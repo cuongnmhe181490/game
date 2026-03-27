@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "techniques": [
+    {
+      "id": "thanh_tuc_quyet",
+      "name": "Thanh Tức Quyết",
+      "category": "cultivation",
+      "path": "balanced",
+      "requiredRealm": "pham_the",
+      "passiveEffects": {
+        "dailyCultivationProgress": 2,
+        "foundationStabilityBonus": 2
+      },
+      "description": "Pháp môn nhập môn của Thanh Huyền Môn, trọng ở điều tức đều và giữ nền khí mạch không tán.",
+      "flavorText": "Khí đi chậm mà đều, niệm không tán mà bền."
+    },
+    {
+      "id": "dan_linh_quyet",
+      "name": "Dẫn Linh Quyết",
+      "category": "cultivation",
+      "path": "orthodox",
+      "requiredRealm": "luyen_khi",
+      "passiveEffects": {
+        "dailyCultivationProgress": 3,
+        "linhKhiDailyBonus": 1
+      },
+      "description": "Dẫn linh khí nhập thể rõ nhịp hơn, hợp với người đã qua giai đoạn mò mẫm của Phàm Thể.",
+      "flavorText": "Linh khí có đường, tâm niệm có chỗ tựa."
+    },
+    {
+      "id": "tinh_tam_an",
+      "name": "Tĩnh Tâm Ấn",
+      "category": "mind",
+      "path": "balanced",
+      "requiredRealm": "truc_co",
+      "passiveEffects": {
+        "dailyCultivationProgress": 1,
+        "foundationStabilityBonus": 4,
+        "tamMaPressureMitigation": 2
+      },
+      "description": "Giữ tâm niệm khỏi nghiêng lệch khi tu hành kéo dài, hợp với giai đoạn bắt đầu gánh trách nhiệm nặng của tông môn.",
+      "flavorText": "Tâm tĩnh thì nền bền, nền bền thì đạo không dễ lệch."
+    }
+  ]
+}

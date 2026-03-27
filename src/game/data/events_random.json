@@ -1,0 +1,3110 @@
+{
+  "version": 3,
+  "events": [
+    {
+      "id": "random.omen.ash_at_gate",
+      "title": "Tro Mỏng Trước Sơn Môn",
+      "category": "omen",
+      "weight": 10,
+      "conditions": {
+        "chapters": [
+          "chapter_1_du_tan_khai_son",
+          "chapter_2_tong_mon_lap_the"
+        ],
+        "minDay": 1,
+        "sectStrengthIn": [
+          "fragile",
+          "stable"
+        ],
+        "cooldownDays": 2
+      },
+      "actorRules": null,
+      "textTemplate": {
+        "body": "Ngoài cổng sơn môn phủ một lớp tro mỏng không mùi khói. Người trực đêm nói không nghe thấy gì, nhưng ai đi qua cũng thấy lòng nặng xuống."
+      },
+      "choices": [
+        {
+          "id": "seal_gate",
+          "label": "Đốt hương trấn môn",
+          "outcome": "Giữ khí thế ổn định."
+        },
+        {
+          "id": "question_watch",
+          "label": "Hỏi kỹ người trực đêm",
+          "outcome": "Xem đây là dấu cần điều tra."
+        },
+        {
+          "id": "sweep_it_away",
+          "label": "Quét sạch rồi bỏ qua",
+          "outcome": "Giữ mặt ngoài yên ổn."
+        }
+      ],
+      "effects": {
+        "seal_gate": {
+          "resources": {
+            "spiritStone": -5
+          },
+          "sectPrestige": 1,
+          "addFlags": [
+            "ash_omen_sealed"
+          ]
+        },
+        "question_watch": {
+          "resources": {
+            "food": -2
+          },
+          "addFlags": [
+            "night_watch_tightened"
+          ]
+        },
+        "sweep_it_away": {
+          "sectPrestige": -1
+        }
+      },
+      "tags": [
+        "mirror",
+        "sect_gate"
+      ]
+    },
+    {
+      "id": "random.omen.bell_without_strike",
+      "title": "Chuông Rạn Giờ Dần",
+      "category": "omen",
+      "weight": 8,
+      "conditions": {
+        "chapters": [
+          "chapter_1_du_tan_khai_son",
+          "chapter_2_tong_mon_lap_the"
+        ],
+        "minDay": 2,
+        "cooldownDays": 3
+      },
+      "actorRules": null,
+      "textTemplate": {
+        "body": "Canh năm chưa đến nhưng chuông sáng đã khẽ ngân trong điện. Âm chuông ngắn và khuyết như bị cắt giữa chừng."
+      },
+      "choices": [
+        {
+          "id": "inspect_bell",
+          "label": "Kiểm tra giá chuông",
+          "outcome": "Ưu tiên xác minh thực địa."
+        },
+        {
+          "id": "hold_short_rite",
+          "label": "Giữ một nghi thức ngắn",
+          "outcome": "Biến điềm lạ thành khuôn phép."
+        },
+        {
+          "id": "forbid_talk",
+          "label": "Cấm bàn tán",
+          "outcome": "Dập lời đồn trước khi lan."
+        }
+      ],
+      "effects": {
+        "inspect_bell": {
+          "resources": {
+            "wood": -1
+          }
+        },
+        "hold_short_rite": {
+          "resources": {
+            "food": -3
+          },
+          "sectPrestige": 1
+        },
+        "forbid_talk": {
+          "sectPrestige": -1,
+          "addFlags": [
+            "silent_bell_kept_internal"
+          ]
+        }
+      },
+      "tags": [
+        "bell",
+        "ritual"
+      ]
+    },
+    {
+      "id": "random.omen.mirror_blood_streak",
+      "title": "Mặt Kính Loang Một Vệt Đỏ",
+      "category": "omen",
+      "weight": 6,
+      "conditions": {
+        "chapters": [
+          "chapter_2_tong_mon_lap_the",
+          "chapter_3_kinh_chieu_cuu_thien",
+          "chapter_4_nhat_niem_dinh_dao"
+        ],
+        "requiredFlags": [
+          "mirror_first_resonance"
+        ],
+        "minDay": 6,
+        "cooldownDays": 5
+      },
+      "actorRules": null,
+      "textTemplate": {
+        "body": "Mặt kính tự hiện ra một vệt đỏ mỏng rồi nhạt dần. Không ai chạm vào nó, nhưng điện thờ quanh đó đều lạnh hơn thường lệ."
+      },
+      "choices": [
+        {
+          "id": "record_and_guard",
+          "label": "Ghi chép và tăng canh",
+          "outcome": "Đối xử như dấu vết có giá trị."
+        },
+        {
+          "id": "test_with_spirit_stone",
+          "label": "Dùng linh thạch thử cộng hưởng",
+          "outcome": "Liều một bước để hiểu thêm."
+        },
+        {
+          "id": "cover_and_wait",
+          "label": "Phủ kín rồi chờ",
+          "outcome": "Không vội mở thêm nguy cơ."
+        }
+      ],
+      "effects": {
+        "record_and_guard": {
+          "resources": {
+            "food": -2
+          },
+          "addFlags": [
+            "mirror_streak_logged"
+          ]
+        },
+        "test_with_spirit_stone": {
+          "resources": {
+            "spiritStone": -8
+          },
+          "sectPrestige": 1,
+          "addFlags": [
+            "mirror_field_tested"
+          ]
+        },
+        "cover_and_wait": {
+          "sectPrestige": -1
+        }
+      },
+      "tags": [
+        "mirror",
+        "relic"
+      ]
+    },
+    {
+      "id": "random.sect_internal.night_watch_lapse",
+      "title": "Ca Trực Đêm Lệch Giờ",
+      "category": "sect_internal",
+      "weight": 11,
+      "conditions": {
+        "chapters": [
+          "chapter_1_du_tan_khai_son",
+          "chapter_2_tong_mon_lap_the"
+        ],
+        "minDay": 1,
+        "cooldownDays": 2
+      },
+      "actorRules": {
+        "type": "disciple"
+      },
+      "textTemplate": {
+        "body": "{discipleName} báo rằng ca trực đêm đổi người chậm một khắc vì hai đệ tử đều tưởng người kia đã đến. Việc nhỏ, nhưng lỗ hở nhỏ thường là nơi rạn nứt bắt đầu."
+      },
+      "choices": [
+        {
+          "id": "reset_watch_schedule",
+          "label": "Lập lại bảng trực",
+          "outcome": "Siết việc nhỏ trước khi thành thói."
+        },
+        {
+          "id": "public_warning",
+          "label": "Khiển trách công khai",
+          "outcome": "Giữ kỷ cương bằng uy quyền."
+        },
+        {
+          "id": "let_it_pass_once",
+          "label": "Cho qua một lần",
+          "outcome": "Giữ nhân tâm, tăng rủi ro."
+        }
+      ],
+      "effects": {
+        "reset_watch_schedule": {
+          "resources": {
+            "wood": -1
+          },
+          "sectPrestige": 1
+        },
+        "public_warning": {
+          "sectPrestige": 2,
+          "alignment": {
+            "dominion_alignment": 1
+          }
+        },
+        "let_it_pass_once": {
+          "sectPrestige": -1
+        }
+      },
+      "tags": [
+        "discipline",
+        "night_watch"
+      ]
+    },
+    {
+      "id": "random.sect_internal.storehouse_petition",
+      "title": "Chấp Sự Xin Mở Kho",
+      "category": "sect_internal",
+      "weight": 10,
+      "conditions": {
+        "chapters": [
+          "chapter_1_du_tan_khai_son",
+          "chapter_2_tong_mon_lap_the"
+        ],
+        "resourcesBelow": {
+          "food": 25
+        },
+        "cooldownDays": 3
+      },
+      "actorRules": {
+        "type": "elder"
+      },
+      "textTemplate": {
+        "body": "Chấp sự kho xin quyền mở kho linh hoạt hơn vì người làm việc ngoài sơn đạo đang ăn thiếu. Mở kho lúc khó là cứu người trước mắt, nhưng cũng là mở tiền lệ cho lúc sau."
+      },
+      "choices": [
+        {
+          "id": "approve_extra_rations",
+          "label": "Cho mở kho có giới hạn",
+          "outcome": "Ưu tiên giữ người làm việc."
+        },
+        {
+          "id": "demand_strict_records",
+          "label": "Chỉ mở nếu ghi đủ",
+          "outcome": "Giữ kỷ luật dù chậm hơn."
+        },
+        {
+          "id": "refuse_request",
+          "label": "Không mở thêm kho",
+          "outcome": "Giữ dự trữ bằng cái giá nhân tâm."
+        }
+      ],
+      "effects": {
+        "approve_extra_rations": {
+          "resources": {
+            "food": -6
+          }
+        },
+        "demand_strict_records": {
+          "resources": {
+            "food": -3
+          },
+          "sectPrestige": 1
+        },
+        "refuse_request": {
+          "sectPrestige": -1,
+          "addFlags": [
+            "ration_denied_once"
+          ]
+        }
+      },
+      "tags": [
+        "food_pressure",
+        "storehouse"
+      ]
+    },
+    {
+      "id": "random.sect_internal.ledger_line_missing",
+      "title": "Danh Bạ Sai Một Dòng",
+      "category": "sect_internal",
+      "weight": 9,
+      "conditions": {
+        "chapters": [
+          "chapter_1_du_tan_khai_son",
+          "chapter_2_tong_mon_lap_the",
+          "chapter_3_kinh_chieu_cuu_thien"
+        ],
+        "minDay": 3,
+        "cooldownDays": 4
+      },
+      "actorRules": {
+        "type": "disciple"
+      },
+      "textTemplate": {
+        "body": "Sổ danh nội môn thiếu đúng một dòng nhập kho của tuần trước. Sai sót này có thể là nhầm tay, nhưng cũng có thể là đầu mối của chuyện sâu hơn."
+      },
+      "choices": [
+        {
+          "id": "audit_records",
+          "label": "Soát lại toàn bộ sổ",
+          "outcome": "Tốn công nhưng sạch đầu mối."
+        },
+        {
+          "id": "warn_clerk",
+          "label": "Chỉ cảnh cáo người chép sổ",
+          "outcome": "Xử nhanh để khỏi dồn việc."
+        },
+        {
+          "id": "bury_error",
+          "label": "Tự sửa cho kín",
+          "outcome": "Giữ mặt sổ sách trước mắt."
+        }
+      ],
+      "effects": {
+        "audit_records": {
+          "resources": {
+            "food": -2
+          },
+          "sectPrestige": 1,
+          "addFlags": [
+            "records_audited"
+          ]
+        },
+        "warn_clerk": {},
+        "bury_error": {
+          "sectPrestige": -1,
+          "addFlags": [
+            "ledger_shadow"
+          ]
+        }
+      },
+      "tags": [
+        "records",
+        "trust"
+      ]
+    },
+    {
+      "id": "random.disciple.odd_manual_request",
+      "title": "Đệ Tử Xin Học Dị Pháp",
+      "category": "disciple",
+      "weight": 8,
+      "conditions": {
+        "chapters": [
+          "chapter_2_tong_mon_lap_the",
+          "chapter_3_kinh_chieu_cuu_thien",
+          "chapter_4_nhat_niem_dinh_dao"
+        ],
+        "minDay": 5,
+        "cooldownDays": 5
+      },
+      "actorRules": {
+        "type": "disciple",
+        "preferredTraitIdsAny": [
+          "ua_di_hoc",
+          "da_nghi"
+        ]
+      },
+      "textTemplate": {
+        "body": "{discipleName} xin được đọc một thiên pháp không nằm trong giáo trình thường dùng. Cho phép hay không là chọn giữa an toàn kỷ luật và độ mở của đạo thống."
+      },
+      "choices": [
+        {
+          "id": "allow_supervised_study",
+          "label": "Cho học nhưng có giám sát",
+          "outcome": "Mở đường vừa đủ."
+        },
+        {
+          "id": "forbid_manual",
+          "label": "Cấm ngay từ đầu",
+          "outcome": "Giữ nội môn theo khuôn cũ."
+        },
+        {
+          "id": "test_the_disciple",
+          "label": "Giao một bài thử trước",
+          "outcome": "Đo người rồi mới đo sách."
+        }
+      ],
+      "effects": {
+        "allow_supervised_study": {
+          "resources": {
+            "spiritStone": -4
+          },
+          "alignment": {
+            "outsider_alignment": 1
+          },
+          "addFlags": [
+            "odd_manual_supervised"
+          ]
+        },
+        "forbid_manual": {
+          "sectPrestige": 1,
+          "alignment": {
+            "orthodox_alignment": 1
+          }
+        },
+        "test_the_disciple": {
+          "resources": {
+            "food": -2
+          }
+        }
+      },
+      "tags": [
+        "manual",
+        "outsider_path"
+      ]
+    },
+    {
+      "id": "random.disciple.newcomer_knows_path",
+      "title": "Kẻ Mới Nhập Môn Biết Quá Nhiều",
+      "category": "disciple",
+      "weight": 7,
+      "conditions": {
+        "chapters": [
+          "chapter_2_tong_mon_lap_the",
+          "chapter_3_kinh_chieu_cuu_thien"
+        ],
+        "minDay": 6,
+        "cooldownDays": 5
+      },
+      "actorRules": {
+        "type": "disciple"
+      },
+      "textTemplate": {
+        "body": "Một người mới tới cửa lại thuộc khá rõ đường vào hậu sơn và biết tên cũ của một kiến trúc đã hỏng từ lâu. Người này có thể hữu dụng, cũng có thể là lỗ hở đi thẳng vào tim sơn môn."
+      },
+      "choices": [
+        {
+          "id": "keep_under_watch",
+          "label": "Nhận người nhưng đặt dưới quan sát",
+          "outcome": "Giữ cơ hội mà không bỏ phòng bị."
+        },
+        {
+          "id": "send_away_quietly",
+          "label": "Từ chối cho nhập môn",
+          "outcome": "Cắt nguy cơ trước khi bén rễ."
+        },
+        {
+          "id": "question_origin",
+          "label": "Hỏi gốc tích thật kỹ",
+          "outcome": "Đào sâu đầu mối còn mơ hồ."
+        }
+      ],
+      "effects": {
+        "keep_under_watch": {
+          "resources": {
+            "food": -3
+          },
+          "addFlags": [
+            "watch_newcomer"
+          ]
+        },
+        "send_away_quietly": {
+          "sectPrestige": 1
+        },
+        "question_origin": {
+          "resources": {
+            "spiritStone": -2
+          },
+          "addFlags": [
+            "newcomer_origin_checked"
+          ]
+        }
+      },
+      "tags": [
+        "recruitment",
+        "suspicion"
+      ]
+    },
+    {
+      "id": "random.survival.smoke_without_fire",
+      "title": "Bếp Lạnh Không Ra Khói",
+      "category": "survival",
+      "weight": 12,
+      "conditions": {
+        "chapters": [
+          "chapter_1_du_tan_khai_son",
+          "chapter_2_tong_mon_lap_the"
+        ],
+        "resourcesBelow": {
+          "food": 22
+        },
+        "cooldownDays": 3
+      },
+      "actorRules": null,
+      "textTemplate": {
+        "body": "Bếp sau sáng nay lạnh hơn thường lệ vì khẩu phần bị cắt tới sát đáy. Không ai than lớn, nhưng bữa ăn ít đi luôn là thứ nói rất lâu trong lòng nội môn."
+      },
+      "choices": [
+        {
+          "id": "stretch_rations",
+          "label": "Chia lại khẩu phần công khai",
+          "outcome": "Giữ niềm tin bằng minh bạch."
+        },
+        {
+          "id": "open_emergency_store",
+          "label": "Mở phần lương khẩn",
+          "outcome": "Cứu nhịp sinh hoạt trước."
+        },
+        {
+          "id": "send_foraging_team",
+          "label": "Cho người kiếm thêm ngoài núi",
+          "outcome": "Tự xoay xở bằng sức người."
+        }
+      ],
+      "effects": {
+        "stretch_rations": {
+          "resources": {
+            "food": -4
+          },
+          "sectPrestige": 1
+        },
+        "open_emergency_store": {
+          "resources": {
+            "food": -7
+          }
+        },
+        "send_foraging_team": {
+          "resources": {
+            "food": 3,
+            "wood": 1
+          }
+        }
+      },
+      "tags": [
+        "food_pressure",
+        "kitchen"
+      ]
+    },
+    {
+      "id": "random.survival.cracked_well",
+      "title": "Giếng Linh Đục Khí",
+      "category": "survival",
+      "weight": 10,
+      "conditions": {
+        "chapters": [
+          "chapter_1_du_tan_khai_son",
+          "chapter_2_tong_mon_lap_the"
+        ],
+        "minDay": 2,
+        "cooldownDays": 4
+      },
+      "actorRules": null,
+      "textTemplate": {
+        "body": "Nước giếng linh sáng nay có lớp đục mỏng như bụi chìm. Kéo dài thêm vài ngày thì cả bếp, dược viện lẫn phòng tĩnh tu đều sẽ chịu ảnh hưởng."
+      },
+      "choices": [
+        {
+          "id": "purify_well",
+          "label": "Dùng linh thạch lọc giếng",
+          "outcome": "Tốn của để giữ nền sinh hoạt."
+        },
+        {
+          "id": "draw_from_stream",
+          "label": "Lấy tạm nước ngoài sơn đạo",
+          "outcome": "Giải nguy trước nhưng thêm việc."
+        },
+        {
+          "id": "limit_usage",
+          "label": "Hạn chế dùng giếng",
+          "outcome": "Siết sinh hoạt để chờ tự lắng."
+        }
+      ],
+      "effects": {
+        "purify_well": {
+          "resources": {
+            "spiritStone": -6
+          },
+          "sectPrestige": 1
+        },
+        "draw_from_stream": {
+          "resources": {
+            "food": -2,
+            "wood": -1
+          }
+        },
+        "limit_usage": {
+          "sectPrestige": -1
+        }
+      },
+      "tags": [
+        "water",
+        "daily_life"
+      ]
+    },
+    {
+      "id": "random.disciple.descent_request",
+      "title": "Người Cũ Xin Xuống Núi",
+      "category": "disciple",
+      "weight": 9,
+      "conditions": {
+        "chapters": [
+          "chapter_1_du_tan_khai_son",
+          "chapter_2_tong_mon_lap_the",
+          "chapter_3_kinh_chieu_cuu_thien"
+        ],
+        "minDay": 4,
+        "cooldownDays": 4
+      },
+      "actorRules": {
+        "type": "disciple",
+        "preferredTraitIdsAny": [
+          "kinh_so_thien_bien",
+          "tham_cong"
+        ]
+      },
+      "textTemplate": {
+        "body": "{discipleName} xin xuống núi ít lâu để tìm người thân còn mất dấu sau Thiên Khư Biến. Giữ lại là giữ người, nhưng ép quá chặt có thể để lại vết nứt dài hơn một chuyến đi."
+      },
+      "choices": [
+        {
+          "id": "grant_leave",
+          "label": "Cho xuống núi có kỳ hạn",
+          "outcome": "Giữ nhân tâm bằng niềm tin có điều kiện."
+        },
+        {
+          "id": "assign_guarded_task",
+          "label": "Cho đi như nhiệm vụ của môn",
+          "outcome": "Biến việc riêng thành việc có khuôn phép."
+        },
+        {
+          "id": "refuse_leave",
+          "label": "Không cho rời núi lúc này",
+          "outcome": "Giữ lực lượng bằng mệnh lệnh."
+        }
+      ],
+      "effects": {
+        "grant_leave": {
+          "sectPrestige": -1,
+          "addFlags": [
+            "disciple_granted_leave"
+          ]
+        },
+        "assign_guarded_task": {
+          "resources": {
+            "food": -2
+          },
+          "sectPrestige": 1
+        },
+        "refuse_leave": {
+          "sectPrestige": 1,
+          "alignment": {
+            "dominion_alignment": 1
+          }
+        }
+      },
+      "tags": [
+        "loyalty",
+        "descent"
+      ]
+    },
+    {
+      "id": "random.survival.roof_after_rain",
+      "title": "Mưa Dột Qua Tàng Cột",
+      "category": "survival",
+      "weight": 9,
+      "conditions": {
+        "chapters": [
+          "chapter_1_du_tan_khai_son",
+          "chapter_2_tong_mon_lap_the",
+          "chapter_3_kinh_chieu_cuu_thien"
+        ],
+        "resourcesBelow": {
+          "wood": 18
+        },
+        "cooldownDays": 4
+      },
+      "actorRules": null,
+      "textTemplate": {
+        "body": "Một trận mưa dài làm nước thấm qua mái cũ của dãy nhà nghỉ. Thêm vài lần như vậy thì chỗ ngủ sẽ biến thành dấu hiệu rõ nhất rằng Thanh Huyền Môn chưa thật sự đứng dậy."
+      },
+      "choices": [
+        {
+          "id": "patch_roof",
+          "label": "Vá mái ngay bằng gỗ tốt",
+          "outcome": "Chặn xuống cấp trước."
+        },
+        {
+          "id": "move_people",
+          "label": "Dồn người sang dãy khác",
+          "outcome": "Giảm nguy nhưng tăng chật chội."
+        },
+        {
+          "id": "wait_for_clear_weather",
+          "label": "Chờ trời khô rồi tính",
+          "outcome": "Đỡ hao trước mắt, tăng nguy cơ sau."
+        }
+      ],
+      "effects": {
+        "patch_roof": {
+          "resources": {
+            "wood": -5
+          },
+          "sectPrestige": 1
+        },
+        "move_people": {
+          "resources": {
+            "food": -1
+          }
+        },
+        "wait_for_clear_weather": {
+          "sectPrestige": -1
+        }
+      },
+      "tags": [
+        "repair",
+        "lodging"
+      ]
+    },
+    {
+      "id": "random.resource.moldy_timber",
+      "title": "Mộc Liêu Mục Rỗng",
+      "category": "resource",
+      "weight": 10,
+      "conditions": {
+        "chapters": [
+          "chapter_1_du_tan_khai_son",
+          "chapter_2_tong_mon_lap_the"
+        ],
+        "resourcesBelow": {
+          "wood": 24
+        },
+        "cooldownDays": 4
+      },
+      "actorRules": null,
+      "textTemplate": {
+        "body": "Một phần gỗ dự trữ mục ruỗng từ bên trong vì để quá lâu sau mưa. Nếu dùng bừa vào chỗ chịu lực thì hậu họa sẽ đắt hơn cả lô gỗ đó."
+      },
+      "choices": [
+        {
+          "id": "discard_weak_timber",
+          "label": "Loại bỏ phần mục",
+          "outcome": "Mất ít để giữ nền chắc."
+        },
+        {
+          "id": "reuse_for_minor_repairs",
+          "label": "Đem dùng cho việc nhỏ",
+          "outcome": "Tiết kiệm bằng cách phân hạng."
+        },
+        {
+          "id": "hide_loss",
+          "label": "Giấu hao hụt khỏi sổ kho",
+          "outcome": "Giữ số đẹp, nuôi rủi ro ngầm."
+        }
+      ],
+      "effects": {
+        "discard_weak_timber": {
+          "resources": {
+            "wood": -4
+          },
+          "sectPrestige": 1
+        },
+        "reuse_for_minor_repairs": {
+          "resources": {
+            "wood": -2
+          }
+        },
+        "hide_loss": {
+          "sectPrestige": -1,
+          "addFlags": [
+            "inventory_concealed"
+          ]
+        }
+      },
+      "tags": [
+        "wood",
+        "inventory"
+      ]
+    },
+    {
+      "id": "random.resource.herb_mist",
+      "title": "Dược Điền Nhiễm Sương",
+      "category": "resource",
+      "weight": 9,
+      "conditions": {
+        "chapters": [
+          "chapter_1_du_tan_khai_son",
+          "chapter_2_tong_mon_lap_the",
+          "chapter_3_kinh_chieu_cuu_thien"
+        ],
+        "resourcesBelow": {
+          "herbs": 18
+        },
+        "cooldownDays": 3
+      },
+      "actorRules": null,
+      "textTemplate": {
+        "body": "Một lớp sương lạ đọng trên luống dược khiến phần lá non xám lại. Dược liệu trong thời hậu tai biến không còn là thứ chỉ gieo rồi chờ ngày thu."
+      },
+      "choices": [
+        {
+          "id": "clear_affected_plants",
+          "label": "Nhổ bỏ phần nhiễm",
+          "outcome": "Cắt lỗ ngay."
+        },
+        {
+          "id": "brew_counter_agent",
+          "label": "Dùng phần hỏng thử chế dược",
+          "outcome": "Mạo hiểm để giữ lại nhiều hơn."
+        },
+        {
+          "id": "leave_it_until_noon",
+          "label": "Chờ nắng lên mới xử",
+          "outcome": "Tiết kiệm công sớm nhưng giảm chủ động."
+        }
+      ],
+      "effects": {
+        "clear_affected_plants": {
+          "resources": {
+            "herbs": -5
+          }
+        },
+        "brew_counter_agent": {
+          "resources": {
+            "herbs": -2,
+            "spiritStone": -3
+          },
+          "sectPrestige": 1
+        },
+        "leave_it_until_noon": {
+          "resources": {
+            "herbs": -7
+          }
+        }
+      },
+      "tags": [
+        "herbs",
+        "garden"
+      ]
+    },
+    {
+      "id": "random.faction.huyen_minh_inquiry",
+      "title": "Người Hỏi Việc Từ Huyền Minh",
+      "category": "faction",
+      "weight": 8,
+      "conditions": {
+        "chapters": [
+          "chapter_2_tong_mon_lap_the",
+          "chapter_3_kinh_chieu_cuu_thien",
+          "chapter_4_nhat_niem_dinh_dao"
+        ],
+        "minSectPrestige": 18,
+        "cooldownDays": 5
+      },
+      "actorRules": null,
+      "textTemplate": {
+        "body": "Một người của Huyền Minh Điện ghé núi, nói chỉ muốn biết tình hình tu sửa sơn môn. Cách hỏi quá đúng mực khiến ai cũng hiểu đây là phép thử hơn là lời thăm hỏi."
+      },
+      "choices": [
+        {
+          "id": "answer_formally",
+          "label": "Trả lời theo lễ",
+          "outcome": "Giữ khoảng cách trong khuôn chính đạo."
+        },
+        {
+          "id": "show_the_restored_hall",
+          "label": "Mời xem phần đã sửa xong",
+          "outcome": "Đổi minh bạch lấy thiện cảm."
+        },
+        {
+          "id": "turn_away_politely",
+          "label": "Khéo léo tiễn khách",
+          "outcome": "Giữ bí mật, tăng dè chừng."
+        }
+      ],
+      "effects": {
+        "answer_formally": {
+          "factionRelations": {
+            "huyen_minh_dien": 1
+          }
+        },
+        "show_the_restored_hall": {
+          "resources": {
+            "food": -3
+          },
+          "sectPrestige": 1,
+          "factionRelations": {
+            "huyen_minh_dien": 1
+          }
+        },
+        "turn_away_politely": {
+          "factionRelations": {
+            "huyen_minh_dien": -1
+          }
+        }
+      },
+      "tags": [
+        "huyen_minh_dien",
+        "orthodox"
+      ]
+    },
+    {
+      "id": "random.faction.xich_luyen_offer",
+      "title": "Xích Luyện Chào Giá Lạ",
+      "category": "faction",
+      "weight": 8,
+      "conditions": {
+        "chapters": [
+          "chapter_2_tong_mon_lap_the",
+          "chapter_3_kinh_chieu_cuu_thien"
+        ],
+        "minSectPrestige": 20,
+        "cooldownDays": 5
+      },
+      "actorRules": null,
+      "textTemplate": {
+        "body": "Xích Luyện Bảo mang tới đúng thứ Thanh Huyền Môn đang thiếu, nhưng cái giá họ đòi không thấp: hoặc linh thạch, hoặc quyền mua trước sản vật về sau."
+      },
+      "choices": [
+        {
+          "id": "pay_now",
+          "label": "Trả bằng linh thạch hiện có",
+          "outcome": "Giữ quyền tự chủ về sau."
+        },
+        {
+          "id": "grant_future_share",
+          "label": "Cho họ phần mua trước",
+          "outcome": "Đỡ áp lực ngắn hạn, nhận ràng buộc dài."
+        },
+        {
+          "id": "reject_offer",
+          "label": "Không nhận đề nghị",
+          "outcome": "Giữ tay sạch, giữ luôn khó khăn."
+        }
+      ],
+      "effects": {
+        "pay_now": {
+          "resources": {
+            "spiritStone": -10,
+            "wood": 6,
+            "herbs": 3
+          },
+          "factionRelations": {
+            "xich_luyen_bao": 1
+          },
+          "addChoiceFlags": [
+            "xich_luyen_trade_contact_open"
+          ]
+        },
+        "grant_future_share": {
+          "resources": {
+            "wood": 6,
+            "food": 5
+          },
+          "factionRelations": {
+            "xich_luyen_bao": 2
+          },
+          "addFlags": [
+            "xich_luyen_future_share"
+          ],
+          "addChoiceFlags": [
+            "xich_luyen_trade_contact_open"
+          ]
+        },
+        "reject_offer": {
+          "factionRelations": {
+            "xich_luyen_bao": -1
+          }
+        }
+      },
+      "tags": [
+        "xich_luyen_bao",
+        "trade"
+      ]
+    },
+    {
+      "id": "random.faction.van_tang_copyist",
+      "title": "Người Sao Lục Từ Vân Tàng",
+      "category": "faction",
+      "weight": 7,
+      "conditions": {
+        "chapters": [
+          "chapter_2_tong_mon_lap_the",
+          "chapter_3_kinh_chieu_cuu_thien",
+          "chapter_4_nhat_niem_dinh_dao"
+        ],
+        "requiredFlags": [
+          "mirror_history_conflict"
+        ],
+        "cooldownDays": 6
+      },
+      "actorRules": null,
+      "textTemplate": {
+        "body": "Một người sao lục từ Vân Tàng Thư Viện ghé núi, xin đổi một bản chỉ dẫn cũ lấy quyền xem vài dòng ghi chép của Thanh Huyền Môn về dị tượng quanh linh kính."
+      },
+      "choices": [
+        {
+          "id": "trade_excerpt",
+          "label": "Đổi một phần ghi chép",
+          "outcome": "Lấy tri thức mới bằng cái giá thông tin."
+        },
+        {
+          "id": "share_nothing",
+          "label": "Từ chối, chỉ nhận xã giao",
+          "outcome": "Giữ kín dữ liệu của môn."
+        },
+        {
+          "id": "offer_false_lead",
+          "label": "Đưa thông tin mờ để dò phản ứng",
+          "outcome": "Thử người trước khi thử sách."
+        }
+      ],
+      "effects": {
+        "trade_excerpt": {
+          "resources": {
+            "spiritStone": -2
+          },
+          "factionRelations": {
+            "van_tang_thu_vien": 2
+          },
+          "addFlags": [
+            "archive_hint_received"
+          ]
+        },
+        "share_nothing": {
+          "factionRelations": {
+            "van_tang_thu_vien": -1
+          }
+        },
+        "offer_false_lead": {
+          "sectPrestige": -1,
+          "addFlags": [
+            "false_archive_lead_sent"
+          ]
+        }
+      },
+      "tags": [
+        "van_tang_thu_vien",
+        "archive"
+      ]
+    },
+    {
+      "id": "random.faction.hac_sa_night_guest",
+      "title": "Khách Đêm Từ Hắc Sa",
+      "category": "faction",
+      "weight": 6,
+      "conditions": {
+        "chapters": [
+          "chapter_2_tong_mon_lap_the",
+          "chapter_3_kinh_chieu_cuu_thien",
+          "chapter_4_nhat_niem_dinh_dao"
+        ],
+        "minDay": 5,
+        "cooldownDays": 6
+      },
+      "actorRules": null,
+      "textTemplate": {
+        "body": "Một khách áo đen đến sau canh hai, tự xưng chỉ là người đi đường. Hàng họ mang theo toàn thứ khó tìm mà người chính đạo sẽ không hỏi giá ở chỗ sáng đèn."
+      },
+      "choices": [
+        {
+          "id": "buy_discreetly",
+          "label": "Mua kín thứ đang thiếu",
+          "outcome": "Nhận lợi ngay, giữ chuyện trong đêm."
+        },
+        {
+          "id": "interrogate_guest",
+          "label": "Giữ khách lại hỏi nguồn gốc",
+          "outcome": "Đặt nghi lên trước lợi."
+        },
+        {
+          "id": "send_away",
+          "label": "Tiễn khách khỏi sơn môn",
+          "outcome": "Không để đường đêm lưu dấu."
+        }
+      ],
+      "effects": {
+        "buy_discreetly": {
+          "resources": {
+            "spiritStone": -6,
+            "herbs": 5,
+            "food": 4
+          },
+          "factionRelations": {
+            "hac_sa_coc": 1
+          },
+          "alignment": {
+            "outsider_alignment": 1
+          }
+        },
+        "interrogate_guest": {
+          "resources": {
+            "food": -2
+          },
+          "sectPrestige": 1
+        },
+        "send_away": {
+          "factionRelations": {
+            "hac_sa_coc": -1
+          },
+          "alignment": {
+            "orthodox_alignment": 1
+          }
+        }
+      },
+      "tags": [
+        "hac_sa_coc",
+        "black_market"
+      ]
+    },
+    {
+      "id": "random.faction.cuu_tieu_sky_letter",
+      "title": "Thiên Thư Đến Không Dấu Chân",
+      "category": "faction",
+      "weight": 5,
+      "conditions": {
+        "chapters": [
+          "chapter_3_kinh_chieu_cuu_thien",
+          "chapter_4_nhat_niem_dinh_dao"
+        ],
+        "requiredFlags": [
+          "ascension_trace_confirmed"
+        ],
+        "minSectPrestige": 40,
+        "cooldownDays": 7
+      },
+      "actorRules": null,
+      "textTemplate": {
+        "body": "Một phong thư mỏng được kẹp giữa khung cửa điện. Nội dung chỉ có một câu của Cửu Tiêu Quan: 'Các ngươi đã thấy dấu, vậy còn dám nhìn trời thêm lần nữa không?'"
+      },
+      "choices": [
+        {
+          "id": "answer_with_ritual",
+          "label": "Đáp lại bằng lễ thư chính thức",
+          "outcome": "Chấp nhận bước vào cuộc đối thoại nguy hiểm."
+        },
+        {
+          "id": "burn_the_letter",
+          "label": "Đốt thư ngay trong điện",
+          "outcome": "Cắt đứt đầu mối đầy cám dỗ."
+        },
+        {
+          "id": "hide_the_letter",
+          "label": "Giấu thư, chưa trả lời",
+          "outcome": "Giữ cửa mở nhưng không lộ ý."
+        }
+      ],
+      "effects": {
+        "answer_with_ritual": {
+          "resources": {
+            "spiritStone": -5
+          },
+          "factionRelations": {
+            "cuu_tieu_quan": 2
+          },
+          "alignment": {
+            "outsider_alignment": 1
+          }
+        },
+        "burn_the_letter": {
+          "factionRelations": {
+            "cuu_tieu_quan": -2
+          },
+          "alignment": {
+            "orthodox_alignment": 1
+          }
+        },
+        "hide_the_letter": {
+          "addFlags": [
+            "sky_letter_hidden"
+          ]
+        }
+      },
+      "tags": [
+        "cuu_tieu_quan",
+        "ascension"
+      ]
+    },
+    {
+      "id": "random.opportunity.hidden_spring",
+      "title": "Khe Nước Có Linh Tức Nhẹ",
+      "category": "opportunity",
+      "weight": 8,
+      "conditions": {
+        "chapters": [
+          "chapter_1_du_tan_khai_son",
+          "chapter_2_tong_mon_lap_the",
+          "chapter_3_kinh_chieu_cuu_thien"
+        ],
+        "minDay": 3,
+        "cooldownDays": 5
+      },
+      "actorRules": null,
+      "textTemplate": {
+        "body": "Người tuần sơn phát hiện một khe nước có linh tức nhẹ phía sau vách cũ. Nguồn này không lớn, nhưng nếu giữ được sẽ là chỗ dựa ổn định hơn nhiều nguồn thu bấp bênh."
+      },
+      "choices": [
+        {
+          "id": "claim_and_mark",
+          "label": "Đánh dấu và dựng cọc giữ ngay",
+          "outcome": "Giữ nguồn nhỏ thành nền dài."
+        },
+        {
+          "id": "study_before_use",
+          "label": "Khảo sát kỹ rồi mới dùng",
+          "outcome": "Ưu tiên an toàn hệ thống."
+        },
+        {
+          "id": "leave_it_secret",
+          "label": "Giấu đầu mối, chưa khai thác",
+          "outcome": "Giữ bí mật hơn là lấy lợi ngay."
+        }
+      ],
+      "effects": {
+        "claim_and_mark": {
+          "resources": {
+            "wood": -3,
+            "spiritStone": 4
+          },
+          "sectPrestige": 1
+        },
+        "study_before_use": {
+          "resources": {
+            "spiritStone": -2
+          },
+          "addFlags": [
+            "hidden_spring_surveyed"
+          ]
+        },
+        "leave_it_secret": {
+          "addFlags": [
+            "hidden_spring_secret"
+          ]
+        }
+      },
+      "tags": [
+        "spring",
+        "resource_gain"
+      ]
+    },
+    {
+      "id": "random.opportunity.abandoned_cart",
+      "title": "Xe Hàng Bỏ Lại Bên Sơn Đạo",
+      "category": "opportunity",
+      "weight": 9,
+      "conditions": {
+        "chapters": [
+          "chapter_1_du_tan_khai_son",
+          "chapter_2_tong_mon_lap_the"
+        ],
+        "minDay": 2,
+        "cooldownDays": 5
+      },
+      "actorRules": null,
+      "textTemplate": {
+        "body": "Một xe hàng gãy trục nằm bên sơn đạo, không thấy người giữ mà dấu bánh còn mới. Giữ lấy là cứu một đoạn khó, nhưng cũng có thể tự nhận một món nợ chưa biết chủ."
+      },
+      "choices": [
+        {
+          "id": "take_supplies",
+          "label": "Chuyển hàng về kho",
+          "outcome": "Chọn lợi hiện tại."
+        },
+        {
+          "id": "leave_marker",
+          "label": "Để dấu chờ chủ quay lại",
+          "outcome": "Giữ nghĩa trước lợi."
+        },
+        {
+          "id": "take_and_note",
+          "label": "Lấy hàng nhưng để lại tín vật",
+          "outcome": "Ăn ở giữa hai bờ lợi và danh."
+        }
+      ],
+      "effects": {
+        "take_supplies": {
+          "resources": {
+            "food": 8,
+            "wood": 4
+          },
+          "sectPrestige": -1
+        },
+        "leave_marker": {
+          "sectPrestige": 1
+        },
+        "take_and_note": {
+          "resources": {
+            "food": 5,
+            "wood": 2
+          }
+        }
+      },
+      "tags": [
+        "loot",
+        "ethics"
+      ]
+    },
+    {
+      "id": "random.opportunity.traveler_shelter",
+      "title": "Lữ Khách Xin Trú Một Đêm",
+      "category": "opportunity",
+      "weight": 8,
+      "conditions": {
+        "chapters": [
+          "chapter_1_du_tan_khai_son",
+          "chapter_2_tong_mon_lap_the",
+          "chapter_3_kinh_chieu_cuu_thien"
+        ],
+        "minDay": 2,
+        "cooldownDays": 4
+      },
+      "actorRules": null,
+      "textTemplate": {
+        "body": "Một lữ khách đi đường xin trú qua đêm, nói đổi lại sẽ kể thứ mình từng thấy ở vùng phụ cận Thiên Khư Biến. Đó có thể là đầu mối, cũng có thể chỉ là miệng lưỡi ăn nhờ."
+      },
+      "choices": [
+        {
+          "id": "host_and_listen",
+          "label": "Cho ở lại và nghe kỹ",
+          "outcome": "Đổi tài nguyên lấy đầu mối."
+        },
+        {
+          "id": "host_without_questions",
+          "label": "Cho ở nhưng không đào sâu",
+          "outcome": "Giữ nhân nghĩa mà giảm rủi ro."
+        },
+        {
+          "id": "refuse_entry",
+          "label": "Từ chối cho vào sơn môn",
+          "outcome": "Giữ cổng sạch hơn lòng."
+        }
+      ],
+      "effects": {
+        "host_and_listen": {
+          "resources": {
+            "food": -3
+          },
+          "addFlags": [
+            "traveler_story_recorded"
+          ]
+        },
+        "host_without_questions": {
+          "resources": {
+            "food": -2
+          },
+          "sectPrestige": 1
+        },
+        "refuse_entry": {
+          "sectPrestige": -1
+        }
+      },
+      "tags": [
+        "traveler",
+        "hospitality"
+      ]
+    },
+    {
+      "id": "random.cultivation.restless_qi",
+      "title": "Linh Khí Xao Mặt Gương",
+      "category": "cultivation",
+      "weight": 8,
+      "conditions": {
+        "chapters": [
+          "chapter_1_du_tan_khai_son",
+          "chapter_2_tong_mon_lap_the"
+        ],
+        "minPlayerRealmOrder": 1,
+        "requiredBuildings": [
+          "tinh_tu_duong"
+        ],
+        "cooldownDays": 3
+      },
+      "actorRules": null,
+      "contextRules": {
+        "buildingIdsAny": [
+          "tinh_tu_duong"
+        ]
+      },
+      "textTemplate": {
+        "body": "Trong {buildingName}, khí mạch hôm nay vận chuyển không đều. Nếu cưỡng ép thêm một nhịp có thể đẩy nhanh tu hành, nhưng nền căn cũng dễ dao động."
+      },
+      "choices": [
+        {
+          "id": "guide_the_flow",
+          "label": "Điều tức theo nhịp chậm",
+          "outcome": "Giữ nền căn ổn hơn, tiến độ vừa phải."
+        },
+        {
+          "id": "force_the_meridian",
+          "label": "Ép mở thêm một chu thiên",
+          "outcome": "Tiến độ tăng nhanh nhưng tâm ma cũng động."
+        },
+        {
+          "id": "seal_and_rest",
+          "label": "Dừng vận công nửa ngày",
+          "outcome": "Bớt rủi ro, mất một nhịp tu."
+        }
+      ],
+      "effects": {
+        "guide_the_flow": {
+          "playerCultivationProgress": 4,
+          "foundationStability": 2
+        },
+        "force_the_meridian": {
+          "playerCultivationProgress": 7,
+          "foundationStability": -3,
+          "tamMaPressure": 3,
+          "addChoiceFlags": [
+            "force_meridian_once"
+          ]
+        },
+        "seal_and_rest": {
+          "foundationStability": 1,
+          "tamMaPressure": -2
+        }
+      },
+      "tags": [
+        "cultivation",
+        "tinh_tu_duong"
+      ]
+    },
+    {
+      "id": "random.cultivation.first_breakthrough_echo",
+      "title": "Hậu Chấn Sau Lần Đột Phá Đầu",
+      "category": "cultivation",
+      "weight": 7,
+      "conditions": {
+        "chapters": [
+          "chapter_1_du_tan_khai_son",
+          "chapter_2_tong_mon_lap_the"
+        ],
+        "requiredFlags": [
+          "first_breakthrough_done"
+        ],
+        "cooldownDays": 5
+      },
+      "actorRules": null,
+      "textTemplate": {
+        "body": "Sau lần đột phá đầu, khí hải vẫn còn dư chấn nhỏ. Đây là lúc nên ổn định nền căn trước khi tham thêm lợi ngắn hạn."
+      },
+      "choices": [
+        {
+          "id": "stabilize_foundation",
+          "label": "Dành ngày này để ổn định",
+          "outcome": "Nền căn vững hơn."
+        },
+        {
+          "id": "keep_pressing_forward",
+          "label": "Tiếp tục tiến công cảnh giới",
+          "outcome": "Có thêm tiến độ nhưng áp lực tăng."
+        }
+      ],
+      "effects": {
+        "stabilize_foundation": {
+          "foundationStability": 4,
+          "tamMaPressure": -2
+        },
+        "keep_pressing_forward": {
+          "playerCultivationProgress": 5,
+          "tamMaPressure": 4
+        }
+      },
+      "tags": [
+        "cultivation",
+        "breakthrough"
+      ]
+    },
+    {
+      "id": "random.disciple.ambitious_in_the_library",
+      "title": "Đệ Tử Hiếu Thắng Ở Tàng Kinh Các",
+      "category": "disciple",
+      "weight": 8,
+      "conditions": {
+        "chapters": [
+          "chapter_1_du_tan_khai_son",
+          "chapter_2_tong_mon_lap_the"
+        ],
+        "requiredBuildings": [
+          "tang_kinh_cac"
+        ],
+        "requiredDiscipleTraitPresence": [
+          "hieu_thang"
+        ],
+        "cooldownDays": 4
+      },
+      "actorRules": {
+        "type": "disciple",
+        "requiredTraitIdsAny": [
+          "hieu_thang"
+        ]
+      },
+      "contextRules": {
+        "actor": {
+          "type": "disciple",
+          "requiredTraitIdsAny": [
+            "hieu_thang"
+          ]
+        },
+        "buildingIdsAny": [
+          "tang_kinh_cac"
+        ]
+      },
+      "textTemplate": {
+        "body": "{discipleName} xin tự chọn một thiên pháp trong {buildingName} thay vì theo thứ tự truyền dạy. Nếu xử lý khéo, đây là động lực; nếu xử lý cứng, dễ thành mầm chống đối."
+      },
+      "choices": [
+        {
+          "id": "allow_with_record",
+          "label": "Cho phép nhưng ghi sổ riêng",
+          "outcome": "Mở đường có kiểm soát."
+        },
+        {
+          "id": "deny_openly",
+          "label": "Từ chối công khai",
+          "outcome": "Giữ khuôn phép, tổn thương tự ái."
+        },
+        {
+          "id": "give_trial_copy",
+          "label": "Cho một bản sao thử trước",
+          "outcome": "Vừa thử người vừa giữ luật."
+        }
+      ],
+      "effects": {
+        "allow_with_record": {
+          "discipleLoyaltyDelta": 4,
+          "addChoiceFlags": [
+            "manual_access_supervised"
+          ]
+        },
+        "deny_openly": {
+          "discipleLoyaltyDelta": -5,
+          "sectPrestige": 1
+        },
+        "give_trial_copy": {
+          "resources": {
+            "linhThach": -3
+          },
+          "discipleLoyaltyDelta": 2
+        }
+      },
+      "tags": [
+        "disciple",
+        "library"
+      ]
+    },
+    {
+      "id": "random.resource.low_storehouse_whisper",
+      "title": "Tiếng Thở Dài Ở Linh Thạch Khố",
+      "category": "resource",
+      "weight": 9,
+      "conditions": {
+        "chapters": [
+          "chapter_1_du_tan_khai_son",
+          "chapter_2_tong_mon_lap_the"
+        ],
+        "resourcesBelow": {
+          "linhThach": 40
+        },
+        "requiredBuildings": [
+          "linh_thach_kho"
+        ],
+        "cooldownDays": 3
+      },
+      "actorRules": null,
+      "contextRules": {
+        "buildingIdsAny": [
+          "linh_thach_kho"
+        ],
+        "lowResourceIdsAny": [
+          "linhThach"
+        ]
+      },
+      "textTemplate": {
+        "body": "Người giữ kho báo rằng {resourceLabel} trong {buildingName} đã chạm mức khiến ai cũng bắt đầu dè chừng lẫn nhau. Xử lý lúc này quyết định nội môn thấy thiếu thốn là cùng gánh hay cùng giấu."
+      },
+      "choices": [
+        {
+          "id": "publish_stock",
+          "label": "Công khai tồn kho thật",
+          "outcome": "Minh bạch trước, khó khăn sau."
+        },
+        {
+          "id": "tighten_release",
+          "label": "Siết xuất kho ba ngày",
+          "outcome": "Giữ đáy kho nhưng làm lòng người lạnh."
+        },
+        {
+          "id": "send_collectors",
+          "label": "Điều người xuống núi thu gom",
+          "outcome": "Bù tài nguyên bằng thêm áp lực vận hành."
+        }
+      ],
+      "effects": {
+        "publish_stock": {
+          "sectPrestige": 1,
+          "addWorldFlags": [
+            "stock_shortage_public"
+          ]
+        },
+        "tighten_release": {
+          "sectPrestige": -1,
+          "addChoiceFlags": [
+            "strict_release_once"
+          ]
+        },
+        "send_collectors": {
+          "resources": {
+            "linhThach": 8,
+            "linhKhi": -3
+          }
+        }
+      },
+      "tags": [
+        "resource_pressure",
+        "linh_thach_kho"
+      ]
+    },
+    {
+      "id": "random.sect_internal.patrol_reports_traces",
+      "title": "Tuần Tra Báo Dấu Lạ Ngoài Sơn Môn",
+      "category": "sect_internal",
+      "weight": 8,
+      "conditions": {
+        "chapters": [
+          "chapter_1_du_tan_khai_son",
+          "chapter_2_tong_mon_lap_the",
+          "chapter_3_kinh_chieu_cuu_thien"
+        ],
+        "requiredTasks": [
+          "tuan_tra"
+        ],
+        "cooldownDays": 4
+      },
+      "actorRules": {
+        "type": "disciple"
+      },
+      "textTemplate": {
+        "body": "Đội tuần tra báo có dấu chân dừng rất lâu trước cổng nhưng không tiến vào. Vết để lại vừa như thăm dò, vừa như thử phản ứng của Thanh Huyền Môn."
+      },
+      "choices": [
+        {
+          "id": "double_patrol",
+          "label": "Tăng tuần tra ba ngày",
+          "outcome": "Giữ ngoài cổng trước."
+        },
+        {
+          "id": "lay_false_trail",
+          "label": "Rải dấu giả để thử kẻ theo dõi",
+          "outcome": "Chủ động phản thăm dò."
+        },
+        {
+          "id": "ignore_for_now",
+          "label": "Tạm ghi nhận rồi để đó",
+          "outcome": "Tiết kiệm sức người, chấp nhận mù một đoạn."
+        }
+      ],
+      "effects": {
+        "double_patrol": {
+          "resources": {
+            "linhKhi": -2
+          },
+          "addWorldFlags": [
+            "outer_patrol_doubled"
+          ]
+        },
+        "lay_false_trail": {
+          "sectPrestige": 1,
+          "addChoiceFlags": [
+            "counter_scouting_used"
+          ]
+        },
+        "ignore_for_now": {
+          "sectPrestige": -1
+        }
+      },
+      "tags": [
+        "patrol",
+        "outer_gate"
+      ]
+    },
+    {
+      "id": "random.faction.huyen_minh_cold_notice",
+      "title": "Thông Điệp Lạnh Từ Huyền Minh Điện",
+      "category": "faction",
+      "weight": 6,
+      "conditions": {
+        "chapters": [
+          "chapter_2_tong_mon_lap_the",
+          "chapter_3_kinh_chieu_cuu_thien"
+        ],
+        "requiredFactionRelations": {
+          "huyen_minh_dien": -10
+        },
+        "cooldownDays": 6
+      },
+      "actorRules": null,
+      "contextRules": {
+        "factionIdsAny": [
+          "huyen_minh_dien"
+        ]
+      },
+      "textTemplate": {
+        "body": "{factionName} gửi một thư ngắn nhắc Thanh Huyền Môn nên nhớ vị trí của mình trong cục diện hiện tại. Giọng văn không thô, nhưng đủ để ai đọc cũng hiểu đây là nhắc nhở có chủ đích."
+      },
+      "choices": [
+        {
+          "id": "reply_formally",
+          "label": "Đáp lại theo lễ, không nhún",
+          "outcome": "Giữ thể diện và giữ khoảng cách."
+        },
+        {
+          "id": "send_small_gift",
+          "label": "Gửi lễ vật xoa dịu",
+          "outcome": "Đổi tài nguyên lấy thêm dư địa."
+        },
+        {
+          "id": "ignore_notice",
+          "label": "Không hồi đáp",
+          "outcome": "Tỏ rõ lập trường cứng."
+        }
+      ],
+      "effects": {
+        "reply_formally": {
+          "factionRelations": {
+            "huyen_minh_dien": 1
+          }
+        },
+        "send_small_gift": {
+          "resources": {
+            "linhThach": -6
+          },
+          "factionRelations": {
+            "huyen_minh_dien": 3
+          }
+        },
+        "ignore_notice": {
+          "factionRelations": {
+            "huyen_minh_dien": -2
+          },
+          "addWorldFlags": [
+            "faction_huyen_minh_dien_hostile_signal"
+          ]
+        }
+      },
+      "tags": [
+        "huyen_minh_dien",
+        "pressure"
+      ]
+    },
+    {
+      "id": "random.faction.black_market_after_dark",
+      "title": "Kẻ Gõ Cổng Sau Canh Ba",
+      "category": "faction",
+      "weight": 6,
+      "conditions": {
+        "chapters": [
+          "chapter_2_tong_mon_lap_the",
+          "chapter_3_kinh_chieu_cuu_thien"
+        ],
+        "requiredFactionRelations": {
+          "hac_sa_coc": -5
+        },
+        "resourcesBelow": {
+          "duocThao": 16
+        },
+        "cooldownDays": 6
+      },
+      "actorRules": null,
+      "contextRules": {
+        "factionIdsAny": [
+          "hac_sa_coc"
+        ],
+        "lowResourceIdsAny": [
+          "duocThao"
+        ]
+      },
+      "textTemplate": {
+        "body": "Một mối từ {factionName} gõ cổng đêm, chào đúng thứ Thanh Huyền Môn đang thiếu: {resourceLabel}. Giá trả bằng danh nghĩa thì không ghi lên sổ, nhưng vẫn phải có người nhớ."
+      },
+      "choices": [
+        {
+          "id": "buy_quietly",
+          "label": "Nhận hàng trong đêm",
+          "outcome": "Có tài nguyên ngay, để lại dấu mờ."
+        },
+        {
+          "id": "trade_information",
+          "label": "Đổi tin tức thay linh thạch",
+          "outcome": "Giảm tiền mặt, tăng ràng buộc ngầm."
+        },
+        {
+          "id": "close_the_gate",
+          "label": "Đóng cổng từ chối",
+          "outcome": "Giữ tay sạch nhưng vẫn thiếu thuốc."
+        }
+      ],
+      "effects": {
+        "buy_quietly": {
+          "resources": {
+            "linhThach": -5,
+            "duocThao": 8
+          },
+          "factionRelations": {
+            "hac_sa_coc": 2
+          }
+        },
+        "trade_information": {
+          "factionRelations": {
+            "hac_sa_coc": 3
+          },
+          "addChoiceFlags": [
+            "black_market_information_trade"
+          ]
+        },
+        "close_the_gate": {
+          "factionRelations": {
+            "hac_sa_coc": -2
+          },
+          "sectPrestige": 1
+        }
+      },
+      "tags": [
+        "hac_sa_coc",
+        "black_market"
+      ]
+    },
+    {
+      "id": "random.omen.mirror_calls_the_name",
+      "title": "Linh Kính Gọi Đúng Danh Hiệu",
+      "category": "omen",
+      "weight": 5,
+      "conditions": {
+        "chapters": [
+          "chapter_2_tong_mon_lap_the",
+          "chapter_3_kinh_chieu_cuu_thien"
+        ],
+        "requiredFlags": [
+          "linh_kinh_awakened"
+        ],
+        "minPlayerRealmOrder": 2,
+        "cooldownDays": 7
+      },
+      "actorRules": null,
+      "textTemplate": {
+        "body": "Đêm tĩnh, mặt kính thoáng rung rồi phát ra một xưng hô cổ vốn không ai trong môn dùng nữa. Âm ấy không lớn, nhưng đủ để khiến người nghe biết rằng linh kính không chỉ phản chiếu vật, mà còn nhận biết người."
+      },
+      "choices": [
+        {
+          "id": "kneel_and_listen",
+          "label": "Tĩnh tâm nghe tiếp",
+          "outcome": "Được thêm chút đầu mối, chịu thêm áp lực."
+        },
+        {
+          "id": "record_the_phrase",
+          "label": "Ghi chép thật kỹ",
+          "outcome": "Giữ lại chứng cứ cho về sau."
+        },
+        {
+          "id": "cover_the_mirror",
+          "label": "Phủ kính rồi rời điện",
+          "outcome": "Cắt nhịp tiếp xúc để giữ ổn định."
+        }
+      ],
+      "effects": {
+        "kneel_and_listen": {
+          "playerCultivationProgress": 3,
+          "tamMaPressure": 3,
+          "addWorldFlags": [
+            "mirror_name_heard"
+          ]
+        },
+        "record_the_phrase": {
+          "foundationStability": 1,
+          "addFlags": [
+            "mirror_phrase_recorded"
+          ]
+        },
+        "cover_the_mirror": {
+          "tamMaPressure": -2
+        }
+      },
+      "tags": [
+        "mirror",
+        "omen"
+      ]
+    },
+    {
+      "id": "random.disciple.request_for_responsibility",
+      "title": "Đệ Tử Xin Gánh Việc Nặng Hơn",
+      "category": "disciple",
+      "weight": 8,
+      "conditions": {
+        "chapters": [
+          "chapter_1_du_tan_khai_son",
+          "chapter_2_tong_mon_lap_the",
+          "chapter_3_kinh_chieu_cuu_thien"
+        ],
+        "requiredDiscipleTraitPresence": [
+          "tai_chat_xuat_chung"
+        ],
+        "cooldownDays": 4
+      },
+      "actorRules": {
+        "type": "disciple",
+        "requiredTraitIdsAny": [
+          "tai_chat_xuat_chung",
+          "hieu_thang",
+          "tham_cong"
+        ]
+      },
+      "textTemplate": {
+        "body": "{discipleName} chủ động xin nhận việc nặng hơn trong nội môn, nói rằng nếu cứ để mãi việc lặt vặt thì lòng cầu tiến sẽ bị mài cùn. Đây là lúc xem người hay cũng là lúc dễ nuôi cái tôi."
+      },
+      "choices": [
+        {
+          "id": "assign_more_duty",
+          "label": "Cho thử gánh việc nặng",
+          "outcome": "Được trọng dụng, lòng người sáng lên."
+        },
+        {
+          "id": "promise_later",
+          "label": "Hẹn lại khi nội môn ổn hơn",
+          "outcome": "Giữ nhịp chung trước, chưa mở chỗ ngay."
+        },
+        {
+          "id": "suppress_the_request",
+          "label": "Bác bỏ thẳng",
+          "outcome": "Giữ khuôn phép nhưng gieo chút ấm ức."
+        }
+      ],
+      "effects": {
+        "assign_more_duty": {
+          "discipleMoodDelta": 5,
+          "discipleLoyaltyDelta": 4,
+          "addChoiceFlags": [
+            "disciple_asked_for_responsibility"
+          ]
+        },
+        "promise_later": {
+          "discipleMoodDelta": -1
+        },
+        "suppress_the_request": {
+          "discipleMoodDelta": -5,
+          "discipleLoyaltyDelta": -4
+        }
+      },
+      "tags": [
+        "disciple",
+        "responsibility"
+      ]
+    },
+    {
+      "id": "random.disciple.bottled_breakthrough",
+      "title": "Khí Cơ Bị Nén Lại",
+      "category": "disciple",
+      "weight": 7,
+      "conditions": {
+        "chapters": [
+          "chapter_1_du_tan_khai_son",
+          "chapter_2_tong_mon_lap_the",
+          "chapter_3_kinh_chieu_cuu_thien"
+        ],
+        "requiredDiscipleRiskFlagsAny": [
+          "can_dot_pha"
+        ],
+        "requiredDiscipleMoodBelow": 60,
+        "cooldownDays": 5
+      },
+      "actorRules": {
+        "type": "disciple",
+        "requiredRiskFlagsAny": [
+          "can_dot_pha"
+        ],
+        "maxMood": 60
+      },
+      "textTemplate": {
+        "body": "{discipleName} đã chạm ngưỡng đột phá nhưng khí cơ liên tục bị nén lại vì tâm niệm không yên. Để mặc thì dễ sinh lệch khí, ép quá lại hỏng nền."
+      },
+      "choices": [
+        {
+          "id": "grant_rest",
+          "label": "Cho nghỉ và dưỡng khí",
+          "outcome": "Chậm một nhịp để giữ người."
+        },
+        {
+          "id": "send_to_meditation",
+          "label": "Đưa vào Tĩnh Tu Đường",
+          "outcome": "Dồn nguồn lực để giữ khí mạch ổn lại."
+        },
+        {
+          "id": "force_endurance",
+          "label": "Bắt tiếp tục chịu đựng",
+          "outcome": "Giữ nhịp việc, đổi lấy bất mãn."
+        }
+      ],
+      "effects": {
+        "grant_rest": {
+          "discipleMoodDelta": 4,
+          "discipleHealthDelta": 6,
+          "discipleLoyaltyDelta": 2
+        },
+        "send_to_meditation": {
+          "resources": {
+            "linhKhi": -4
+          },
+          "discipleMoodDelta": 3,
+          "discipleLoyaltyDelta": 3
+        },
+        "force_endurance": {
+          "discipleMoodDelta": -6,
+          "discipleLoyaltyDelta": -5,
+          "addWorldFlags": [
+            "disciple_breakthrough_forced_once"
+          ]
+        }
+      },
+      "tags": [
+        "disciple",
+        "breakthrough"
+      ]
+    },
+    {
+      "id": "random.disciple.internal_dispute",
+      "title": "Lời Qua Tiếng Lại Ở Nội Viện",
+      "category": "disciple",
+      "weight": 8,
+      "conditions": {
+        "chapters": [
+          "chapter_1_du_tan_khai_son",
+          "chapter_2_tong_mon_lap_the",
+          "chapter_3_kinh_chieu_cuu_thien"
+        ],
+        "requiredDiscipleCount": 3,
+        "requiredDiscipleRiskFlagsAny": [
+          "bat_man",
+          "muon_duoc_trong_dung"
+        ],
+        "cooldownDays": 4
+      },
+      "actorRules": {
+        "type": "disciple",
+        "requiredRiskFlagsAny": [
+          "bat_man",
+          "muon_duoc_trong_dung"
+        ]
+      },
+      "textTemplate": {
+        "body": "{discipleName} va chạm với đồng môn vì chuyện chia việc và ghi công. Việc chưa lớn, nhưng nếu bỏ mặc thì nề nếp nội môn sẽ mòn từ những cơn bực nhỏ."
+      },
+      "choices": [
+        {
+          "id": "mediate_quietly",
+          "label": "Gọi riêng hai bên để giảng hòa",
+          "outcome": "Giữ mặt mũi cho họ, giảm lửa nội viện."
+        },
+        {
+          "id": "record_merit_clearly",
+          "label": "Lập sổ công việc rõ hơn",
+          "outcome": "Lấy phép tắc dập tranh chấp."
+        },
+        {
+          "id": "rebuke_publicly",
+          "label": "Khiển trách công khai",
+          "outcome": "Lửa tắt nhanh nhưng lòng người lạnh."
+        }
+      ],
+      "effects": {
+        "mediate_quietly": {
+          "discipleMoodDelta": 3,
+          "discipleLoyaltyDelta": 2
+        },
+        "record_merit_clearly": {
+          "resources": {
+            "linhKhi": -1
+          },
+          "sectPrestige": 1,
+          "discipleMoodDelta": 1
+        },
+        "rebuke_publicly": {
+          "sectPrestige": 1,
+          "discipleMoodDelta": -4,
+          "discipleLoyaltyDelta": -2
+        }
+      },
+      "tags": [
+        "disciple",
+        "discipline"
+      ]
+    },
+    {
+      "id": "random.disciple.instability_signs",
+      "title": "Tâm Cảnh Có Dấu Lệch",
+      "category": "disciple",
+      "weight": 6,
+      "conditions": {
+        "chapters": [
+          "chapter_2_tong_mon_lap_the",
+          "chapter_3_kinh_chieu_cuu_thien",
+          "chapter_4_nhat_niem_dinh_dao"
+        ],
+        "requiredDiscipleRiskFlagsAny": [
+          "bat_on",
+          "phan_tam"
+        ],
+        "cooldownDays": 6
+      },
+      "actorRules": {
+        "type": "disciple",
+        "requiredRiskFlagsAny": [
+          "bat_on",
+          "phan_tam"
+        ],
+        "maxLoyalty": 45
+      },
+      "textTemplate": {
+        "body": "{discipleName} gần đây nói năng thất thường, lúc nóng lúc lạnh, trong mắt còn có chút né tránh khi gặp chưởng môn. Đây chưa phải phản ý thành hình, nhưng đã là dấu cần nhìn thẳng."
+      },
+      "choices": [
+        {
+          "id": "watch_and_help",
+          "label": "Giám sát kín và cho người trợ giúp",
+          "outcome": "Giữ người trong vòng tay tông môn."
+        },
+        {
+          "id": "grant_solitary_rest",
+          "label": "Cho tĩnh dưỡng một thời gian",
+          "outcome": "Lùi một bước để tránh hỏng lớn."
+        },
+        {
+          "id": "tighten_restrictions",
+          "label": "Siết hạn chế đi lại",
+          "outcome": "Ổn bên ngoài, ép bên trong."
+        }
+      ],
+      "effects": {
+        "watch_and_help": {
+          "resources": {
+            "linhKhi": -2
+          },
+          "discipleMoodDelta": 2,
+          "discipleLoyaltyDelta": 3
+        },
+        "grant_solitary_rest": {
+          "discipleHealthDelta": 5,
+          "discipleMoodDelta": 3
+        },
+        "tighten_restrictions": {
+          "discipleMoodDelta": -5,
+          "discipleLoyaltyDelta": -4,
+          "addWorldFlags": [
+            "disciple_restriction_used_once"
+          ]
+        }
+      },
+      "tags": [
+        "disciple",
+        "instability"
+      ]
+    },
+    {
+      "id": "random.opportunity.talented_youth_at_gate",
+      "title": "Thiếu Niên Có Linh Căn Tới Cổng",
+      "category": "opportunity",
+      "weight": 7,
+      "conditions": {
+        "chapters": [
+          "chapter_1_du_tan_khai_son",
+          "chapter_2_tong_mon_lap_the"
+        ],
+        "requiredDiscipleCount": 2,
+        "forbiddenFlags": [
+          "recruit_talented_youth_accepted"
+        ],
+        "cooldownDays": 8
+      },
+      "actorRules": null,
+      "textTemplate": {
+        "body": "Một thiếu niên từ chân núi tìm tới, tự nói mình nghe rõ tiếng linh khí quanh Hậu Sơn Cốc từ nhỏ. Tư chất lộ ra khá rõ, nhưng người giỏi quá sớm cũng là người dễ khó dạy."
+      },
+      "choices": [
+        {
+          "id": "accept_as_outer_disciple",
+          "label": "Nhận vào làm ngoại môn",
+          "outcome": "Có thêm hạt giống tốt cho tương lai."
+        },
+        {
+          "id": "accept_with_trial",
+          "label": "Nhận nhưng thử ba ngày",
+          "outcome": "Mở cửa mà chưa mở hết lòng."
+        },
+        {
+          "id": "send_with_supplies",
+          "label": "Cho ít vật rồi tiễn đi",
+          "outcome": "Giữ cổng hẹp, không giữ người."
+        }
+      ],
+      "effects": {
+        "accept_as_outer_disciple": {
+          "recruitDiscipleArchetype": "talented_youth",
+          "sectPrestige": 1
+        },
+        "accept_with_trial": {
+          "recruitDiscipleArchetype": "talented_youth",
+          "discipleMoodDelta": 1,
+          "addChoiceFlags": [
+            "talented_youth_trial_used"
+          ]
+        },
+        "send_with_supplies": {
+          "resources": {
+            "linhThach": -3,
+            "duocThao": -2
+          }
+        }
+      },
+      "tags": [
+        "recruitment",
+        "talent"
+      ]
+    },
+    {
+      "id": "random.opportunity.wounded_wanderer_refuge",
+      "title": "Tán Tu Thương Tích Xin Nương Náu",
+      "category": "opportunity",
+      "weight": 6,
+      "conditions": {
+        "chapters": [
+          "chapter_1_du_tan_khai_son",
+          "chapter_2_tong_mon_lap_the",
+          "chapter_3_kinh_chieu_cuu_thien"
+        ],
+        "requiredBuildings": [
+          "duoc_vien"
+        ],
+        "forbiddenFlags": [
+          "recruit_wounded_wanderer_accepted"
+        ],
+        "cooldownDays": 8
+      },
+      "actorRules": null,
+      "textTemplate": {
+        "body": "Một tán tu bị thương ghé trước sơn môn, nói chỉ xin một chỗ trú và ít thuốc. Người này mang khí tức từng trải, nếu cứu có thể thành người dùng được, nếu bỏ cũng chưa chắc đã không lưu oán."
+      },
+      "choices": [
+        {
+          "id": "heal_and_accept",
+          "label": "Chữa trị rồi nhận ở lại",
+          "outcome": "Cưu người trong lúc khốn, đổi lấy một nhân lực biết ơn."
+        },
+        {
+          "id": "heal_then_send",
+          "label": "Chữa xong rồi tiễn đi",
+          "outcome": "Giữ nhân nghĩa mà không giữ người."
+        },
+        {
+          "id": "deny_entry",
+          "label": "Khước từ ngay tại cổng",
+          "outcome": "Giữ an toàn cho nội môn trước."
+        }
+      ],
+      "effects": {
+        "heal_and_accept": {
+          "resources": {
+            "duocThao": -4,
+            "linhKhi": -2
+          },
+          "recruitDiscipleArchetype": "wounded_wanderer"
+        },
+        "heal_then_send": {
+          "resources": {
+            "duocThao": -3
+          },
+          "sectPrestige": 1
+        },
+        "deny_entry": {
+          "sectPrestige": -1
+        }
+      },
+      "tags": [
+        "recruitment",
+        "refuge"
+      ]
+    },
+    {
+      "id": "random.faction.huyen_minh_protection_overture",
+      "title": "Lá»i Äá» Nghá»‹ Che Chá»Ÿ Tá»« Huyá»n Minh",
+      "category": "faction",
+      "weight": 6,
+      "conditions": {
+        "chapters": [
+          "chapter_2_tong_mon_lap_the",
+          "chapter_3_kinh_chieu_cuu_thien"
+        ],
+        "minSectPrestige": 16,
+        "requiredFactionRelations": {
+          "huyen_minh_dien": 6
+        },
+        "cooldownDays": 7
+      },
+      "actorRules": null,
+      "contextRules": {
+        "factionIdsAny": [
+          "huyen_minh_dien"
+        ]
+      },
+      "textTemplate": {
+        "body": "{factionName} gá»­i thÆ° nÃªu Ã½ sáºµn sÃ ng cho Thanh Huyá»n MÃ´n má»™t táº¥m danh nghÄ©a báº£o há»™, Ä‘á»•i láº¥y viá»‡c mÃ´n ta pháº£i báº¡ch hÃ³a nhiá»u hÆ¡n cÃ¡c viá»‡c ná»™i mÃ´n. ÄÃ¢y khÃ´ng pháº£i liÃªn minh tháº­t sá»±, nhÆ°ng cÅ©ng khÃ´ng cÃ²n lÃ  khoáº£ng cÃ¡ch thuáº§n tÃºy."
+      },
+      "choices": [
+        {
+          "id": "accept_supervised_protection",
+          "label": "Nháº­n láº¥y danh nghÄ©a báº£o há»™",
+          "outcome": "Äá»•i dÆ° Ä‘á»‹a láº¥y sÆ°á»n khung an toÃ n."
+        },
+        {
+          "id": "accept_limited_contact",
+          "label": "Chá»‰ nháº­n giao háº£o, khÃ´ng nháº­n ráº ng buá»™c",
+          "outcome": "Giá»¯ cá»­a há»£p tÃ¡c mÃ  khÃ´ng giao quyá»n chá»§ Ä‘á»™ng."
+        },
+        {
+          "id": "refuse_protection",
+          "label": "Tá»« chá»‘i lá»i che chá»Ÿ",
+          "outcome": "Giá»¯ Ä‘á»™c láº­p, cháº¥p nháº­n bá»‹ nhÃ¬n khÃ³ hÆ¡n."
+        }
+      ],
+      "effects": {
+        "accept_supervised_protection": {
+          "factionRelations": {
+            "huyen_minh_dien": 3
+          },
+          "addChoiceFlags": [
+            "protection_offer_huyen_minh_dien"
+          ]
+        },
+        "accept_limited_contact": {
+          "factionRelations": {
+            "huyen_minh_dien": 1
+          }
+        },
+        "refuse_protection": {
+          "factionRelations": {
+            "huyen_minh_dien": -2
+          },
+          "addWorldFlags": [
+            "faction_huyen_minh_dien_hostile_signal"
+          ]
+        }
+      },
+      "tags": [
+        "huyen_minh_dien",
+        "alliance",
+        "protection",
+        "letter"
+      ]
+    },
+    {
+      "id": "random.sect_internal.merit_tablet_argument",
+      "title": "Bảng Công Trạng Bắt Đầu Gây Va Chạm",
+      "category": "sect_internal",
+      "weight": 8,
+      "conditions": {
+        "chapters": [
+          "chapter_2_tong_mon_lap_the",
+          "chapter_3_kinh_chieu_cuu_thien"
+        ],
+        "requiredDiscipleCount": 4,
+        "minSectPrestige": 10,
+        "cooldownDays": 5
+      },
+      "actorRules": {
+        "type": "disciple",
+        "preferredTraitIdsAny": [
+          "can_man_ben_bi",
+          "tham_cong",
+          "kieu_tam"
+        ]
+      },
+      "textTemplate": {
+        "body": "{discipleName} xin chưởng môn định lại cách ghi công trong nội môn. Từ khi người và việc đều nhiều hơn, lời khen miệng không còn đủ giữ yên lòng người."
+      },
+      "choices": [
+        {
+          "id": "formalize_merit_board",
+          "label": "Lập bảng công trạng rõ ràng",
+          "outcome": "Giữ việc theo phép, lòng người bớt nghi."
+        },
+        {
+          "id": "favor_visible_results",
+          "label": "Ưu tiên người làm việc thấy ngay",
+          "outcome": "Nhanh gọn, nhưng dễ để người âm thầm thiệt phần."
+        },
+        {
+          "id": "delay_the_record",
+          "label": "Để đó rồi tính sau",
+          "outcome": "Tránh mất công trước mắt, để mầm bất mãn ở lại."
+        }
+      ],
+      "effects": {
+        "formalize_merit_board": {
+          "resources": {
+            "linhKhi": -1
+          },
+          "sectPrestige": 1,
+          "sectStability": 2,
+          "addFlags": [
+            "merit_board_formalized"
+          ]
+        },
+        "favor_visible_results": {
+          "sectPrestige": 1,
+          "discipleMoodDelta": -4,
+          "addChoiceFlags": [
+            "merit_board_bias_visible"
+          ]
+        },
+        "delay_the_record": {
+          "sectStability": -2
+        }
+      },
+      "tags": [
+        "governance",
+        "merit",
+        "chapter2"
+      ]
+    },
+    {
+      "id": "random.disciple.diligent_hand_unseen",
+      "title": "Người Cần Mẫn Bị Bỏ Qua",
+      "category": "disciple",
+      "weight": 8,
+      "conditions": {
+        "chapters": [
+          "chapter_1_du_tan_khai_son",
+          "chapter_2_tong_mon_lap_the"
+        ],
+        "requiredDiscipleTraitPresence": [
+          "can_man_ben_bi"
+        ],
+        "cooldownDays": 4
+      },
+      "actorRules": {
+        "type": "disciple",
+        "requiredTraitIdsAny": [
+          "can_man_ben_bi"
+        ]
+      },
+      "textTemplate": {
+        "body": "{discipleName} làm đủ việc nặng nhẹ nhiều ngày liền mà không lên tiếng một câu. Chính vì không lên tiếng nên người như vậy lại dễ bị bỏ quên nhất."
+      },
+      "choices": [
+        {
+          "id": "praise_openly",
+          "label": "Biểu dương ngay trước nội môn",
+          "outcome": "Cho người làm việc biết công không mất."
+        },
+        {
+          "id": "assign_store_help",
+          "label": "Giao thêm phần việc tin cậy",
+          "outcome": "Lấy trọng dụng thay lời khen."
+        },
+        {
+          "id": "let_the_day_pass",
+          "label": "Để yên như cũ",
+          "outcome": "Không sinh việc mới, nhưng lòng người khó nói."
+        }
+      ],
+      "effects": {
+        "praise_openly": {
+          "resources": {
+            "linhThach": -3
+          },
+          "discipleMoodDelta": 5,
+          "discipleLoyaltyDelta": 4,
+          "sectStability": 1
+        },
+        "assign_store_help": {
+          "sectPrestige": 1,
+          "discipleMoodDelta": 2,
+          "discipleLoyaltyDelta": 2,
+          "addChoiceFlags": [
+            "recent_disciple_recognized"
+          ]
+        },
+        "let_the_day_pass": {
+          "discipleMoodDelta": -4,
+          "discipleLoyaltyDelta": -2
+        }
+      },
+      "tags": [
+        "disciple",
+        "labor",
+        "recognition"
+      ]
+    },
+    {
+      "id": "random.disciple.alchemy_hand_request",
+      "title": "Đệ Tử Xin Thử Tay Trong Đan Phòng",
+      "category": "disciple",
+      "weight": 7,
+      "conditions": {
+        "chapters": [
+          "chapter_2_tong_mon_lap_the",
+          "chapter_3_kinh_chieu_cuu_thien"
+        ],
+        "requiredBuildings": [
+          "luyen_khi_phong"
+        ],
+        "requiredDiscipleTraitPresence": [
+          "gioi_luyen_dan"
+        ],
+        "cooldownDays": 6
+      },
+      "actorRules": {
+        "type": "disciple",
+        "requiredTraitIdsAny": [
+          "gioi_luyen_dan"
+        ]
+      },
+      "textTemplate": {
+        "body": "{discipleName} xin được tự tay coi một mẻ đan nhỏ, nói rằng chỉ đứng phụ mãi thì tay nghề sẽ không bao giờ thành. Chọn lúc này là mở đường cho một người, cũng là mạo hiểm một phần linh thảo đang hiếm."
+      },
+      "choices": [
+        {
+          "id": "open_small_batch",
+          "label": "Cho thử một mẻ nhỏ",
+          "outcome": "Mở chỗ cho tay nghề lộ ra."
+        },
+        {
+          "id": "keep_as_assistant",
+          "label": "Vẫn để đứng phụ thêm",
+          "outcome": "An toàn hơn, nhưng chưa thật sự trọng dụng."
+        },
+        {
+          "id": "deny_for_now",
+          "label": "Chưa phải lúc động lò",
+          "outcome": "Giữ vật liệu, để người nản đi một nhịp."
+        }
+      ],
+      "effects": {
+        "open_small_batch": {
+          "resources": {
+            "duocThao": -3,
+            "linhKhi": -2
+          },
+          "sectPrestige": 1,
+          "discipleMoodDelta": 4,
+          "discipleLoyaltyDelta": 2,
+          "addFlags": [
+            "alchemy_hand_trusted"
+          ]
+        },
+        "keep_as_assistant": {
+          "discipleMoodDelta": 1,
+          "discipleLoyaltyDelta": 2
+        },
+        "deny_for_now": {
+          "discipleMoodDelta": -4,
+          "discipleLoyaltyDelta": -3
+        }
+      },
+      "tags": [
+        "alchemy",
+        "disciple",
+        "chapter2"
+      ]
+    },
+    {
+      "id": "random.cultivation.cracked_eaves_breath",
+      "title": "Nhịp Thở Dưới Mái Hiên Nứt",
+      "category": "cultivation",
+      "weight": 7,
+      "conditions": {
+        "chapters": [
+          "chapter_1_du_tan_khai_son",
+          "chapter_2_tong_mon_lap_the"
+        ],
+        "requiredBuildings": [
+          "tinh_tu_duong"
+        ],
+        "minDay": 3,
+        "cooldownDays": 5
+      },
+      "actorRules": null,
+      "textTemplate": {
+        "body": "Mái hiên Tĩnh Tu Đường còn một khe nứt nhỏ. Sáng sớm, gió lùa qua đúng nhịp khiến hơi thở trong sân hòa thành một tiết tấu cũ, như có người xưa âm thầm nhắc lại bài nhập môn của Thanh Huyền Môn."
+      },
+      "choices": [
+        {
+          "id": "follow_old_rhythm",
+          "label": "Thu tâm theo nhịp cũ",
+          "outcome": "Lấy một nhịp ngộ ra giữa lúc sơ thất."
+        },
+        {
+          "id": "mend_the_eaves",
+          "label": "Sửa hiên trước rồi tính",
+          "outcome": "Giữ chỗ tu hành bền hơn về sau."
+        },
+        {
+          "id": "close_the_court",
+          "label": "Đóng sân, khỏi để người bàn tán",
+          "outcome": "Giữ yên bên ngoài, bỏ qua một cơ duyên nhỏ."
+        }
+      ],
+      "effects": {
+        "follow_old_rhythm": {
+          "playerCultivationProgress": 5,
+          "foundationStability": 1
+        },
+        "mend_the_eaves": {
+          "resources": {
+            "linhMoc": -2,
+            "khoangThach": -1
+          },
+          "sectStability": 2
+        },
+        "close_the_court": {
+          "sectStability": 1,
+          "sectPrestige": -1
+        }
+      },
+      "tags": [
+        "cultivation",
+        "ruin_recovery",
+        "chapter1"
+      ]
+    },
+    {
+      "id": "random.opportunity.branch_descendant_petition",
+      "title": "Hậu Nhân Một Chi Cũ Tìm Về",
+      "category": "opportunity",
+      "weight": 6,
+      "conditions": {
+        "chapters": [
+          "chapter_2_tong_mon_lap_the",
+          "chapter_3_kinh_chieu_cuu_thien"
+        ],
+        "requiredFlags": [
+          "chapter2_started"
+        ],
+        "minSectPrestige": 12,
+        "forbiddenFlags": [
+          "recruit_branch_descendant_accepted"
+        ],
+        "cooldownDays": 8
+      },
+      "actorRules": null,
+      "textTemplate": {
+        "body": "Một thanh niên mang theo gia phả mờ cũ, tự xưng là hậu nhân của một chi nhỏ từng dựa vào Thanh Huyền Môn để truyền đạo ở chân núi. Giấy tờ không đủ để gọi là chứng cứ, nhưng đủ để khiến người ta không nỡ xem như lời nói liều."
+      },
+      "choices": [
+        {
+          "id": "accept_carefully",
+          "label": "Nhận vào nhưng tra xét kỹ",
+          "outcome": "Giữ người và giữ phép cùng lúc."
+        },
+        {
+          "id": "accept_by_old_name",
+          "label": "Nể tình chi cũ mà nhận ngay",
+          "outcome": "Lấy tình cũ làm gốc cho mối mới."
+        },
+        {
+          "id": "send_away_with_coin",
+          "label": "Cho ít lộ phí rồi tiễn đi",
+          "outcome": "Không mở rộng cửa lúc lòng còn ngại."
+        }
+      ],
+      "effects": {
+        "accept_carefully": {
+          "recruitDiscipleArchetype": "branch_descendant",
+          "sectPrestige": 1,
+          "addChoiceFlags": [
+            "branch_lineage_checked"
+          ]
+        },
+        "accept_by_old_name": {
+          "recruitDiscipleArchetype": "branch_descendant",
+          "sectFortune": 1
+        },
+        "send_away_with_coin": {
+          "resources": {
+            "linhThach": -4
+          }
+        }
+      },
+      "tags": [
+        "recruitment",
+        "sect_history",
+        "chapter2"
+      ]
+    },
+    {
+      "id": "random.opportunity.orphan_strange_root_found",
+      "title": "Cô Nhi Có Dị Linh Căn Được Dẫn Tới",
+      "category": "opportunity",
+      "weight": 5,
+      "conditions": {
+        "chapters": [
+          "chapter_2_tong_mon_lap_the",
+          "chapter_3_kinh_chieu_cuu_thien"
+        ],
+        "requiredFlags": [
+          "first_formal_recruitment_opened"
+        ],
+        "minSectPrestige": 14,
+        "forbiddenFlags": [
+          "recruit_orphan_strange_root_accepted"
+        ],
+        "cooldownDays": 9
+      },
+      "actorRules": null,
+      "textTemplate": {
+        "body": "Người dưới chân núi dẫn tới một cô nhi ít nói, quanh người có linh tức lệch mà không tán. Tư chất ấy sáng quá sớm, nhưng người mang dị căn mà không được dạy đúng cũng dễ thành nguồn họa cho chính mình."
+      },
+      "choices": [
+        {
+          "id": "adopt_into_outer_court",
+          "label": "Nhận làm ngoại môn, dạy từ nền",
+          "outcome": "Giữ một hạt giống hiếm cho đường dài."
+        },
+        {
+          "id": "accept_under_trial",
+          "label": "Nhận nhưng đặt dưới kỳ thử ngắn",
+          "outcome": "Mở cửa mà chưa giao hết lòng tin."
+        },
+        {
+          "id": "leave_with_support",
+          "label": "Cho vật dụng rồi để người khác nuôi",
+          "outcome": "Tránh gánh lớn, cũng bỏ qua cơ duyên."
+        }
+      ],
+      "effects": {
+        "adopt_into_outer_court": {
+          "recruitDiscipleArchetype": "orphan_strange_root",
+          "sectFortune": 2,
+          "sectPrestige": 1
+        },
+        "accept_under_trial": {
+          "recruitDiscipleArchetype": "orphan_strange_root",
+          "addChoiceFlags": [
+            "strange_root_trial_used"
+          ]
+        },
+        "leave_with_support": {
+          "resources": {
+            "linhThach": -3,
+            "duocThao": -2
+          },
+          "sectPrestige": -1
+        }
+      },
+      "tags": [
+        "recruitment",
+        "talent",
+        "fortune"
+      ]
+    },
+    {
+      "id": "random.opportunity.disgraced_transfer_at_gate",
+      "title": "Người Có Tài Nhưng Mang Tai Tiếng Xin Nương",
+      "category": "opportunity",
+      "weight": 5,
+      "conditions": {
+        "chapters": [
+          "chapter_2_tong_mon_lap_the",
+          "chapter_3_kinh_chieu_cuu_thien"
+        ],
+        "minSectPrestige": 16,
+        "forbiddenFlags": [
+          "recruit_disgraced_transfer_accepted"
+        ],
+        "cooldownDays": 9
+      },
+      "actorRules": null,
+      "textTemplate": {
+        "body": "Một tu sĩ trẻ tự xưng từng ở môn khác, bị đẩy ra ngoài vì dính chuyện khó nói. Người này nói ít, tay lại giữ đúng lễ của đan sư. Có người như vậy vào môn là thêm một tay nghề, cũng là thêm một lời dị nghị."
+      },
+      "choices": [
+        {
+          "id": "accept_under_watch",
+          "label": "Nhận vào nhưng đặt dưới quan sát",
+          "outcome": "Lấy tài mà không bỏ phòng bị."
+        },
+        {
+          "id": "use_as_temporary_help",
+          "label": "Cho ở lại như khách làm việc",
+          "outcome": "Giữ cánh cửa hẹp hơn, lòng người cũng xa hơn."
+        },
+        {
+          "id": "refuse_due_to_reputation",
+          "label": "Khước từ vì sợ liên lụy",
+          "outcome": "Giữ thanh danh sạch, bỏ qua một tay nghề hiếm."
+        }
+      ],
+      "effects": {
+        "accept_under_watch": {
+          "recruitDiscipleArchetype": "disgraced_transfer",
+          "sectPrestige": 1,
+          "addChoiceFlags": [
+            "disgraced_transfer_under_watch"
+          ]
+        },
+        "use_as_temporary_help": {
+          "resources": {
+            "duocThao": 3
+          },
+          "sectStability": -1
+        },
+        "refuse_due_to_reputation": {
+          "sectPrestige": 1
+        }
+      },
+      "tags": [
+        "recruitment",
+        "reputation",
+        "chapter2"
+      ]
+    },
+    {
+      "id": "random.opportunity.stubborn_mortal_seeks_gate",
+      "title": "Kẻ Phàm Căn Cứ Đứng Ngoài Sơn Môn",
+      "category": "opportunity",
+      "weight": 6,
+      "conditions": {
+        "chapters": [
+          "chapter_1_du_tan_khai_son",
+          "chapter_2_tong_mon_lap_the"
+        ],
+        "minDay": 4,
+        "forbiddenFlags": [
+          "recruit_stubborn_mortal_accepted"
+        ],
+        "cooldownDays": 8
+      },
+      "actorRules": null,
+      "textTemplate": {
+        "body": "Ngoài sơn môn có một người mang phàm căn mỏng đến ba lần vẫn không chịu rời. Người ấy nói không cầu kỳ tích, chỉ xin một chỗ làm việc và một con đường để từng bước mà học."
+      },
+      "choices": [
+        {
+          "id": "accept_as_outer_worker",
+          "label": "Nhận vào từ việc nặng nhất",
+          "outcome": "Lấy ý chí bù cằn căn cơ."
+        },
+        {
+          "id": "test_with_hard_chores",
+          "label": "Cho thử sức ba ngày",
+          "outcome": "Xem lòng người có bền như lời nói hay không."
+        },
+        {
+          "id": "send_home_with_grain",
+          "label": "Cho lương thực rồi bảo trở về",
+          "outcome": "Cứu một người qua bữa, không giữ người cho đường dài."
+        }
+      ],
+      "effects": {
+        "accept_as_outer_worker": {
+          "recruitDiscipleArchetype": "stubborn_mortal",
+          "sectStability": 1
+        },
+        "test_with_hard_chores": {
+          "recruitDiscipleArchetype": "stubborn_mortal",
+          "addChoiceFlags": [
+            "stubborn_mortal_trial_used"
+          ]
+        },
+        "send_home_with_grain": {
+          "resources": {
+            "linhKhi": -2
+          },
+          "sectPrestige": 1
+        }
+      },
+      "tags": [
+        "recruitment",
+        "willpower",
+        "chapter1"
+      ]
+    },
+    {
+      "id": "random.faction.xich_luyen_trade_probe",
+      "title": "Xích Luyện Bảo Gửi Thư Dò Giá",
+      "category": "faction",
+      "weight": 7,
+      "conditions": {
+        "chapters": [
+          "chapter_2_tong_mon_lap_the",
+          "chapter_3_kinh_chieu_cuu_thien"
+        ],
+        "minSectPrestige": 12,
+        "cooldownDays": 6
+      },
+      "actorRules": null,
+      "contextRules": {
+        "factionIdsAny": [
+          "xich_luyen_bao"
+        ]
+      },
+      "textTemplate": {
+        "body": "{factionName} gửi thư hỏi rất gọn: Thanh Huyền Môn có ý mở đường đổi vật hay chỉ muốn khép cửa mà lớn lên? Câu chữ nhã, nhưng giọng điệu rõ là muốn thử xem môn ta biết định giá mình đến đâu."
+      },
+      "choices": [
+        {
+          "id": "open_trade_contact",
+          "label": "Nhận mối giao thương",
+          "outcome": "Mở một lối trao đổi thực dụng với người biết tính lời."
+        },
+        {
+          "id": "bargain_hard",
+          "label": "Hồi thư đòi điều khoản tốt hơn",
+          "outcome": "Giữ thế, nhưng để đối phương nhớ là môn ta không dễ dắt."
+        },
+        {
+          "id": "refuse_contact",
+          "label": "Từ chối lúc này",
+          "outcome": "Giữ cửa hẹp hơn với thương khí ngoài núi."
+        }
+      ],
+      "effects": {
+        "open_trade_contact": {
+          "factionRelations": {
+            "xich_luyen_bao": 3
+          },
+          "addChoiceFlags": [
+            "xich_luyen_trade_contact_open"
+          ]
+        },
+        "bargain_hard": {
+          "resources": {
+            "linhThach": 4
+          },
+          "factionRelations": {
+            "xich_luyen_bao": 1
+          }
+        },
+        "refuse_contact": {
+          "factionRelations": {
+            "xich_luyen_bao": -2
+          }
+        }
+      },
+      "tags": [
+        "xich_luyen_bao",
+        "letter",
+        "trade"
+      ]
+    },
+    {
+      "id": "random.faction.van_tang_sealed_excerpt",
+      "title": "Vân Tàng Thư Viện Gửi Mảnh Trích Lục",
+      "category": "faction",
+      "weight": 6,
+      "conditions": {
+        "chapters": [
+          "chapter_2_tong_mon_lap_the",
+          "chapter_3_kinh_chieu_cuu_thien"
+        ],
+        "minSectPrestige": 14,
+        "cooldownDays": 7
+      },
+      "actorRules": null,
+      "contextRules": {
+        "factionIdsAny": [
+          "van_tang_thu_vien"
+        ]
+      },
+      "textTemplate": {
+        "body": "{factionName} gửi tới một mảnh trích lục đã niêm phong, chỉ ghi ngoài bìa rằng nội dung có nhắc đến một nhánh Thanh Huyền Môn trước Thiên Khư Biến. Không nói xin đổi gì ngay, nhưng cũng không phải vô cớ mà cho không."
+      },
+      "choices": [
+        {
+          "id": "share_a_copy_back",
+          "label": "Sao lại điều môn ta biết rồi hồi đáp",
+          "outcome": "Trao đi chút thành ý để đổi đường đọc sâu hơn."
+        },
+        {
+          "id": "keep_for_inner_court",
+          "label": "Giữ lại chỉ cho nội môn xem",
+          "outcome": "Thu lợi trước mắt, chậm lòng người gửi."
+        },
+        {
+          "id": "reply_with_formal_thanks",
+          "label": "Chỉ đáp lễ nghi",
+          "outcome": "Giữ khoảng cách mà không làm mất mặt nhau."
+        }
+      ],
+      "effects": {
+        "share_a_copy_back": {
+          "factionRelations": {
+            "van_tang_thu_vien": 3
+          },
+          "sectPrestige": 1,
+          "addFlags": [
+            "library_excerpt_shared"
+          ]
+        },
+        "keep_for_inner_court": {
+          "playerCultivationProgress": 4,
+          "factionRelations": {
+            "van_tang_thu_vien": -1
+          }
+        },
+        "reply_with_formal_thanks": {
+          "factionRelations": {
+            "van_tang_thu_vien": 1
+          },
+          "foundationStability": 1
+        }
+      },
+      "tags": [
+        "van_tang_thu_vien",
+        "letter",
+        "records"
+      ]
+    },
+    {
+      "id": "random.faction.cuu_tieu_observation_note",
+      "title": "Cửu Tiêu Quan Để Lại Một Lời Nhắn Kín",
+      "category": "faction",
+      "weight": 5,
+      "conditions": {
+        "chapters": [
+          "chapter_2_tong_mon_lap_the",
+          "chapter_3_kinh_chieu_cuu_thien"
+        ],
+        "minPlayerRealmOrder": 2,
+        "cooldownDays": 7
+      },
+      "actorRules": null,
+      "contextRules": {
+        "factionIdsAny": [
+          "cuu_tieu_quan"
+        ]
+      },
+      "textTemplate": {
+        "body": "Một lá phù giấy mỏng được kẹp vào khe cửa Chính Điện, trên đó chỉ có vài dòng ngắn của {factionName}: biết Thanh Huyền Môn đã đứng dậy, biết môn ta chưa muốn phô trương, và biết có một số dấu cũ không nên để người ngoài thấy trước."
+      },
+      "choices": [
+        {
+          "id": "accept_the_hint",
+          "label": "Nhận lấy lời nhắc kín",
+          "outcome": "Giữ lấy một chút thiện ý khó nắm."
+        },
+        {
+          "id": "burn_after_reading",
+          "label": "Đọc xong đốt ngay",
+          "outcome": "Không để lại dây buộc về sau."
+        },
+        {
+          "id": "send_a_short_reply",
+          "label": "Hồi một bức thư ngắn",
+          "outcome": "Không nhận ân trống không, cũng không khép cửa."
+        }
+      ],
+      "effects": {
+        "accept_the_hint": {
+          "sectFortune": 2,
+          "factionRelations": {
+            "cuu_tieu_quan": 2
+          },
+          "addWorldFlags": [
+            "cuu_tieu_hint_taken"
+          ]
+        },
+        "burn_after_reading": {
+          "sectStability": 1,
+          "factionRelations": {
+            "cuu_tieu_quan": -1
+          }
+        },
+        "send_a_short_reply": {
+          "factionRelations": {
+            "cuu_tieu_quan": 1
+          },
+          "addChoiceFlags": [
+            "cuu_tieu_short_reply_sent"
+          ]
+        }
+      },
+      "tags": [
+        "cuu_tieu_quan",
+        "letter",
+        "hidden_guidance"
+      ]
+    }
+  ]
+}

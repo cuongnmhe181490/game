@@ -1,0 +1,164 @@
+{
+  "version": 2,
+  "realms": [
+    {
+      "id": "pham_the",
+      "name": "Pham The",
+      "order": 1,
+      "tierId": "mortal",
+      "worldLayerId": "pham_gioi",
+      "implemented": true,
+      "progressRequired": 12,
+      "description": "Giai doan than the con nang pham tuc, chi vua du mang khi ma chua biet giu khi.",
+      "breakthroughRequirements": {
+        "requiredBuildings": [
+          "tinh_tu_duong"
+        ],
+        "requiredResources": {
+          "food": 10,
+          "spiritStone": 8
+        },
+        "requiredFlags": []
+      },
+      "unlocks": {
+        "dailyMeditation": true,
+        "basicDiscipleTraining": true,
+        "dailyCultivationBaseBonus": 0
+      },
+      "flavorText": "Diem bat dau cua phan lon nguoi tu, noi ben bi quan trong hon thien tu."
+    },
+    {
+      "id": "luyen_khi",
+      "name": "Luyen Khi",
+      "order": 2,
+      "tierId": "mortal",
+      "worldLayerId": "pham_gioi",
+      "implemented": true,
+      "progressRequired": 18,
+      "description": "Biet dan linh khi nhap than va giu nhip tu hanh so bo, la nen cua moi dao lo ve sau.",
+      "breakthroughRequirements": {
+        "requiredBuildings": [
+          "tinh_tu_duong"
+        ],
+        "requiredResources": {
+          "spiritStone": 12,
+          "herbs": 4
+        },
+        "requiredFlags": []
+      },
+      "unlocks": {
+        "realmEventTier": 1,
+        "discipleAssignments": true,
+        "dailyCultivationBaseBonus": 1,
+        "sectPrestigeBonus": 1
+      },
+      "flavorText": "Luyen Khi khong lam nguoi tu manh ngay, nhung khien moi quyet dinh ve tai nguyen co trong luong hon truoc."
+    },
+    {
+      "id": "truc_co",
+      "name": "Truc Co",
+      "order": 3,
+      "tierId": "mortal",
+      "worldLayerId": "pham_gioi",
+      "implemented": true,
+      "progressRequired": 28,
+      "description": "Can co duoc dung thanh nen, kha nang chiu ap luc va tiep can cong trinh lan nghi thuc cao hon.",
+      "breakthroughRequirements": {
+        "requiredBuildings": [
+          "tinh_tu_duong",
+          "duoc_vien"
+        ],
+        "requiredResources": {
+          "spiritStone": 24,
+          "herbs": 10
+        },
+        "requiredFlags": [
+          "mirror_first_resonance"
+        ]
+      },
+      "unlocks": {
+        "realmEventTier": 2,
+        "advancedBuildingUse": true,
+        "dailyCultivationBaseBonus": 2,
+        "sectPrestigeBonus": 2,
+        "foundationStabilityBonus": 4
+      },
+      "flavorText": "Tu day nguoi tu bat dau thuc su tro thanh mot tru cot co the ganh viec cho tong mon."
+    },
+    {
+      "id": "kim_dan",
+      "name": "Kim Dan",
+      "order": 4,
+      "tierId": "mortal",
+      "worldLayerId": "pham_gioi",
+      "implemented": true,
+      "progressRequired": 42,
+      "description": "Noi tuc ket tu thanh hach ben, du de ganh nhung nghi thuc, di tuong va quyet sach nang hon muc thuong.",
+      "breakthroughRequirements": {
+        "requiredBuildings": [
+          "tinh_tu_duong",
+          "tang_kinh_cac",
+          "luyen_khi_phong"
+        ],
+        "requiredResources": {
+          "spiritStone": 40,
+          "herbs": 16
+        },
+        "requiredFlags": [
+          "chapter_2_complete"
+        ]
+      },
+      "unlocks": {
+        "realmEventTier": 3,
+        "factionNegotiationBonus": true,
+        "dailyCultivationBaseBonus": 3,
+        "sectPrestigeBonus": 4
+      },
+      "flavorText": "Kim Dan khong chi la tang luc, ma la kha nang dung vung khi su that va quyen luc cung de xuong."
+    },
+    {
+      "id": "nguyen_anh",
+      "name": "Nguyen Anh",
+      "order": 5,
+      "tierId": "mortal",
+      "worldLayerId": "pham_gioi",
+      "implemented": true,
+      "progressRequired": 60,
+      "description": "Mot nguong cao hiem hoi trong pham vi base game, du de cham vao tang quyet dinh cuoi cua dao lo ma khong tan vo ngay.",
+      "breakthroughRequirements": {
+        "requiredBuildings": [
+          "tinh_tu_duong",
+          "ho_son_tran_dai",
+          "tang_kinh_cac"
+        ],
+        "requiredResources": {
+          "spiritStone": 64,
+          "herbs": 24
+        },
+        "requiredFlags": [
+          "ascension_trace_confirmed"
+        ]
+      },
+      "unlocks": {
+        "realmEventTier": 4,
+        "finalChapterEligibility": true,
+        "dailyCultivationBaseBonus": 4,
+        "sectPrestigeBonus": 6
+      },
+      "flavorText": "Nguyen Anh trong Nhat Niem Khai Tong la bac cua trach nhiem lon, khong phai giay phep cho power fantasy vo gia.",
+      "nextRealmHintId": "hoa_than",
+      "futureArcHint": "Sau Nguyen Anh la nguong Hoa Than tro len, thuoc mach mo rong hau pham gioi chua mo trong ban hien tai."
+    }
+  ],
+  "futureRealms": [
+    {
+      "id": "hoa_than",
+      "name": "Hoa Than",
+      "tierId": "transcendent",
+      "worldLayerId": "pham_gioi",
+      "implemented": false,
+      "availableAfterBaseGame": true,
+      "summary": "Nguong canh gioi danh dau viec roi khoi logic co ban cua pham gioi. Hien tai chi duoc dat moc du lieu de phuc vu mo rong ve sau."
+    }
+  ]
+}

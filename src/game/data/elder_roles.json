@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "roles": [
+    {
+      "id": "truong_lao_tu_hanh",
+      "name": "Trưởng Lão Tu Hành",
+      "summary": "Giữ nhịp truyền pháp và nâng chất lượng tu hành toàn môn.",
+      "effects": {
+        "playerCultivationDaily": 1,
+        "discipleCultivationDaily": 1
+      }
+    },
+    {
+      "id": "truong_lao_luyen_dan",
+      "name": "Trưởng Lão Luyện Đan",
+      "summary": "Ổn định lò đan và giúp tài nguyên dược liệu bớt lãng phí.",
+      "effects": {
+        "resourceProductionFlat": 1,
+        "alchemyOutputBonus": 1
+      }
+    },
+    {
+      "id": "truong_lao_hinh_luat",
+      "name": "Trưởng Lão Hình Luật",
+      "summary": "Giữ kỷ cương nội môn, giảm nguy cơ bất ổn kéo dài.",
+      "effects": {
+        "stabilityDaily": 2,
+        "disciplineWeight": 2
+      }
+    },
+    {
+      "id": "truong_lao_ho_son",
+      "name": "Trưởng Lão Hộ Sơn",
+      "summary": "Củng cố phòng tuyến và giữ khí cục sơn môn không tản.",
+      "effects": {
+        "stabilityDaily": 1,
+        "explorationSafety": 1
+      }
+    }
+  ]
+}

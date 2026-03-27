@@ -1,0 +1,147 @@
+:root {
+  color-scheme: dark;
+  font-family: "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  background:
+    radial-gradient(circle at top, rgba(190, 152, 93, 0.16), transparent 34%),
+    linear-gradient(180deg, #12191c 0%, #080b0d 72%, #050607 100%);
+  color: #f3ead8;
+  --frame-edge: rgba(190, 152, 93, 0.28);
+  --frame-shadow: rgba(0, 0, 0, 0.42);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  min-height: 100dvh;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+#app {
+  display: grid;
+  place-items: center;
+  min-height: 100dvh;
+  padding: clamp(6px, 1.4vw, 16px);
+}
+
+#app-shell[hidden] {
+  display: none;
+}
+
+#app-shell {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  pointer-events: none;
+}
+
+.boot-card,
+.boot-error {
+  width: min(100%, 540px);
+  padding: 28px 30px;
+  border: 1px solid var(--frame-edge);
+  border-radius: 22px;
+  background:
+    linear-gradient(180deg, rgba(19, 26, 29, 0.96) 0%, rgba(10, 13, 15, 0.96) 100%);
+  box-shadow:
+    0 22px 64px var(--frame-shadow),
+    0 0 0 1px rgba(255, 255, 255, 0.03) inset;
+}
+
+.boot-card h1,
+.boot-error h1 {
+  margin: 0 0 10px;
+  color: #f3ead8;
+  font-size: clamp(26px, 4vw, 34px);
+  line-height: 1.15;
+}
+
+.boot-card p,
+.boot-error p {
+  margin: 0;
+  color: rgba(243, 234, 216, 0.82);
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.boot-card p + p,
+.boot-error p + p {
+  margin-top: 10px;
+}
+
+.boot-line {
+  margin-top: 16px;
+  color: #d1b98b;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.boot-error {
+  margin: 24px auto;
+}
+
+.boot-error-detail {
+  color: rgba(243, 234, 216, 0.68);
+}
+
+canvas {
+  display: block;
+  width: min(100%, 1280px);
+  height: auto;
+  max-width: 100%;
+  max-height: calc(100dvh - 16px);
+  border: 1px solid var(--frame-edge);
+  border-radius: 22px;
+  box-shadow:
+    0 22px 64px var(--frame-shadow),
+    0 0 0 1px rgba(255, 255, 255, 0.03) inset;
+  touch-action: manipulation;
+}
+
+@media (max-width: 900px) {
+  #app {
+    padding: 0;
+    place-items: stretch;
+  }
+
+  canvas {
+    width: 100%;
+    max-height: 100dvh;
+    border-radius: 0;
+    border-left: 0;
+    border-right: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  body {
+    background:
+      radial-gradient(circle at top, rgba(190, 152, 93, 0.12), transparent 28%),
+      linear-gradient(180deg, #10171a 0%, #07090b 78%, #040506 100%);
+  }
+
+  canvas {
+    max-height: none;
+    min-height: 100dvh;
+  }
+
+  .boot-card,
+  .boot-error {
+    padding: 24px 20px;
+    border-radius: 18px;
+  }
+}

@@ -1,0 +1,237 @@
+{
+  "version": 1,
+  "buildings": [
+    {
+      "id": "chinh_dien",
+      "name": "Chánh Điện",
+      "category": "core",
+      "maxLevel": 3,
+      "unlockConditions": {
+        "requiredChapterId": "chapter_1_du_tan_khai_son",
+        "requiredFlags": [],
+        "requiredBuildingIds": []
+      },
+      "buildCost": {
+        "wood": 12,
+        "spiritStone": 10
+      },
+      "productionPerDay": {},
+      "bonuses": [
+        {
+          "type": "sect_prestige",
+          "value": 2
+        },
+        {
+          "type": "major_event_gate",
+          "value": 1
+        }
+      ],
+      "flavorText": "Trung tâm danh nghĩa của Thanh Huyền Môn. Nếu Chánh điện còn giữ được khí tượng, tông môn vẫn còn mặt mũi để nói chuyện với thiên hạ."
+    },
+    {
+      "id": "tinh_tu_duong",
+      "name": "Tĩnh Tu Đường",
+      "category": "cultivation",
+      "maxLevel": 3,
+      "unlockConditions": {
+        "requiredChapterId": "chapter_1_du_tan_khai_son",
+        "requiredFlags": [],
+        "requiredBuildingIds": [
+          "chinh_dien"
+        ]
+      },
+      "buildCost": {
+        "wood": 8,
+        "spiritStone": 12
+      },
+      "productionPerDay": {},
+      "bonuses": [
+        {
+          "type": "realm_breakthrough_support",
+          "value": 1
+        },
+        {
+          "type": "disciple_stability",
+          "value": 1
+        }
+      ],
+      "flavorText": "Nơi đệ tử lắng hơi thở, gom tạp niệm và giữ nhịp tu hành không bị xô lệch bởi biến động quanh sơn môn."
+    },
+    {
+      "id": "duoc_vien",
+      "name": "Dược Viện",
+      "category": "resource",
+      "maxLevel": 3,
+      "unlockConditions": {
+        "requiredChapterId": "chapter_1_du_tan_khai_son",
+        "requiredFlags": [],
+        "requiredBuildingIds": [
+          "chinh_dien"
+        ]
+      },
+      "buildCost": {
+        "wood": 6,
+        "spiritStone": 8,
+        "herbs": 4
+      },
+      "productionPerDay": {
+        "herbs": 3
+      },
+      "bonuses": [
+        {
+          "type": "survival_buffer",
+          "value": 1
+        }
+      ],
+      "flavorText": "Dược viện giữ nhịp cứu người và tự cứu mình. Trong hậu tai biến, một vườn thuốc sống được đáng giá như một chiến công."
+    },
+    {
+      "id": "tang_kinh_cac",
+      "name": "Tàng Kinh Các",
+      "category": "lore",
+      "maxLevel": 3,
+      "unlockConditions": {
+        "requiredChapterId": "chapter_2_tong_mon_lap_the",
+        "requiredFlags": [
+          "mirror_history_conflict"
+        ],
+        "requiredBuildingIds": [
+          "chinh_dien"
+        ]
+      },
+      "buildCost": {
+        "wood": 10,
+        "spiritStone": 14
+      },
+      "productionPerDay": {},
+      "bonuses": [
+        {
+          "type": "research_slots",
+          "value": 1
+        },
+        {
+          "type": "truth_event_weight",
+          "value": 1
+        }
+      ],
+      "flavorText": "Thư tịch là ký ức của đạo thống. Có Tàng Kinh Các, Thanh Huyền Môn mới có chỗ để giữ tri thức thay vì chỉ truyền bằng lời."
+    },
+    {
+      "id": "luyen_khi_phong",
+      "name": "Luyện Khí Phòng",
+      "category": "craft",
+      "maxLevel": 3,
+      "unlockConditions": {
+        "requiredChapterId": "chapter_2_tong_mon_lap_the",
+        "requiredFlags": [],
+        "requiredBuildingIds": [
+          "chinh_dien",
+          "tinh_tu_duong"
+        ]
+      },
+      "buildCost": {
+        "wood": 9,
+        "spiritStone": 16
+      },
+      "productionPerDay": {
+        "spiritStone": 1
+      },
+      "bonuses": [
+        {
+          "type": "trade_value",
+          "value": 1
+        }
+      ],
+      "flavorText": "Một lò nhỏ được giữ đúng lửa còn đáng tin hơn nhiều lời hứa giao hàng từ người ngoài núi."
+    },
+    {
+      "id": "linh_thach_kho",
+      "name": "Linh Thạch Khố",
+      "category": "storage",
+      "maxLevel": 3,
+      "unlockConditions": {
+        "requiredChapterId": "chapter_1_du_tan_khai_son",
+        "requiredFlags": [],
+        "requiredBuildingIds": [
+          "chinh_dien"
+        ]
+      },
+      "buildCost": {
+        "wood": 7,
+        "spiritStone": 9
+      },
+      "productionPerDay": {},
+      "bonuses": [
+        {
+          "type": "spirit_stone_capacity",
+          "value": 20
+        },
+        {
+          "type": "resource_loss_reduction",
+          "value": 1
+        }
+      ],
+      "flavorText": "Giữ linh thạch ổn định không chỉ là giữ của, mà là giữ nhịp vận hành của cả sơn môn."
+    },
+    {
+      "id": "ho_son_tran_dai",
+      "name": "Hộ Sơn Trận Đài",
+      "category": "defense",
+      "maxLevel": 3,
+      "unlockConditions": {
+        "requiredChapterId": "chapter_2_tong_mon_lap_the",
+        "requiredFlags": [],
+        "requiredBuildingIds": [
+          "chinh_dien",
+          "linh_thach_kho"
+        ]
+      },
+      "buildCost": {
+        "wood": 10,
+        "spiritStone": 18
+      },
+      "productionPerDay": {},
+      "bonuses": [
+        {
+          "type": "omen_risk_reduction",
+          "value": 1
+        },
+        {
+          "type": "faction_pressure_resistance",
+          "value": 1
+        }
+      ],
+      "flavorText": "Trận đài không khiến Thanh Huyền Môn mạnh ngay, nhưng khiến kẻ ngoài núi phải nghĩ thêm một nhịp trước khi bước quá sâu."
+    },
+    {
+      "id": "tiep_khach_duong",
+      "name": "Tiếp Khách Đường",
+      "category": "diplomacy",
+      "maxLevel": 3,
+      "unlockConditions": {
+        "requiredChapterId": "chapter_2_tong_mon_lap_the",
+        "requiredFlags": [],
+        "requiredBuildingIds": [
+          "chinh_dien"
+        ]
+      },
+      "buildCost": {
+        "wood": 8,
+        "spiritStone": 10,
+        "food": 6
+      },
+      "productionPerDay": {},
+      "bonuses": [
+        {
+          "type": "faction_relation_gain",
+          "value": 1
+        },
+        {
+          "type": "guest_event_weight",
+          "value": 1
+        }
+      ],
+      "flavorText": "Một nơi tiếp khách đàng hoàng giúp Thanh Huyền Môn nói chuyện bằng tư thế của một tông môn, không phải bằng dáng vẻ của kẻ còn sót lại."
+    }
+  ]
+}

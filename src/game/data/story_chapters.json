@@ -1,0 +1,184 @@
+{
+  "version": 3,
+  "worldName": "Huyen Tran Gioi",
+  "catastropheName": "Thien Khu Bien",
+  "playerSectName": "Thanh Huyen Mon",
+  "coreRelicName": "Van Tuong Linh Kinh",
+  "worldLayers": [
+    {
+      "id": "pham_gioi",
+      "name": "Pham Gioi",
+      "implemented": true,
+      "summary": "Tang gioi hien tai cua base game, noi Thanh Huyen Mon phuc hung giua hau chan Thien Khu Bien."
+    },
+    {
+      "id": "linh_gioi",
+      "name": "Linh Gioi",
+      "implemented": false,
+      "summary": "Tang gioi ve sau chi moi duoc dat moc kien truc, chua mo thanh noi dung choi duoc."
+    }
+  ],
+  "arcs": [
+    {
+      "id": "base_game_pham_gioi",
+      "worldLayerId": "pham_gioi",
+      "name": "Pham Gioi Chi Bien",
+      "implemented": true,
+      "baseGameScope": true,
+      "continuationFromEnding": false,
+      "summary": "Mach base game hien tai, tu tan tich Thanh Huyen Mon den ba ket cuc cua pham gioi."
+    },
+    {
+      "id": "future_linh_gioi_arc",
+      "worldLayerId": "linh_gioi",
+      "name": "Linh Gioi Chi Mon",
+      "implemented": false,
+      "baseGameScope": false,
+      "continuationFromEnding": true,
+      "summary": "Arc mo rong trong tuong lai, noi hau van cua ket cuoc pham gioi se mo thanh chan troi moi."
+    }
+  ],
+  "chapters": [
+    {
+      "id": "chapter_1_du_tan_khai_son",
+      "arcId": "base_game_pham_gioi",
+      "worldLayerId": "pham_gioi",
+      "name": "Du Tan Khai Son",
+      "summary": "Thanh Huyen Mon mo ra giua canh vo nat, chi con du lua trong Chinh dien va vai nguoi chua bo di. Chuong nay la giai doan Tan Hoa Chua Tat: song sot, giu nhan tam, va xac nhan rang ton mon nay van con ly do de dung lai.",
+      "emotionalGoal": "Thieu thon, mong manh, nhung khong tuyet vong. Nguoi choi phai cam thay lua cua tong mon rat nho, nhung van chua tat.",
+      "progressionGoal": "Qua duoc chu ky ngay dau, dung lai mot cong trinh cot loi, giu mot nguoi o lai cung tong mon, vuot qua moi de doa dau tien, va nhin thay dau moi dau tien tu Van Tuong Linh Kinh.",
+      "unlockConditions": {
+        "requiredFlags": ["chapter_1_start"],
+        "stateThresholds": {},
+        "notes": [
+          "Bat ngay khi save moi duoc tao.",
+          "Khong can phe phai hay ngoai giao de vao chuong nay."
+        ]
+      },
+      "majorEventIds": [
+        "major.chapter1.claim_the_ruins",
+        "major.chapter1.first_embers",
+        "major.chapter1.first_companion_vow",
+        "major.chapter1.restore_first_pulse",
+        "major.chapter1.outer_warning",
+        "major.chapter1.first_major_threat",
+        "major.chapter1.mirror_first_resonance",
+        "major.chapter1.flame_not_extinguished"
+      ],
+      "recommendedRandomEventCategories": [
+        "survival",
+        "sect_internal",
+        "resource",
+        "disciple",
+        "omen"
+      ],
+      "mysteryProgressionNotes": "Thien Khu Bien moi chi hien ra nhu vet thuong song trong linh mach va tan tich. Van Tuong Linh Kinh chua cho chan tuong, chi cho mot linh cam rang tai nan nam xua co dau vet khong tu nhien."
+    },
+    {
+      "id": "chapter_2_tong_mon_lap_the",
+      "arcId": "base_game_pham_gioi",
+      "worldLayerId": "pham_gioi",
+      "name": "Tong Mon Lap The",
+      "summary": "Day la giai doan Khai Son Lap Tong. Thanh Huyen Mon khong con chi giong mot tan mon co nguoi o lai, ma bat dau co ten goi, co cua mon, co de tu moi, va co ap luc that su tu noi mon lan ngoai gioi.",
+      "emotionalGoal": "Tu giu lua chuyen sang dung lua thanh duong. Nguoi choi phai cam thay tong mon dang bat dau co hinh, nhung moi buoc mo rong deu keo theo gia phai tra.",
+      "progressionGoal": "Chinh thuc mo lai son mon, thu nhan mon sinh theo khuon phep, dat mot ne nep noi mon dau tien, dung them cot tru mo rong, va chiu duoc dot tham do dau tien tu ben ngoai.",
+      "unlockConditions": {
+        "requiredFlags": ["chapter_1_complete"],
+        "stateThresholds": {},
+        "notes": [
+          "Chuong 1 hoan tat se mo ngay Chuong 2.",
+          "Cac nguong uy danh, quy mo, va on dinh trong Chuong 2 duoc dung cho milestone va chapter-end, khong phai de khoa chapter."
+        ]
+      },
+      "majorEventIds": [
+        "major.chapter2.raise_the_banner",
+        "major.chapter2.first_formal_intake",
+        "major.chapter2.rule_of_the_hall",
+        "major.chapter2.envoy_at_the_gate",
+        "major.chapter2.expansion_hall_completed",
+        "major.chapter2.slope_boundary_test",
+        "major.chapter2.mirror_history_conflict",
+        "major.chapter2.small_sect_stands"
+      ],
+      "recommendedRandomEventCategories": [
+        "faction",
+        "sect_internal",
+        "disciple",
+        "opportunity",
+        "resource",
+        "omen"
+      ],
+      "mysteryProgressionNotes": "Trong Chuong 2, dau vet bi an chua lo thanh chan tuong, nhung da du de gay mau thuan giua su luc cong khai va dieu Van Tuong Linh Kinh phan chieu. Thanh Huyen Mon bat dau biet rang minh dang dung tren mot lop lich su bi cat xe."
+    },
+    {
+      "id": "chapter_3_kinh_chieu_cuu_thien",
+      "arcId": "base_game_pham_gioi",
+      "worldLayerId": "pham_gioi",
+      "name": "Kinh Chieu Cuu Thien",
+      "summary": "Van Tuong Linh Kinh mo them tang cong huong, keo Thanh Huyen Mon vao vung xoay cua bi canh, su do xet tu phe phai lon, va tham vong noi mon dang lon nhanh hon truoc.",
+      "emotionalGoal": "Tong mon da lon du de cham vao su that, va vi the cung khong con duoc yen. Chuong 3 phai cho cam giac co hoi va hiem nguy dang mo ra cung luc.",
+      "progressionGoal": "Chiu duoc dot tham do nghiem tuc tu ben ngoai, mo mot co hoi lon hon qua bi canh hay di tich, va tim thay bang chung ro rang hon ve vet thuong lich su cua Thanh Huyen Mon.",
+      "unlockConditions": {
+        "requiredFlags": ["chapter_2_complete"],
+        "stateThresholds": {
+          "sect.prestige": 40,
+          "disciples.count": 10
+        },
+        "notes": [
+          "Can co nen luc du de ganh event tam cao.",
+          "Khong mo neu nguoi choi moi chi tich tai nguyen ma chua co va cham voi lore gate."
+        ]
+      },
+      "majorEventIds": [
+        "major.chapter3.archive_of_the_cracked_sky",
+        "major.chapter3.ascension_trace_revealed",
+        "major.chapter3.serious_faction_probe",
+        "major.chapter3.ambition_by_lantern",
+        "major.chapter3.small_sect_under_heaven"
+      ],
+      "recommendedRandomEventCategories": [
+        "faction",
+        "disciple",
+        "omen",
+        "opportunity"
+      ],
+      "mysteryProgressionNotes": "Nguoi choi xac nhan ro rang Thien Khu Bien gan voi mot lan cuong hanh phi thang that bai; cau hoi con lai la ai se dung hay chon vui tri thuc do."
+    },
+    {
+      "id": "chapter_4_nhat_niem_dinh_dao",
+      "arcId": "base_game_pham_gioi",
+      "worldLayerId": "pham_gioi",
+      "name": "Nhat Niem Dinh Dao",
+      "summary": "Day la giai doan Thien Khu Van Dao. Thanh Huyen Mon da khong con chi doi mat voi tranh chap son mon va phe phai, ma dung truoc hoi ve dieu gi xung dang song sot sau khi su that va dai kiep lo mat.",
+      "emotionalGoal": "Nang, ro, va khong con duong lui de tro lai su vo minh. Chuong 4 phai cho cam giac mot tong mon dang bi hoi ve dao ly, khong chi bi ep ve luc luong.",
+      "progressionGoal": "Dung vung qua dot dai kiep dau tien, thu du nhung manh chan tuong cot loi, chap nhan it nhat mot lua chon gia phai tra, va mo ra nguong cua cac huong ket cuoi.",
+      "unlockConditions": {
+        "requiredFlags": ["chapter_3_complete"],
+        "stateThresholds": {
+          "sect.prestige": 65
+        },
+        "notes": [
+          "Chi mo khi chan tuong da du ro.",
+          "Ending phai la ket qua tich luy co va lua chon, khong chi mot nut bam cuoi."
+        ]
+      },
+      "majorEventIds": [
+        "major.chapter4.heaven_asks_at_the_ruined_peak",
+        "major.chapter4.distortion_over_the_border_realm",
+        "major.chapter4.record_of_failed_ascension",
+        "major.chapter4.doctrine_under_heaven",
+        "major.chapter4.price_of_preservation",
+        "major.chapter4.ultimatum_before_the_outer_slope",
+        "major.chapter4.threshold_of_the_three_paths"
+      ],
+      "recommendedRandomEventCategories": [
+        "faction",
+        "sect_internal",
+        "disciple",
+        "omen",
+        "opportunity"
+      ],
+      "mysteryProgressionNotes": "Trong Chuong 4, Thien Khu Bien khong con la cau hoi trang tri. Chan tuong ve cuong hanh phi thang, su suy doi cua dao thong, va phan cua Thanh Huyen Mon trong viec giu hoac doi loi se tro thanh nen cho nguong ket cuoi."
+    }
+  ]
+}

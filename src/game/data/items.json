@@ -1,0 +1,319 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "id": "linh_thao_co_ban",
+      "name": "Linh Thảo Cơ Bản",
+      "category": "herb",
+      "rarity": "common",
+      "description": "Dược thảo nền dùng cho mẻ đan nhập môn và hồi khí nhẹ.",
+      "flavorText": "Linh khí mỏng nhưng đều, hợp với giai đoạn khôi phục tông môn.",
+      "stackable": true,
+      "value": 6,
+      "craftingTags": [
+        "starter_herb",
+        "gentle"
+      ]
+    },
+    {
+      "id": "hoa_linh_thao",
+      "name": "Hỏa Linh Thảo",
+      "category": "herb",
+      "rarity": "uncommon",
+      "description": "Linh thảo thiên hỏa, giúp tụ khí nhanh hơn nhưng cần phối liệu ổn định.",
+      "flavorText": "Lá đỏ sẫm, khi nghiền ra còn giữ hơi nóng nhè nhẹ.",
+      "stackable": true,
+      "value": 10,
+      "craftingTags": [
+        "fire",
+        "cultivation"
+      ]
+    },
+    {
+      "id": "u_hon_chi",
+      "name": "U Hồn Chi",
+      "category": "herb",
+      "rarity": "rare",
+      "description": "Linh chi hút sương u trong rừng đen, dùng để điều hòa khí tức sau khi ép linh lực quá gấp.",
+      "flavorText": "Mũ nấm lạnh và mỏng, nhưng phần lõi lại giữ linh tức rất sâu.",
+      "stackable": true,
+      "value": 28,
+      "craftingTags": [
+        "rare_herb",
+        "stability"
+      ]
+    },
+    {
+      "id": "khoang_thach_tho",
+      "name": "Khoáng Thạch Thô",
+      "category": "ore",
+      "rarity": "common",
+      "description": "Khoáng thạch chưa tinh luyện, dùng để làm phụ liệu cho đan phương và phù vật đơn giản.",
+      "flavorText": "Không quý, nhưng lúc thiếu thì thứ gì cũng đáng giá.",
+      "stackable": true,
+      "value": 7,
+      "craftingTags": [
+        "ore",
+        "stabilizer"
+      ]
+    },
+    {
+      "id": "hac_moc_tam",
+      "name": "Hắc Mộc Tâm",
+      "category": "material",
+      "rarity": "rare",
+      "description": "Lõi gỗ đen lấy từ vùng sâu Hắc Mộc Lâm, giữ mộc khí dày và ổn định hơn gỗ thường.",
+      "flavorText": "Đen nhánh như than nhưng gõ vào lại có tiếng vang rất trong.",
+      "stackable": true,
+      "value": 34,
+      "craftingTags": [
+        "rare_wood",
+        "ward"
+      ]
+    },
+    {
+      "id": "tan_phien_co_khi",
+      "name": "Tàn Phiến Cổ Khí",
+      "category": "material",
+      "rarity": "rare",
+      "description": "Mảnh cổ khí vỡ, hiện chỉ dùng làm vật liệu nghiên cứu hoặc luyện hợp đơn giản.",
+      "flavorText": "Trên mép vỡ còn lưu chút ý vị của thời trước Thiên Khư Biến.",
+      "stackable": true,
+      "value": 28,
+      "craftingTags": [
+        "ancient",
+        "artifact_fragment"
+      ]
+    },
+    {
+      "id": "thanh_huyen_tan_luc",
+      "name": "Thanh Huyền Tàn Lục",
+      "category": "quest",
+      "rarity": "rare",
+      "description": "Mảnh chép tay còn sót lại của Thanh Huyền Môn, có giá trị làm đầu mối truyền thừa và cờ truyện.",
+      "flavorText": "Nét mực đã nhòe, nhưng cách hành văn vẫn mang khí cốt rất riêng của sơn môn cũ.",
+      "stackable": true,
+      "value": 42,
+      "craftingTags": [
+        "sect_records",
+        "inheritance"
+      ]
+    },
+    {
+      "id": "thua_ke_linh_bai",
+      "name": "Thừa Kế Linh Bài",
+      "category": "quest",
+      "rarity": "rare",
+      "description": "Linh bài cũ của Thanh Huyền Môn, chứng tỏ người mang nó đã chạm tới một nhánh truyền thừa thật sự.",
+      "flavorText": "Không phải pháp khí mạnh, nhưng là vật đủ khiến người trong đạo phải nhìn lại.",
+      "stackable": true,
+      "value": 56,
+      "craftingTags": [
+        "inheritance",
+        "sect_identity"
+      ]
+    },
+    {
+      "id": "tu_khi_dan",
+      "name": "Tụ Khí Đan",
+      "category": "pill",
+      "rarity": "uncommon",
+      "description": "Đan dược nhập môn, giúp trưởng môn gom thêm một nhịp linh khí khi tu hành.",
+      "flavorText": "Không mạnh, nhưng rất hợp cho lúc nền móng còn yếu.",
+      "stackable": true,
+      "value": 22,
+      "usableEffect": {
+        "type": "player_cultivation_progress",
+        "value": 8
+      },
+      "craftingTags": [
+        "pill",
+        "cultivation"
+      ]
+    },
+    {
+      "id": "duong_tuc_dan",
+      "name": "Dưỡng Tức Đan",
+      "category": "pill",
+      "rarity": "uncommon",
+      "description": "Đan dược dịu mạch, giúp ổn nền căn và tạm đè áp lực tâm ma.",
+      "flavorText": "Dùng đúng lúc sẽ giữ được nhịp điều tức khỏi lệch thêm.",
+      "stackable": true,
+      "value": 24,
+      "usableEffect": {
+        "type": "foundation_stability",
+        "value": 6,
+        "tamMaPressureDelta": -3
+      },
+      "craftingTags": [
+        "pill",
+        "stability"
+      ]
+    },
+    {
+      "id": "uong_linh_tan",
+      "name": "Uỡng Linh Tán",
+      "category": "pill",
+      "rarity": "rare",
+      "description": "Tán dược mạnh hơn đan nhập môn, vừa tụ khí vừa giữ cho nền căn không bị xao khi bức tốc.",
+      "flavorText": "Dược lực đi sâu và chậm, hợp với lúc chuẩn bị chạm ngưỡng mới.",
+      "stackable": true,
+      "value": 40,
+      "usableEffect": {
+        "type": "player_cultivation_progress",
+        "value": 12
+      },
+      "craftingTags": [
+        "pill",
+        "rare"
+      ]
+    },
+    {
+      "id": "ho_than_phu",
+      "name": "Hộ Thân Phù",
+      "category": "misc",
+      "rarity": "common",
+      "description": "Phù giản đơn giữ thân khí khỏi tán loạn quá nhanh trong một chuyến thám hiểm.",
+      "flavorText": "Loại phù này không sang, nhưng có lúc cứu được một nhịp mạng.",
+      "stackable": true,
+      "value": 16,
+      "usableEffect": {
+        "type": "foundation_stability",
+        "value": 3
+      },
+      "craftingTags": [
+        "utility",
+        "ward"
+      ]
+    },
+    {
+      "id": "tu_linh_ngoc_boi",
+      "name": "Tụ Linh Ngọc Bội",
+      "category": "artifact",
+      "rarity": "rare",
+      "description": "Ngọc bội cũ của Thanh Huyền Môn, có thể gắn lên người trưởng môn để giữ nhịp tụ khí bền hơn.",
+      "flavorText": "Bề mặt đã mòn, nhưng đạo ý cũ vẫn chưa tan hết.",
+      "stackable": false,
+      "value": 48,
+      "artifactEffect": {
+        "type": "daily_cultivation_progress",
+        "value": 1
+      },
+      "craftingTags": [
+        "artifact",
+        "cultivation"
+      ]
+    },
+    {
+      "id": "yen_tuc_phu",
+      "name": "Yên Tức Phù",
+      "category": "artifact",
+      "rarity": "uncommon",
+      "description": "Phù khí đeo bên người, giúp giữ hơi thở ổn hơn khi vào nơi có tà khí lẫn tạp khí.",
+      "flavorText": "Đơn sơ nhưng hợp với người đang phải đi ra ngoài sơn môn thường xuyên.",
+      "stackable": false,
+      "value": 36,
+      "artifactEffect": {
+        "type": "exploration_max_health",
+        "value": 8
+      },
+      "craftingTags": [
+        "artifact",
+        "exploration"
+      ]
+    },
+    {
+      "id": "khuyet_mach_thao",
+      "name": "Khuyáº¿t Máº¡ch Tháº£o",
+      "category": "herb",
+      "rarity": "rare",
+      "description": "Linh tháº£o má»c sá¡t khe Ä‘Ã¡ nÆ°á»›c ngáº§m, thÆ°á»ng Ä‘Æ°á»£c dÃ¹ng Ä‘á»ƒ bá»“i láº¡i kinh máº¡ch vi tá»•n.",
+      "flavorText": "ThÃ¢n cá» máº£nh nhÆ° sÆ°Æ¡ng, bá»©t rá»… lÃªn tá»« nhá»¯ng kẽ ná»©t khÃ´ng ai nghÄ© cÃ²n sinh khÃ­.",
+      "stackable": true,
+      "value": 26,
+      "craftingTags": [
+        "rare_herb",
+        "restorative"
+      ]
+    },
+    {
+      "id": "am_hoa_tinh_sa",
+      "name": "Ã‚m Há»a Tinh Sa",
+      "category": "material",
+      "rarity": "rare",
+      "description": "Tinh sa lÃ¡º¯ng tá»« nhá»±a má»™c vÃ  táº¡p hÃ³a khÃ­, dÃ¹ng lÃ m phá»¥ liá»‡u cho Ä‘an dÆ°á»£c hÃ¬m há»a.",
+      "flavorText": "Bá» ngoÃ i xÃ¡m láº¡nh, nhÆ°ng khi nghiá»n nháº¹ láº¡i lÃ³e lÃªn váº¿t Ä‘á» tá»‘i nhÆ° tro nÃ³ng chÆ°a táº¯t.",
+      "stackable": true,
+      "value": 32,
+      "craftingTags": [
+        "fire",
+        "rare_material"
+      ]
+    },
+    {
+      "id": "mat_bia_tu_hanh",
+      "name": "Máº·t Bia Tu HÃ nh VÃ¡",
+      "category": "quest",
+      "rarity": "uncommon",
+      "description": "Máº·t bia cÅ© chá»‰ cÃ²n vá»‹ trí»‹ nÃ©t kháº¯c vÃ i cáº£nh giới¥n sá»‘m, hÆ¡n giÃ¡ trá»‹ ở manh mÃ´i truyá»n thá»«a hÆ¡n lÃ  váº­t liá»‡u.",
+      "flavorText": "Ai giá»¯ nÃ³ trong tay Ä‘á»u cÃ³ cáº£m giÃ¡c nhÆ° má»™t Ä‘á»i mÃ´n nhÃ¢n cÅ© Ä‘ang cá»‘ nháº¯c pháº£i Ä‘i cho Ä‘Ãºng nhá»‹p.",
+      "stackable": true,
+      "value": 18,
+      "craftingTags": [
+        "ruin_record",
+        "cultivation_trace"
+      ]
+    },
+    {
+      "id": "thanh_huyen_ngoai_chi",
+      "name": "Thanh Huyá»n Ngoáº¡i ChÃ­",
+      "category": "quest",
+      "rarity": "rare",
+      "description": "MÃ£nh ghi chÃ©p bÃªn lề cá»§a má»™t nhÃ¡nh Thanh Huyá»n MÃ´n cÅ©, chÃ©p láº¡i cÃ¡ch giÃ¡o dÆ°á»¡ng mÃ´n sinh khi tÃ´ng mÃ´n cÃ²n hÆ°ng vÆ°á»£ng.",
+      "flavorText": "KhÃ´ng phÃ´ trÆ°Æ¡ng Ä‘áº¡i Ä‘áº¡o, chá»‰ lÃ  nhá»¯ng dÃ²ng ghi chÃº vá» cÃ¡ch giÃ¯n ngÆ°á»i, giÃ¯n viá»‡c vÃ  giÃ¯n nhá»‹p tÃ´ng mÃ´n.",
+      "stackable": true,
+      "value": 48,
+      "craftingTags": [
+        "sect_records",
+        "governance"
+      ]
+    },
+    {
+      "id": "co_ngoc_huyen_tuc",
+      "name": "Cá»• Ngá»c Huyá»n Tá»©c",
+      "category": "artifact",
+      "rarity": "uncommon",
+      "description": "Máº£nh ngá»c xÃ¡m tháº¥u má»™t lÃ n khÃ­ yÃªn tá»©c, thá»i cÅ© thÆ°á»ng Ä‘Æ°á»£c mang theo khi lÃªn Ä‘Æ°á»ng dÃ² vÃºng sÆ¡n.",
+      "flavorText": "Äeo lÃªn khÃ´ng tháº¥y sá»©c máº¡nh bá»‘c lÃªn, chá»‰ tháº¥y nhá»‹p thá»Ÿ vÃ  bÆ°á»›c chÃ¢n Ä‘á»� láº¡i hÆ¡n má»™t chÃºt.",
+      "stackable": false,
+      "value": 44,
+      "artifactEffect": {
+        "type": "exploration_max_health",
+        "value": 6
+      },
+      "craftingTags": [
+        "artifact",
+        "exploration",
+        "keepsake"
+      ]
+    },
+    {
+      "id": "thanh_huyen_di_luc",
+      "name": "Thanh Huyền Di Lục Kính Phiến",
+      "category": "artifact",
+      "rarity": "rare",
+      "description": "Một phiến di lục từng đặt gần linh kính, khi đeo theo có thể làm nhịp tu hành sâu hơn mỗi ngày.",
+      "flavorText": "Không rực sáng, chỉ lặng lẽ giữ một tầng cộng hưởng rất cũ.",
+      "stackable": false,
+      "value": 72,
+      "artifactEffect": {
+        "type": "daily_cultivation_progress",
+        "value": 2
+      },
+      "craftingTags": [
+        "artifact",
+        "inheritance"
+      ]
+    }
+  ]
+}

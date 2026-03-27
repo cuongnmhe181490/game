@@ -1,0 +1,323 @@
+{
+  "version": 2,
+  "generationRules": {
+    "defaultTraitCount": 2,
+    "minimumTraitCount": 2,
+    "maximumTraitCount": 4,
+    "maxTemperamentTags": 1
+  },
+  "traits": [
+    {
+      "id": "can_trong",
+      "name": "Cẩn Trọng",
+      "type": "positive",
+      "shortEffect": "Ưu tiên lựa chọn an toàn, hợp với event bảo trì và điều tra.",
+      "eventBias": [
+        "sect_internal",
+        "survival",
+        "omen"
+      ],
+      "description": "Người có tính cẩn trọng không vội tin kết luận đầu tiên và thường giảm sai lầm trong lúc tông môn áp lực."
+    },
+    {
+      "id": "trung_hau",
+      "name": "Trung Hậu",
+      "type": "positive",
+      "shortEffect": "Ổn định nhân tâm, hợp với event giữ kỷ cương và gánh việc dài.",
+      "eventBias": [
+        "sect_internal",
+        "survival",
+        "disciple"
+      ],
+      "description": "Đệ tử trung hậu dễ đặt lợi ích Thanh Huyền Môn lên trước và ít dao động trước phần thưởng ngắn hạn."
+    },
+    {
+      "id": "thien_ve_tri_su",
+      "name": "Thiên Về Trị Sự",
+      "type": "positive",
+      "shortEffect": "Hợp kho vận, sổ sách và các event tài nguyên.",
+      "eventBias": [
+        "resource",
+        "sect_internal",
+        "opportunity"
+      ],
+      "description": "Người này xử lý việc kho, người và việc thường nhật gọn tay, thích hợp cho nền quản trị hơn là phô diễn chiến lực."
+    },
+    {
+      "id": "nhay_cam_linh_tuc",
+      "name": "Nhạy Cảm Linh Tức",
+      "type": "positive",
+      "shortEffect": "Dễ bắt dấu lệch trong omen và relic event.",
+      "eventBias": [
+        "omen",
+        "faction",
+        "disciple"
+      ],
+      "description": "Có xu hướng nhận ra những biến động nhỏ của linh khí và là mẫu NPC nên được ưu tiên xuất hiện ở event liên quan linh kính."
+    },
+    {
+      "id": "chiu_kho",
+      "name": "Chịu Khổ",
+      "type": "positive",
+      "shortEffect": "Giảm áp lực trong giai đoạn thiếu ăn, thiếu vật tư.",
+      "eventBias": [
+        "survival",
+        "resource",
+        "sect_internal"
+      ],
+      "description": "Người chịu khó không làm phép màu, nhưng giúp tông môn giữ nhịp trong những ngày xấu nhất."
+    },
+    {
+      "id": "can_man_ben_bi",
+      "name": "Cáº§n Máº«n Bá»n Bá»‰",
+      "type": "positive",
+      "shortEffect": "LÃ m viá»‡c Ä‘á»u tay, há»£p vá»›i cÃ´ng viá»‡c dÃ i nhá»‹p vÃ  giÃ¯n ná»™i mÃ´n.",
+      "eventBias": [
+        "resource",
+        "sect_internal",
+        "survival"
+      ],
+      "description": "KhÃ´ng ná»•i báº­t bÃ¹ng sÃ¡ng, nhÆ°ng ngÆ°á»i nÃ y cÃ³ thá»ƒ gáº¯nh viá»‡c ráº¥t dÃ i mÃ  khÃ´ng buÃ´ng nhá»‹p dá»… dÃ ng."
+    },
+    {
+      "id": "gioi_luyen_dan",
+      "name": "KhÃ©o Tay Luyá»‡n Äan",
+      "type": "positive",
+      "shortEffect": "Há»£p Ä‘an phÃ²ng, dÆ°á»£c viá»‡n vÃ  cÃ¡c event cáº§n tay nghá» tá»‰ má»‰.",
+      "eventBias": [
+        "cultivation",
+        "resource",
+        "disciple"
+      ],
+      "description": "Biáº¿t cÃ¡ch giá»¯ tay á»•n khi xá»­ lÃ½ linh tháº£o vÃ  váº­t liá»‡u, ráº¥t hÃ¡p dáº«n trong lÃºc sÆ¡n mÃ´n vá»«a gáº§y láº¡i Ä‘an phÃ²ng."
+    },
+    {
+      "id": "quen_duong_nui",
+      "name": "Quen ÄÆ°á»ng NÃºi",
+      "type": "positive",
+      "shortEffect": "Há»£p thu tháº­p, tuáº§n tra vÃ  cÃ¡c event ngoÃ i sÆ¡n.",
+      "eventBias": [
+        "exploration",
+        "survival",
+        "opportunity"
+      ],
+      "description": "NÃºi ráng, khe nÆ°á»›c vÃ  lÃ²ng rá»«ng vá»›i ngÆ°á»i nÃ y khÃ´ng pháº£i Ä‘iá»u xa láº¡, nÃªn dá»… trá»Ÿ thÃ nh tay chÃ¢n hÆ°á»›ng ngoáº¡i sÆ¡n."
+    },
+    {
+      "id": "y_chi_ben",
+      "name": "Ã ChÃ­ Bá»n",
+      "type": "positive",
+      "shortEffect": "Dá»… gá»“ng mÃ¬nh vÆ°á»£t ngÆ°á»¡ng khi cÄƒn cÆ¡ hoáº·c thá»ƒ tráº¡ng chÆ°a tá»‘t.",
+      "eventBias": [
+        "cultivation",
+        "disciple",
+        "survival"
+      ],
+      "description": "CÄƒn cÆ¡ khÃ´ng hán sáº¯c, nhÆ°ng ngÆ°á»i nÃ y váº«n cÃ³ thá»ƒ cáº¯n rÄƒng bÆ°á»›c thÃªm má»™t báº­c vá»›i á»™n á»‹nh hiáº¿m cÃ³."
+    },
+    {
+      "id": "tham_cong",
+      "name": "Tham Công",
+      "type": "flaw",
+      "shortEffect": "Dễ nghiêng về lựa chọn liều hoặc tranh phần thưởng.",
+      "eventBias": [
+        "disciple",
+        "faction",
+        "opportunity"
+      ],
+      "description": "Muốn lập công nhanh, dễ bị lôi kéo bởi đề nghị có lợi trước mắt hoặc nhiệm vụ có tiếng vang."
+    },
+    {
+      "id": "da_nghi",
+      "name": "Đa Nghi",
+      "type": "flaw",
+      "shortEffect": "Hợp điều tra nhưng dễ gây căng thẳng nội môn.",
+      "eventBias": [
+        "disciple",
+        "faction",
+        "omen"
+      ],
+      "description": "Hiếm khi chấp nhận một lời giải thích duy nhất, hữu ích cho tìm chân tướng nhưng dễ làm nội môn nặng khí nghi kỵ."
+    },
+    {
+      "id": "kinh_so_thien_bien",
+      "name": "Kinh Sợ Thiên Biến",
+      "type": "flaw",
+      "shortEffect": "Dễ dao động ở omen và event liên quan Thiên Khư Biến.",
+      "eventBias": [
+        "omen",
+        "survival",
+        "disciple"
+      ],
+      "description": "Bóng sợ từ đại nạn xưa vẫn đè trong lòng, khiến người này phản ứng mạnh với mọi dấu hiệu gợi lại pháp tắc lệch pha."
+    },
+    {
+      "id": "thich_loi_tat",
+      "name": "Thích Lối Tắt",
+      "type": "flaw",
+      "shortEffect": "Hay chọn đường vòng có rủi ro, hợp event Hắc Sa hoặc Ngoại Đạo.",
+      "eventBias": [
+        "faction",
+        "opportunity",
+        "resource"
+      ],
+      "description": "Có xu hướng xem quy củ là thứ có thể né được nếu kết quả tới nhanh hơn."
+    },
+    {
+      "id": "kieu_tam",
+      "name": "KiÃªu TÃ¢m",
+      "type": "flaw",
+      "shortEffect": "Dá»… sinh va cháº¡m khi bá»‹ xem nháº¹ hoáº·c chÆ°a Ä‘Æ°á»£c trá»ng dá»¥ng.",
+      "eventBias": [
+        "disciple",
+        "cultivation",
+        "opportunity"
+      ],
+      "description": "Tá»± xem mÃ¬nh khÃ´ng thua ai, ngÆ°á»i nÃ y ráº¥t dá»… trÆ°á»£t sang báº¥t bÃ¬nh náº¿u ná»™i mÃ´n Ä‘á»‘i xá»­ khÃ´ng kháº©u phá»¥c."
+    },
+    {
+      "id": "thieu_quyet_doan",
+      "name": "Thiáº¿u Quyáº¿t ÄoÃ¡n",
+      "type": "flaw",
+      "shortEffect": "KhÃ³ chá»‘t viá»‡c gáº¥p, há»£p viá»‡c Ä‘i theo hÆ¡n lÃ  tá»± gá»¡ nÃºt tháº¯t.",
+      "eventBias": [
+        "disciple",
+        "sect_internal",
+        "survival"
+      ],
+      "description": "KhÃ´ng áº¿u hÃ¨n, chá»‰ lÃ  Ä‘áº¿n lÃºc cáº§n quyáº¿t ngay thÃ¬ thÆ°á»ng chÆ°á»n má»™t nhá»‹p vÃ¬ ngáº§n ngáº¡i."
+    },
+    {
+      "id": "mang_tai_tieng",
+      "name": "Mang Tai Tiáº¿ng",
+      "type": "flaw",
+      "shortEffect": "Dá»… kÃ©o theo nghi ká»µ, Ã¡p lá»±c phe phÃ¡i vÃ  event tuyá»ƒn mÃ´n nhiá»u rÃ ng buá»™c.",
+      "eventBias": [
+        "faction",
+        "disciple",
+        "opportunity"
+      ],
+      "description": "Tiáº¿ng xáº¥u Ä‘i trÆ°á»›c bÆ°á»›c chÃ¢n, khiáº¿n má»—i láº§n ngÆ°á»i nÃ y xuáº¥t hiá»‡n Ä‘á»u buá»™c sÆ¡n mÃ´n pháº£i tráº£ thÃªm má»™t táº§ng giáº£i thÃ­ch."
+    },
+    {
+      "id": "giu_le",
+      "name": "Giữ Lễ",
+      "type": "temperament",
+      "shortEffect": "Nghiêng về lựa chọn đúng khuôn phép và giữ danh phận.",
+      "eventBias": [
+        "faction",
+        "sect_internal",
+        "survival"
+      ],
+      "description": "Người giữ lễ coi hình thức và thứ tự đúng là một phần của đạo thống chứ không chỉ là bề ngoài."
+    },
+    {
+      "id": "tram_tinh",
+      "name": "Trầm Tĩnh",
+      "type": "temperament",
+      "shortEffect": "Hợp với lựa chọn bình ổn, chịu áp lực tốt ở event nặng.",
+      "eventBias": [
+        "omen",
+        "sect_internal",
+        "disciple"
+      ],
+      "description": "Ít bốc đồng, giữ được đầu óc rõ trong tình huống điềm lạ hoặc nội môn rối."
+    },
+    {
+      "id": "hieu_thang",
+      "name": "Hiếu Thắng",
+      "type": "temperament",
+      "shortEffect": "Nghiêng về tranh uy, phản ứng mạnh khi bị thử hoặc bị ép.",
+      "eventBias": [
+        "faction",
+        "disciple",
+        "opportunity"
+      ],
+      "description": "Không thích lùi bước trước sức ép, phù hợp cho tuyến Bá Đạo nhưng dễ làm tình huống căng hơn mức cần thiết."
+    },
+    {
+      "id": "ua_di_hoc",
+      "name": "Ưa Dị Học",
+      "type": "temperament",
+      "shortEffect": "Dễ kéo event về phía tri thức cấm và đường tu khác lối.",
+      "eventBias": [
+        "omen",
+        "faction",
+        "disciple"
+      ],
+      "description": "Bị hút bởi thứ lệch chuẩn và các ghi chép không nằm trong giáo trình thường dùng của chính đạo."
+    },
+    {
+      "id": "diem_tinh",
+      "name": "Äiá»m TÄ©nh",
+      "type": "temperament",
+      "shortEffect": "Há»£p viá»‡c quÃ¡n xuyáº¿n, giáº£ng hÃ²a vÃ  cÃ¡c event quáº£n trá»‹.",
+      "eventBias": [
+        "sect_internal",
+        "governance",
+        "resource"
+      ],
+      "description": "KhÃ´ng lÃªn giá»ng nhanh, nhÆ°ng giá»¯ Ä‘Æ°á»£c nhá»‹p cho cÃ¡c viá»‡c rá»‘i trá»Ÿ láº¡i cÃ³ thá»© tá»±."
+    },
+    {
+      "id": "nong_tinh",
+      "name": "NÃ³ng TÃ­nh",
+      "type": "temperament",
+      "shortEffect": "Pháº£n á»©ng máº¡nh trÆ°á»›c xung Ä‘á»™t vÃ  cÃ¡c event Ã¡p lá»±c cao.",
+      "eventBias": [
+        "disciple",
+        "faction",
+        "survival"
+      ],
+      "description": "KhÃ´ng sợ va cháº¡m, nhÆ°ng cÃ¡i gáº¥p cá»§a ngÆ°á»i nÃ y cÅ©ng dá»… Ä‘áº©y viá»‡c tá»« cáº³ng thÃ nh khÃ³ gỡ."
+    },
+    {
+      "id": "tai_chat_xuat_chung",
+      "name": "Tài Chất Xuất Chúng",
+      "type": "positive",
+      "shortEffect": "Tăng nhịp tu hành, dễ thành nhân tố nổi bật lẫn nguồn căng thẳng nội môn.",
+      "eventBias": [
+        "disciple",
+        "cultivation",
+        "opportunity"
+      ],
+      "description": "Tư chất nổi lên rất sớm, khiến tốc độ trưởng thành nhanh hơn người thường nhưng cũng kéo theo kỳ vọng và va chạm."
+    },
+    {
+      "id": "nhan_hau",
+      "name": "Nhân Hậu",
+      "type": "positive",
+      "shortEffect": "Ổn định nhân tâm, hợp các event cứu giúp, cưu mang và cảm kích.",
+      "eventBias": [
+        "disciple",
+        "survival",
+        "opportunity"
+      ],
+      "description": "Có lòng mềm và biết nghĩ cho người khác, dễ trở thành điểm tựa tinh thần khi nội môn mỏi mệt."
+    },
+    {
+      "id": "luoi_bien",
+      "name": "Lười Biếng",
+      "type": "flaw",
+      "shortEffect": "Hiệu suất việc thường giảm, dễ sinh bất mãn khi bị ép việc dài ngày.",
+      "eventBias": [
+        "disciple",
+        "sect_internal",
+        "resource"
+      ],
+      "description": "Không nhất thiết phản nghịch, nhưng luôn nghiêng về cách ít tốn sức nhất và dễ xuống nhịp nếu thiếu thúc đẩy."
+    },
+    {
+      "id": "bat_on_tam_tinh",
+      "name": "Tâm Tính Bất Ổn",
+      "type": "flaw",
+      "shortEffect": "Dễ phát sinh sự cố nội môn khi áp lực kéo dài hoặc đột phá bị dồn nén.",
+      "eventBias": [
+        "disciple",
+        "omen",
+        "cultivation"
+      ],
+      "description": "Tâm cảnh lên xuống thất thường, nếu không được dẫn dắt đúng lúc thì rất dễ thành mầm bất trắc cho cả sơn môn."
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "projectName": "Nhat Niem Khai Tong",
+  "mainMenu": {
+    "title": "Nhat Niem Khai Tong",
+    "subtitle": "Web-first cultivation strategy foundation",
+    "introLines": [
+      "A restrained Phaser shell for sect management, realm growth, and event-driven progression.",
+      "This build stops at the menu layer so systems and content can plug in without refactoring."
+    ],
+    "menuOptions": [
+      "Start journey (scaffold placeholder)",
+      "Continue save (typed state ready)",
+      "Exit to stillness"
+    ]
+  }
+}
+

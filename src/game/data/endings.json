@@ -1,0 +1,56 @@
+{
+  "version": 2,
+  "endings": [
+    {
+      "id": "orthodox",
+      "title": "Chinh Dao Trung Lap",
+      "routeName": "Chinh Dao Trung Lap",
+      "alignmentAxis": "orthodox_alignment",
+      "summary": "Thanh Huyen Mon chon dung lai dao thong tren ky luat, gioi han, va ky uc ve sai lam cu.",
+      "doctrineSummary": "Ban khong dung chan tuong de dot bo moi gioi han, ma de sua lai mot trat tu da tung roi vo.",
+      "sectFateSummary": "Thanh Huyen Mon tro thanh cot tru giu nhip cho nhung tong mon con muon ton tai ma khong tai dien cuong hanh phi thang.",
+      "playerSummary": "Chuong mon chon ganh lay burden giu dao thong song ma khong de no tro lai thanh co may nghien nat nhan tam.",
+      "futureHint": "Phia tren pham gioi van con nhung canh cua chua mo, nhung tu nay Thanh Huyen Mon di len voi mot gioi han tu dat ma khong ai de dang buc vo.",
+      "continuationHookIds": [
+        "hook.orthodox.rebuild_celestial_order",
+        "hook.common.linh_gioi_threshold"
+      ],
+      "nextArcId": "future_linh_gioi_arc",
+      "nextWorldLayerId": "linh_gioi"
+    },
+    {
+      "id": "dominion",
+      "title": "Ba Dao Xung Ton",
+      "routeName": "Ba Dao Xung Ton",
+      "alignmentAxis": "dominion_alignment",
+      "summary": "Thanh Huyen Mon chon giu trat tu bang uy ap, quyet doan, va kha nang bat ke khac phai nhin thang vao ten minh.",
+      "doctrineSummary": "Ban tin rang mot the gian vua qua dai kiep khong duoc cuu bang loi khuyen ran mem, ma phai bang quyen luc du suc dinh hinh no.",
+      "sectFateSummary": "Thanh Huyen Mon lon thanh mot tong mon khien phe khac phai ne, va ngay ca dong minh cung hieu rang y chi cua no khong de mac ca.",
+      "playerSummary": "Chuong mon chap nhan mang tieng nang tay de doi lay mot trat tu khong con de ben ngoai xau xe.",
+      "futureHint": "Phia truoc la mot the cuc lon hon, noi moi buoc tien se doi them su quy phuc, va moi loi chong lai cung se sac hon.",
+      "continuationHookIds": [
+        "hook.dominion.claim_upper_heavens",
+        "hook.common.linh_gioi_threshold"
+      ],
+      "nextArcId": "future_linh_gioi_arc",
+      "nextWorldLayerId": "linh_gioi"
+    },
+    {
+      "id": "outsider",
+      "title": "Ngoai Dao Khai Thien",
+      "routeName": "Ngoai Dao Khai Thien",
+      "alignmentAxis": "outsider_alignment",
+      "summary": "Thanh Huyen Mon chon mo mot loi di khac, khong tiep tuc phuc dung he dao thong da de lai vet nut cua Thien Khu Bien.",
+      "doctrineSummary": "Ban chap nhan rang cai cu khong du de sua chinh no, va mot con duong moi chi co the mo ra neu dam di qua no so cua the gian.",
+      "sectFateSummary": "Thanh Huyen Mon tro thanh hat mam cua mot dao lo chua duoc cong nhan, vua cuon hut ke can mot loi thoat, vua khien nguoi giu luat cu phai run tay.",
+      "playerSummary": "Chuong mon khong chon an toan. Ban chon mot tuong lai chua ai dam bao, nhung cung la tuong lai khong bi troi buoc boi sai lam thua ke.",
+      "futureHint": "Phia sau pham gioi van con nhung tang troi se khong mo truoc loi the cu. Tu nay, moi buoc cua Thanh Huyen Mon deu la mot cau hoi moi dat len thien dia.",
+      "continuationHookIds": [
+        "hook.outsider.open_new_heaven",
+        "hook.common.linh_gioi_threshold"
+      ],
+      "nextArcId": "future_linh_gioi_arc",
+      "nextWorldLayerId": "linh_gioi"
+    }
+  ]
+}

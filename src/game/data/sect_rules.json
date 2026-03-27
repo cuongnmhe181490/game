@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "rules": [
+    {
+      "id": "thuong_cong",
+      "name": "Trọng Thưởng Người Có Công",
+      "summary": "Đệ tử làm tốt việc dễ giữ lòng hơn, nhưng tốn thêm linh thạch giữ nhịp thưởng công.",
+      "effects": {
+        "discipleLoyaltyDaily": 1,
+        "stabilityDaily": 1,
+        "linhThachUpkeep": 1
+      }
+    },
+    {
+      "id": "cam_tu_dau",
+      "name": "Nghiêm Cấm Tư Đấu",
+      "summary": "Giảm xung đột nội bộ và nguy cơ sự cố, nhưng người hiếu thắng dễ bức bối.",
+      "effects": {
+        "stabilityDaily": 2,
+        "discipleMoodDaily": -1,
+        "disciplineWeight": 2
+      }
+    },
+    {
+      "id": "uu_tien_tu_luyen",
+      "name": "Ưu Tiên Tu Luyện",
+      "summary": "Dồn nhịp cho đột phá và tiến cảnh, đổi lại tài nguyên tăng chậm hơn.",
+      "effects": {
+        "playerCultivationDaily": 1,
+        "discipleCultivationDaily": 1,
+        "resourceProductionFlat": -1
+      }
+    },
+    {
+      "id": "uu_tien_san_xuat",
+      "name": "Ưu Tiên Sản Xuất",
+      "summary": "Tăng sản lượng nền, nhưng nhịp tu hành và tâm trạng dễ bị nén xuống.",
+      "effects": {
+        "resourceProductionFlat": 1,
+        "discipleMoodDaily": -1,
+        "discipleCultivationDaily": -1
+      }
+    },
+    {
+      "id": "mo_rong_thu_nhan",
+      "name": "Mở Rộng Thu Nhận Đệ Tử",
+      "summary": "Nới chỗ trống cho nội môn mới, nhưng nội bộ dễ loạn nếu nền chưa vững.",
+      "effects": {
+        "discipleCapacity": 2,
+        "recruitmentWeight": 2,
+        "stabilityDaily": -1
+      }
+    },
+    {
+      "id": "tiet_kiem_tai_nguyen",
+      "name": "Tiết Kiệm Tài Nguyên",
+      "summary": "Giảm hao hụt hằng ngày, nhưng khiến bầu không khí kham khổ hơn.",
+      "effects": {
+        "linhKhiUpkeepReduction": 1,
+        "discipleMoodDaily": -1,
+        "stabilityDaily": 1
+      }
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "version": 1,
+  "recipes": [
+    {
+      "id": "recipe_tu_khi_dan",
+      "name": "Tụ Khí Đan",
+      "requiredBuildingId": "luyen_khi_phong",
+      "ingredients": [
+        {
+          "itemId": "linh_thao_co_ban",
+          "amount": 2
+        },
+        {
+          "itemId": "hoa_linh_thao",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "tu_khi_dan",
+          "amount": 1
+        }
+      ],
+      "description": "Đan nhập môn hỗ trợ tiến độ tu hành cho trưởng môn."
+    },
+    {
+      "id": "recipe_duong_tuc_dan",
+      "name": "Dưỡng Tức Đan",
+      "requiredBuildingId": "luyen_khi_phong",
+      "ingredients": [
+        {
+          "itemId": "linh_thao_co_ban",
+          "amount": 1
+        },
+        {
+          "itemId": "khoang_thach_tho",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "duong_tuc_dan",
+          "amount": 1
+        }
+      ],
+      "description": "Đan giữ nền căn ổn định, hợp lúc áp lực tâm ma vừa chớm tăng."
+    },
+    {
+      "id": "recipe_ho_than_phu",
+      "name": "Hộ Thân Phù",
+      "requiredBuildingId": "luyen_khi_phong",
+      "ingredients": [
+        {
+          "itemId": "khoang_thach_tho",
+          "amount": 1
+        },
+        {
+          "itemId": "tan_phien_co_khi",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "ho_than_phu",
+          "amount": 1
+        }
+      ],
+      "description": "Phù vật đơn giản giúp giữ thân khí và làm nền cho đồ hộ thân về sau."
+    },
+    {
+      "id": "recipe_uong_linh_tan",
+      "name": "Uỡng Linh Tán",
+      "requiredBuildingId": "luyen_khi_phong",
+      "ingredients": [
+        {
+          "itemId": "u_hon_chi",
+          "amount": 1
+        },
+        {
+          "itemId": "hoa_linh_thao",
+          "amount": 1
+        },
+        {
+          "itemId": "hac_moc_tam",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "uong_linh_tan",
+          "amount": 1
+        }
+      ],
+      "description": "Đan tán từ linh chi rừng đen, hỗ trợ bức tốc tu hành mà vẫn giữ khí tức bớt lệch."
+    }
+  ]
+}

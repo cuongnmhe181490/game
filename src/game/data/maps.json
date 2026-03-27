@@ -1,0 +1,157 @@
+{
+  "version": 1,
+  "maps": [
+    {
+      "id": "hau_son_coc",
+      "name": "Hậu Sơn Cốc",
+      "description": "Sơn cốc phía sau Thanh Huyền Môn, nơi linh khí đứt khúc sau Thiên Khư Biến khiến thú nhỏ và dị thảo cùng sinh trưởng lệch nhịp.",
+      "chapterUnlock": "chapter_1_du_tan_khai_son",
+      "riskLevel": 1,
+      "recommendedRealm": "pham_the",
+      "enemyPool": [
+        "am_tich_lang",
+        "thach_tu_xa",
+        "linh_tuc_diep_hau"
+      ],
+      "bossId": "hau_son_thu_linh",
+      "rewardProfile": {
+        "guaranteed": {
+          "duocThao": 4,
+          "khoangThach": 2
+        },
+        "bossBonus": {
+          "linhThach": 18,
+          "duocThao": 6,
+          "linhMoc": 4
+        },
+        "retreatKeepRatio": 1,
+        "itemRewards": {
+          "linh_thao_co_ban": 1
+        }
+      },
+      "eventPool": [
+        "explore.herb_patch",
+        "explore.stone_tablet",
+        "explore.waymarker_stone"
+      ],
+      "environmentTags": [
+        "post_catastrophe",
+        "herb_patch",
+        "ruined_path"
+      ],
+      "specialDiscoveryTags": [
+        "early_herb",
+        "stone_trace"
+      ]
+    },
+    {
+      "id": "hac_moc_lam",
+      "name": "Hắc Mộc Lâm",
+      "description": "Rừng gỗ đen từng là vành chắn ngoài núi. Sau đại biến, nhựa mộc tích tà khí, sương mù thấp giữ mãi không tan.",
+      "chapterUnlock": "chapter_1_du_tan_khai_son",
+      "riskLevel": 2,
+      "recommendedRealm": "luyen_khi",
+      "enemyPool": [
+        "hac_moc_yeu_lang",
+        "u_vu_moc_yeu",
+        "thach_tu_xa"
+      ],
+      "bossId": "hac_moc_thu_vuong",
+      "rewardProfile": {
+        "guaranteed": {
+          "linhMoc": 6,
+          "duocThao": 4
+        },
+        "bossBonus": {
+          "linhThach": 24,
+          "linhMoc": 8,
+          "khoangThach": 4
+        },
+        "retreatKeepRatio": 1,
+        "itemRewards": {
+          "u_hon_chi": 1,
+          "am_hoa_tinh_sa": 1
+        },
+        "sectPrestigeBonus": 1
+      },
+      "eventPool": [
+        "explore.black_wood_resin",
+        "explore.corrupt_spirit_fog",
+        "explore.trader_satchel"
+      ],
+      "environmentTags": [
+        "black_forest",
+        "spirit_fog",
+        "resin"
+      ],
+      "specialDiscoveryTags": [
+        "rare_herb",
+        "merchant_trace"
+      ],
+      "unlockConditions": {
+        "requiredWorldFlags": [
+          "map_hau_son_coc_cleared"
+        ],
+        "minSectPrestige": 10
+      }
+    },
+    {
+      "id": "tan_tich_thanh_huyen",
+      "name": "Tàn Tích Thanh Huyền",
+      "description": "Một nhánh di tích cũ của Thanh Huyền Môn nằm sâu trong sườn núi, nửa chìm trong đá vỡ, nửa còn giữ được khí vận của một đời đạo thống trước.",
+      "chapterUnlock": "chapter_2_tong_mon_lap_the",
+      "riskLevel": 3,
+      "recommendedRealm": "truc_co",
+      "enemyPool": [
+        "thanh_huyen_tan_anh",
+        "co_tran_thach_linh",
+        "u_vu_moc_yeu"
+      ],
+      "bossId": "thanh_huyen_thu_ve",
+      "rewardProfile": {
+        "guaranteed": {
+          "linhThach": 12,
+          "khoangThach": 6
+        },
+        "bossBonus": {
+          "linhThach": 32,
+          "khoangThach": 8,
+          "duocThao": 4
+        },
+        "retreatKeepRatio": 1,
+        "itemRewards": {
+          "thanh_huyen_tan_luc": 1,
+          "thanh_huyen_ngoai_chi": 1
+        },
+        "sectPrestigeBonus": 2,
+        "playerCultivationProgressBonus": 6
+      },
+      "eventPool": [
+        "explore.ruined_altar",
+        "explore.sect_records_cache",
+        "explore.hidden_chamber",
+        "explore.branch_elder_cairn",
+        "explore.cracked_guidance_wall"
+      ],
+      "environmentTags": [
+        "ruins",
+        "inheritance",
+        "sect_history"
+      ],
+      "specialDiscoveryTags": [
+        "inheritance",
+        "sect_records",
+        "altar_boon"
+      ],
+      "unlockConditions": {
+        "requiredWorldFlags": [
+          "map_hac_moc_lam_cleared"
+        ],
+        "requiredStoryFlags": [
+          "first_breakthrough_done"
+        ],
+        "minSectPrestige": 20
+      }
+    }
+  ]
+}

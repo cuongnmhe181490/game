@@ -1,0 +1,80 @@
+{
+  "version": 2,
+  "factions": [
+    {
+      "id": "huyen_minh_dien",
+      "name": "Huyền Minh Điện",
+      "shortDescription": "Liên minh chính đạo trọng danh phận, luật lệ và ổn định đại cục hơn số phận từng tông môn nhỏ.",
+      "alignment": "orthodox",
+      "gameplayRole": "Nguồn áp lực chính thống, công nhận danh nghĩa và các event kiểm soát hoặc hợp tác kiểu khuôn phép.",
+      "relationDefault": "neutral",
+      "eventTags": [
+        "orthodox",
+        "envoy",
+        "oversight",
+        "judgement"
+      ],
+      "notes": "Có thể hỗ trợ Thanh Huyền Môn ở tuyến Chính Đạo, nhưng luôn có xu hướng muốn nắm quyền định nghĩa điều gì là hợp lệ."
+    },
+    {
+      "id": "xich_luyen_bao",
+      "name": "Xích Luyện Bảo",
+      "shortDescription": "Thế lực thực dụng mạnh về luyện khí, thương lộ và vật tư, nói chuyện bằng cái giá rõ hơn bằng đạo lý.",
+      "alignment": "mercantile",
+      "gameplayRole": "Nguồn giao dịch, vật tư, nâng cấp và các event mặc cả tài nguyên ngắn hạn đổi ràng buộc dài hạn.",
+      "relationDefault": "neutral",
+      "eventTags": [
+        "trade",
+        "supply",
+        "bargain",
+        "forging"
+      ],
+      "notes": "Phù hợp với vertical slice quản lý tài nguyên vì luôn tạo bài toán đổi cái đang thiếu lấy một cam kết khó chịu hơn về sau."
+    },
+    {
+      "id": "van_tang_thu_vien",
+      "name": "Vân Tàng Thư Viện",
+      "shortDescription": "Tổ chức bảo tồn thư tịch, bản đồ cổ và dị văn, mạnh về diễn giải lịch sử hơn sức ép quân sự.",
+      "alignment": "scholarly",
+      "gameplayRole": "Nguồn lore gate, mở khóa chapter mystery, thư lục, nhân chứng và event trao đổi tri thức.",
+      "relationDefault": "neutral",
+      "eventTags": [
+        "archive",
+        "history",
+        "witness",
+        "research"
+      ],
+      "notes": "Không biết trọn chân tướng từ đầu; họ nắm mảnh rời và luôn chọn lọc điều gì nên công bố."
+    },
+    {
+      "id": "hac_sa_coc",
+      "name": "Hắc Sa Cốc",
+      "shortDescription": "Tập hợp ngoại lệ và thương đạo nửa tối nửa sáng, sẵn sàng đi đường vòng nếu đổi được lợi thực.",
+      "alignment": "outsider",
+      "gameplayRole": "Nguồn chợ đen, nhân lực bất ổn, cơ hội rủi ro cao và các event nghiêng về Ngoại Đạo.",
+      "relationDefault": "strained",
+      "eventTags": [
+        "black_market",
+        "outsider",
+        "smuggling",
+        "temptation"
+      ],
+      "notes": "Không nên viết như phe tà ác phẳng; đây là phe mở đường tắt, nhưng đường tắt luôn có giá về uy danh và kỷ cương."
+    },
+    {
+      "id": "cuu_tieu_quan",
+      "name": "Cửu Tiêu Quan",
+      "shortDescription": "Phe tu pháp trời ám ảnh với phi thăng và thiên tượng, bề ngoài thanh cao nhưng rất gần bí mật cấm lộ xưa.",
+      "alignment": "celestial",
+      "gameplayRole": "Nguồn event omen cao cấp, nghi lễ trời, dữ kiện về cưỡng hành phi thăng và xung đột tư tưởng cuối game.",
+      "relationDefault": "strained",
+      "eventTags": [
+        "ascension",
+        "heavenly_rite",
+        "omens",
+        "forbidden_path"
+      ],
+      "notes": "Là phe gần chân tướng nhất nhưng cũng là tấm gương phản chiếu lựa chọn nguy hiểm nhất của người chơi."
+    }
+  ]
+}

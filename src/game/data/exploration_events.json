@@ -1,0 +1,463 @@
+{
+  "version": 1,
+  "events": [
+    {
+      "id": "explore.herb_patch",
+      "allowedMapIds": [
+        "hau_son_coc"
+      ],
+      "requiredEnvironmentTags": [
+        "herb_patch"
+      ],
+      "title": "Khóm Linh Thảo Lệch Mạch",
+      "body": "Một mảng dược thảo mọc chen quanh khe đá, linh tức không đều nhưng vẫn còn giá trị. Hái gấp sẽ lấy được nhiều hơn, nhưng dễ làm động khí mạch quanh đó.",
+      "choices": [
+        {
+          "id": "harvest_carefully",
+          "label": "Hái cẩn thận từng lớp",
+          "outcome": "Thu được dược thảo ổn định."
+        },
+        {
+          "id": "strip_it_fast",
+          "label": "Thu gom nhanh rồi đi",
+          "outcome": "Lấy được nhiều hơn nhưng phải trả chút máu."
+        }
+      ],
+      "effects": {
+        "harvest_carefully": {
+          "resources": {
+            "duocThao": 4
+          },
+          "itemAdds": {
+            "linh_thao_co_ban": 1
+          }
+        },
+        "strip_it_fast": {
+          "resources": {
+            "duocThao": 7
+          },
+          "itemAdds": {
+            "hoa_linh_thao": 1
+          },
+          "healthDelta": -8
+        }
+      }
+    },
+    {
+      "id": "explore.stone_tablet",
+      "allowedMapIds": [
+        "hau_son_coc"
+      ],
+      "requiredEnvironmentTags": [
+        "ruined_path"
+      ],
+      "title": "Tàn Bia Trong Cốc",
+      "body": "Một mảnh bia đá nứt ngang, còn sót lại vài chữ cổ nói về người từng thử ép linh khí trong cốc vận hành trái chiều. Dừng lại đọc sẽ tốn thời gian, nhưng có thể mang về chút đầu mối.",
+      "choices": [
+        {
+          "id": "copy_the_marks",
+          "label": "Chép lại dấu bia",
+          "outcome": "Mang được ít manh mối về sơn môn."
+        },
+        {
+          "id": "take_the_fragment",
+          "label": "Bóc lấy mảnh đá nhỏ",
+          "outcome": "Có thêm vật mang về nhưng dễ động phải khí lạ."
+        }
+      ],
+      "effects": {
+        "copy_the_marks": {
+          "resources": {
+            "linhThach": 2
+          },
+          "itemAdds": {
+            "tan_phien_co_khi": 1
+          },
+          "addWorldFlags": [
+            "stone_tablet_copied"
+          ]
+        },
+        "take_the_fragment": {
+          "resources": {
+            "khoangThach": 4
+          },
+          "healthDelta": -6,
+          "addWorldFlags": [
+            "stone_tablet_fragment_taken"
+          ]
+        }
+      }
+    },
+    {
+      "id": "explore.black_wood_resin",
+      "allowedMapIds": [
+        "hac_moc_lam"
+      ],
+      "requiredEnvironmentTags": [
+        "resin"
+      ],
+      "title": "Nhựa Hắc Mộc Đọng Linh",
+      "body": "Một gốc hắc mộc bị nứt, nhựa đen chảy chậm như đang giữ lại linh khí lẫn tạp khí. Nếu cắt đúng lớp, có thể lấy được vật liệu quý.",
+      "choices": [
+        {
+          "id": "take_resin_core",
+          "label": "Tách lõi nhựa đen",
+          "outcome": "Lấy được vật liệu hiếm cho luyện đan và phù vật."
+        },
+        {
+          "id": "scrape_lightly",
+          "label": "Chỉ gọt lớp ngoài",
+          "outcome": "Lấy được ít hơn nhưng an toàn."
+        }
+      ],
+      "effects": {
+        "take_resin_core": {
+          "resources": {
+            "linhMoc": 4
+          },
+          "itemAdds": {
+            "hac_moc_tam": 1
+          },
+          "healthDelta": -10
+        },
+        "scrape_lightly": {
+          "resources": {
+            "linhMoc": 3
+          },
+          "itemAdds": {
+            "u_hon_chi": 1
+          }
+        }
+      }
+    },
+    {
+      "id": "explore.corrupt_spirit_fog",
+      "allowedMapIds": [
+        "hac_moc_lam"
+      ],
+      "requiredEnvironmentTags": [
+        "spirit_fog"
+      ],
+      "title": "U Vụ Dồn Thành Tầng",
+      "body": "Một dải sương thấp quấn quanh khe rừng, mỏng nhưng đè khí tức rất khó chịu. Đi xuyên qua có thể gặp vật hiếm, nhưng nền căn sẽ bị xô mạnh.",
+      "choices": [
+        {
+          "id": "force_through",
+          "label": "Ép khí xuyên vụ",
+          "outcome": "Có thêm thu hoạch và một chút ngộ ra về cách ép khí."
+        },
+        {
+          "id": "retreat_and_mark",
+          "label": "Đánh dấu rồi rút",
+          "outcome": "Giữ an toàn và mang về một đầu mối để thương lượng sau."
+        }
+      ],
+      "effects": {
+        "force_through": {
+          "itemAdds": {
+            "u_hon_chi": 1
+          },
+          "playerCultivationProgress": 4,
+          "foundationStability": -4
+        },
+        "retreat_and_mark": {
+          "itemAdds": {
+            "hac_moc_tam": 1
+          },
+          "factionRelations": {
+            "xich_luyen_bao": 3
+          },
+          "addWorldFlags": [
+            "black_forest_trade_trace"
+          ]
+        }
+      }
+    },
+    {
+      "id": "explore.ruined_altar",
+      "allowedMapIds": [
+        "tan_tich_thanh_huyen"
+      ],
+      "requiredEnvironmentTags": [
+        "inheritance"
+      ],
+      "title": "Tàn Đàn Dư Quang",
+      "body": "Một đàn đá nhỏ đã nứt hết cạnh, nhưng khi đến gần vẫn giữ được nhịp cộng hưởng rất giống pháp thức cũ của Thanh Huyền Môn.",
+      "choices": [
+        {
+          "id": "sit_and_resonate",
+          "label": "Ngồi xuống cộng hưởng một nhịp",
+          "outcome": "Nhận một tầng ngộ ra từ di tích cũ."
+        },
+        {
+          "id": "take_the_seal_piece",
+          "label": "Gỡ lấy mảnh ấn còn sót",
+          "outcome": "Mang về vật chứng truyền thừa."
+        }
+      ],
+      "effects": {
+        "sit_and_resonate": {
+          "playerCultivationProgress": 8,
+          "foundationStability": 3,
+          "addFlags": [
+            "ruined_altar_resonated"
+          ]
+        },
+        "take_the_seal_piece": {
+          "itemAdds": {
+            "thua_ke_linh_bai": 1
+          },
+          "sectPrestige": 2,
+          "addWorldFlags": [
+            "inheritance_seal_taken"
+          ]
+        }
+      }
+    },
+    {
+      "id": "explore.sect_records_cache",
+      "allowedMapIds": [
+        "tan_tich_thanh_huyen"
+      ],
+      "requiredEnvironmentTags": [
+        "sect_history"
+      ],
+      "title": "Kho Ghi Chép Bị Bịt Kín",
+      "body": "Một hốc tường sau bệ đá vẫn còn dấu niêm phong cũ của Thanh Huyền Môn. Bên trong có thể là ghi chép sót lại, nhưng mở mạnh sẽ làm vỡ phần còn nguyên.",
+      "choices": [
+        {
+          "id": "open_patiently",
+          "label": "Mở niêm phong thật chậm",
+          "outcome": "Giữ lại được phần văn bản có giá trị."
+        },
+        {
+          "id": "break_it_open",
+          "label": "Phá niêm phong lấy nhanh",
+          "outcome": "Lấy được nhiều mảnh hơn nhưng khó giữ nguyên thứ quan trọng."
+        }
+      ],
+      "effects": {
+        "open_patiently": {
+          "itemAdds": {
+            "thanh_huyen_tan_luc": 1
+          },
+          "sectPrestige": 1,
+          "addWorldFlags": [
+            "sect_records_recovered"
+          ]
+        },
+        "break_it_open": {
+          "resources": {
+            "khoangThach": 4
+          },
+          "itemAdds": {
+            "tan_phien_co_khi": 1
+          },
+          "healthDelta": -6
+        }
+      }
+    },
+    {
+      "id": "explore.waymarker_stone",
+      "allowedMapIds": [
+        "hau_son_coc"
+      ],
+      "requiredEnvironmentTags": [
+        "ruined_path"
+      ],
+      "title": "Tháº¡ch Mác Chæ°a Máº¥t HÆ°á»›ng",
+      "body": "BÃªn lá»‘i mÃ²n cÃ²n má»™t máº·t Ä‘Ã¡ kháº¯c ná»­a chÃ«m ná»­a má», dÆ°á»ng nhÆ° tá»«ng dÃ¹ng Ä‘á»ƒ dáº«n mÃ´n nhÃ¢n vá» háº­u cá»‘c trÃ¡nh Ä‘áº¡i biáº¿n. ÄÃ¢y khÃ´ng pháº£i báº£o váº­t, nhÆ°ng cÃ³ thá»ƒ lÃ  má»™t nhá»‹p nháº¯c Thanh Huyá»n MÃ´n váº«n cÃ²n dáº¥u xÆ°a.",
+      "choices": [
+        {
+          "id": "copy_marks",
+          "label": "ChÃ©p láº¡i kháº¯c dáº¥u",
+          "outcome": "Mang vá» má»™t má»‘i manh vá» Ä‘áº¡o lá»™ cÅ©."
+        },
+        {
+          "id": "clear_the_base",
+          "label": "Dá»n sáº¡ch chÃ¢n mÃ¡c",
+          "outcome": "Giá»¯ lÃ¡º¡i lá»‘i cÅ© cho ngÆ°á»i sau."
+        }
+      ],
+      "effects": {
+        "copy_marks": {
+          "itemAdds": {
+            "mat_bia_tu_hanh": 1
+          },
+          "addWorldFlags": [
+            "hau_son_waymarker_copied"
+          ]
+        },
+        "clear_the_base": {
+          "resources": {
+            "linhMoc": 2
+          },
+          "foundationStability": 1,
+          "sectPrestige": 1
+        }
+      }
+    },
+    {
+      "id": "explore.trader_satchel",
+      "allowedMapIds": [
+        "hac_moc_lam"
+      ],
+      "requiredEnvironmentTags": [
+        "black_forest"
+      ],
+      "title": "TÃºi HÃ nh CÆ°á»›c Bá»‹ Bá» Láº¡i",
+      "body": "DÆ°á»›i gá»‘c háº¯c má»™c cÃ²n má»™t tÃºi da bá»‹ xÆ°á»›c sáº©m nhá»±a, trong cÃ³ mÃ£nh sá»• giao hÃ ng dÃ­nh áº¥n cá»§a XÃ­ch Luyá»‡n Báº£o. Váº­t trong tÃºi khÃ´ng nhiá»u, nhÆ°ng dÃ¡u vÃ¿t cÅ©ng chÆ°a lÃ¢u.",
+      "choices": [
+        {
+          "id": "take_goods_and_note",
+          "label": "Giá»¯ cáº£ hÃ ng láº«n sá»•",
+          "outcome": "Thu Ä‘Æ°á»£c váº­t hiáº¿m nhÆ°ng cÅ©ng cháº¡m vÃ o mÃ¡ch ngoáº¡i sÆ¡n."
+        },
+        {
+          "id": "send_note_back",
+          "label": "Mang sá»• vá» tráº£ láº¡i",
+          "outcome": "KhÃ´ng láº¥y háº¿t lá»£i trÆ°á»›c máº¯t, Ä‘á»•i láº¥y dáº¥u thiá»‡n chÃ­."
+        }
+      ],
+      "effects": {
+        "take_goods_and_note": {
+          "itemAdds": {
+            "am_hoa_tinh_sa": 1
+          },
+          "resources": {
+            "linhThach": 5
+          },
+          "factionRelations": {
+            "xich_luyen_bao": -1
+          }
+        },
+        "send_note_back": {
+          "itemAdds": {
+            "khoang_thach_tho": 1
+          },
+          "factionRelations": {
+            "xich_luyen_bao": 3
+          },
+          "addWorldFlags": [
+            "merchant_satchel_returned"
+          ]
+        }
+      }
+    },
+    {
+      "id": "explore.branch_elder_cairn",
+      "allowedMapIds": [
+        "tan_tich_thanh_huyen"
+      ],
+      "requiredEnvironmentTags": [
+        "sect_history"
+      ],
+      "title": "Mộ Áº¤n Cá»§a TrÆ°á»Ÿng Lá»o Chi PhÃ¡i",
+      "body": "Trong khe Ä‘Ã¡ khuáº¥t giÃ³ cÃ³ má»™t mộ áº¥n ráº¥t nhá», trÃªn Ä‘á»‰nh kháº¯c biá»ƒu vÄƒn cá»§a má»™t chi nhÃ¡nh Thanh Huyá»n Ä‘Ã£ máº¥t tÃªn. Chung quanh khÃ´ng cÃ³ báº£o váº­t lÃ³e sÃ¡ng, chá»‰ cÃ³ cáº£m giÃ¡c ngÆ°á»i xÆ°a váº«n muá»‘n Ä‘á»ƒ láº¡i má»™t cÃ¢u dÄƒn cho káº» Ä‘i sau.",
+      "choices": [
+        {
+          "id": "offer_quiet_respect",
+          "label": "Dá»«ng láº¡i hÃ nh lá»…",
+          "outcome": "Nháº­n láº¥y má»™t nhá»‹p yÃªn vÃ  chÃºt khÃ­ váº­n."
+        },
+        {
+          "id": "lift_the_stone_case",
+          "label": "Má»Ÿ há»™c Ä‘Ã¡ nhá»",
+          "outcome": "Mang vá» máº£nh ghi chÃ©p cá»§a chi phÃ¡i cÅ©."
+        }
+      ],
+      "effects": {
+        "offer_quiet_respect": {
+          "playerCultivationProgress": 5,
+          "foundationStability": 2,
+          "addWorldFlags": [
+            "branch_elder_cairn_honored"
+          ]
+        },
+        "lift_the_stone_case": {
+          "itemAdds": {
+            "thanh_huyen_ngoai_chi": 1
+          },
+          "sectPrestige": 2
+        }
+      }
+    },
+    {
+      "id": "explore.cracked_guidance_wall",
+      "allowedMapIds": [
+        "tan_tich_thanh_huyen"
+      ],
+      "requiredEnvironmentTags": [
+        "inheritance"
+      ],
+      "title": "Váº¡ch HÆ°á»›ng Dáº«n Nứt Dà i",
+      "body": "Má»™t váº¡ch Ä‘Ã¡ sau tÃ n Ä‘iá»‡n cÃ²n khÃ¡ kháº¯c nhá»¯ng dÃ²ng khuyáº¿n giá»›i dÃ nh cho mÃ´n sinh khi má»›i vÃ o ná»™i mÃ´n. Ná»­a trÃªn khuyáº¿n ngÆ°á»i giÃ¯n khÃ­, ná»­a dÆ°á»›i khuyáº¿n giÃ¯n tÃ¢m; ráº¥t Ã­t dáº¡y phÃ¡p nÃ³i tháº³ng nhÆ° váº­y.",
+      "choices": [
+        {
+          "id": "read_until_dusk",
+          "label": "Äá»©ng láº¡i Ä‘á»c háº¿t",
+          "outcome": "Láº¥y chÃºt ngá»™ ra tá»« lá»i dÄƒn cá»§a ngÆ°á»i xÆ°a."
+        },
+        {
+          "id": "pry_loose_the_jade_pin",
+          "label": "Gá»¡ ngá»c chÃ´n trong kẽ nứt",
+          "outcome": "Mang vá» váº­t nhá» giÃºp Ä‘i Ä‘Æ°á»ng xa bÃªn ngoÃ i sÆ¡n."
+        }
+      ],
+      "effects": {
+        "read_until_dusk": {
+          "playerCultivationProgress": 7,
+          "itemAdds": {
+            "mat_bia_tu_hanh": 1
+          }
+        },
+        "pry_loose_the_jade_pin": {
+          "itemAdds": {
+            "co_ngoc_huyen_tuc": 1
+          },
+          "healthDelta": -4
+        }
+      }
+    },
+    {
+      "id": "explore.hidden_chamber",
+      "allowedMapIds": [
+        "tan_tich_thanh_huyen"
+      ],
+      "requiredEnvironmentTags": [
+        "ruins"
+      ],
+      "title": "Thiên Phòng Bị Ép Kín",
+      "body": "Sau một vách nứt là gian phòng nhỏ chỉ đủ đặt một bệ đá và một ngọc phiến. Khí tức trong đó không mạnh, nhưng rất ngay ngắn, giống một chỗ truyền một pháp chứ không phải nơi cất của.",
+      "choices": [
+        {
+          "id": "take_the_jade_slip",
+          "label": "Mang ngọc phiến về sect",
+          "outcome": "Thu được di vật có ích cho nhịp tu hành lâu dài."
+        },
+        {
+          "id": "study_in_place",
+          "label": "Đọc ngay tại chỗ",
+          "outcome": "Hiểu thêm một chút nhưng phải tiêu hao khí lực."
+        }
+      ],
+      "effects": {
+        "take_the_jade_slip": {
+          "itemAdds": {
+            "thanh_huyen_di_luc": 1
+          },
+          "addFlags": [
+            "inheritance_jade_recovered"
+          ]
+        },
+        "study_in_place": {
+          "playerCultivationProgress": 10,
+          "foundationStability": -2,
+          "addWorldFlags": [
+            "hidden_chamber_studied"
+          ]
+        }
+      }
+    }
+  ]
+}

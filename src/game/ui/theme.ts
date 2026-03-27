@@ -1,0 +1,20 @@
+export const menuPalette = {
+  background: '#081014',
+  backgroundDeep: 0x071014,
+  backgroundLift: 0x152127,
+  panel: 0x10191d,
+  panelAlt: 0x162126,
+  panelSoft: 0x1a252b,
+  frame: 0x8f744a,
+  frameSoft: 0x6f5a38,
+  accent: 0xbe985d,
+  accentDeep: 0x6f5f3d,
+  accentText: '#c9b27c',
+  successText: '#b6d1a5',
+  warningText: '#d7b07b',
+  dangerText: '#d39a95',
+  textStrong: '#f2ead8',
+  textMuted: '#b6c0bc',
+  textSoft: '#8f9a96',
+  shadow: 0x030506
+} as const;

@@ -1,0 +1,166 @@
+{
+  "version": 1,
+  "enemies": [
+    {
+      "id": "am_tich_lang",
+      "name": "Âm Tích Lang",
+      "maxHealth": 18,
+      "moveSpeed": 74,
+      "damage": 5,
+      "behaviorType": "idle_chase",
+      "detectionRange": 180,
+      "attackCooldownMs": 900,
+      "dropTable": [
+        {
+          "resourceId": "linhMoc",
+          "amount": 2,
+          "chance": 0.8
+        },
+        {
+          "resourceId": "duocThao",
+          "amount": 1,
+          "chance": 0.35
+        }
+      ],
+      "flavorText": "Dã lang sống sót sau dị biến, quen ẩn trong cỏ thấp rồi lao tới khi thấy mục tiêu lộ sơ hở."
+    },
+    {
+      "id": "thach_tu_xa",
+      "name": "Thạch Tức Xà",
+      "maxHealth": 22,
+      "moveSpeed": 58,
+      "damage": 7,
+      "behaviorType": "idle_chase",
+      "detectionRange": 160,
+      "attackCooldownMs": 1200,
+      "dropTable": [
+        {
+          "resourceId": "khoangThach",
+          "amount": 2,
+          "chance": 0.75
+        },
+        {
+          "resourceId": "duocThao",
+          "amount": 1,
+          "chance": 0.25
+        }
+      ],
+      "flavorText": "Loài xà ẩn trong kẽ đá, linh tức chậm nhưng đòn cắn nặng và khó đoán nhịp."
+    },
+    {
+      "id": "linh_tuc_diep_hau",
+      "name": "Điệp Hầu Linh Tức",
+      "maxHealth": 14,
+      "moveSpeed": 92,
+      "damage": 4,
+      "behaviorType": "idle_chase",
+      "detectionRange": 210,
+      "attackCooldownMs": 800,
+      "dropTable": [
+        {
+          "resourceId": "duocThao",
+          "amount": 2,
+          "chance": 0.7
+        },
+        {
+          "resourceId": "linhThach",
+          "amount": 1,
+          "chance": 0.2
+        }
+      ],
+      "flavorText": "Khí lạ đọng trên thân khỉ núi khiến nó linh hoạt quá mức, thường mò tới những chỗ có linh thảo mỏng."
+    },
+    {
+      "id": "hac_moc_yeu_lang",
+      "name": "Hắc Mộc Yêu Lang",
+      "maxHealth": 28,
+      "moveSpeed": 84,
+      "damage": 8,
+      "behaviorType": "idle_chase",
+      "detectionRange": 210,
+      "attackCooldownMs": 950,
+      "dropTable": [
+        {
+          "resourceId": "linhMoc",
+          "amount": 3,
+          "chance": 0.85
+        },
+        {
+          "resourceId": "duocThao",
+          "amount": 2,
+          "chance": 0.45
+        }
+      ],
+      "flavorText": "Lang sói đen sống trong sương thấp, quen lùa mồi về phía gốc cây mục rồi xé vụn."
+    },
+    {
+      "id": "u_vu_moc_yeu",
+      "name": "U Vụ Mộc Yêu",
+      "maxHealth": 34,
+      "moveSpeed": 52,
+      "damage": 10,
+      "behaviorType": "idle_chase",
+      "detectionRange": 190,
+      "attackCooldownMs": 1300,
+      "dropTable": [
+        {
+          "resourceId": "linhMoc",
+          "amount": 4,
+          "chance": 0.9
+        },
+        {
+          "resourceId": "khoangThach",
+          "amount": 2,
+          "chance": 0.35
+        }
+      ],
+      "flavorText": "Gốc cây cũ tích tụ u vụ thành linh, cử động nặng nhưng bền, càng vào sâu rừng càng dễ gặp."
+    },
+    {
+      "id": "thanh_huyen_tan_anh",
+      "name": "Thanh Huyền Tàn Ảnh",
+      "maxHealth": 38,
+      "moveSpeed": 86,
+      "damage": 11,
+      "behaviorType": "idle_chase",
+      "detectionRange": 225,
+      "attackCooldownMs": 980,
+      "dropTable": [
+        {
+          "resourceId": "linhThach",
+          "amount": 3,
+          "chance": 0.7
+        },
+        {
+          "resourceId": "khoangThach",
+          "amount": 2,
+          "chance": 0.55
+        }
+      ],
+      "flavorText": "Bóng dư còn sót lại trong di tích, không còn là người thật nhưng vẫn giữ nhịp truy đuổi cũ."
+    },
+    {
+      "id": "co_tran_thach_linh",
+      "name": "Cổ Trận Thạch Linh",
+      "maxHealth": 46,
+      "moveSpeed": 48,
+      "damage": 13,
+      "behaviorType": "idle_chase",
+      "detectionRange": 170,
+      "attackCooldownMs": 1450,
+      "dropTable": [
+        {
+          "resourceId": "khoangThach",
+          "amount": 4,
+          "chance": 0.8
+        },
+        {
+          "resourceId": "linhThach",
+          "amount": 2,
+          "chance": 0.4
+        }
+      ],
+      "flavorText": "Mảnh đá trận bám linh lâu năm, nặng và chậm nhưng một khi áp sát thì rất khó chống đỡ."
+    }
+  ]
+}

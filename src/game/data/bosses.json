@@ -1,0 +1,113 @@
+{
+  "version": 1,
+  "bosses": [
+    {
+      "id": "hau_son_thu_linh",
+      "name": "Thủ Lĩnh Hậu Sơn",
+      "maxHealth": 72,
+      "moveSpeed": 68,
+      "damage": 12,
+      "behaviorType": "boss_guardian",
+      "detectionRange": 260,
+      "attackCooldownMs": 1100,
+      "dropTable": [
+        {
+          "resourceId": "linhThach",
+          "amount": 8,
+          "chance": 1
+        },
+        {
+          "resourceId": "khoangThach",
+          "amount": 5,
+          "chance": 1
+        }
+      ],
+      "itemDrops": [
+        {
+          "itemId": "tan_phien_co_khi",
+          "amount": 1,
+          "chance": 1
+        },
+        {
+          "itemId": "yen_tuc_phu",
+          "amount": 1,
+          "chance": 1
+        }
+      ],
+      "flavorText": "Con thú lớn chiếm đoạn sâu nhất của Hậu Sơn Cốc, dường như chịu ảnh hưởng trực tiếp từ dư chấn linh mạch cũ.",
+      "bossFlagOnDefeat": "boss_hau_son_thu_linh_defeated"
+    },
+    {
+      "id": "hac_moc_thu_vuong",
+      "name": "Hắc Mộc Thú Vương",
+      "maxHealth": 108,
+      "moveSpeed": 74,
+      "damage": 16,
+      "behaviorType": "boss_guardian",
+      "detectionRange": 285,
+      "attackCooldownMs": 980,
+      "dropTable": [
+        {
+          "resourceId": "linhMoc",
+          "amount": 10,
+          "chance": 1
+        },
+        {
+          "resourceId": "linhThach",
+          "amount": 10,
+          "chance": 1
+        }
+      ],
+      "itemDrops": [
+        {
+          "itemId": "hac_moc_tam",
+          "amount": 1,
+          "chance": 1
+        },
+        {
+          "itemId": "uong_linh_tan",
+          "amount": 1,
+          "chance": 1
+        }
+      ],
+      "flavorText": "Yêu thú cắm rễ giữa nhựa đen và sương thấp, giữ một vùng rừng như thể có chủ từ lâu.",
+      "bossFlagOnDefeat": "boss_hac_moc_thu_vuong_defeated"
+    },
+    {
+      "id": "thanh_huyen_thu_ve",
+      "name": "Thanh Huyền Thủ Vệ Tàn Trận",
+      "maxHealth": 144,
+      "moveSpeed": 70,
+      "damage": 20,
+      "behaviorType": "boss_guardian",
+      "detectionRange": 310,
+      "attackCooldownMs": 920,
+      "dropTable": [
+        {
+          "resourceId": "linhThach",
+          "amount": 16,
+          "chance": 1
+        },
+        {
+          "resourceId": "khoangThach",
+          "amount": 10,
+          "chance": 1
+        }
+      ],
+      "itemDrops": [
+        {
+          "itemId": "thanh_huyen_di_luc",
+          "amount": 1,
+          "chance": 1
+        },
+        {
+          "itemId": "thua_ke_linh_bai",
+          "amount": 1,
+          "chance": 1
+        }
+      ],
+      "flavorText": "Một cụm tàn trận và ý niệm cũ kết lại thành thủ vệ, như đang hỏi người đến sau có đủ tư cách nhận di tồn hay chưa.",
+      "bossFlagOnDefeat": "boss_thanh_huyen_thu_ve_defeated"
+    }
+  ]
+}

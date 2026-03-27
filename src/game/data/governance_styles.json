@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "styles": [
+    {
+      "id": "on_hoa",
+      "name": "Ôn Hòa",
+      "summary": "Giữ lòng người trước, giảm bất mãn nhưng nhịp sản xuất không quá gắt.",
+      "effects": {
+        "discipleMoodDaily": 1,
+        "discipleLoyaltyDaily": 1,
+        "stabilityDaily": 1
+      }
+    },
+    {
+      "id": "nghiem_tri",
+      "name": "Nghiêm Trị",
+      "summary": "Siết kỷ cương, giữ nội môn gọn nhưng dễ làm đệ tử thấy áp lực.",
+      "effects": {
+        "discipleMoodDaily": -1,
+        "stabilityDaily": 2,
+        "disciplineWeight": 2
+      }
+    },
+    {
+      "id": "thuc_dung",
+      "name": "Thực Dụng",
+      "summary": "Ưu tiên hiệu quả và tài nguyên, hợp với giai đoạn dựng lại nền móng.",
+      "effects": {
+        "resourceProductionFlat": 1,
+        "fortuneDaily": 0,
+        "stabilityDaily": 0
+      }
+    },
+    {
+      "id": "cau_dao",
+      "name": "Cầu Đạo",
+      "summary": "Dồn lực cho tu hành và truyền thừa, đổi lại nhịp sản xuất chậm hơn.",
+      "effects": {
+        "playerCultivationDaily": 1,
+        "discipleCultivationDaily": 1,
+        "resourceProductionFlat": -1
+      }
+    },
+    {
+      "id": "be_mon",
+      "name": "Bế Môn",
+      "summary": "Giảm giao du bên ngoài để ổn định nội môn, nhưng cơ hội ngoại giao ít đi.",
+      "effects": {
+        "stabilityDaily": 1,
+        "fortuneDaily": 1,
+        "diplomacyWeight": -2
+      }
+    }
+  ]
+}

@@ -1,0 +1,1438 @@
+{
+  "version": 2,
+  "events": [
+    {
+      "id": "major.chapter1.claim_the_ruins",
+      "title": "Tan Tich Con Nguoi Giu",
+      "chapter": "chapter_1_du_tan_khai_son",
+      "category": "founding",
+      "triggerConditions": {
+        "requiredFlags": ["chapter_1_start"],
+        "forbiddenFlags": ["major.chapter1.claim_the_ruins.resolved"],
+        "minDay": 1
+      },
+      "text": "Cot da nut, son mon vo, Chinh dien chi con mot mach khi mong. Thanh Huyen Mon van con ten, nhung cai ten ay chi song neu co nguoi dam nhan lay dong tan nay.",
+      "choices": [
+        {
+          "id": "cleanse_and_reopen",
+          "label": "Quet sach Chinh dien, nhan lai son mon",
+          "outcome": "Ban chon o lai giua tan tich, dung ten Thanh Huyen Mon len truoc gio lanh."
+        },
+        {
+          "id": "seal_then_repair",
+          "label": "Phong son tam thoi, sua nen truoc",
+          "outcome": "Ban giu mach song truoc, chap nhan cham mot nhip de tong mon khong vo them."
+        }
+      ],
+      "effects": {
+        "cleanse_and_reopen": {
+          "resources": {
+            "wood": -4,
+            "spiritStone": -6
+          },
+          "sectPrestige": 2,
+          "sectStability": 2
+        },
+        "seal_then_repair": {
+          "resources": {
+            "wood": -2
+          },
+          "sectStability": 3,
+          "advanceDays": 1
+        }
+      },
+      "followupFlags": {
+        "onResolve": ["sect_ruins_surveyed"],
+        "byChoice": {
+          "cleanse_and_reopen": ["qingxuan_reclaimed", "major.chapter1.claim_the_ruins.resolved"],
+          "seal_then_repair": ["gate_sealed_first", "major.chapter1.claim_the_ruins.resolved"]
+        }
+      }
+    },
+    {
+      "id": "major.chapter1.first_embers",
+      "title": "Tan Hoa Gom Lai",
+      "chapter": "chapter_1_du_tan_khai_son",
+      "category": "survival",
+      "triggerConditions": {
+        "requiredFlags": ["sect_ruins_surveyed", "first_resource_cycle_completed"],
+        "forbiddenFlags": ["major.chapter1.first_embers.resolved"],
+        "minDay": 2
+      },
+      "text": "Sau nhung ngay dau, bep lo da co tro nong tro lai. Noi mon chua dung, nhung da co thu phai giu: mot mach sinh hoat moi vua gom lai.",
+      "choices": [
+        {
+          "id": "ration_everything",
+          "label": "Chia khau phan va giu lua qua dem",
+          "outcome": "Noi mon yeu nhung khong tan. Moi nguoi biet rang tong mon van con co ngay mai."
+        },
+        {
+          "id": "let_the_fire_burn_bright",
+          "label": "Dung them tai nguyen de giu khi the",
+          "outcome": "Bep lua sang hon, long nguoi cung on dinh hon du gia phai tra khong nho."
+        }
+      ],
+      "effects": {
+        "ration_everything": {
+          "sectStability": 3,
+          "resources": {
+            "food": -1
+          }
+        },
+        "let_the_fire_burn_bright": {
+          "resources": {
+            "food": -2,
+            "wood": -2
+          },
+          "sectStability": 4,
+          "sectPrestige": 1
+        }
+      },
+      "followupFlags": {
+        "onResolve": ["first_cycle_stabilized"],
+        "byChoice": {
+          "ration_everything": ["major.chapter1.first_embers.resolved"],
+          "let_the_fire_burn_bright": ["major.chapter1.first_embers.resolved"]
+        }
+      }
+    },
+    {
+      "id": "major.chapter1.first_companion_vow",
+      "title": "Nguoi O Lai Duoi Mai Vo",
+      "chapter": "chapter_1_du_tan_khai_son",
+      "category": "disciple",
+      "triggerConditions": {
+        "requiredFlags": ["sect_ruins_surveyed", "first_resource_cycle_completed"],
+        "forbiddenFlags": ["major.chapter1.first_companion_vow.resolved"],
+        "requiredDiscipleCount": 1,
+        "minDay": 2
+      },
+      "text": "Giua canh vach nut va cot do, van co nguoi noi se chua roi di. Loi o lai ay khong lam tong mon manh len ngay, nhung du de giu mot ngon lua trong nguoi.",
+      "choices": [
+        {
+          "id": "accept_their_vow",
+          "label": "Ghi nhan loi o lai, xem ho la hat giong dau tien",
+          "outcome": "Noi mon co nguoi cung ganh lanh. Thanh Huyen Mon khong con chi do mot minh ban chong do."
+        },
+        {
+          "id": "ask_them_to_endure_silently",
+          "label": "Bao ho cu lo viec, de sau se ban",
+          "outcome": "Tong mon giu duoc trat tu, nhung niem tin den cham hon."
+        }
+      ],
+      "effects": {
+        "accept_their_vow": {
+          "sectStability": 2,
+          "sectPrestige": 1,
+          "discipleLoyaltyDelta": 6,
+          "discipleMoodDelta": 5
+        },
+        "ask_them_to_endure_silently": {
+          "sectStability": 1,
+          "discipleLoyaltyDelta": 2,
+          "discipleMoodDelta": -1
+        }
+      },
+      "followupFlags": {
+        "onResolve": ["first_companion_secured"],
+        "byChoice": {
+          "accept_their_vow": ["major.chapter1.first_companion_vow.resolved"],
+          "ask_them_to_endure_silently": ["major.chapter1.first_companion_vow.resolved"]
+        }
+      }
+    },
+    {
+      "id": "major.chapter1.restore_first_pulse",
+      "title": "Mot Mach Tong Mon Song Lai",
+      "chapter": "chapter_1_du_tan_khai_son",
+      "category": "recovery",
+      "triggerConditions": {
+        "requiredFlags": ["first_building_restored"],
+        "forbiddenFlags": ["major.chapter1.restore_first_pulse.resolved"],
+        "minDay": 3
+      },
+      "text": "Khi mot cong trinh dau tien dung lai, tieng go va hoi khi quanh son mon khong con vo dinh. Day chua phai phuc hung, nhung da la nhip dap dau tien cua mot tong mon song.",
+      "choices": [
+        {
+          "id": "declare_the_work_begun",
+          "label": "Cong bo noi mon da bat dau dung lai",
+          "outcome": "Nguoi trong mon biet rang viec dung lai tong mon da co hinh dang ro hon."
+        },
+        {
+          "id": "keep_the_repair_quiet",
+          "label": "Lam xong roi moi noi, tranh de ngoai gioi de y",
+          "outcome": "Ban giu su kin dao, uu tien su that truoc tieng vang."
+        }
+      ],
+      "effects": {
+        "declare_the_work_begun": {
+          "sectPrestige": 3,
+          "sectStability": 2
+        },
+        "keep_the_repair_quiet": {
+          "sectStability": 3,
+          "sectFortune": 1
+        }
+      },
+      "followupFlags": {
+        "onResolve": ["first_recovery_made"],
+        "byChoice": {
+          "declare_the_work_begun": ["major.chapter1.restore_first_pulse.resolved"],
+          "keep_the_repair_quiet": ["major.chapter1.restore_first_pulse.resolved"]
+        }
+      }
+    },
+    {
+      "id": "major.chapter1.outer_warning",
+      "title": "Song Gio Ngoai Son",
+      "chapter": "chapter_1_du_tan_khai_son",
+      "category": "warning",
+      "triggerConditions": {
+        "requiredFlags": ["first_resource_cycle_completed", "first_building_restored"],
+        "forbiddenFlags": ["major.chapter1.outer_warning.resolved"],
+        "minDay": 4
+      },
+      "text": "Dau vet thu la xuat hien ben ngoai son dao: chan thu lac, vet sat, va hoi khi la cua ke da tung di ngang day. Ben ngoai khong coi Thanh Huyen Mon la mo dat vo chu lau nua.",
+      "choices": [
+        {
+          "id": "tighten_the_watch",
+          "label": "Tang tua tra va giu son mon dong",
+          "outcome": "Noi mon biet mot moi de doa dang den gan, va da bat dau dung than de doi."
+        },
+        {
+          "id": "send_a_quiet_probe",
+          "label": "Cho nguoi di nhin xa, tranh de bi dong",
+          "outcome": "Ban chon biet som hon noi lon, de phong gio lon tu xa."
+        }
+      ],
+      "effects": {
+        "tighten_the_watch": {
+          "sectStability": 2,
+          "resources": {
+            "food": -1
+          }
+        },
+        "send_a_quiet_probe": {
+          "sectFortune": 1,
+          "sectPrestige": 1
+        }
+      },
+      "followupFlags": {
+        "onResolve": ["first_warning_received"],
+        "byChoice": {
+          "tighten_the_watch": ["major.chapter1.outer_warning.resolved"],
+          "send_a_quiet_probe": ["major.chapter1.outer_warning.resolved"]
+        }
+      }
+    },
+    {
+      "id": "major.chapter1.first_major_threat",
+      "title": "Da Thu Den Truc Son Mon",
+      "chapter": "chapter_1_du_tan_khai_son",
+      "category": "threat",
+      "triggerConditions": {
+        "requiredFlags": ["first_warning_received", "first_building_restored"],
+        "forbiddenFlags": ["major.chapter1.first_major_threat.resolved"],
+        "minDay": 5
+      },
+      "text": "Dem xuong, thu tri di theo hoi tan khi ap sat son mon. Day khong con la canh thieu thon am tham nua; neu lui luc nay, Thanh Huyen Mon se that su tat lua.",
+      "choices": [
+        {
+          "id": "hold_the_gate",
+          "label": "Giu cong son, khong lui",
+          "outcome": "Thanh Huyen Mon qua duoc dot song dau tien. Ton mon van yeu, nhung da khong de gio dem nay thoi tat."
+        },
+        {
+          "id": "yield_then_recover",
+          "label": "Rut vao noi mon, giu nguoi va thu lai sau",
+          "outcome": "Ban mat mot phan the dien, nhung da giu lai duoc goc re de tong mon khong do vo."
+        }
+      ],
+      "effects": {
+        "hold_the_gate": {
+          "sectPrestige": 4,
+          "sectStability": 2,
+          "resources": {
+            "wood": -2,
+            "food": -1
+          }
+        },
+        "yield_then_recover": {
+          "sectStability": 1,
+          "sectFortune": -1,
+          "resources": {
+            "wood": -1
+          }
+        }
+      },
+      "followupFlags": {
+        "onResolve": ["first_major_threat_survived"],
+        "byChoice": {
+          "hold_the_gate": ["major.chapter1.first_major_threat.resolved"],
+          "yield_then_recover": ["major.chapter1.first_major_threat.resolved"]
+        }
+      }
+    },
+    {
+      "id": "major.chapter1.mirror_first_resonance",
+      "title": "Kinh Dong Giua Chinh Dien",
+      "chapter": "chapter_1_du_tan_khai_son",
+      "category": "relic",
+      "triggerConditions": {
+        "requiredFlags": ["first_major_threat_survived"],
+        "forbiddenFlags": ["major.chapter1.mirror_first_resonance.resolved", "linh_kinh_glimpse_seen"],
+        "minDay": 6
+      },
+      "text": "Sau dem giu son mon, Van Tuong Linh Kinh bat sang mot vet mong nhu troi nut. No khong cho cau tra loi, chi de lai mot linh cam rang dai nan nam xua khong phai chi la troi dat noi gian.",
+      "choices": [
+        {
+          "id": "record_the_glimpse",
+          "label": "Ghi lai vet sang va giu trong noi mon",
+          "outcome": "Ban chon ghi nho khoanh khac nay nhu dau moi dau tien cua tong mon."
+        },
+        {
+          "id": "kneel_and_vow",
+          "label": "Quy truoc linh kinh, lap loi khong bo son mon",
+          "outcome": "Ban khong co du su that, nhung da co mot loi the de di tiep."
+        }
+      ],
+      "effects": {
+        "record_the_glimpse": {
+          "sectFortune": 2,
+          "playerCultivationProgress": 8
+        },
+        "kneel_and_vow": {
+          "sectStability": 2,
+          "foundationStability": 3
+        }
+      },
+      "followupFlags": {
+        "onResolve": ["linh_kinh_glimpse_seen", "linh_kinh_awakened"],
+        "byChoice": {
+          "record_the_glimpse": ["major.chapter1.mirror_first_resonance.resolved"],
+          "kneel_and_vow": ["major.chapter1.mirror_first_resonance.resolved"]
+        }
+      }
+    },
+    {
+      "id": "major.chapter1.flame_not_extinguished",
+      "title": "Tan Hoa Chua Tat",
+      "chapter": "chapter_1_du_tan_khai_son",
+      "category": "resolution",
+      "triggerConditions": {
+        "requiredFlags": [
+          "first_resource_cycle_completed",
+          "first_building_restored",
+          "first_major_threat_survived",
+          "linh_kinh_glimpse_seen"
+        ],
+        "forbiddenFlags": ["chapter1_completed", "major.chapter1.flame_not_extinguished.resolved"],
+        "minDay": 6
+      },
+      "text": "Thanh Huyen Mon van la mot tong mon tan nat, nhung da co lua trong bep, co nguoi trong mon, co cong trinh song lai, va da qua duoc dot song dau tien. Luc nay ban phai chon: roi di de giu than, hay o lai de giu dao thong chua tat.",
+      "choices": [
+        {
+          "id": "remain_and_rebuild",
+          "label": "O lai, dung lai tu mot niem nay",
+          "outcome": "Ban chon o lai. Thanh Huyen Mon chua phuc hung, nhung tu nay da co ngay mai de dung tiep."
+        },
+        {
+          "id": "swear_a_quiet_revival",
+          "label": "Khong noi lon, nhung the se dung lai tong mon",
+          "outcome": "Ban khong phat loi huong ngoai, nhung da chot loi nguyen trong long. Tan hoa nay se khong tat."
+        }
+      ],
+      "effects": {
+        "remain_and_rebuild": {
+          "sectPrestige": 5,
+          "sectStability": 4,
+          "sectFortune": 2,
+          "completeChapter": "chapter_1_du_tan_khai_son",
+          "unlockChapter": "chapter_2_tong_mon_lap_the"
+        },
+        "swear_a_quiet_revival": {
+          "sectPrestige": 3,
+          "sectStability": 5,
+          "sectFortune": 3,
+          "completeChapter": "chapter_1_du_tan_khai_son",
+          "unlockChapter": "chapter_2_tong_mon_lap_the"
+        }
+      },
+      "followupFlags": {
+        "onResolve": ["chapter1_completed", "chapter_1_complete", "chapter_1_completed"],
+        "byChoice": {
+          "remain_and_rebuild": ["major.chapter1.flame_not_extinguished.resolved"],
+          "swear_a_quiet_revival": ["major.chapter1.flame_not_extinguished.resolved"]
+        }
+      }
+    },
+    {
+      "id": "major.chapter2.raise_the_banner",
+      "title": "Khai Son Lap Tong",
+      "chapter": "chapter_2_tong_mon_lap_the",
+      "category": "founding",
+      "triggerConditions": {
+        "requiredFlags": ["chapter_1_complete"],
+        "forbiddenFlags": ["chapter2_started", "major.chapter2.raise_the_banner.resolved"],
+        "minDay": 7
+      },
+      "text": "Thanh Huyen Mon da qua duoc nhung ngay chi biet giu lua. Gio day, neu van o lai, ton mon nay khong the chi la mot bai vi co nguoi canh giu; no phai duoc noi ro rang van con dung giua nui.",
+      "choices": [
+        {
+          "id": "announce_revival",
+          "label": "Doi lai bien mon, cong bo Thanh Huyen Mon mo lai",
+          "outcome": "Tu nay, Thanh Huyen Mon khong con chi la mot tan tich co nguoi o lai."
+        },
+        {
+          "id": "reopen_with_caution",
+          "label": "Mo lai son mon trong im lang, uu tien noi mon vung truoc",
+          "outcome": "Ban chon dung lai mot cach than trong, de tong mon co nen ma lon."
+        }
+      ],
+      "effects": {
+        "announce_revival": {
+          "resources": {
+            "wood": -2,
+            "spiritStone": -4
+          },
+          "sectPrestige": 3,
+          "sectStability": 1,
+          "sectFortune": 1
+        },
+        "reopen_with_caution": {
+          "sectStability": 3,
+          "sectFortune": 1
+        }
+      },
+      "followupFlags": {
+        "onResolve": ["chapter2_started"],
+        "byChoice": {
+          "announce_revival": ["major.chapter2.raise_the_banner.resolved"],
+          "reopen_with_caution": ["major.chapter2.raise_the_banner.resolved"]
+        }
+      }
+    },
+    {
+      "id": "major.chapter2.first_formal_intake",
+      "title": "Thu Nhan Mon Sinh Dau Tien",
+      "chapter": "chapter_2_tong_mon_lap_the",
+      "category": "recruitment",
+      "triggerConditions": {
+        "requiredFlags": ["chapter2_started"],
+        "forbiddenFlags": ["first_formal_recruitment_opened", "major.chapter2.first_formal_intake.resolved"],
+        "minDay": 8,
+        "minSectPrestige": 8
+      },
+      "text": "Sau khi son mon mo lai, nguoi tim den khong con chi la ke lac buoc ngang qua. Da co nguoi den xin nhap mon that su, buoc Thanh Huyen Mon phai tra loi rang minh se thu nhan nguoi theo khuon phep nao.",
+      "choices": [
+        {
+          "id": "accept_open_trial",
+          "label": "Thu nhan va cho thu viec trong noi mon",
+          "outcome": "Thanh Huyen Mon lan dau tien mo cua thu nhan mon sinh theo ne nep ro rang."
+        },
+        {
+          "id": "accept_narrowly",
+          "label": "Thu nhan it nguoi, uu tien ke hop tinh canh tong mon",
+          "outcome": "Ban mo cua, nhung van giu tay rat chat."
+        },
+        {
+          "id": "decline_until_ready",
+          "label": "Tam hoan thu nhan, cho noi mon on hon",
+          "outcome": "Ban chua nhan nguoi ngay, nhung da dat ra nguong cua su thu nhan co chu y."
+        }
+      ],
+      "effects": {
+        "accept_open_trial": {
+          "recruitDiscipleArchetype": "chapter2_formal_candidate",
+          "sectPrestige": 2,
+          "sectStability": 1
+        },
+        "accept_narrowly": {
+          "recruitDiscipleArchetype": "chapter2_formal_candidate",
+          "sectStability": 2
+        },
+        "decline_until_ready": {
+          "sectStability": 1,
+          "sectFortune": 1
+        }
+      },
+      "followupFlags": {
+        "onResolve": ["first_formal_recruitment_opened"],
+        "byChoice": {
+          "accept_open_trial": ["major.chapter2.first_formal_intake.resolved"],
+          "accept_narrowly": ["major.chapter2.first_formal_intake.resolved"],
+          "decline_until_ready": ["major.chapter2.first_formal_intake.resolved"]
+        }
+      }
+    },
+    {
+      "id": "major.chapter2.rule_of_the_hall",
+      "title": "Noi Quy Dau Tien",
+      "chapter": "chapter_2_tong_mon_lap_the",
+      "category": "governance",
+      "triggerConditions": {
+        "requiredFlags": ["chapter2_started", "first_formal_recruitment_opened"],
+        "forbiddenFlags": ["first_internal_rule_enforced", "major.chapter2.rule_of_the_hall.resolved"],
+        "minDay": 9
+      },
+      "text": "Nguoi vao ra da dong hon, viec ghi cong, chia viec, va xu loi khong the de theo y tung nguoi nua. Muon lap tong, truoc het phai co mot ne nep ma ai cung nghe va ai cung thay.",
+      "choices": [
+        {
+          "id": "register_merit_and_fault",
+          "label": "Lap so cong toi ro rang",
+          "outcome": "Thanh Huyen Mon bat dau dung nguoi va xu viec theo khuon muc co the nhin thay."
+        },
+        {
+          "id": "set_cultivation_priority",
+          "label": "Dinh ro uu tien tu luyen trong noi mon",
+          "outcome": "Ban cho thay tong mon nay lon len de giu dao, khong chi de giu cua."
+        },
+        {
+          "id": "set_ration_discipline",
+          "label": "An dinh quy cu chi dung kho va chia phan",
+          "outcome": "Ban dat nen song con len truoc, de tong mon khong roi lai vao canh vo nhan."
+        }
+      ],
+      "effects": {
+        "register_merit_and_fault": {
+          "sectStability": 3,
+          "sectPrestige": 1,
+          "addChoiceFlags": ["chapter2_merit_register"]
+        },
+        "set_cultivation_priority": {
+          "playerCultivationProgress": 6,
+          "sectFortune": 1,
+          "addChoiceFlags": ["chapter2_cultivation_priority"]
+        },
+        "set_ration_discipline": {
+          "sectStability": 2,
+          "sectFortune": 1,
+          "addChoiceFlags": ["chapter2_ration_discipline"]
+        }
+      },
+      "followupFlags": {
+        "onResolve": ["first_internal_rule_enforced"],
+        "byChoice": {
+          "register_merit_and_fault": ["major.chapter2.rule_of_the_hall.resolved"],
+          "set_cultivation_priority": ["major.chapter2.rule_of_the_hall.resolved"],
+          "set_ration_discipline": ["major.chapter2.rule_of_the_hall.resolved"]
+        }
+      }
+    },
+    {
+      "id": "major.chapter2.envoy_at_the_gate",
+      "title": "Su Gia Dung Truoc Son Mon",
+      "chapter": "chapter_2_tong_mon_lap_the",
+      "category": "faction",
+      "triggerConditions": {
+        "requiredFlags": ["chapter2_started", "first_internal_rule_enforced"],
+        "forbiddenFlags": ["first_external_contact_received", "major.chapter2.envoy_at_the_gate.resolved"],
+        "minSectPrestige": 12,
+        "minDay": 10
+      },
+      "text": "Thanh Huyen Mon vua dung lai co quy cu thi ngoai gioi da de mat toi. Su gia den khong phai de mung, ma de can xem ton mon nay la mot mon sinh moi, mot noi co the mua chuoc, hay mot canh cua canh phai.",
+      "choices": [
+        {
+          "id": "receive_with_ritual",
+          "label": "Tiep su gia dung le va giu danh nghia ton mon",
+          "outcome": "Ban cho thay Thanh Huyen Mon da co khuon mat cua mot tong mon that su."
+        },
+        {
+          "id": "keep_measured_distance",
+          "label": "Tiep xuc co muc, khong de ho buoc vao noi mon qua sau",
+          "outcome": "Ban mo cua du de ngoai gioi biet, nhung van giu khoang cach."
+        },
+        {
+          "id": "show_strength_first",
+          "label": "Cho ho thay son mon nay khong de bi thu ngay tu cua",
+          "outcome": "Ban giu tu the cung ngay tu lan gap dau, chap nhan de lai goc canh giac."
+        }
+      ],
+      "effects": {
+        "receive_with_ritual": {
+          "resources": {
+            "food": -2
+          },
+          "sectPrestige": 2,
+          "factionRelations": {
+            "huyen_minh_dien": 2
+          }
+        },
+        "keep_measured_distance": {
+          "sectStability": 1,
+          "sectFortune": 1,
+          "factionRelations": {
+            "huyen_minh_dien": 1
+          }
+        },
+        "show_strength_first": {
+          "sectPrestige": 1,
+          "factionRelations": {
+            "huyen_minh_dien": -1
+          }
+        }
+      },
+      "followupFlags": {
+        "onResolve": ["first_external_contact_received", "first_faction_stance_chosen"],
+        "byChoice": {
+          "receive_with_ritual": ["orthodox_overture", "major.chapter2.envoy_at_the_gate.resolved"],
+          "keep_measured_distance": ["measured_gate_posture", "major.chapter2.envoy_at_the_gate.resolved"],
+          "show_strength_first": ["hardline_posture", "major.chapter2.envoy_at_the_gate.resolved"]
+        }
+      }
+    },
+    {
+      "id": "major.chapter2.expansion_hall_completed",
+      "title": "Noi Mon Them Mot Nhip",
+      "chapter": "chapter_2_tong_mon_lap_the",
+      "category": "expansion",
+      "triggerConditions": {
+        "requiredFlags": ["first_external_contact_received"],
+        "forbiddenFlags": ["first_expansion_building_completed", "major.chapter2.expansion_hall_completed.resolved"],
+        "minConstructedBuildings": 4,
+        "requiredDiscipleCount": 4,
+        "minDay": 10
+      },
+      "text": "Khi cong trinh mo rong dau tien dung len va nguoi trong mon bat dau co cho ma phan viec ro hon, Thanh Huyen Mon moi that su thoat khoi dang ve cua mot noi co nguoi tam o nhan. Tu nay, moi buoc mo rong deu de lai ap luc giu trat tu.",
+      "choices": [
+        {
+          "id": "dedicate_to_outer_court",
+          "label": "Dung phan mo rong de don nguoi va mo mat ton mon",
+          "outcome": "Thanh Huyen Mon bat dau co bo mat de ngoai gioi ghi nho."
+        },
+        {
+          "id": "dedicate_to_inner_order",
+          "label": "Dung phan mo rong de siet nhan su va ne nep noi mon",
+          "outcome": "Ban uu tien nen tang ben trong, de tong mon lon len ma khong vo so."
+        }
+      ],
+      "effects": {
+        "dedicate_to_outer_court": {
+          "resources": {
+            "wood": -2,
+            "food": -1
+          },
+          "sectPrestige": 2,
+          "sectStability": 1
+        },
+        "dedicate_to_inner_order": {
+          "sectStability": 3,
+          "sectFortune": 1
+        }
+      },
+      "followupFlags": {
+        "onResolve": ["first_expansion_building_completed", "chapter2_midpoint_reached"],
+        "byChoice": {
+          "dedicate_to_outer_court": ["major.chapter2.expansion_hall_completed.resolved"],
+          "dedicate_to_inner_order": ["major.chapter2.expansion_hall_completed.resolved"]
+        }
+      }
+    },
+    {
+      "id": "major.chapter2.slope_boundary_test",
+      "title": "Thu The Ben Truc Son",
+      "chapter": "chapter_2_tong_mon_lap_the",
+      "category": "pressure",
+      "triggerConditions": {
+        "requiredFlags": ["first_external_contact_received", "first_expansion_building_completed"],
+        "forbiddenFlags": ["first_faction_pressure_resolved", "major.chapter2.slope_boundary_test.resolved"],
+        "minSectPrestige": 16,
+        "minDay": 12
+      },
+      "text": "Khi Thanh Huyen Mon da co cua mon, co nguoi, co ten goi, thu thach tu ben ngoai cung den. Khong nhat thiet la cuong dich xong vao son mon, ma la nhung lan do ran, thu gio, doi xem tong mon nay se lui, nhun, hay dung cho vung.",
+      "choices": [
+        {
+          "id": "hold_boundary_and_reply",
+          "label": "Dung vung truoc son mon, tra loi bang tu the ton mon",
+          "outcome": "Ban khong de Thanh Huyen Mon bi xem la noi co the day lui bang mot cai nhin."
+        },
+        {
+          "id": "offer_small_gift",
+          "label": "Dua mot phan le vat nho de tranh xung dot som",
+          "outcome": "Ban mua them thoi gian cho tong mon lon them mot nhip."
+        },
+        {
+          "id": "call_in_witnesses",
+          "label": "Moi nguoi ngoai den chung kien de tranh bi ep che sau rem",
+          "outcome": "Ban keo ap luc ra sang cho mo, doi lai la no khong con im lang nua."
+        }
+      ],
+      "effects": {
+        "hold_boundary_and_reply": {
+          "sectPrestige": 3,
+          "sectStability": 1,
+          "factionRelations": {
+            "huyen_minh_dien": -1
+          }
+        },
+        "offer_small_gift": {
+          "resources": {
+            "spiritStone": -6
+          },
+          "sectStability": 2,
+          "factionRelations": {
+            "xich_luyen_bao": 1
+          }
+        },
+        "call_in_witnesses": {
+          "resources": {
+            "spiritStone": -4
+          },
+          "sectPrestige": 1,
+          "sectFortune": 1,
+          "factionRelations": {
+            "van_tang_thu_vien": 2
+          }
+        }
+      },
+      "followupFlags": {
+        "onResolve": ["first_faction_pressure_resolved"],
+        "byChoice": {
+          "hold_boundary_and_reply": ["major.chapter2.slope_boundary_test.resolved"],
+          "offer_small_gift": ["major.chapter2.slope_boundary_test.resolved"],
+          "call_in_witnesses": ["major.chapter2.slope_boundary_test.resolved"]
+        }
+      }
+    },
+    {
+      "id": "major.chapter2.mirror_history_conflict",
+      "title": "Ky Uc Lech Khoi Su Luc",
+      "chapter": "chapter_2_tong_mon_lap_the",
+      "category": "truth",
+      "triggerConditions": {
+        "requiredFlags": ["chapter2_midpoint_reached", "first_faction_pressure_resolved"],
+        "forbiddenFlags": ["mirror_history_conflict", "major.chapter2.mirror_history_conflict.resolved"],
+        "minSectPrestige": 18,
+        "minDay": 12
+      },
+      "text": "Linh kinh hien ra mot vet phap tran co nguoi dieu khien dung vao luc Thien Khu Bien phat tac. Vet nay khong du thay chan tuong, nhung du de bat Thanh Huyen Mon thua nhan rang su luc cong khai da bi cat di mot khoang khong nho.",
+      "choices": [
+        {
+          "id": "seek_archival_proof",
+          "label": "Tim them ban ghi doi chieu va nguoi giu sach",
+          "outcome": "Ban quyet lan theo dau vet nay den cung, du no co the keo tong mon vao vung nhin cua ke khac."
+        },
+        {
+          "id": "keep_it_internal",
+          "label": "Tam giu trong noi mon, chua de ai ngoai biet",
+          "outcome": "Ban giu cho Thanh Huyen Mon mot khoang yen de hieu truoc khi noi."
+        }
+      ],
+      "effects": {
+        "seek_archival_proof": {
+          "resources": {
+            "spiritStone": -5
+          },
+          "sectPrestige": 1,
+          "factionRelations": {
+            "van_tang_thu_vien": 1
+          }
+        },
+        "keep_it_internal": {
+          "sectStability": 2,
+          "sectFortune": 1
+        }
+      },
+      "followupFlags": {
+        "onResolve": ["mirror_history_conflict"],
+        "byChoice": {
+          "seek_archival_proof": ["archive_route_open", "major.chapter2.mirror_history_conflict.resolved"],
+          "keep_it_internal": ["truth_kept_internal", "major.chapter2.mirror_history_conflict.resolved"]
+        }
+      }
+    },
+    {
+      "id": "major.chapter2.small_sect_stands",
+      "title": "Tieu Tong Da Dung Chan",
+      "chapter": "chapter_2_tong_mon_lap_the",
+      "category": "resolution",
+      "triggerConditions": {
+        "requiredFlags": [
+          "chapter2_started",
+          "first_formal_recruitment_opened",
+          "first_internal_rule_enforced",
+          "first_external_contact_received",
+          "first_expansion_building_completed",
+          "first_faction_pressure_resolved",
+          "mirror_history_conflict"
+        ],
+        "forbiddenFlags": ["chapter2_completed", "major.chapter2.small_sect_stands.resolved"],
+        "minSectPrestige": 20,
+        "minSectStability": 52,
+        "requiredDiscipleCount": 4,
+        "minConstructedBuildings": 4,
+        "minDay": 13
+      },
+      "text": "Thanh Huyen Mon van chua phai dai tong, nhung da khong con la tan mon chi nho hoi tro duoc giu lai trong mot gian dien. Da co cua mon, co de tu moi, co ne nep, co nguoi ngoai de mat, va quan trong hon ca: da co tu the de noi rang ton mon nay se tiep tuc lon len bang chinh ten cua minh.",
+      "choices": [
+        {
+          "id": "declare_small_sect_standing",
+          "label": "Thua nhan Thanh Huyen Mon nay da lap duoc the dung dau tien",
+          "outcome": "Tu nay, Thanh Huyen Mon la mot tieu tong co the tu giu ten minh duoi troi."
+        },
+        {
+          "id": "vow_steady_growth",
+          "label": "Khong noi lon, nhung chot loi se dung tong mon den noi den chon",
+          "outcome": "Ban khong chon khoa truong, ma chon mot con duong lon len ben chac va khong lui."
+        }
+      ],
+      "effects": {
+        "declare_small_sect_standing": {
+          "sectPrestige": 4,
+          "sectStability": 2,
+          "sectFortune": 1,
+          "completeChapter": "chapter_2_tong_mon_lap_the",
+          "unlockChapter": "chapter_3_kinh_chieu_cuu_thien"
+        },
+        "vow_steady_growth": {
+          "sectPrestige": 2,
+          "sectStability": 4,
+          "sectFortune": 2,
+          "completeChapter": "chapter_2_tong_mon_lap_the",
+          "unlockChapter": "chapter_3_kinh_chieu_cuu_thien"
+        }
+      },
+      "followupFlags": {
+        "onResolve": ["chapter2_completed", "chapter_2_complete", "chapter_2_completed"],
+        "byChoice": {
+          "declare_small_sect_standing": ["major.chapter2.small_sect_stands.resolved"],
+          "vow_steady_growth": ["major.chapter2.small_sect_stands.resolved"]
+        }
+      }
+    },
+    {
+      "id": "major.chapter3.archive_of_the_cracked_sky",
+      "title": "Thu Luc Ve Troi Nut",
+      "chapter": "chapter_3_kinh_chieu_cuu_thien",
+      "category": "truth",
+      "triggerConditions": {
+        "requiredFlags": ["chapter_2_complete", "archive_route_open"],
+        "forbiddenFlags": ["archive_sky_crack_seen"],
+        "minSectPrestige": 40
+      },
+      "text": "Mot ban sao cu bi xen mat van du de ghep thanh dieu lanh nguoi: Thien Khu Bien khong khoi tu thien tuong vo chu, ma tu mot nghi thuc co nguoi chu tri va nhieu ke tiep suc.",
+      "choices": [
+        {
+          "id": "share_with_inner_circle",
+          "label": "Chi cho vong nong cot doc",
+          "outcome": "Thanh Huyen Mon co them mot lop su that, nhung van giu duoc mieng kin."
+        },
+        {
+          "id": "barter_for_more_pages",
+          "label": "Doi tai nguyen lay them thu luc",
+          "outcome": "Ban di xa hon tren duong tim su that."
+        }
+      ],
+      "effects": {
+        "share_with_inner_circle": {},
+        "barter_for_more_pages": {
+          "resources": {
+            "spiritStone": -12
+          }
+        }
+      },
+      "followupFlags": {
+        "onResolve": ["archive_sky_crack_seen"],
+        "byChoice": {
+          "share_with_inner_circle": ["inner_circle_knows_truth"],
+          "barter_for_more_pages": ["mirror_second_resonance"]
+        }
+      }
+    },
+    {
+      "id": "major.chapter3.ascension_trace_revealed",
+      "title": "Dau Vet Cuong Hanh Phi Thang",
+      "chapter": "chapter_3_kinh_chieu_cuu_thien",
+      "category": "truth",
+      "triggerConditions": {
+        "requiredFlags": ["mirror_second_resonance", "archive_sky_crack_seen"],
+        "forbiddenFlags": ["ascension_trace_confirmed"],
+        "minSectPrestige": 42
+      },
+      "text": "Linh kinh va thu luc ghep lai thanh bang chung truc tiep: da tung co nguoi cuong ep mo duong vuot gioi, va Huyen Tran Gioi ganh lay phan chan thay cho tham vong ay.",
+      "choices": [
+        {
+          "id": "reject_the_method",
+          "label": "The khong de cam lo tai dien",
+          "outcome": "Ban xem chan tuong la loi ran de giu dao, khong phai loi moi."
+        },
+        {
+          "id": "study_the_trace",
+          "label": "Giu dau vet nay de nghien cuu toi cung",
+          "outcome": "Ban khong chon chon vui tri thuc cam nua."
+        }
+      ],
+      "effects": {
+        "reject_the_method": {
+          "sectPrestige": 2,
+          "truthProgress": 12,
+          "alignmentShift": {
+            "orthodox_alignment": 1
+          }
+        },
+        "study_the_trace": {
+          "truthProgress": 14,
+          "greatCrisisDelta": 4,
+          "alignmentShift": {
+            "outsider_alignment": 1
+          }
+        }
+      },
+      "followupFlags": {
+        "onResolve": ["ascension_trace_confirmed"],
+        "byChoice": {
+          "reject_the_method": ["truth_rejected_as_method"],
+          "study_the_trace": ["forbidden_path_studied"]
+        }
+      }
+    },
+    {
+      "id": "major.chapter3.serious_faction_probe",
+      "title": "Thu The Tren Son Dao",
+      "chapter": "chapter_3_kinh_chieu_cuu_thien",
+      "category": "faction",
+      "triggerConditions": {
+        "requiredFlags": ["ascension_trace_confirmed"],
+        "forbiddenFlags": ["first_serious_faction_probe", "major.chapter3.serious_faction_probe.resolved"],
+        "minSectPrestige": 46,
+        "minDay": 20
+      },
+      "text": "Sau khi Thanh Huyen Mon lo ro hon tren mat nuoc, hai phong thu cung mot thu hoi am lan luot toi. Mot ben danh tieng khuyen tong mon chon phe som, mot ben lai am chi rang duong lui da khong con rong. Day khong con la loi tham do thuong le: ben ngoai dang do xem Thanh Huyen Mon se dung o dau khi phong van thuc su no len.",
+      "choices": [
+        {
+          "id": "answer_with_measure",
+          "label": "Hoi am tiet che, giu khoang cach voi ca hai ben",
+          "outcome": "Ban khong cho phe nao mot loi hua, nhung buoc Thanh Huyen Mon phai dung thang bang chinh the dung cua minh."
+        },
+        {
+          "id": "buy_room_with_tribute",
+          "label": "Dung linh thach mua mot khoang lui ngan",
+          "outcome": "Ban mua them thoi gian, doi lai la thua nhan rang tong mon da khong con vo hinh."
+        },
+        {
+          "id": "counter_probe",
+          "label": "Cho nguoi do vet nguoc lai ai dang thu the",
+          "outcome": "Ban chon doi ap luc bang ap luc, chap nhan de phong van tren nui day len nhanh hon."
+        }
+      ],
+      "effects": {
+        "answer_with_measure": {
+          "sectPrestige": 2,
+          "sectStability": 1,
+          "alignmentShift": {
+            "orthodox_alignment": 1
+          }
+        },
+        "buy_room_with_tribute": {
+          "resources": {
+            "spiritStone": -18
+          },
+          "sectStability": 2,
+          "factionRelations": {
+            "cuu_tieu_quan": 1,
+            "huyen_minh_dien": 1
+          }
+        },
+        "counter_probe": {
+          "sectPrestige": 3,
+          "greatCrisisDelta": 6,
+          "alignmentShift": {
+            "dominion_alignment": 1
+          }
+        }
+      },
+      "followupFlags": {
+        "onResolve": ["first_serious_faction_probe"],
+        "byChoice": {
+          "answer_with_measure": ["orthodox_overture", "major.chapter3.serious_faction_probe.resolved"],
+          "buy_room_with_tribute": ["faction_pressure_bought_off", "major.chapter3.serious_faction_probe.resolved"],
+          "counter_probe": ["counter_scouting_used", "major.chapter3.serious_faction_probe.resolved"]
+        }
+      }
+    },
+    {
+      "id": "major.chapter3.ambition_by_lantern",
+      "title": "Dong Tam Duoi Den Son Mon",
+      "chapter": "chapter_3_kinh_chieu_cuu_thien",
+      "category": "decision",
+      "triggerConditions": {
+        "requiredFlags": ["first_serious_faction_probe"],
+        "forbiddenFlags": ["first_disciple_ambition_incident", "major.chapter3.ambition_by_lantern.resolved"],
+        "requiredDiscipleCount": 4,
+        "minSectStability": 35,
+        "minDay": 22
+      },
+      "text": "Noi mon da khong con qua nho de moi nguoi deu giu mot tam the giong nhau. Sau mot dem de dang, loi xin them trach nhiem, loi than bi bo quen, va ca su so sanh ngam giua de tu manh yeu bat dau lo ra duoi anh den. Thanh Huyen Mon phai quyet dinh xem lon len bang cach giu trinh tu, khuyen tai nang, hay chiu mot chut bat hoa de doi lay suc vut len.",
+      "choices": [
+        {
+          "id": "set_clear_merit_order",
+          "label": "Lap thu tu cong lao va phan viec ro rang",
+          "outcome": "Ban giam loi doan doan, nhung cung buoc tong mon vao ne nep chat hon."
+        },
+        {
+          "id": "favor_fast_risers",
+          "label": "Day nguoi troi nhanh len truoc",
+          "outcome": "Ban dat toc do len tren can bang, chap nhan de khat vong trong noi mon sac hon."
+        },
+        {
+          "id": "let_tension_breathe",
+          "label": "Cho ho tu tranh mot khoang de lo ro long nguoi",
+          "outcome": "Ban khong can ngay, ma de noi mon tu phoi ra ai du suc ganh bien doi."
+        }
+      ],
+      "effects": {
+        "set_clear_merit_order": {
+          "sectStability": 3,
+          "sectPrestige": 1,
+          "alignmentShift": {
+            "orthodox_alignment": 1
+          }
+        },
+        "favor_fast_risers": {
+          "sectPrestige": 2,
+          "sectStability": -2,
+          "alignmentShift": {
+            "dominion_alignment": 1
+          }
+        },
+        "let_tension_breathe": {
+          "sectFortune": 1,
+          "truthProgress": 6,
+          "alignmentShift": {
+            "outsider_alignment": 1
+          }
+        }
+      },
+      "followupFlags": {
+        "onResolve": ["first_disciple_ambition_incident"],
+        "byChoice": {
+          "set_clear_merit_order": ["chapter3_merit_lantern", "major.chapter3.ambition_by_lantern.resolved"],
+          "favor_fast_risers": ["chapter3_fast_risers_favored", "major.chapter3.ambition_by_lantern.resolved"],
+          "let_tension_breathe": ["chapter3_tension_observed", "major.chapter3.ambition_by_lantern.resolved"]
+        }
+      }
+    },
+    {
+      "id": "major.chapter3.small_sect_under_heaven",
+      "title": "Tieu Tong Duoi Troi Rong",
+      "chapter": "chapter_3_kinh_chieu_cuu_thien",
+      "category": "resolution",
+      "triggerConditions": {
+        "requiredFlags": [
+          "ascension_trace_confirmed",
+          "first_serious_faction_probe",
+          "first_disciple_ambition_incident"
+        ],
+        "forbiddenFlags": ["chapter3_completed", "major.chapter3.small_sect_under_heaven.resolved"],
+        "minSectPrestige": 50,
+        "minSectStability": 40,
+        "requiredDiscipleCount": 5,
+        "minDay": 24
+      },
+      "text": "Thanh Huyen Mon da khong con la mot tieu tong chi biet ngoi gin giu tro tan. Ben ngoai da do den, noi mon da co khat vong, va su that ve Thien Khu Bien da khong the tro lai lam mot loi don vo hu. Truoc troi rong, ban buoc phai thua nhan rang ton mon nay da thuc su buoc vao dong phong van cua Huyen Tran Gioi.",
+      "choices": [
+        {
+          "id": "stand_without_bowing",
+          "label": "Dung trung tam, khong cui dau truoc phong van",
+          "outcome": "Ban chot lai Chuong 3 bang mot loi the giu dao tam giua nhieu suc ep."
+        },
+        {
+          "id": "advance_with_caution",
+          "label": "Nhan rang song gio da den, va chon tien tung buoc chac",
+          "outcome": "Ban khop Chuong 3 bang mot loi hua song dai hon voi nhung gi sap toi."
+        }
+      ],
+      "effects": {
+        "stand_without_bowing": {
+          "sectPrestige": 4,
+          "sectStability": 2,
+          "truthProgress": 8,
+          "completeChapter": "chapter_3_kinh_chieu_cuu_thien",
+          "unlockChapter": "chapter_4_nhat_niem_dinh_dao"
+        },
+        "advance_with_caution": {
+          "sectPrestige": 2,
+          "sectStability": 4,
+          "sectFortune": 2,
+          "truthProgress": 6,
+          "completeChapter": "chapter_3_kinh_chieu_cuu_thien",
+          "unlockChapter": "chapter_4_nhat_niem_dinh_dao"
+        }
+      },
+      "followupFlags": {
+        "onResolve": ["chapter3_completed", "chapter_3_complete", "chapter_3_completed"],
+        "byChoice": {
+          "stand_without_bowing": ["major.chapter3.small_sect_under_heaven.resolved"],
+          "advance_with_caution": ["major.chapter3.small_sect_under_heaven.resolved"]
+        }
+      }
+    },
+    {
+      "id": "major.chapter4.heaven_asks_at_the_ruined_peak",
+      "title": "Thien Khu Van Dao",
+      "chapter": "chapter_4_nhat_niem_dinh_dao",
+      "category": "pressure",
+      "triggerConditions": {
+        "requiredFlags": ["chapter_3_complete"],
+        "forbiddenFlags": ["chapter4_started", "major.chapter4.heaven_asks_at_the_ruined_peak.resolved"],
+        "minSectPrestige": 56,
+        "minDay": 26
+      },
+      "text": "Sau mot dem troi vut sang nhung khong co sao, tren dinh son mon hien ra vet troi nut nhu mot cau hoi khong tieng. Tin don lan ra nhanh hon y chi cua bat ky mot phe nao: Thanh Huyen Mon da khong con la mot cai ten co the bo qua. Tu nay, moi lua chon cua ban se khong chi giu tong mon song, ma con tra loi xem giua thoi dai sau Thien Khu Bien, dao thong nao con dang duoc phep ton tai.",
+      "choices": [
+        {
+          "id": "rally_the_sect",
+          "label": "Tap hop noi mon, giu tam khong tan",
+          "outcome": "Ban mo Chuong 4 bang cach coi trong su dong long, truoc khi de ben ngoai dinh nghia Thanh Huyen Mon."
+        },
+        {
+          "id": "seal_the_peak_and_watch",
+          "label": "Phong dinh, quan sat thien tuong va chuan bi doi bien",
+          "outcome": "Ban chon can than, nhung cung ngua ben ngoai khong the lam nhu khong thay vet nut tren troi."
+        }
+      ],
+      "effects": {
+        "rally_the_sect": {
+          "sectPrestige": 3,
+          "sectStability": 2,
+          "greatCrisisDelta": 8
+        },
+        "seal_the_peak_and_watch": {
+          "sectStability": 3,
+          "sectFortune": 1,
+          "greatCrisisDelta": 6
+        }
+      },
+      "followupFlags": {
+        "onResolve": ["chapter4_started", "chapter_4_started", "first_great_crisis_seen"],
+        "byChoice": {
+          "rally_the_sect": ["chapter4_rallied_opening", "major.chapter4.heaven_asks_at_the_ruined_peak.resolved"],
+          "seal_the_peak_and_watch": ["chapter4_watched_the_peak", "major.chapter4.heaven_asks_at_the_ruined_peak.resolved"]
+        }
+      }
+    },
+    {
+      "id": "major.chapter4.distortion_over_the_border_realm",
+      "title": "Bien Gioi Dao Dong",
+      "chapter": "chapter_4_nhat_niem_dinh_dao",
+      "category": "pressure",
+      "triggerConditions": {
+        "requiredFlags": ["chapter4_started"],
+        "forbiddenFlags": ["chapter4_border_distortion_seen", "major.chapter4.distortion_over_the_border_realm.resolved"],
+        "minSectStability": 28,
+        "minDay": 27
+      },
+      "text": "Ben ngoai son vuc, mot vung bien canh vo hinh bat dau bi xoan meo, lam dong linh mach va hut ca nhung ke tu xa muon toi thua nuoc duc. Day khong phai tai a hon nua, ma la dau hieu cua mot dai kiep nho dang tim cho de no vao. Neu Thanh Huyen Mon xu ly sai, su bien dang ay se bien moi co hoi cua tong mon thanh gai nhon dam nguoc vao minh.",
+      "choices": [
+        {
+          "id": "stabilize_the_border",
+          "label": "Rut tai nguyen giu bien canh, dam no khong no tai son mon",
+          "outcome": "Ban lay on dinh doi lay ton hao, co gang giu bien dang ngoai vong ton mon."
+        },
+        {
+          "id": "study_the_distortion",
+          "label": "Dung linh kinh va de tu tinh anh do phep tren vet meo",
+          "outcome": "Ban chon tien sat hon vao thien tuong, biet rang tri thuc nay co the doi bang nguy co."
+        }
+      ],
+      "effects": {
+        "stabilize_the_border": {
+          "resources": {
+            "spiritStone": -20
+          },
+          "sectStability": 3,
+          "greatCrisisDelta": 4
+        },
+        "study_the_distortion": {
+          "truthProgress": 12,
+          "greatCrisisDelta": 8,
+          "sectPrestige": 2
+        }
+      },
+      "followupFlags": {
+        "onResolve": ["chapter4_border_distortion_seen"],
+        "byChoice": {
+          "stabilize_the_border": ["great_crisis_temporarily_stemmed", "major.chapter4.distortion_over_the_border_realm.resolved"],
+          "study_the_distortion": ["first_major_bi_canh_opened", "major.chapter4.distortion_over_the_border_realm.resolved"]
+        }
+      }
+    },
+    {
+      "id": "major.chapter4.record_of_failed_ascension",
+      "title": "Co Luc Ve Lan Vuot Hu",
+      "chapter": "chapter_4_nhat_niem_dinh_dao",
+      "category": "truth",
+      "triggerConditions": {
+        "requiredFlags": ["chapter4_border_distortion_seen"],
+        "forbiddenFlags": ["first_core_truth_piece_obtained", "major.chapter4.record_of_failed_ascension.resolved"],
+        "minSectPrestige": 58,
+        "minDay": 28
+      },
+      "text": "Trong mot manh co luc con sot lai, Thanh Huyen Mon xua khong phai ke khoanh tay dung ngoai. Toan bo Thien Khu Bien da tung duoc mot nhom nguoi xem la gia phai tra de bat ca mot ky nguyen nhay vuot qua gioi han. Cang kinh hon hon nua: co nguoi trong Thanh Huyen Mon da chon cat dut nghi thuc vao phut cuoi, va chinh vet cat ay co the la ly do ton mon nay khong bi xoa sach cung mot luot.",
+      "choices": [
+        {
+          "id": "honor_the_break",
+          "label": "Giu vet cat do nhu mot gioi han khong duoc pha",
+          "outcome": "Ban xem su song sot cua Thanh Huyen Mon la loi nhac ve gioi han cua dao tam va quyen luc."
+        },
+        {
+          "id": "inherit_the_knowledge",
+          "label": "Nhan lay ca phan tri thuc tung gay hoa nan",
+          "outcome": "Ban khong muon lap lai sai lam, nhung cung khong chiu bo qua thu tung duoc mo ra."
+        }
+      ],
+      "effects": {
+        "honor_the_break": {
+          "truthProgress": 18,
+          "sectStability": 2,
+          "alignmentShift": {
+            "orthodox_alignment": 2
+          }
+        },
+        "inherit_the_knowledge": {
+          "truthProgress": 20,
+          "greatCrisisDelta": 5,
+          "alignmentShift": {
+            "outsider_alignment": 2
+          }
+        }
+      },
+      "followupFlags": {
+        "onResolve": ["first_core_truth_piece_obtained", "thanh_huyen_past_fragment_found"],
+        "byChoice": {
+          "honor_the_break": ["chapter4_truth_bound_to_limit", "major.chapter4.record_of_failed_ascension.resolved"],
+          "inherit_the_knowledge": ["chapter4_forbidden_record_kept", "major.chapter4.record_of_failed_ascension.resolved"]
+        }
+      }
+    },
+    {
+      "id": "major.chapter4.doctrine_under_heaven",
+      "title": "Dao Ly Giua Cuu Bien",
+      "chapter": "chapter_4_nhat_niem_dinh_dao",
+      "category": "decision",
+      "triggerConditions": {
+        "requiredFlags": ["first_core_truth_piece_obtained"],
+        "forbiddenFlags": ["first_doctrinal_choice_made", "major.chapter4.doctrine_under_heaven.resolved"],
+        "minSectStability": 36,
+        "minDay": 29
+      },
+      "text": "Sau khi su that khong con the day lui, Thanh Huyen Mon khong the tiep tuc song bang cach noi chung chung ve dao thong. De tu, truong lao, va ca nhung nguoi moi nhin toi son mon deu can mot loi xac dinh: tong mon nay se dung lai trat tu cu, dung quyen luc de tri loạn, hay mo mot con dao moi du bi the gian xem la lech?",
+      "choices": [
+        {
+          "id": "orthodox_reaffirmed",
+          "label": "Chinh Dao Trung Lap",
+          "outcome": "Ban tuyen bo gioi han va truyen thua phai duoc dung lai truoc tien."
+        },
+        {
+          "id": "dominion_declared",
+          "label": "Ba Dao Xung Ton",
+          "outcome": "Ban chon dung quyet doan va uy luc de giu lai trat tu trong mot thoi dai sap do."
+        },
+        {
+          "id": "outsider_opened",
+          "label": "Ngoai Dao Khai Thien",
+          "outcome": "Ban chon mo mot loi di moi, chap nhan de ke khac xem la nguy hiem."
+        }
+      ],
+      "effects": {
+        "orthodox_reaffirmed": {
+          "sectStability": 3,
+          "sectPrestige": 2,
+          "alignmentShift": {
+            "orthodox_alignment": 3
+          }
+        },
+        "dominion_declared": {
+          "sectPrestige": 3,
+          "greatCrisisDelta": 3,
+          "alignmentShift": {
+            "dominion_alignment": 3
+          }
+        },
+        "outsider_opened": {
+          "sectFortune": 2,
+          "truthProgress": 8,
+          "greatCrisisDelta": 3,
+          "alignmentShift": {
+            "outsider_alignment": 3
+          }
+        }
+      },
+      "followupFlags": {
+        "onResolve": ["first_doctrinal_choice_made"],
+        "byChoice": {
+          "orthodox_reaffirmed": ["ending_orthodox_route_hint", "major.chapter4.doctrine_under_heaven.resolved"],
+          "dominion_declared": ["ending_dominion_route_hint", "major.chapter4.doctrine_under_heaven.resolved"],
+          "outsider_opened": ["ending_outsider_route_hint", "major.chapter4.doctrine_under_heaven.resolved"]
+        }
+      }
+    },
+    {
+      "id": "major.chapter4.price_of_preservation",
+      "title": "Cai Gia De Gi Lai",
+      "chapter": "chapter_4_nhat_niem_dinh_dao",
+      "category": "pressure",
+      "triggerConditions": {
+        "requiredFlags": ["first_doctrinal_choice_made"],
+        "forbiddenFlags": ["first_major_sacrifice_or_compromise", "major.chapter4.price_of_preservation.resolved"],
+        "minSectPrestige": 60,
+        "minDay": 30
+      },
+      "text": "Cang giu tong mon dung, cai gia cang khong con chi la linh thach hay linh moc. Co nguoi xin phong son mot phan, co nguoi doi cat duong mot vai de tu nguy hiem, co nguoi muon hy sinh mot co hoi de giu noi mon yen. Trong dai kiep, gi duoc giu lai se luon doi bang mot thu gi do bi bo di.",
+      "choices": [
+        {
+          "id": "sacrifice_growth_for_order",
+          "label": "Giu trat tu, chap nhan cham lai mot nhip",
+          "outcome": "Ban cat bot du da de noi mon khong vut khoi khoi truc."
+        },
+        {
+          "id": "sacrifice_safety_for_opportunity",
+          "label": "Danh doi mot khoang an toan lay duong tien",
+          "outcome": "Ban chon de tong mon chiu song gio hon de doi mot lo hoang lon hon."
+        }
+      ],
+      "effects": {
+        "sacrifice_growth_for_order": {
+          "sectStability": 4,
+          "sectPrestige": -1,
+          "greatCrisisDelta": -3
+        },
+        "sacrifice_safety_for_opportunity": {
+          "sectPrestige": 2,
+          "truthProgress": 6,
+          "greatCrisisDelta": 6
+        }
+      },
+      "followupFlags": {
+        "onResolve": ["first_major_sacrifice_or_compromise"],
+        "byChoice": {
+          "sacrifice_growth_for_order": ["chapter4_order_preserved", "major.chapter4.price_of_preservation.resolved"],
+          "sacrifice_safety_for_opportunity": ["chapter4_risk_accepted", "major.chapter4.price_of_preservation.resolved"]
+        }
+      }
+    },
+    {
+      "id": "major.chapter4.ultimatum_before_the_outer_slope",
+      "title": "Thu Cuoi Truoc Ngoai Son",
+      "chapter": "chapter_4_nhat_niem_dinh_dao",
+      "category": "faction",
+      "triggerConditions": {
+        "requiredFlags": ["first_major_sacrifice_or_compromise"],
+        "forbiddenFlags": ["chapter4_ultimatum_resolved", "major.chapter4.ultimatum_before_the_outer_slope.resolved"],
+        "minSectPrestige": 62,
+        "minDay": 31
+      },
+      "text": "Khi dai kiep da lo hinh, ben ngoai khong con gui thu tham do nua. Mot thong diep duoc dua toi son mon voi loi le du lanh nhat: Thanh Huyen Mon phai chon dung vao mot the cuc, giao ra mot phan tri thuc, hoac chap nhan bi xem la vat can duong trong luc song gio dang toi. Day la luc ban nhan ra rang su ton tai cua tong mon nay da thuc su co trong luong.",
+      "choices": [
+        {
+          "id": "defy_the_ultimatum",
+          "label": "Khong nhan toi hau thu",
+          "outcome": "Ban giu ten Thanh Huyen Mon bang cach chiu them suc ep, khong de ben ngoai an dinh dao tong thay minh."
+        },
+        {
+          "id": "yield_a_small_token",
+          "label": "Nhuong mot phan nho de tranh vo mat ngay luc nay",
+          "outcome": "Ban nhan mot su nhan nhuong kho nuot de doi mot khoang thoi gian va du dia xoay chuyen."
+        }
+      ],
+      "effects": {
+        "defy_the_ultimatum": {
+          "sectPrestige": 4,
+          "greatCrisisDelta": 6,
+          "factionRelations": {
+            "huyen_minh_dien": -2,
+            "cuu_tieu_quan": -1
+          }
+        },
+        "yield_a_small_token": {
+          "resources": {
+            "spiritStone": -24
+          },
+          "sectStability": 2,
+          "greatCrisisDelta": 2,
+          "factionRelations": {
+            "huyen_minh_dien": 1
+          }
+        }
+      },
+      "followupFlags": {
+        "onResolve": ["chapter4_ultimatum_resolved"],
+        "byChoice": {
+          "defy_the_ultimatum": ["chapter4_defied_outer_slope", "major.chapter4.ultimatum_before_the_outer_slope.resolved"],
+          "yield_a_small_token": ["chapter4_yielded_token", "major.chapter4.ultimatum_before_the_outer_slope.resolved"]
+        }
+      }
+    },
+    {
+      "id": "major.chapter4.threshold_of_the_three_paths",
+      "title": "Nguong Cua Ba Dao",
+      "chapter": "chapter_4_nhat_niem_dinh_dao",
+      "category": "resolution",
+      "triggerConditions": {
+        "requiredFlags": [
+          "chapter4_started",
+          "first_great_crisis_seen",
+          "first_core_truth_piece_obtained",
+          "first_doctrinal_choice_made",
+          "first_major_sacrifice_or_compromise",
+          "chapter4_ultimatum_resolved"
+        ],
+        "forbiddenFlags": ["chapter4_completed", "major.chapter4.threshold_of_the_three_paths.resolved"],
+        "minSectPrestige": 66,
+        "minSectStability": 34,
+        "minDay": 33
+      },
+      "text": "Den luc nay, Thanh Huyen Mon da khong the tro lai lam mot tieu tong chi can song sot them vai nam. Dai kiep da hien hinh, su that da du nang de doi mot loi dap, va ngay ca noi mon cung khong con the tranh cau hoi cuoi: sau tat ca, tong mon nay se giu lai mot trat tu cu, dung quyen luc de ep song, hay mo mot con dao chua ai dam goi ten? Ban chua can dong lai ket cuoc hom nay, nhung nguong cua no da mo ra truoc mat.",
+      "choices": [
+        {
+          "id": "open_the_threshold_with_discipline",
+          "label": "Mo nguong ket cuoc bang dao tam va ky luat",
+          "outcome": "Ban dua Thanh Huyen Mon toi sat nguong ket cuoc voi mot loi hua giu dao thong khong tan."
+        },
+        {
+          "id": "open_the_threshold_with_will",
+          "label": "Mo nguong ket cuoc bang y chi va quyet quyen",
+          "outcome": "Ban dua tong mon toi sat ket cuoc bang mot loi hua khong de ai ep minh quy phuc."
+        },
+        {
+          "id": "open_the_threshold_with_breaking",
+          "label": "Mo nguong ket cuoc bang cach chap nhan pha gioi cu",
+          "outcome": "Ban dua Thanh Huyen Mon toi sat bo vuc cua mot dao lo moi ma khong ai dam bao."
+        }
+      ],
+      "effects": {
+        "open_the_threshold_with_discipline": {
+          "sectPrestige": 3,
+          "truthProgress": 10,
+          "greatCrisisDelta": 2,
+          "alignmentShift": {
+            "orthodox_alignment": 2
+          }
+        },
+        "open_the_threshold_with_will": {
+          "sectPrestige": 4,
+          "greatCrisisDelta": 3,
+          "alignmentShift": {
+            "dominion_alignment": 2
+          }
+        },
+        "open_the_threshold_with_breaking": {
+          "sectFortune": 2,
+          "truthProgress": 12,
+          "greatCrisisDelta": 4,
+          "alignmentShift": {
+            "outsider_alignment": 2
+          }
+        }
+      },
+      "followupFlags": {
+        "onResolve": ["ending_path_opened", "chapter4_completed", "chapter_4_complete", "chapter_4_completed"],
+        "byChoice": {
+          "open_the_threshold_with_discipline": ["ending_orthodox_route", "major.chapter4.threshold_of_the_three_paths.resolved"],
+          "open_the_threshold_with_will": ["ending_dominion_route", "major.chapter4.threshold_of_the_three_paths.resolved"],
+          "open_the_threshold_with_breaking": ["ending_outsider_route", "major.chapter4.threshold_of_the_three_paths.resolved"]
+        }
+      }
+    }
+  ]
+}
