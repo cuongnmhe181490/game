@@ -2307,7 +2307,7 @@
     },
     {
       "id": "random.faction.huyen_minh_protection_overture",
-      "title": "Lá»i Äá» Nghá»‹ Che Chá»Ÿ Tá»« Huyá»n Minh",
+      "title": "Lời Đề Nghị Che Chở Từ Huyền Minh",
       "category": "faction",
       "weight": 6,
       "conditions": {
@@ -2328,23 +2328,23 @@
         ]
       },
       "textTemplate": {
-        "body": "{factionName} gá»­i thÆ° nÃªu Ã½ sáºµn sÃ ng cho Thanh Huyá»n MÃ´n má»™t táº¥m danh nghÄ©a báº£o há»™, Ä‘á»•i láº¥y viá»‡c mÃ´n ta pháº£i báº¡ch hÃ³a nhiá»u hÆ¡n cÃ¡c viá»‡c ná»™i mÃ´n. ÄÃ¢y khÃ´ng pháº£i liÃªn minh tháº­t sá»±, nhÆ°ng cÅ©ng khÃ´ng cÃ²n lÃ  khoáº£ng cÃ¡ch thuáº§n tÃºy."
+        "body": "{factionName} gửi thư nêu ý sẵn sàng cho Thanh Huyền Môn một tấm danh nghĩa bảo hộ, đổi lấy việc môn ta phải bạch hóa nhiều hơn các việc nội môn. Đây không phải liên minh thật sự, nhưng cũng không còn là khoảng cách thuần túy."
       },
       "choices": [
         {
           "id": "accept_supervised_protection",
-          "label": "Nháº­n láº¥y danh nghÄ©a báº£o há»™",
-          "outcome": "Äá»•i dÆ° Ä‘á»‹a láº¥y sÆ°á»n khung an toÃ n."
+          "label": "Nhận lấy danh nghĩa bảo hộ",
+          "outcome": "Đổi dư địa lấy sườn khung an toàn."
         },
         {
           "id": "accept_limited_contact",
-          "label": "Chá»‰ nháº­n giao háº£o, khÃ´ng nháº­n ráº ng buá»™c",
-          "outcome": "Giá»¯ cá»­a há»£p tÃ¡c mÃ  khÃ´ng giao quyá»n chá»§ Ä‘á»™ng."
+          "label": "Chỉ nhận giao hảo, không nhận rẠng buộc",
+          "outcome": "Giữ cửa hợp tác mà không giao quyền chủ động."
         },
         {
           "id": "refuse_protection",
-          "label": "Tá»« chá»‘i lá»i che chá»Ÿ",
-          "outcome": "Giá»¯ Ä‘á»™c láº­p, cháº¥p nháº­n bá»‹ nhÃ¬n khÃ³ hÆ¡n."
+          "label": "Từ chối lời che chở",
+          "outcome": "Giữ độc lập, chấp nhận bị nhìn khó hơn."
         }
       ],
       "effects": {

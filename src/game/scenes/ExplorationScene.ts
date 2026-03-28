@@ -58,15 +58,15 @@ function addDelta(target: ResourceDeltaState, source: ResourceDeltaState): Resou
 
 function formatRewards(rewards: ResourceDeltaState): string {
   const labels: Record<string, string> = {
-    linhThach: 'linh thÃ¡ÂºÂ¡ch',
-    linhKhi: 'linh khÃƒÂ­',
-    duocThao: 'dÃ†Â°Ã¡Â»Â£c thÃ¡ÂºÂ£o',
-    khoangThach: 'khoÃƒÂ¡ng thÃ¡ÂºÂ¡ch',
-    linhMoc: 'linh mÃ¡Â»â„¢c'
+    linhThach: 'linh thạch',
+    linhKhi: 'linh khí',
+    duocThao: 'dược thảo',
+    khoangThach: 'khoáng thạch',
+    linhMoc: 'linh má»™c'
   };
 
   const entries = Object.entries(rewards).filter(([, value]) => typeof value === 'number' && value > 0);
-  return entries.map(([key, value]) => `+${value} ${labels[key] ?? key}`).join(', ') || 'chÃ†Â°a cÃƒÂ³';
+  return entries.map(([key, value]) => `+${value} ${labels[key] ?? key}`).join(', ') || 'chưa có';
 }
 
 function getMapTheme(map: ExplorationMapDefinition): MapVisualTheme {
@@ -77,7 +77,7 @@ function getMapTheme(map: ExplorationMapDefinition): MapVisualTheme {
         field: 0x10211a,
         accent: 0x264433,
         bossZone: 0x1f2028,
-        note: 'RÃ¡Â»Â«ng Ã„â€˜en nhiÃ¡Â»Âu sÃ†Â°Ã†Â¡ng thÃ¡ÂºÂ¥p, thu hoÃ¡ÂºÂ¡ch quÃƒÂ½ hÃ†Â¡n nhÃ†Â°ng Ã„â€˜ÃƒÂ²n Ã„â€˜ÃƒÂ¡nh cÃ…Â©ng nÃ¡ÂºÂ·ng hÃ†Â¡n.',
+        note: 'Rừng đen nhiều sương thấp, thu hoạch quý hơn nhưng đòn đánh cũng nặng hơn.',
         enemyPositions: [
           { x: 500, y: 790 },
           { x: 720, y: 640 },
@@ -96,7 +96,7 @@ function getMapTheme(map: ExplorationMapDefinition): MapVisualTheme {
         field: 0x181b28,
         accent: 0x3a4458,
         bossZone: 0x2a2432,
-        note: 'Di tÃƒÂ­ch cÃ…Â© giÃ¡Â»Â¯ nhÃ¡Â»â€¹p trÃ¡ÂºÂ§m vÃƒÂ  nÃ¡ÂºÂ·ng, phÃ¡ÂºÂ§n thÃ†Â°Ã¡Â»Å¸ng truyÃ¡Â»Ân thÃ¡Â»Â«a Ã„â€˜ÃƒÂ¡ng giÃƒÂ¡ hÃ†Â¡n tÃƒÂ i nguyÃƒÂªn thÃ†Â°Ã¡Â»Âng.',
+        note: 'Di tích cũ giữ nhịp trầm và nặng, phần thưởng truyền thừa đáng giá hơn tài nguyên thường.',
         enemyPositions: [
           { x: 540, y: 760 },
           { x: 780, y: 610 },
@@ -116,7 +116,7 @@ function getMapTheme(map: ExplorationMapDefinition): MapVisualTheme {
         field: 0x162523,
         accent: 0x2f4a40,
         bossZone: 0x2c1d1d,
-        note: 'Map Ã„â€˜Ã¡ÂºÂ§u giÃ¡Â»Â¯ combat nhÃ¡ÂºÂ¹, chÃ¡Â»Â§ yÃ¡ÂºÂ¿u Ã„â€˜Ã¡Â»Æ’ mang tÃƒÂ i nguyÃƒÂªn vÃƒÂ  vÃ¡ÂºÂ­t phÃ¡ÂºÂ©m nhÃ¡ÂºÂ­p mÃƒÂ´n vÃ¡Â»Â sect.',
+        note: 'Map đầu giữ combat nhẹ, chủ yếu để mang tài nguyên và vật phẩm nhập môn về sect.',
         enemyPositions: [
           { x: 520, y: 790 },
           { x: 760, y: 700 },
@@ -158,7 +158,7 @@ export class ExplorationScene extends Phaser.Scene {
   private pendingSectPrestige = 0;
   private pendingCultivationProgress = 0;
   private pendingFoundationStability = 0;
-  private statusLines: string[] = ['RÃ¡Â»Âi sÃ†Â¡n mÃƒÂ´n, giÃ¡Â»Â¯ nhÃ¡Â»â€¹p thÃ„Æ’m dÃƒÂ² trÃ†Â°Ã¡Â»â€ºc khi lao sÃƒÂ¢u vÃƒÂ o Ã„â€˜Ã¡Â»â€¹a giÃ¡Â»â€ºi lÃ¡ÂºÂ¡.'];
+  private statusLines: string[] = ['Rời sơn môn, giữ nhịp thăm dò trước khi lao sâu vào địa giới lạ.'];
   private latestStatusTone: 'neutral' | 'reward' | 'danger' | 'major' = 'neutral';
   private runResolved = false;
   private inputLocked = false;
@@ -185,7 +185,7 @@ export class ExplorationScene extends Phaser.Scene {
 
       if (!draft.story.choiceFlags.includes('tutorial_entered_exploration')) {
         draft.story.choiceFlags.push('tutorial_entered_exploration');
-        draft.ui.statusMessage = 'Ã„ÂÃƒÂ£ vÃƒÂ o khu thÃƒÂ¡m hiÃ¡Â»Æ’m Ã„â€˜Ã¡ÂºÂ§u tiÃƒÂªn. HÃ¡ÂºÂ¡ boss hoÃ¡ÂºÂ·c rÃƒÂºt lui an toÃƒÂ n Ã„â€˜Ã¡Â»Æ’ mang phÃ¡ÂºÂ§n thÃ†Â°Ã¡Â»Å¸ng vÃ¡Â»Â sÃ†Â¡n mÃƒÂ´n.';
+        draft.ui.statusMessage = 'Đã vào khu thám hiểm đầu tiên. Hạ boss hoặc rút lui an toàn để mang phần thưởng về sơn môn.';
       }
     });
     getSaveStore(this).saveGame(snapshot);
@@ -230,7 +230,7 @@ export class ExplorationScene extends Phaser.Scene {
     }
 
     if (!this.inputLocked && Phaser.Input.Keyboard.JustDown(this.keys.R)) {
-      this.finishRun('retreat', false, ['TÃ¡Â»Â± rÃƒÂºt vÃ¡Â»Â trÃ†Â°Ã¡Â»â€ºc khi khÃƒÂ­ lÃ¡Â»Â±c hao thÃƒÂªm.']);
+      this.finishRun('retreat', false, ['Tự rút về trước khi khí lực hao thêm.']);
       return;
     }
 
@@ -458,7 +458,7 @@ export class ExplorationScene extends Phaser.Scene {
       ease: 'Quad.Out',
       yoyo: true
     });
-    this.flashStatus(`XuÃ¡ÂºÂ¥t thÃ¡Â»Â§ trong phÃ¡ÂºÂ¡m vi ${profile.attackRange}.`);
+    this.flashStatus(`Xuất thủ trong phạm vi ${profile.attackRange}.`);
 
     for (const enemy of this.enemyRuntimes) {
       if (!enemy.alive) {
@@ -512,11 +512,11 @@ export class ExplorationScene extends Phaser.Scene {
         this.playFeedback('damage');
         this.cameras.main.shake(85, enemy.isBoss ? 0.0048 : 0.0028);
         this.spawnFloatingText(this.player.x, this.player.y - 28, `-${enemy.definition.damage}`, menuPalette.dangerText);
-        this.flashStatus(`${enemy.definition.name} gÃƒÂ¢y ${enemy.definition.damage} sÃƒÂ¡t thÃ†Â°Ã†Â¡ng.`);
+        this.flashStatus(`${enemy.definition.name} gây ${enemy.definition.damage} sát thương.`);
 
         this.markHudDirty();
         if (this.playerHealth <= 0) {
-          this.finishRun('defeat', false, ['KhÃƒÂ­ lÃ¡Â»Â±c cÃ¡ÂºÂ¡n, buÃ¡Â»â„¢c phÃ¡ÂºÂ£i rÃƒÂºt ngÃ†Â°Ã¡Â»Âi vÃ¡Â»Â sÃ†Â¡n mÃƒÂ´n.']);
+          this.finishRun('defeat', false, ['Khí lực cạn, buộc phải rút người về sơn môn.']);
           return;
         }
       }
@@ -539,7 +539,7 @@ export class ExplorationScene extends Phaser.Scene {
       this.cameras.main.shake(150, 0.005);
       this.cameras.main.flash(180, 182, 209, 165, false);
     }
-    this.flashStatus(`${enemy.definition.name} bÃ¡Â»â€¹ hÃ¡ÂºÂ¡.`);
+    this.flashStatus(`${enemy.definition.name} bị hạ.`);
 
     for (const drop of enemy.definition.dropTable) {
       if (Math.random() <= drop.chance) {
@@ -554,7 +554,7 @@ export class ExplorationScene extends Phaser.Scene {
         if (Math.random() <= itemDrop.chance) {
           this.pendingItems[itemDrop.itemId] = (this.pendingItems[itemDrop.itemId] ?? 0) + itemDrop.amount;
           this.playFeedback('rare-reward');
-          this.flashStatus(`Thu Ã„â€˜Ã†Â°Ã¡Â»Â£c ${itemDrop.amount} ${itemDrop.itemId}.`);
+          this.flashStatus(`Thu được ${itemDrop.amount} ${itemDrop.itemId}.`);
         }
       }
     }
@@ -562,7 +562,7 @@ export class ExplorationScene extends Phaser.Scene {
     if (enemy.isBoss) {
       const map = getExplorationSystem(this).getMapDefinition(this.mapId);
       this.pendingRewards = addDelta(this.pendingRewards, map?.rewardProfile.bossBonus ?? {});
-      this.finishRun('victory', true, [`Ã„ÂÃƒÂ£ hÃ¡ÂºÂ¡ ${enemy.definition.name} vÃƒÂ  khÃƒÂ©p lÃ¡ÂºÂ¡i chuyÃ¡ÂºÂ¿n Ã„â€˜i Ã¡Â»Å¸ ${map?.name ?? 'khu vÃ¡Â»Â±c nÃƒÂ y'}.`], 550);
+      this.finishRun('victory', true, [`Đã hạ ${enemy.definition.name} và khép lại chuyến đi ở ${map?.name ?? 'khu vực này'}.`], 550);
     }
     this.markHudDirty();
   }
@@ -611,7 +611,7 @@ export class ExplorationScene extends Phaser.Scene {
         pickup.sprite.destroy();
         this.lootPickups = this.lootPickups.filter((entry) => entry !== pickup);
         this.markHudDirty();
-        this.flashStatus(`Thu Ã„â€˜Ã†Â°Ã¡Â»Â£c +${pickup.amount} ${pickup.resourceId}.`);
+        this.flashStatus(`Thu được +${pickup.amount} ${pickup.resourceId}.`);
       }
     }
   }

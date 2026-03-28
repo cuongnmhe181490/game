@@ -69,51 +69,51 @@
     },
     {
       "id": "can_man_ben_bi",
-      "name": "Cáº§n Máº«n Bá»n Bá»‰",
+      "name": "Cần Mẫn Bền Bỉ",
       "type": "positive",
-      "shortEffect": "LÃ m viá»‡c Ä‘á»u tay, há»£p vá»›i cÃ´ng viá»‡c dÃ i nhá»‹p vÃ  giÃ¯n ná»™i mÃ´n.",
+      "shortEffect": "Làm việc đều tay, hợp với công việc dài nhịp và giïn nội môn.",
       "eventBias": [
         "resource",
         "sect_internal",
         "survival"
       ],
-      "description": "KhÃ´ng ná»•i báº­t bÃ¹ng sÃ¡ng, nhÆ°ng ngÆ°á»i nÃ y cÃ³ thá»ƒ gáº¯nh viá»‡c ráº¥t dÃ i mÃ  khÃ´ng buÃ´ng nhá»‹p dá»… dÃ ng."
+      "description": "Không nổi bật bùng sáng, nhưng người này có thể gắnh việc rất dài mà không buông nhịp dễ dàng."
     },
     {
       "id": "gioi_luyen_dan",
-      "name": "KhÃ©o Tay Luyá»‡n Äan",
+      "name": "Khéo Tay Luyện Đan",
       "type": "positive",
-      "shortEffect": "Há»£p Ä‘an phÃ²ng, dÆ°á»£c viá»‡n vÃ  cÃ¡c event cáº§n tay nghá» tá»‰ má»‰.",
+      "shortEffect": "Hợp đan phòng, dược viện và các event cần tay nghề tỉ mỉ.",
       "eventBias": [
         "cultivation",
         "resource",
         "disciple"
       ],
-      "description": "Biáº¿t cÃ¡ch giá»¯ tay á»•n khi xá»­ lÃ½ linh tháº£o vÃ  váº­t liá»‡u, ráº¥t hÃ¡p dáº«n trong lÃºc sÆ¡n mÃ´n vá»«a gáº§y láº¡i Ä‘an phÃ²ng."
+      "description": "Biết cách giữ tay ổn khi xử lý linh thảo và vật liệu, rất háp dẫn trong lúc sơn môn vừa gầy lại đan phòng."
     },
     {
       "id": "quen_duong_nui",
-      "name": "Quen ÄÆ°á»ng NÃºi",
+      "name": "Quen Đường Núi",
       "type": "positive",
-      "shortEffect": "Há»£p thu tháº­p, tuáº§n tra vÃ  cÃ¡c event ngoÃ i sÆ¡n.",
+      "shortEffect": "Hợp thu thập, tuần tra và các event ngoài sơn.",
       "eventBias": [
         "exploration",
         "survival",
         "opportunity"
       ],
-      "description": "NÃºi ráng, khe nÆ°á»›c vÃ  lÃ²ng rá»«ng vá»›i ngÆ°á»i nÃ y khÃ´ng pháº£i Ä‘iá»u xa láº¡, nÃªn dá»… trá»Ÿ thÃ nh tay chÃ¢n hÆ°á»›ng ngoáº¡i sÆ¡n."
+      "description": "Núi ráng, khe nước và lòng rừng vá»›i người này không phải Ä'iều xa lạ, nên dá»… trở thành tay chân hướng ngoại sÆ¡n."
     },
     {
       "id": "y_chi_ben",
-      "name": "Ã ChÃ­ Bá»n",
+      "name": "Ý Chí Bền",
       "type": "positive",
-      "shortEffect": "Dá»… gá»“ng mÃ¬nh vÆ°á»£t ngÆ°á»¡ng khi cÄƒn cÆ¡ hoáº·c thá»ƒ tráº¡ng chÆ°a tá»‘t.",
+      "shortEffect": "Dễ gồng mình vượt ngưỡng khi căn cơ hoặc thể trạng chưa tốt.",
       "eventBias": [
         "cultivation",
         "disciple",
         "survival"
       ],
-      "description": "CÄƒn cÆ¡ khÃ´ng hán sáº¯c, nhÆ°ng ngÆ°á»i nÃ y váº«n cÃ³ thá»ƒ cáº¯n rÄƒng bÆ°á»›c thÃªm má»™t báº­c vá»›i á»™n á»‹nh hiáº¿m cÃ³."
+      "description": "Căn cÆ¡ không hán sắc, nhưng người này vẫn có thể cắn răng bước thêm má»™t bậc vá»›i á»™n ịnh hiếm có."
     },
     {
       "id": "tham_cong",
@@ -165,39 +165,39 @@
     },
     {
       "id": "kieu_tam",
-      "name": "KiÃªu TÃ¢m",
+      "name": "Kiêu Tâm",
       "type": "flaw",
-      "shortEffect": "Dá»… sinh va cháº¡m khi bá»‹ xem nháº¹ hoáº·c chÆ°a Ä‘Æ°á»£c trá»ng dá»¥ng.",
+      "shortEffect": "Dễ sinh va chạm khi bị xem nhẹ hoặc chưa được trọng dụng.",
       "eventBias": [
         "disciple",
         "cultivation",
         "opportunity"
       ],
-      "description": "Tá»± xem mÃ¬nh khÃ´ng thua ai, ngÆ°á»i nÃ y ráº¥t dá»… trÆ°á»£t sang báº¥t bÃ¬nh náº¿u ná»™i mÃ´n Ä‘á»‘i xá»­ khÃ´ng kháº©u phá»¥c."
+      "description": "Tự xem mình không thua ai, người này rất dễ trượt sang bất bình nếu nội môn đối xử không khẩu phục."
     },
     {
       "id": "thieu_quyet_doan",
-      "name": "Thiáº¿u Quyáº¿t ÄoÃ¡n",
+      "name": "Thiếu Quyết Đoán",
       "type": "flaw",
-      "shortEffect": "KhÃ³ chá»‘t viá»‡c gáº¥p, há»£p viá»‡c Ä‘i theo hÆ¡n lÃ  tá»± gá»¡ nÃºt tháº¯t.",
+      "shortEffect": "Khó chốt việc gấp, hợp việc đi theo hơn là tự gỡ nút thắt.",
       "eventBias": [
         "disciple",
         "sect_internal",
         "survival"
       ],
-      "description": "KhÃ´ng áº¿u hÃ¨n, chá»‰ lÃ  Ä‘áº¿n lÃºc cáº§n quyáº¿t ngay thÃ¬ thÆ°á»ng chÆ°á»n má»™t nhá»‹p vÃ¬ ngáº§n ngáº¡i."
+      "description": "Không ếu hèn, chỉ là đến lúc cần quyết ngay thì thường chườn một nhịp vì ngần ngại."
     },
     {
       "id": "mang_tai_tieng",
-      "name": "Mang Tai Tiáº¿ng",
+      "name": "Mang Tai Tiếng",
       "type": "flaw",
-      "shortEffect": "Dá»… kÃ©o theo nghi ká»µ, Ã¡p lá»±c phe phÃ¡i vÃ  event tuyá»ƒn mÃ´n nhiá»u rÃ ng buá»™c.",
+      "shortEffect": "Dễ kéo theo nghi kỵ, áp lực phe phái và event tuyển môn nhiều ràng buộc.",
       "eventBias": [
         "faction",
         "disciple",
         "opportunity"
       ],
-      "description": "Tiáº¿ng xáº¥u Ä‘i trÆ°á»›c bÆ°á»›c chÃ¢n, khiáº¿n má»—i láº§n ngÆ°á»i nÃ y xuáº¥t hiá»‡n Ä‘á»u buá»™c sÆ¡n mÃ´n pháº£i tráº£ thÃªm má»™t táº§ng giáº£i thÃ­ch."
+      "description": "Tiếng xấu đi trước bước chân, khiến mỗi lần người này xuất hiện đều buộc sơn môn phải trả thêm một tầng giải thích."
     },
     {
       "id": "giu_le",
@@ -249,27 +249,27 @@
     },
     {
       "id": "diem_tinh",
-      "name": "Äiá»m TÄ©nh",
+      "name": "Điềm Tĩnh",
       "type": "temperament",
-      "shortEffect": "Há»£p viá»‡c quÃ¡n xuyáº¿n, giáº£ng hÃ²a vÃ  cÃ¡c event quáº£n trá»‹.",
+      "shortEffect": "Hợp việc quán xuyến, giảng hòa và các event quản trị.",
       "eventBias": [
         "sect_internal",
         "governance",
         "resource"
       ],
-      "description": "KhÃ´ng lÃªn giá»ng nhanh, nhÆ°ng giá»¯ Ä‘Æ°á»£c nhá»‹p cho cÃ¡c viá»‡c rá»‘i trá»Ÿ láº¡i cÃ³ thá»© tá»±."
+      "description": "Không lên giọng nhanh, nhưng giữ được nhịp cho các việc rối trở lại có thứ tự."
     },
     {
       "id": "nong_tinh",
-      "name": "NÃ³ng TÃ­nh",
+      "name": "Nóng Tính",
       "type": "temperament",
-      "shortEffect": "Pháº£n á»©ng máº¡nh trÆ°á»›c xung Ä‘á»™t vÃ  cÃ¡c event Ã¡p lá»±c cao.",
+      "shortEffect": "Phản ứng mạnh trước xung đột và các event áp lực cao.",
       "eventBias": [
         "disciple",
         "faction",
         "survival"
       ],
-      "description": "KhÃ´ng sợ va cháº¡m, nhÆ°ng cÃ¡i gáº¥p cá»§a ngÆ°á»i nÃ y cÅ©ng dá»… Ä‘áº©y viá»‡c tá»« cáº³ng thÃ nh khÃ³ gỡ."
+      "description": "Không sợ va chạm, nhưng cái gấp cá»§a người này cÅ©ng dá»… đẩy việc từ cẳng thành khó gỡ."
     },
     {
       "id": "tai_chat_xuat_chung",

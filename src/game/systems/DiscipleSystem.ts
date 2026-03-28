@@ -767,24 +767,24 @@ export class DiscipleSystem {
         base.comprehension = 72 + fortuneBonus;
         base.loyalty = 57;
         base.mood = 58;
-        base.rootType = 'Thá»§y má»™c táº¡p cÄƒn';
+        base.rootType = 'Thủy mộc tạp căn';
         base.positiveTraitIds = ['y_chi_ben', 'nhay_cam_linh_tuc'].filter((traitId) =>
           discipleTraitCatalog.traits.some((trait) => trait.id === traitId)
         );
         base.flawTraitIds = ['thieu_quyet_doan'].filter((traitId) => discipleTraitCatalog.traits.some((trait) => trait.id === traitId));
-        base.lastDailyNote = 'Tá»± nháº­n cÃ³ dÃ¢y má»‘i vá»›i má»™t nhÃ¡nh cÅ© cá»§a Thanh Huyá»n MÃ´n, vá»«a mong Ä‘Æ°á»£c cÃ´ng nháº­n vá»«a sá»£ mang tiáº¿ng máº¡o nháº­n.';
+        base.lastDailyNote = 'Tự nhận có dây mối với một nhánh cũ của Thanh Huyền Môn, vừa mong được công nhận vừa sợ mang tiếng mạo nhận.';
         break;
       case 'orphan_strange_root':
         base.age = 14;
         base.comprehension = 78 + fortuneBonus;
         base.loyalty = 55;
         base.mood = 63;
-        base.rootType = 'Dá»‹ linh cÄƒn phong áº£nh';
+        base.rootType = 'Dị linh căn phong ảnh';
         base.positiveTraitIds = ['tai_chat_xuat_chung', 'nhay_cam_linh_tuc'].filter((traitId) =>
           discipleTraitCatalog.traits.some((trait) => trait.id === traitId)
         );
         base.flawTraitIds = ['kieu_tam'].filter((traitId) => discipleTraitCatalog.traits.some((trait) => trait.id === traitId));
-        base.lastDailyNote = 'CÄƒn cÆ¡ hiáº¿m gáº·p nhÆ°ng tÃ¢m chÆ°a Ä‘á»‹nh, dá»… sáº£n sinh ká»³ vá»ng cáº£ tá»« trong lÃªn ngoÃ i.';
+        base.lastDailyNote = 'Căn cơ hiếm gặp nhưng tâm chưa định, dễ sản sinh kỳ vọng cả từ trong lên ngoài.';
         break;
       case 'disgraced_transfer':
         base.age = 22;
@@ -799,19 +799,19 @@ export class DiscipleSystem {
         base.flawTraitIds = ['mang_tai_tieng', 'da_nghi'].filter((traitId) =>
           discipleTraitCatalog.traits.some((trait) => trait.id === traitId)
         );
-        base.lastDailyNote = 'Mang theo tay nghá» vÃ  tiáº¿ng xáº¥u, vÃ o mÃ´n lÃ  cÆ¡ há»™i cÅ©ng lÃ  gÃ¡nh náº·ng.';
+        base.lastDailyNote = 'Mang theo tay nghề và tiếng xấu, vào môn là cơ hội cũng là gánh nặng.';
         break;
       case 'stubborn_mortal':
         base.age = 19;
         base.comprehension = 52 + prestigeBonus;
         base.loyalty = 64;
         base.mood = 61;
-        base.rootType = 'PhÃ m cÄƒn mÃ³ng';
+        base.rootType = 'Phàm căn móng';
         base.positiveTraitIds = ['y_chi_ben', 'can_man_ben_bi'].filter((traitId) =>
           discipleTraitCatalog.traits.some((trait) => trait.id === traitId)
         );
         base.flawTraitIds = ['thieu_quyet_doan'].filter((traitId) => discipleTraitCatalog.traits.some((trait) => trait.id === traitId));
-        base.lastDailyNote = 'CÄƒn cÆ¡ khÃ´ng nÃ³i lÃªn Ä‘iá»u gÃ¬, nhÆ°ng Ã½ chÃ­ láº¡i cÃ³ thá»ƒ giÃºp ngÆ°á»i nÃ y bá»›c tá»«ng báº­c má»™t cÃ¡ch bÃªn bá»‰.';
+        base.lastDailyNote = 'Căn cơ không nói lên điều gì, nhưng ý chí lại có thể giúp người này bớc từng bậc một cách bên bỉ.';
         break;
       default:
         base.flawTraitIds = [flawFallback];

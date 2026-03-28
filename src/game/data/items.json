@@ -224,11 +224,11 @@
     },
     {
       "id": "khuyet_mach_thao",
-      "name": "Khuyáº¿t Máº¡ch Tháº£o",
+      "name": "Khuyết Mạch Thảo",
       "category": "herb",
       "rarity": "rare",
-      "description": "Linh tháº£o má»c sá¡t khe Ä‘Ã¡ nÆ°á»›c ngáº§m, thÆ°á»ng Ä‘Æ°á»£c dÃ¹ng Ä‘á»ƒ bá»“i láº¡i kinh máº¡ch vi tá»•n.",
-      "flavorText": "ThÃ¢n cá» máº£nh nhÆ° sÆ°Æ¡ng, bá»©t rá»… lÃªn tá»« nhá»¯ng kẽ ná»©t khÃ´ng ai nghÄ© cÃ²n sinh khÃ­.",
+      "description": "Linh thảo mọc sá¡t khe đá nước ngầm, thường được dùng để bồi lại kinh mạch vi tổn.",
+      "flavorText": "Thân cỏ mảnh như sương, bứt rá»… lên từ những kẽ nứt không ai nghÄ© còn sinh khí.",
       "stackable": true,
       "value": 26,
       "craftingTags": [
@@ -238,11 +238,11 @@
     },
     {
       "id": "am_hoa_tinh_sa",
-      "name": "Ã‚m Há»a Tinh Sa",
+      "name": "Âm Hỏa Tinh Sa",
       "category": "material",
       "rarity": "rare",
-      "description": "Tinh sa lÃ¡º¯ng tá»« nhá»±a má»™c vÃ  táº¡p hÃ³a khÃ­, dÃ¹ng lÃ m phá»¥ liá»‡u cho Ä‘an dÆ°á»£c hÃ¬m há»a.",
-      "flavorText": "Bá» ngoÃ i xÃ¡m láº¡nh, nhÆ°ng khi nghiá»n nháº¹ láº¡i lÃ³e lÃªn váº¿t Ä‘á» tá»‘i nhÆ° tro nÃ³ng chÆ°a táº¯t.",
+      "description": "Tinh sa lắng từ nhá»±a má»™c và tạp hóa khí, dùng làm phụ liệu cho Ä'an dược hìm hỏa.",
+      "flavorText": "Bề ngoài xám lạnh, nhưng khi nghiền nhẹ lại lóe lên vết đỏ tối như tro nóng chưa tắt.",
       "stackable": true,
       "value": 32,
       "craftingTags": [
@@ -252,11 +252,11 @@
     },
     {
       "id": "mat_bia_tu_hanh",
-      "name": "Máº·t Bia Tu HÃ nh VÃ¡",
+      "name": "Mặt Bia Tu Hành Vá",
       "category": "quest",
       "rarity": "uncommon",
-      "description": "Máº·t bia cÅ© chá»‰ cÃ²n vá»‹ trí»‹ nÃ©t kháº¯c vÃ i cáº£nh giới¥n sá»‘m, hÆ¡n giÃ¡ trá»‹ ở manh mÃ´i truyá»n thá»«a hÆ¡n lÃ  váº­t liá»‡u.",
-      "flavorText": "Ai giá»¯ nÃ³ trong tay Ä‘á»u cÃ³ cáº£m giÃ¡c nhÆ° má»™t Ä‘á»i mÃ´n nhÃ¢n cÅ© Ä‘ang cá»‘ nháº¯c pháº£i Ä‘i cho Ä‘Ãºng nhá»‹p.",
+      "description": "Mặt bia cÅ© chỉ còn vị trí»‹ nét khắc vài cảnh giới¥n sốm, hÆ¡n giá trị ở manh môi truyền thừa hÆ¡n là vật liệu.",
+      "flavorText": "Ai giữ nó trong tay đều có cảm giác như một đời môn nhân cũ đang cố nhắc phải đi cho đúng nhịp.",
       "stackable": true,
       "value": 18,
       "craftingTags": [
@@ -266,11 +266,11 @@
     },
     {
       "id": "thanh_huyen_ngoai_chi",
-      "name": "Thanh Huyá»n Ngoáº¡i ChÃ­",
+      "name": "Thanh Huyền Ngoại Chí",
       "category": "quest",
       "rarity": "rare",
-      "description": "MÃ£nh ghi chÃ©p bÃªn lề cá»§a má»™t nhÃ¡nh Thanh Huyá»n MÃ´n cÅ©, chÃ©p láº¡i cÃ¡ch giÃ¡o dÆ°á»¡ng mÃ´n sinh khi tÃ´ng mÃ´n cÃ²n hÆ°ng vÆ°á»£ng.",
-      "flavorText": "KhÃ´ng phÃ´ trÆ°Æ¡ng Ä‘áº¡i Ä‘áº¡o, chá»‰ lÃ  nhá»¯ng dÃ²ng ghi chÃº vá» cÃ¡ch giÃ¯n ngÆ°á»i, giÃ¯n viá»‡c vÃ  giÃ¯n nhá»‹p tÃ´ng mÃ´n.",
+      "description": "Mãnh ghi chép bên lề cá»§a má»™t nhánh Thanh Huyền Môn cÅ©, chép lại cách giáo dưỡng môn sinh khi tông môn còn hưng vượng.",
+      "flavorText": "Không phô trương đại đạo, chỉ là những dòng ghi chú về cách giïn người, giïn việc và giïn nhịp tông môn.",
       "stackable": true,
       "value": 48,
       "craftingTags": [
@@ -280,11 +280,11 @@
     },
     {
       "id": "co_ngoc_huyen_tuc",
-      "name": "Cá»• Ngá»c Huyá»n Tá»©c",
+      "name": "Cổ Ngọc Huyền Tức",
       "category": "artifact",
       "rarity": "uncommon",
-      "description": "Máº£nh ngá»c xÃ¡m tháº¥u má»™t lÃ n khÃ­ yÃªn tá»©c, thá»i cÅ© thÆ°á»ng Ä‘Æ°á»£c mang theo khi lÃªn Ä‘Æ°á»ng dÃ² vÃºng sÆ¡n.",
-      "flavorText": "Äeo lÃªn khÃ´ng tháº¥y sá»©c máº¡nh bá»‘c lÃªn, chá»‰ tháº¥y nhá»‹p thá»Ÿ vÃ  bÆ°á»›c chÃ¢n Ä‘á»� láº¡i hÆ¡n má»™t chÃºt.",
+      "description": "Mảnh ngọc xám thấu một làn khí yên tức, thời cũ thường được mang theo khi lên đường dò vúng sơn.",
+      "flavorText": "Đeo lên không thấy sức mạnh bốc lên, chỉ thấy nhịp thở và bước chân đ� lại hơn một chút.",
       "stackable": false,
       "value": 44,
       "artifactEffect": {

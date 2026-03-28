@@ -50,8 +50,8 @@ import {
 } from '@/game/ui';
 
 const CULTIVATION_MODE_LABELS = {
-  balanced: 'BÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¬nh ÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢n',
-  focused: 'TÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Â¥ khÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â­'
+  balanced: 'Binh on',
+  focused: 'Tu khi'
 } as const;
 
 const TUTORIAL_CHOICE_FLAGS = {
@@ -66,11 +66,11 @@ const TUTORIAL_CHOICE_FLAGS = {
 } as const;
 
 function getChapterName(snapshot: Readonly<GameState>): string {
-  return storyChapterCatalog.chapters.find((chapter) => chapter.id === snapshot.story.currentChapterId)?.name ?? 'ChÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â°a rÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âµ chÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â°ÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â¡ng';
+  return storyChapterCatalog.chapters.find((chapter) => chapter.id === snapshot.story.currentChapterId)?.name ?? 'Chua ro chuong';
 }
 
 function formatDate(snapshot: Readonly<GameState>): string {
-  return `NgÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â y ${snapshot.time.day} ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¢ ThÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡ng ${snapshot.time.month} ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¢ NÃƒÆ’Ã¢â‚¬Å¾Ãƒâ€ Ã¢â‚¬â„¢m ${snapshot.time.year}`;
+  return `Ngay ${snapshot.time.day} | Thang ${snapshot.time.month} | Nam ${snapshot.time.year}`;
 }
 
 function getDiscipleRealmName(realmId: string): string {
@@ -80,13 +80,13 @@ function getDiscipleRealmName(realmId: string): string {
 function getDiscipleStatusLabel(status: GameState['disciples']['roster'][number]['status']): string {
   switch (status) {
     case 'recovering':
-      return 'ÃƒÆ’Ã¢â‚¬Å¾Ãƒâ€šÃ‚Âang hÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œi sÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Â©c';
+      return 'Dang hoi suc';
     case 'dissatisfied':
-      return 'BÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â¥t mÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â£n';
+      return 'Bat man';
     case 'unstable':
-      return 'BÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â¥t ÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢n';
+      return 'Bat on';
     default:
-      return 'ÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Ân ÃƒÆ’Ã¢â‚¬Å¾ÃƒÂ¢Ã¢â€šÂ¬Ã‹Å“ÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¹nh';
+      return 'On dinh';
   }
 }
 
@@ -188,19 +188,19 @@ export class SectScene extends Phaser.Scene {
       wordWrap: { width: 1140 }
     });
 
-    this.add.text(74, 206, 'CÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â´ng trÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¬nh', {
+    this.add.text(74, 206, 'Cong trinh', {
       color: menuPalette.textStrong,
       fontFamily: '"Palatino Linotype", "Book Antiqua", Georgia, serif',
       fontSize: '28px'
     });
 
-    this.add.text(452, 206, 'ÃƒÆ’Ã¢â‚¬Å¾Ãƒâ€šÃ‚ÂÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¡ tÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Â­', {
+    this.add.text(452, 206, 'De tu', {
       color: menuPalette.textStrong,
       fontFamily: '"Palatino Linotype", "Book Antiqua", Georgia, serif',
       fontSize: '28px'
     });
 
-    this.add.text(836, 206, 'NhÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â­t kÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â½ vÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â  sÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Â± kiÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¡n', {
+    this.add.text(836, 206, 'Nhat ky va su kien', {
       color: menuPalette.textStrong,
       fontFamily: '"Palatino Linotype", "Book Antiqua", Georgia, serif',
       fontSize: '28px'
@@ -316,12 +316,12 @@ export class SectScene extends Phaser.Scene {
       x: 120,
       y: 602,
       width: 112,
-      label: 'Qua 1 ngÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â y',
-      detail: 'ChÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â¡y sÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â£n xuÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â¥t',
+      label: 'Qua 1 ngay',
+      detail: 'Chay san xuat',
       onClick: () => {
         this.markTutorialFlag(TUTORIAL_CHOICE_FLAGS.advancedDay);
         const result = getTimeSystem(this).advanceOneDay();
-        this.refreshView(result.snapshot, 'ÃƒÆ’Ã‚ÂÃƒÆ’Ã‚Â£ qua m?t ngÃƒÆ’Ã‚Â y. HÃƒÆ’Ã‚Â£y d?c t?ng k?t d? hi?u tÃƒÆ’Ã‚Â i nguyÃƒÆ’Ã‚Âªn, tu hÃƒÆ’Ã‚Â nh vÃƒÆ’Ã‚Â  bi?n d?ng n?i mÃƒÆ’Ã‚Â´n.');
+        this.refreshView(result.snapshot, 'Da qua mot ngay. Hay doc tong ket de hieu tai nguyen, tu hanh va bien dong noi mon.');
         this.presentCurrentEvent('time');
       }
     });
@@ -357,11 +357,11 @@ export class SectScene extends Phaser.Scene {
       y: 602,
       width: 112,
       label: 'Luu game',
-      detail: 'Ghi vÃƒÆ’Ã‚Â o mÃƒÆ’Ã‚Â¡y nÃƒÆ’Ã‚Â y',
+      detail: 'Ghi vào máy này',
       onClick: () => {
         const nextSnapshot = getStateManager(this).snapshot;
         getSaveStore(this).saveGame(nextSnapshot);
-        this.refreshView(nextSnapshot, 'ÃƒÆ’Ã¢â‚¬Å¾Ãƒâ€šÃ‚ÂÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â£ lÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â°u game vÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â o localStorage.');
+        this.refreshView(nextSnapshot, 'Đã lưu game vào localStorage.');
       }
     });
 
@@ -369,8 +369,8 @@ export class SectScene extends Phaser.Scene {
       x: 495,
       y: 602,
       width: 112,
-      label: 'T?i save',
-      detail: 'ÃƒÆ’Ã‚Â?c l?i save dÃƒÆ’Ã‚Â£ ghi',
+      label: 'Tai save',
+      detail: 'Doc lai save da ghi',
       onClick: () => {
         const loaded = getSaveStore(this).loadSave();
         const nextSnapshot = getStateManager(this).replace(loaded);
@@ -380,7 +380,7 @@ export class SectScene extends Phaser.Scene {
           getSectIdentitySystem(this).refreshSectIdentityInDraft(draft);
         });
         getSaveStore(this).saveGame(syncedSnapshot);
-        this.refreshView(syncedSnapshot, 'ÃƒÆ’Ã¢â‚¬Å¾Ãƒâ€šÃ‚ÂÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â£ tÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â£i lÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â¡i save hiÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¡n cÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â³.');
+        this.refreshView(syncedSnapshot, 'Đã tải lại save hiện có.');
       }
     });
 
@@ -388,8 +388,8 @@ export class SectScene extends Phaser.Scene {
       x: 620,
       y: 602,
       width: 112,
-      label: 'TÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âºi ÃƒÆ’Ã¢â‚¬Å¾ÃƒÂ¢Ã¢â€šÂ¬Ã‹Å“ÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œ',
-      detail: 'Kho tÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â´ng mÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â´n',
+      label: 'Túi đồ',
+      detail: 'Kho tông môn',
       onClick: () => {
         this.toggleInventoryPanel(true);
       }
@@ -399,8 +399,8 @@ export class SectScene extends Phaser.Scene {
       x: 745,
       y: 602,
       width: 112,
-      label: 'LuyÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¡n ÃƒÆ’Ã¢â‚¬Å¾ÃƒÂ¢Ã¢â€šÂ¬Ã‹Å“an',
-      detail: 'ÃƒÆ’Ã¢â‚¬Å¾Ãƒâ€šÃ‚Âan phÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â°ÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â¡ng cÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â¡ bÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â£n',
+      label: 'Luyện đan',
+      detail: 'Đan phương cơ bản',
       onClick: () => {
         this.toggleAlchemyPanel(true);
       }
@@ -410,8 +410,8 @@ export class SectScene extends Phaser.Scene {
       x: 870,
       y: 602,
       width: 112,
-      label: 'Tu hÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â nh',
-      detail: 'MÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€¦Ã‚Â¸ panel cÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â£nh giÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Âºi',
+      label: 'Tu hành',
+      detail: 'Mở panel cảnh giới',
       onClick: () => {
         this.toggleCultivationPanel(true);
       }
@@ -421,8 +421,8 @@ export class SectScene extends Phaser.Scene {
       x: 995,
       y: 602,
       width: 112,
-      label: 'NgoÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚ÂºÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¡i giao',
-      detail: 'MÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â»ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¸ panel phe phÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¡i',
+      label: 'Ngoại giao',
+      detail: 'Mở panel phe phái',
       onClick: () => {
         this.toggleDiplomacyPanel(true);
       }
@@ -460,8 +460,8 @@ export class SectScene extends Phaser.Scene {
       x: 1120,
       y: 602,
       width: 112,
-      label: 'Game m?i',
-      detail: 'XÃƒÆ’Ã‚Â³a ti?n trÃƒÆ’Ã‚Â¬nh hi?n t?i',
+      label: 'Game moi',
+      detail: 'Xoa tien trinh hien tai',
       onClick: () => {
         getSaveStore(this).clear();
         getStateManager(this).replace(createGameState());
@@ -485,7 +485,7 @@ export class SectScene extends Phaser.Scene {
         this.selectedItemIndex = 0;
         this.selectedRecipeIndex = 0;
         this.selectedMapIndex = 0;
-        this.refreshView(syncedSnapshot, 'ÃƒÆ’Ã¢â‚¬Å¾Ãƒâ€šÃ‚ÂÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â£ tÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â¡o save mÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Âºi cho vertical slice.');
+        this.refreshView(syncedSnapshot, 'Đã tạo save mới cho vertical slice.');
       }
     });
   }
@@ -495,8 +495,8 @@ export class SectScene extends Phaser.Scene {
       x: 150,
       y: 548,
       width: 120,
-      label: 'TrÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â°ÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Âºc',
-      detail: 'CÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â´ng trÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¬nh trÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â°ÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Âºc',
+      label: 'Trước',
+      detail: 'Công trình trước',
       onClick: () => {
         this.selectedBuildingIndex = this.wrapIndex(this.selectedBuildingIndex - 1, buildingCatalog.buildings.length);
         this.refreshView(getStateManager(this).snapshot);
@@ -508,7 +508,7 @@ export class SectScene extends Phaser.Scene {
       y: 548,
       width: 120,
       label: 'Sau',
-      detail: 'CÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â´ng trÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¬nh sau',
+      detail: 'Công trình sau',
       onClick: () => {
         this.selectedBuildingIndex = this.wrapIndex(this.selectedBuildingIndex + 1, buildingCatalog.buildings.length);
         this.refreshView(getStateManager(this).snapshot);
@@ -519,8 +519,8 @@ export class SectScene extends Phaser.Scene {
       x: 150,
       y: 606,
       width: 120,
-      label: 'DÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Â±ng',
-      detail: 'XÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢y cÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â´ng trÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¬nh',
+      label: 'Dá»±ng',
+      detail: 'Xây công trình',
       onClick: () => {
         const buildingId = this.getSelectedBuildingId();
         const result = getBuildingSystem(this).constructBuilding(buildingId);
@@ -532,8 +532,8 @@ export class SectScene extends Phaser.Scene {
       x: 284,
       y: 606,
       width: 120,
-      label: 'NÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ng cÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â¥p',
-      detail: 'TÃƒÆ’Ã¢â‚¬Å¾Ãƒâ€ Ã¢â‚¬â„¢ng cÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â¥p hiÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¡n tÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â¡i',
+      label: 'Nâng cấp',
+      detail: 'Tăng cấp hiện tại',
       onClick: () => {
         const buildingId = this.getSelectedBuildingId();
         const result = getBuildingSystem(this).upgradeBuilding(buildingId);
@@ -547,8 +547,8 @@ export class SectScene extends Phaser.Scene {
       x: 954,
       y: 548,
       width: 112,
-      label: 'Map trÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â°ÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Âºc',
-      detail: 'ÃƒÆ’Ã¢â‚¬Å¾Ãƒâ€šÃ‚ÂÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢i khu thÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡m hiÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€ Ã¢â‚¬â„¢m',
+      label: 'Map trước',
+      detail: 'Đổi khu thám hiểm',
       onClick: () => {
         const maps = getExplorationSystem(this).getMaps();
         this.selectedMapIndex = this.wrapIndex(this.selectedMapIndex - 1, maps.length);
@@ -560,8 +560,8 @@ export class SectScene extends Phaser.Scene {
       x: 1080,
       y: 548,
       width: 136,
-      label: 'VÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â o map',
-      detail: 'Khu ÃƒÆ’Ã¢â‚¬Å¾ÃƒÂ¢Ã¢â€šÂ¬Ã‹Å“ang chÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Ân',
+      label: 'Vào map',
+      detail: 'Khu đang chọn',
       onClick: () => {
         const explorationSystem = getExplorationSystem(this);
         const map = this.getSelectedMap();
@@ -581,7 +581,7 @@ export class SectScene extends Phaser.Scene {
       y: 548,
       width: 112,
       label: 'Map sau',
-      detail: 'ÃƒÆ’Ã¢â‚¬Å¾Ãƒâ€šÃ‚ÂÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢i khu thÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡m hiÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€ Ã¢â‚¬â„¢m',
+      detail: 'Đổi khu thám hiểm',
       onClick: () => {
         const maps = getExplorationSystem(this).getMaps();
         this.selectedMapIndex = this.wrapIndex(this.selectedMapIndex + 1, maps.length);
@@ -593,8 +593,8 @@ export class SectScene extends Phaser.Scene {
       x: 526,
       y: 548,
       width: 120,
-      label: 'TrÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â°ÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Âºc',
-      detail: 'ÃƒÆ’Ã¢â‚¬Å¾Ãƒâ€šÃ‚ÂÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¡ tÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Â­ trÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â°ÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Âºc',
+      label: 'Trước',
+      detail: 'Đệ tử trước',
       onClick: () => {
         this.markTutorialFlag(TUTORIAL_CHOICE_FLAGS.checkedDisciple);
         this.selectedDiscipleIndex = this.wrapIndex(this.selectedDiscipleIndex - 1, getStateManager(this).snapshot.disciples.roster.length);
@@ -607,7 +607,7 @@ export class SectScene extends Phaser.Scene {
       y: 548,
       width: 120,
       label: 'Sau',
-      detail: 'ÃƒÆ’Ã¢â‚¬Å¾Ãƒâ€šÃ‚ÂÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¡ tÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Â­ sau',
+      detail: 'Đệ tử sau',
       onClick: () => {
         this.markTutorialFlag(TUTORIAL_CHOICE_FLAGS.checkedDisciple);
         this.selectedDiscipleIndex = this.wrapIndex(this.selectedDiscipleIndex + 1, getStateManager(this).snapshot.disciples.roster.length);
@@ -649,8 +649,8 @@ export class SectScene extends Phaser.Scene {
       x: 1080,
       y: 606,
       width: 220,
-      label: 'GÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡n vÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â o cÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â´ng trÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¬nh',
-      detail: 'DÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¹ng cÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â´ng trÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¬nh ÃƒÆ’Ã¢â‚¬Å¾ÃƒÂ¢Ã¢â€šÂ¬Ã‹Å“ang chÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Ân',
+      label: 'Gán vào công trình',
+      detail: 'Dùng công trình đang chọn',
       onClick: () => {
         const snapshot = getStateManager(this).snapshot;
         const disciple = this.getSelectedDisciple(snapshot);
@@ -669,8 +669,8 @@ export class SectScene extends Phaser.Scene {
       x: 1080,
       y: 664,
       width: 220,
-      label: 'RÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âºt khÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Âi cÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â´ng trÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¬nh',
-      detail: 'GiÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Â¯ task hiÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¡n tÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â¡i',
+      label: 'Rút khỏi công trình',
+      detail: 'Giữ task hiện tại',
       onClick: () => {
         const disciple = this.getSelectedDisciple(getStateManager(this).snapshot);
 
@@ -688,7 +688,7 @@ export class SectScene extends Phaser.Scene {
       x: 486,
       y: 708,
       width: 128,
-      label: 'ThÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â°ÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€¦Ã‚Â¸ng',
+      label: 'Thưởng',
       detail: '+mood, +loyalty',
       onClick: () => {
         const disciple = this.getSelectedDisciple(getStateManager(this).snapshot);
@@ -706,8 +706,8 @@ export class SectScene extends Phaser.Scene {
       x: 624,
       y: 708,
       width: 128,
-      label: 'NghÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â°',
-      detail: 'HÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œi sÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Â©c vÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â  dÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¹u tÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢m',
+      label: 'Nghỉ',
+      detail: 'Hồi sức và dịu tâm',
       onClick: () => {
         const disciple = this.getSelectedDisciple(getStateManager(this).snapshot);
 
@@ -725,8 +725,8 @@ export class SectScene extends Phaser.Scene {
       x: 762,
       y: 708,
       width: 128,
-      label: 'KhiÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€ Ã¢â‚¬â„¢n trÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡ch',
-      detail: 'SiÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â¿t kÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Â· cÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â°ÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â¡ng',
+      label: 'Khiển trách',
+      detail: 'Siết kỷ cương',
       onClick: () => {
         const disciple = this.getSelectedDisciple(getStateManager(this).snapshot);
 
@@ -743,45 +743,45 @@ export class SectScene extends Phaser.Scene {
   private createCultivationPanel(): void {
     this.cultivationPanel = new CultivationPanel(this, [
       {
-        label: 'ÃƒÆ’Ã¢â‚¬Å¾Ãƒâ€šÃ‚ÂÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢i chÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â¿ ÃƒÆ’Ã¢â‚¬Å¾ÃƒÂ¢Ã¢â€šÂ¬Ã‹Å“ÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢',
-        detail: 'BÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¬nh ÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢n / TÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Â¥ khÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â­',
+        label: 'Đổi chế độ',
+        detail: 'Bình ổn / Tụ khí',
         onClick: () => {
           const snapshot = getStateManager(this).update((draft) => {
             draft.player.cultivation.cultivationMode =
               draft.player.cultivation.cultivationMode === 'balanced' ? 'focused' : 'balanced';
-            draft.ui.statusMessage = `ÃƒÆ’Ã¢â‚¬Å¾Ãƒâ€šÃ‚ÂÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â£ chuyÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€ Ã¢â‚¬â„¢n sang chÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â¿ ÃƒÆ’Ã¢â‚¬Å¾ÃƒÂ¢Ã¢â€šÂ¬Ã‹Å“ÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ ${CULTIVATION_MODE_LABELS[draft.player.cultivation.cultivationMode]}.`;
+            draft.ui.statusMessage = `Đã chuyển sang chế độ ${CULTIVATION_MODE_LABELS[draft.player.cultivation.cultivationMode]}.`;
           });
           getSaveStore(this).saveGame(snapshot);
           this.refreshView(snapshot);
         }
       },
       {
-        label: 'TÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Â¥ khÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â­ thÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Â­',
-        detail: 'Debug +10 tiÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â¿n ÃƒÆ’Ã¢â‚¬Å¾ÃƒÂ¢Ã¢â€šÂ¬Ã‹Å“ÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢',
+        label: 'Tụ khí thử',
+        detail: 'Debug +10 tiến độ',
         onClick: () => {
-          const snapshot = getRealmSystem(this).addCultivationProgress(10, 'TÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Â¥ khÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â­ thÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Â­: +10 tiÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â¿n ÃƒÆ’Ã¢â‚¬Å¾ÃƒÂ¢Ã¢â€šÂ¬Ã‹Å“ÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ tu hÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â nh.');
-          this.refreshView(snapshot, 'TÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Â¥ khÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â­ thÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Â­: +10 tiÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â¿n ÃƒÆ’Ã¢â‚¬Å¾ÃƒÂ¢Ã¢â€šÂ¬Ã‹Å“ÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ tu hÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â nh.');
+          const snapshot = getRealmSystem(this).addCultivationProgress(10, 'Tụ khí thử: +10 tiến độ tu hành.');
+          this.refreshView(snapshot, 'Tụ khí thử: +10 tiến độ tu hành.');
         }
       },
       {
-        label: 'PhÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡p trÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â°ÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Âºc',
-        detail: 'ÃƒÆ’Ã¢â‚¬Å¾Ãƒâ€šÃ‚ÂÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢i cÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â´ng phÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡p ÃƒÆ’Ã¢â‚¬Å¾ÃƒÂ¢Ã¢â€šÂ¬Ã‹Å“ang xem',
+        label: 'Pháp trước',
+        detail: 'Đổi công pháp đang xem',
         onClick: () => {
           this.selectedTechniqueIndex = this.wrapIndex(this.selectedTechniqueIndex - 1, techniqueCatalog.techniques.length);
           this.refreshView(getStateManager(this).snapshot);
         }
       },
       {
-        label: 'PhÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡p sau',
-        detail: 'ÃƒÆ’Ã¢â‚¬Å¾Ãƒâ€šÃ‚ÂÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢i cÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â´ng phÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡p ÃƒÆ’Ã¢â‚¬Å¾ÃƒÂ¢Ã¢â€šÂ¬Ã‹Å“ang xem',
+        label: 'Pháp sau',
+        detail: 'Đổi công pháp đang xem',
         onClick: () => {
           this.selectedTechniqueIndex = this.wrapIndex(this.selectedTechniqueIndex + 1, techniqueCatalog.techniques.length);
           this.refreshView(getStateManager(this).snapshot);
         }
       },
       {
-        label: 'HÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Âc cÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â´ng phÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡p',
-        detail: 'NÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â¿u ÃƒÆ’Ã¢â‚¬Å¾ÃƒÂ¢Ã¢â€šÂ¬Ã‹Å“ÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Â§ cÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â£nh giÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Âºi',
+        label: 'Học công pháp',
+        detail: 'Nếu đủ cảnh giới',
         onClick: () => {
           const selectedTechnique = this.getSelectedTechnique();
           const result = getTechniqueSystem(this).learnTechnique(selectedTechnique.id);
@@ -789,8 +789,8 @@ export class SectScene extends Phaser.Scene {
         }
       },
       {
-        label: 'Trang bÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¹ chÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â­nh',
-        detail: 'DÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¹ng lÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â m cÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â´ng phÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡p chÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â­nh',
+        label: 'Trang bị chính',
+        detail: 'Dùng làm công pháp chính',
         onClick: () => {
           const selectedTechnique = this.getSelectedTechnique();
           const result = getTechniqueSystem(this).equipMainTechnique(selectedTechnique.id);
@@ -798,16 +798,16 @@ export class SectScene extends Phaser.Scene {
         }
       },
       {
-        label: 'ÃƒÆ’Ã¢â‚¬Å¾Ãƒâ€šÃ‚ÂÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢t phÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡',
-        detail: 'Khi ÃƒÆ’Ã¢â‚¬Å¾ÃƒÂ¢Ã¢â€šÂ¬Ã‹Å“ÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Â§ ÃƒÆ’Ã¢â‚¬Å¾ÃƒÂ¢Ã¢â€šÂ¬Ã‹Å“iÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Âu kiÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¡n',
+        label: 'Đột phá',
+        detail: 'Khi đủ điều kiện',
         onClick: () => {
           const result = getRealmSystem(this).performBreakthrough();
           this.refreshView(result.snapshot, result.message);
         }
       },
       {
-        label: 'ÃƒÆ’Ã¢â‚¬Å¾Ãƒâ€šÃ‚ÂÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â³ng panel',
-        detail: 'TrÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€¦Ã‚Â¸ vÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Â sÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â¡n mÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â´n',
+        label: 'Đóng panel',
+        detail: 'Trở về sơn môn',
         onClick: () => {
           this.toggleCultivationPanel(false);
         }
@@ -818,8 +818,8 @@ export class SectScene extends Phaser.Scene {
   private createDiplomacyPanel(): void {
     this.diplomacyPanel = new DiplomacyPanel(this, [
       {
-        label: 'Phe trÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â°ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â»ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Âºc',
-        detail: 'ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚ÂÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â»ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¢i phe ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¹Ã…â€œang xem',
+        label: 'Phe trước',
+        detail: 'Đổi phe đang xem',
         onClick: () => {
           this.selectedFactionIndex = this.wrapIndex(this.selectedFactionIndex - 1, getDiplomacySystem(this).getKnownFactions().length);
           this.refreshView(getStateManager(this).snapshot);
@@ -827,20 +827,20 @@ export class SectScene extends Phaser.Scene {
       },
       {
         label: 'Phe sau',
-        detail: 'ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚ÂÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â»ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¢i phe ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¹Ã…â€œang xem',
+        detail: 'Đổi phe đang xem',
         onClick: () => {
           this.selectedFactionIndex = this.wrapIndex(this.selectedFactionIndex + 1, getDiplomacySystem(this).getKnownFactions().length);
           this.refreshView(getStateManager(this).snapshot);
         }
       },
       {
-        label: 'MÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â»ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¸ thÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â° chÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â»ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â',
-        detail: 'ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¯u tiÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Âªn thÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â´ng ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¹Ã…â€œiÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â»ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¡p phe phÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¡i',
+        label: 'Mở thư chờ',
+        detail: 'Ưu tiên thông điệp phe phái',
         onClick: () => {
           const presentation = getEventRuntimeSystem(this).presentPendingDiplomacyMessage();
 
           if (!presentation) {
-            this.refreshView(getStateManager(this).snapshot, 'KhÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â´ng cÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â³ thÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â° ngoÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚ÂºÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¡i giao ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¹Ã…â€œang chÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â»ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â.');
+            this.refreshView(getStateManager(this).snapshot, 'Không có thư ngoại giao đang chờ.');
             return;
           }
 
@@ -849,48 +849,48 @@ export class SectScene extends Phaser.Scene {
         }
       },
       {
-        label: 'HÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â»ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã¢â‚¬Å“i ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢m mÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â»ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Âm',
-        detail: '+1 quan hÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â»ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¡',
+        label: 'Hồi âm mềm',
+        detail: '+1 quan hệ',
         onClick: () => {
           const result = getDiplomacySystem(this).sendPoliteResponse(this.getSelectedFactionId());
           this.refreshView(result.snapshot, result.message);
         }
       },
       {
-        label: 'GÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â»ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â­i lÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â»ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¦ vÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚ÂºÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â­t',
-        detail: '-10 linh thÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚ÂºÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¡ch',
+        label: 'Gửi lễ vật',
+        detail: '-10 linh thạch',
         onClick: () => {
           const result = getDiplomacySystem(this).sendTribute(this.getSelectedFactionId());
           this.refreshView(result.snapshot, result.message);
         }
       },
       {
-        label: 'BÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â»ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â qua',
-        detail: '-2 quan hÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â»ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¡',
+        label: 'Bỏ qua',
+        detail: '-2 quan hệ',
         onClick: () => {
           const result = getDiplomacySystem(this).ignoreFaction(this.getSelectedFactionId());
           this.refreshView(result.snapshot, result.message);
         }
       },
       {
-        label: 'Mua dÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â°ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â»ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â£c thÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚ÂºÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â£o',
-        detail: 'XÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â­ch LuyÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â»ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¡n BÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚ÂºÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â£o',
+        label: 'Mua dược thảo',
+        detail: 'Xích Luyện Bảo',
         onClick: () => {
           const result = getDiplomacySystem(this).executeTrade(this.getSelectedFactionId(), 'buy_herbs');
           this.refreshView(result.snapshot, result.message);
         }
       },
       {
-        label: 'Mua khoÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¡ng thÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚ÂºÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¡ch',
-        detail: 'XÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â­ch LuyÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â»ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¡n BÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚ÂºÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â£o',
+        label: 'Mua khoáng thạch',
+        detail: 'Xích Luyện Bảo',
         onClick: () => {
           const result = getDiplomacySystem(this).executeTrade(this.getSelectedFactionId(), 'buy_ore');
           this.refreshView(result.snapshot, result.message);
         }
       },
       {
-        label: 'ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚ÂÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â³ng panel',
-        detail: 'TrÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â»ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¸ vÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â»ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â sÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¡n mÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â´n',
+        label: 'Đóng panel',
+        detail: 'Trở về sơn môn',
         onClick: () => {
           this.toggleDiplomacyPanel(false);
         }
@@ -1013,24 +1013,24 @@ export class SectScene extends Phaser.Scene {
   private createInventoryPanel(): void {
     this.inventoryPanel = new InventoryPanel(this, [
       {
-        label: 'VÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â­t trÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â°ÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Âºc',
-        detail: 'ÃƒÆ’Ã¢â‚¬Å¾Ãƒâ€šÃ‚ÂÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢i vÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â­t ÃƒÆ’Ã¢â‚¬Å¾ÃƒÂ¢Ã¢â€šÂ¬Ã‹Å“ang xem',
+        label: 'Vật trước',
+        detail: 'Đổi vật đang xem',
         onClick: () => {
           this.selectedItemIndex = this.wrapIndex(this.selectedItemIndex - 1, this.getInventoryEntries(getStateManager(this).snapshot).length);
           this.refreshView(getStateManager(this).snapshot);
         }
       },
       {
-        label: 'VÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â­t sau',
-        detail: 'ÃƒÆ’Ã¢â‚¬Å¾Ãƒâ€šÃ‚ÂÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢i vÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â­t ÃƒÆ’Ã¢â‚¬Å¾ÃƒÂ¢Ã¢â€šÂ¬Ã‹Å“ang xem',
+        label: 'Vật sau',
+        detail: 'Đổi vật đang xem',
         onClick: () => {
           this.selectedItemIndex = this.wrapIndex(this.selectedItemIndex + 1, this.getInventoryEntries(getStateManager(this).snapshot).length);
           this.refreshView(getStateManager(this).snapshot);
         }
       },
       {
-        label: 'DÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¹ng vÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â­t phÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â©m',
-        detail: 'ChÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â° vÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â­t phÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â©m cÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â³ hiÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¡u ÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Â©ng',
+        label: 'Dùng vật phẩm',
+        detail: 'Chỉ vật phẩm có hiệu ứng',
         onClick: () => {
           const entry = this.getSelectedInventoryEntry(getStateManager(this).snapshot);
           if (!entry) {
@@ -1042,8 +1042,8 @@ export class SectScene extends Phaser.Scene {
         }
       },
       {
-        label: 'Trang bÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¹ phÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡p khÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â­',
-        detail: 'MÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢t slot cho trÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â°ÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€¦Ã‚Â¸ng mÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â´n',
+        label: 'Trang bị pháp khí',
+        detail: 'Một slot cho trưởng môn',
         onClick: () => {
           const entry = this.getSelectedInventoryEntry(getStateManager(this).snapshot);
           if (!entry) {
@@ -1055,16 +1055,16 @@ export class SectScene extends Phaser.Scene {
         }
       },
       {
-        label: 'ThÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡o phÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡p khÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â­',
-        detail: 'BÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Â trang bÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¹ hiÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¡n tÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â¡i',
+        label: 'Tháo pháp khí',
+        detail: 'Bỏ trang bị hiện tại',
         onClick: () => {
           const result = getArtifactSystem(this).unequipArtifact();
           this.refreshView(result.snapshot, result.message);
         }
       },
       {
-        label: 'ÃƒÆ’Ã¢â‚¬Å¾Ãƒâ€šÃ‚ÂÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â³ng panel',
-        detail: 'TrÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€¦Ã‚Â¸ vÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Â sÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â¡n mÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â´n',
+        label: 'Đóng panel',
+        detail: 'Trở về sơn môn',
         onClick: () => {
           this.toggleInventoryPanel(false);
         }
@@ -1075,23 +1075,23 @@ export class SectScene extends Phaser.Scene {
   private createAlchemyPanel(): void {
     this.alchemyPanel = new AlchemyPanel(this, [
       {
-        label: 'PhÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â°ÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â¡ng trÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â°ÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Âºc',
-        detail: 'ÃƒÆ’Ã¢â‚¬Å¾Ãƒâ€šÃ‚ÂÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢i ÃƒÆ’Ã¢â‚¬Å¾ÃƒÂ¢Ã¢â€šÂ¬Ã‹Å“an phÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â°ÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â¡ng ÃƒÆ’Ã¢â‚¬Å¾ÃƒÂ¢Ã¢â€šÂ¬Ã‹Å“ang xem',
+        label: 'Phương trước',
+        detail: 'Đổi đan phương đang xem',
         onClick: () => {
           this.selectedRecipeIndex = this.wrapIndex(this.selectedRecipeIndex - 1, alchemyRecipeCatalog.recipes.length);
           this.refreshView(getStateManager(this).snapshot);
         }
       },
       {
-        label: 'PhÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â°ÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â¡ng sau',
-        detail: 'ÃƒÆ’Ã¢â‚¬Å¾Ãƒâ€šÃ‚ÂÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢i ÃƒÆ’Ã¢â‚¬Å¾ÃƒÂ¢Ã¢â€šÂ¬Ã‹Å“an phÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â°ÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â¡ng ÃƒÆ’Ã¢â‚¬Å¾ÃƒÂ¢Ã¢â€šÂ¬Ã‹Å“ang xem',
+        label: 'Phương sau',
+        detail: 'Đổi đan phương đang xem',
         onClick: () => {
           this.selectedRecipeIndex = this.wrapIndex(this.selectedRecipeIndex + 1, alchemyRecipeCatalog.recipes.length);
           this.refreshView(getStateManager(this).snapshot);
         }
       },
       {
-        label: 'LuyÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¡n mÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢t mÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â»',
+        label: 'Luyện một mẻ',
         detail: 'Deterministic',
         onClick: () => {
           const recipe = this.getSelectedRecipe();
@@ -1100,8 +1100,8 @@ export class SectScene extends Phaser.Scene {
         }
       },
       {
-        label: 'ÃƒÆ’Ã¢â‚¬Å¾Ãƒâ€šÃ‚ÂÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â³ng panel',
-        detail: 'TrÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€¦Ã‚Â¸ vÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Â sÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â¡n mÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â´n',
+        label: 'Đóng panel',
+        detail: 'Trở về sơn môn',
         onClick: () => {
           this.toggleAlchemyPanel(false);
         }
@@ -1796,7 +1796,7 @@ export class SectScene extends Phaser.Scene {
 
     if (!presentation) {
       this.playFeedback('ui-invalid');
-      this.refreshView(getStateManager(this).snapshot, 'HÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â´m nay chÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â°a cÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â³ biÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â¿n cÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‹Å“ phÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¹ hÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Â£p.');
+      this.refreshView(getStateManager(this).snapshot, 'Hôm nay chưa có biến cố phù hợp.');
       return;
     }
 
@@ -1821,7 +1821,7 @@ export class SectScene extends Phaser.Scene {
 
     this.eventModal.show({
       title: event.title,
-      subtitle: `${event.kind === 'major' ? 'major' : event.category} ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¢ ngÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â y ${snapshot.time.day} ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¢ ${getChapterName(snapshot)}`,
+      subtitle: `${event.kind === 'major' ? 'major' : event.category} • ngày ${snapshot.time.day} • ${getChapterName(snapshot)}`,
       variant:
         event.kind === 'major'
           ? 'major'
@@ -2083,7 +2083,7 @@ export class SectScene extends Phaser.Scene {
     const breakthrough = getRealmSystem(this).checkBreakthroughEligibility(snapshot);
     const selectedDiscipleBuildingName = selectedDisciple?.assignedBuildingId
       ? buildingCatalog.buildings.find((building) => building.id === selectedDisciple.assignedBuildingId)?.name ?? selectedDisciple.assignedBuildingId
-      : 'ChÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â°a gÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡n';
+      : 'Chưa gán';
     const notableFlags = [
       ...snapshot.story.storyFlags.slice(-3),
       ...snapshot.story.worldFlags.slice(-2),
@@ -2210,27 +2210,27 @@ export class SectScene extends Phaser.Scene {
     this.applyRefreshFeedback(snapshot, latestChangeSummary);
     if (snapshot.ui.isCultivationPanelOpen) {
       this.cultivationPanel.show({
-        title: 'Tu hÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â nh',
+        title: 'Tu hành',
         summaryLines: [
-          `CÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â£nh giÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Âºi hiÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¡n tÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â¡i: ${currentRealm.name}`,
-          `TiÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â¿n ÃƒÆ’Ã¢â‚¬Å¾ÃƒÂ¢Ã¢â€šÂ¬Ã‹Å“ÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢: ${snapshot.player.cultivation.cultivationProgress}/${currentRealm.progressRequired}`,
-          `SÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Âµn sÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â ng ÃƒÆ’Ã¢â‚¬Å¾ÃƒÂ¢Ã¢â€šÂ¬Ã‹Å“ÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢t phÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡: ${snapshot.player.cultivation.breakthroughReady ? 'CÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â³' : 'ChÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â°a'}`,
-          `NÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Ân cÃƒÆ’Ã¢â‚¬Å¾Ãƒâ€ Ã¢â‚¬â„¢n: ${snapshot.player.cultivation.foundationStability}`,
-          `TÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢m ma ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡p lÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Â±c: ${snapshot.player.cultivation.tamMaPressure}`,
-          `ChÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â¿ ÃƒÆ’Ã¢â‚¬Å¾ÃƒÂ¢Ã¢â€šÂ¬Ã‹Å“ÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢: ${CULTIVATION_MODE_LABELS[snapshot.player.cultivation.cultivationMode]}`,
-          `LÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â§n tÃƒÆ’Ã¢â‚¬Å¾Ãƒâ€ Ã¢â‚¬â„¢ng gÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â§n nhÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â¥t: +${snapshot.player.cultivation.lastGain}`,
-          `Ghi chÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âº: ${snapshot.player.cultivation.lastSummary}`,
-          `ÃƒÆ’Ã¢â‚¬Å¾Ãƒâ€šÃ‚ÂiÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Âu kiÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¡n ÃƒÆ’Ã¢â‚¬Å¾ÃƒÂ¢Ã¢â€šÂ¬Ã‹Å“ÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢t phÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡: ${breakthrough.reason}`
+          `Cảnh giới hiện tại: ${currentRealm.name}`,
+          `Tiến độ: ${snapshot.player.cultivation.cultivationProgress}/${currentRealm.progressRequired}`,
+          `Sẵn sàng đột phá: ${snapshot.player.cultivation.breakthroughReady ? 'Có' : 'Chưa'}`,
+          `Nền căn: ${snapshot.player.cultivation.foundationStability}`,
+          `Tâm ma áp lực: ${snapshot.player.cultivation.tamMaPressure}`,
+          `Chế độ: ${CULTIVATION_MODE_LABELS[snapshot.player.cultivation.cultivationMode]}`,
+          `Lần tăng gần nhất: +${snapshot.player.cultivation.lastGain}`,
+          `Ghi chú: ${snapshot.player.cultivation.lastSummary}`,
+          `Điều kiện đột phá: ${breakthrough.reason}`
         ],
         techniqueLines: [
-          `CÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â´ng phÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡p chÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â­nh: ${this.getEquippedTechniqueLabel(snapshot)}`,
-          `ÃƒÆ’Ã¢â‚¬Å¾Ãƒâ€šÃ‚Âang xem: ${selectedTechnique.name}`,
-          `PhÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢n loÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â¡i: ${selectedTechnique.category} ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¢ LÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢: ${selectedTechnique.path}`,
-          `YÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âªu cÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â§u cÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â£nh giÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Âºi: ${selectedTechnique.requiredRealm}`,
-          `MÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â´ tÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â£: ${selectedTechnique.description}`,
-          `ThÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Â¥ ÃƒÆ’Ã¢â‚¬Å¾ÃƒÂ¢Ã¢â€šÂ¬Ã‹Å“ÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ng: ${this.describeTechniqueEffects(selectedTechnique.passiveEffects)}`,
+          `Công pháp chính: ${this.getEquippedTechniqueLabel(snapshot)}`,
+          `Đang xem: ${selectedTechnique.name}`,
+          `Phân loại: ${selectedTechnique.category} • Lộ: ${selectedTechnique.path}`,
+          `Yêu cầu cảnh giới: ${selectedTechnique.requiredRealm}`,
+          `Mô tả: ${selectedTechnique.description}`,
+          `Thụ động: ${this.describeTechniqueEffects(selectedTechnique.passiveEffects)}`,
           '',
-          `ÃƒÆ’Ã¢â‚¬Å¾Ãƒâ€šÃ‚ÂÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â£ biÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â¿t: ${snapshot.player.cultivation.knownTechniqueIds.join(', ') || 'ChÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â°a cÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â³'}`
+          `Đã biết: ${snapshot.player.cultivation.knownTechniqueIds.join(', ') || 'Chưa có'}`
         ]
       });
     } else {
@@ -2244,7 +2244,7 @@ export class SectScene extends Phaser.Scene {
           `Dang xem: ${selectedFaction.name}`,
           `Trang thai: ${selectedFactionState.relationStatus}`,
           `Diem quan he: ${selectedFactionState.relationScore}`,
-          `Canh bao: ${selectedFactionState.warningLevel} ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¢ Thu dich: ${selectedFactionState.hostilityLevel}`,
+          `Canh bao: ${selectedFactionState.warningLevel} • Thu dich: ${selectedFactionState.hostilityLevel}`,
           `Lien minh: ${selectedFactionState.allianceState}`,
           `Mo giao dich: ${selectedFactionState.tradeAccess ? 'Co' : 'Chua'}`,
           `Thu dang cho: ${snapshot.diplomacy.pendingMessageEventIds.length}`,
@@ -2257,7 +2257,7 @@ export class SectScene extends Phaser.Scene {
           '',
           'Tuong tac gan day',
           ...(selectedFactionState.recentInteractions.length > 0
-            ? selectedFactionState.recentInteractions.slice().reverse().map((entry) => `Ngay ${entry.day} ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¢ ${entry.type} ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¢ ${entry.summary}`)
+            ? selectedFactionState.recentInteractions.slice().reverse().map((entry) => `Ngay ${entry.day} • ${entry.type} • ${entry.summary}`)
             : ['Chua co']),
           '',
           `Trade nhanh: ${selectedFaction.id === 'xich_luyen_bao' ? 'Mua duoc thao / khoang thach bang linh thach.' : 'Phe nay chua co trade hook trong sprint nay.'}`
@@ -2306,7 +2306,7 @@ export class SectScene extends Phaser.Scene {
           '',
           'Danh sach khach khanh',
           ...(snapshot.sect.guestCultivators.length > 0
-            ? snapshot.sect.guestCultivators.map((guest) => `${guest.name} ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢ ${guest.bonusSummary} ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢ ${guest.remainingDays} ngay`)
+            ? snapshot.sect.guestCultivators.map((guest) => `${guest.name} • ${guest.bonusSummary} • ${guest.remainingDays} ngay`)
             : ['Chua co'])
         ]
       });
@@ -2316,26 +2316,26 @@ export class SectScene extends Phaser.Scene {
 
     if (snapshot.ui.isInventoryPanelOpen) {
       this.inventoryPanel.show({
-        title: 'TÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âºi ÃƒÆ’Ã¢â‚¬Å¾ÃƒÂ¢Ã¢â€šÂ¬Ã‹Å“ÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œ',
+        title: 'Túi đồ',
         summaryLines: [
-          `ÃƒÆ’Ã¢â‚¬Å¾Ãƒâ€šÃ‚ÂÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œ ÃƒÆ’Ã¢â‚¬Å¾ÃƒÂ¢Ã¢â€šÂ¬Ã‹Å“ang xem: ${selectedItemEntry?.definition.name ?? 'Kho trÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‹Å“ng'}`,
-          `SÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‹Å“ lÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â°ÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Â£ng: ${selectedItemEntry?.quantity ?? 0}`,
-          `LoÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â¡i: ${selectedItemEntry ? this.getItemCategoryLabel(selectedItemEntry.definition.category) : 'ChÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â°a cÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â³'}`,
-          `ÃƒÆ’Ã¢â‚¬Å¾Ãƒâ€šÃ‚ÂÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ hiÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â¿m: ${selectedItemEntry?.definition.rarity ?? 'ChÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â°a cÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â³'}`,
-          `Trang bÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¹ hiÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¡n tÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â¡i: ${equippedArtifact?.name ?? 'ChÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â°a trang bÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¹'}`,
-          `TÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢ng vÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â­t phÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â©m: ${inventoryEntries.length}`,
-          `Ghi chÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âº kho: ${snapshot.inventory.lastSummary}`
+          `Đồ đang xem: ${selectedItemEntry?.definition.name ?? 'Kho trống'}`,
+          `Số lượng: ${selectedItemEntry?.quantity ?? 0}`,
+          `Loại: ${selectedItemEntry ? this.getItemCategoryLabel(selectedItemEntry.definition.category) : 'Chưa có'}`,
+          `Độ hiếm: ${selectedItemEntry?.definition.rarity ?? 'Chưa có'}`,
+          `Trang bị hiện tại: ${equippedArtifact?.name ?? 'Chưa trang bị'}`,
+          `Tổng vật phẩm: ${inventoryEntries.length}`,
+          `Ghi chú kho: ${snapshot.inventory.lastSummary}`
         ],
         detailLines: selectedItemEntry
           ? [
-              `MÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â´ tÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â£: ${selectedItemEntry.definition.description}`,
-              `HiÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¡u ÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Â©ng: ${this.describeItem(selectedItemEntry.definition.id)}`,
+              `Mô tả: ${selectedItemEntry.definition.description}`,
+              `Hiệu ứng: ${this.describeItem(selectedItemEntry.definition.id)}`,
               `Flavor: ${selectedItemEntry.definition.flavorText}`,
               '',
-              `DÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¹ng ÃƒÆ’Ã¢â‚¬Å¾ÃƒÂ¢Ã¢â€šÂ¬Ã‹Å“ÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â°ÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Â£c: ${selectedItemEntry.definition.usableEffect ? 'CÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â³' : 'KhÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â´ng'}`,
-              `PhÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡p khÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â­: ${selectedItemEntry.definition.category === 'artifact' ? 'CÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â³' : 'KhÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â´ng'}`
+              `Dùng được: ${selectedItemEntry.definition.usableEffect ? 'Có' : 'Không'}`,
+              `Pháp khí: ${selectedItemEntry.definition.category === 'artifact' ? 'Có' : 'Không'}`
             ]
-          : ['Kho hiÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¡n chÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â°a cÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â³ vÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â­t phÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â©m nÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â o.']
+          : ['Kho hiện chưa có vật phẩm nào.']
       });
     } else {
       this.inventoryPanel.hide();
@@ -2344,20 +2344,20 @@ export class SectScene extends Phaser.Scene {
     if (snapshot.ui.isAlchemyPanelOpen) {
       const recipeCheck = getAlchemySystem(this).canCraft(selectedRecipe.id, snapshot);
       this.alchemyPanel.show({
-        title: 'LuyÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¡n ÃƒÆ’Ã¢â‚¬Å¾ÃƒÂ¢Ã¢â€šÂ¬Ã‹Å“an',
+        title: 'Luyện đan',
         summaryLines: [
-          `ÃƒÆ’Ã¢â‚¬Å¾Ãƒâ€šÃ‚Âan phÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â°ÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â¡ng: ${selectedRecipe.name}`,
-          `YÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âªu cÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â§u cÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â´ng trÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¬nh: ${buildingCatalog.buildings.find((building) => building.id === selectedRecipe.requiredBuildingId)?.name ?? selectedRecipe.requiredBuildingId}`,
-          `CÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â³ thÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€ Ã¢â‚¬â„¢ luyÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¡n: ${recipeCheck.ok ? 'CÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â³' : 'ChÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â°a'}`,
-          `Ghi chÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âº: ${recipeCheck.reason === 'ok' ? 'NguyÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âªn liÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¡u ÃƒÆ’Ã¢â‚¬Å¾ÃƒÂ¢Ã¢â€šÂ¬Ã‹Å“ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â£ ÃƒÆ’Ã¢â‚¬Å¾ÃƒÂ¢Ã¢â€šÂ¬Ã‹Å“ÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Â§.' : recipeCheck.reason}`
+          `Đan phương: ${selectedRecipe.name}`,
+          `Yêu cầu công trình: ${buildingCatalog.buildings.find((building) => building.id === selectedRecipe.requiredBuildingId)?.name ?? selectedRecipe.requiredBuildingId}`,
+          `Có thể luyện: ${recipeCheck.ok ? 'Có' : 'Chưa'}`,
+          `Ghi chú: ${recipeCheck.reason === 'ok' ? 'Nguyên liệu đã đủ.' : recipeCheck.reason}`
         ],
         detailLines: [
-          `MÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â´ tÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â£: ${selectedRecipe.description}`,
+          `Mô tả: ${selectedRecipe.description}`,
           '',
-          'NguyÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âªn liÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¡u',
-          ...selectedRecipe.ingredients.map((ingredient) => `${itemCatalog.items.find((item) => item.id === ingredient.itemId)?.name ?? ingredient.itemId} x${ingredient.amount} ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¢ ÃƒÆ’Ã¢â‚¬Å¾ÃƒÂ¢Ã¢â€šÂ¬Ã‹Å“ang cÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â³ ${snapshot.inventory.items[ingredient.itemId] ?? 0}`),
+          'Nguyên liệu',
+          ...selectedRecipe.ingredients.map((ingredient) => `${itemCatalog.items.find((item) => item.id === ingredient.itemId)?.name ?? ingredient.itemId} x${ingredient.amount} • đang có ${snapshot.inventory.items[ingredient.itemId] ?? 0}`),
           '',
-          'ThÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â nh phÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â©m',
+          'Thành phẩm',
           ...selectedRecipe.outputs.map((output) => `${itemCatalog.items.find((item) => item.id === output.itemId)?.name ?? output.itemId} x${output.amount}`)
         ]
       });
@@ -2455,15 +2455,15 @@ export class SectScene extends Phaser.Scene {
   private getItemCategoryLabel(category: string): string {
     switch (category) {
       case 'herb':
-        return 'Linh thÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â£o';
+        return 'Linh thảo';
       case 'ore':
-        return 'KhoÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡ng liÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¡u';
+        return 'Khoáng liệu';
       case 'pill':
-        return 'ÃƒÆ’Ã¢â‚¬Å¾Ãƒâ€šÃ‚Âan dÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â°ÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Â£c';
+        return 'Đan dược';
       case 'material':
-        return 'VÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â­t liÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¡u';
+        return 'Vật liệu';
       case 'artifact':
-        return 'PhÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡p khÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â­';
+        return 'Pháp khí';
       default:
         return category;
     }
@@ -2477,19 +2477,19 @@ export class SectScene extends Phaser.Scene {
     }
 
     if (definition.usableEffect?.type === 'player_cultivation_progress') {
-      return `DÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¹ng: +${definition.usableEffect.value} tiÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â¿n ÃƒÆ’Ã¢â‚¬Å¾ÃƒÂ¢Ã¢â€šÂ¬Ã‹Å“ÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ tu hÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â nh.`;
+      return `Dùng: +${definition.usableEffect.value} tiến độ tu hành.`;
     }
 
     if (definition.usableEffect?.type === 'foundation_stability') {
-      return `DÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¹ng: +${definition.usableEffect.value} nÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Ân cÃƒÆ’Ã¢â‚¬Å¾Ãƒâ€ Ã¢â‚¬â„¢n, ${definition.usableEffect.tamMaPressureDelta ?? 0} tÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢m ma.`;
+      return `Dùng: +${definition.usableEffect.value} nền căn, ${definition.usableEffect.tamMaPressureDelta ?? 0} tâm ma.`;
     }
 
     if (definition.artifactEffect?.type === 'daily_cultivation_progress') {
-      return `Trang bÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¹: +${definition.artifactEffect.value} tiÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â¿n ÃƒÆ’Ã¢â‚¬Å¾ÃƒÂ¢Ã¢â€šÂ¬Ã‹Å“ÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ tu hÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â nh mÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Âi ngÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â y.`;
+      return `Trang bị: +${definition.artifactEffect.value} tiến độ tu hành mỗi ngày.`;
     }
 
     if (definition.artifactEffect?.type === 'exploration_max_health') {
-      return `Trang bÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¹: +${definition.artifactEffect.value} HP khi thÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡m hiÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€ Ã¢â‚¬â„¢m.`;
+      return `Trang bị: +${definition.artifactEffect.value} HP khi thám hiểm.`;
     }
 
     return definition.description;
@@ -2505,45 +2505,45 @@ export class SectScene extends Phaser.Scene {
 
   private getEquippedTechniqueLabel(snapshot: Readonly<GameState>): string {
     const equipped = getTechniqueSystem(this).getEquippedTechnique(snapshot);
-    return equipped?.name ?? 'ChÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â°a trang bÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¹';
+    return equipped?.name ?? 'Chưa trang bị';
   }
 
   private describeTechniqueEffects(effects: Record<string, number | undefined>): string {
     const lines: string[] = [];
 
     if (typeof effects.dailyCultivationProgress === 'number') {
-      lines.push(`+${effects.dailyCultivationProgress} tiÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â¿n ÃƒÆ’Ã¢â‚¬Å¾ÃƒÂ¢Ã¢â€šÂ¬Ã‹Å“ÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢/ngÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â y`);
+      lines.push(`+${effects.dailyCultivationProgress} tiến độ/ngày`);
     }
 
     if (typeof effects.foundationStabilityBonus === 'number') {
-      lines.push(`+${effects.foundationStabilityBonus} nÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Ân cÃƒÆ’Ã¢â‚¬Å¾Ãƒâ€ Ã¢â‚¬â„¢n khi vÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â­n cÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â´ng`);
+      lines.push(`+${effects.foundationStabilityBonus} nền căn khi vận công`);
     }
 
     if (typeof effects.tamMaPressureMitigation === 'number') {
-      lines.push(`-${effects.tamMaPressureMitigation} ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡p lÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Â±c tÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢m ma`);
+      lines.push(`-${effects.tamMaPressureMitigation} áp lực tâm ma`);
     }
 
     if (typeof effects.linhKhiDailyBonus === 'number') {
-      lines.push(`+${effects.linhKhiDailyBonus} linh khÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â­/ngÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â y`);
+      lines.push(`+${effects.linhKhiDailyBonus} linh khí/ngày`);
     }
 
-    return lines.join(', ') || 'ChÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â°a cÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â³ hiÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¡u ÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Â©ng rÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âµ trong sprint nÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â y.';
+    return lines.join(', ') || 'Chưa có hiệu ứng rõ trong sprint này.';
   }
 
   private getBuildingEffectText(buildingId: BuildingId): string {
     switch (buildingId) {
       case 'tinh_tu_duong':
-        return 'TÃƒÆ’Ã¢â‚¬Å¾Ãƒâ€ Ã¢â‚¬â„¢ng linh khÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â­ mÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Âi ngÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â y vÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â  hÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â trÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Â£ tu hÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â nh cÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Â§a chÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â°ÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€¦Ã‚Â¸ng mÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â´n lÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â«n ÃƒÆ’Ã¢â‚¬Å¾ÃƒÂ¢Ã¢â€šÂ¬Ã‹Å“ÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¡ tÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Â­.';
+        return 'Tăng linh khí mỗi ngày và hỗ trợ tu hành của chưởng môn lẫn đệ tử.';
       case 'duoc_vien':
-        return 'TÃƒÆ’Ã¢â‚¬Å¾Ãƒâ€ Ã¢â‚¬â„¢ng dÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â°ÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Â£c thÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â£o, mÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â¡nh hÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â¡n khi gÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡n ngÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â°ÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Âi trÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œng dÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â°ÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Â£c.';
+        return 'Tăng dược thảo, mạnh hơn khi gán người trồng dược.';
       case 'linh_thach_kho':
-        return 'ÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Ân ÃƒÆ’Ã¢â‚¬Å¾ÃƒÂ¢Ã¢â€šÂ¬Ã‹Å“ÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¹nh linh thÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â¡ch, hÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â trÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Â£ thu thÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â­p khoÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡ng thÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â¡ch.';
+        return 'Ổn định linh thạch, hỗ trợ thu thập khoáng thạch.';
       case 'luyen_khi_phong':
-        return 'Cho ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â­t linh thÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â¡ch tinh luyÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¡n khi cÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â³ ngÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â°ÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Âi luyÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¡n ÃƒÆ’Ã¢â‚¬Å¾ÃƒÂ¢Ã¢â€šÂ¬Ã‹Å“an.';
+        return 'Cho ít linh thạch tinh luyện khi có người luyện đan.';
       case 'ho_son_tran_dai':
-        return 'TÃƒÆ’Ã¢â‚¬Å¾Ãƒâ€ Ã¢â‚¬â„¢ng phÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â²ng thÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Â§ nÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Ân vÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â  giÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âºp giÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Â¯ tÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢m ma ÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢n hÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â¡n ÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€¦Ã‚Â¸ chÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â¿ ÃƒÆ’Ã¢â‚¬Å¾ÃƒÂ¢Ã¢â€šÂ¬Ã‹Å“ÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ bÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¬nh ÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢n.';
+        return 'Tăng phòng thủ nền và giúp giữ tâm ma ổn hơn ở chế độ bình ổn.';
       default:
-        return 'CÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â´ng trÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¬nh nÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Ân cho sÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â¡n mÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â´n, mÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€¦Ã‚Â¸ thÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âªm nhÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¹p vÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚ÂºÃƒâ€šÃ‚Â­n hÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â nh vÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Â sau.';
+        return 'Công trình nền cho sơn môn, mở thêm nhịp vận hành về sau.';
     }
   }
 
@@ -2555,11 +2555,9 @@ export class SectScene extends Phaser.Scene {
       wood: 'linhMoc'
     };
     const entries = Object.entries(cost).filter(([, value]) => typeof value === 'number' && value > 0);
-    return entries.map(([key, value]) => `${labels[key] ?? key}:${value}`).join(', ') || 'KhÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â´ng tÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â€šÂ¬Ã‹Å“n';
+    return entries.map(([key, value]) => `${labels[key] ?? key}:${value}`).join(', ') || 'Không tốn';
   }
 }
-
-
 
 
 

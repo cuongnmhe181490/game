@@ -1,4 +1,4 @@
-﻿import { buildingCatalog, realmCatalog, type RealmDefinition } from '@/game/data';
+import { buildingCatalog, realmCatalog, type RealmDefinition } from '@/game/data';
 import type { GameStateManager } from '@/game/state/GameStateManager';
 import type { BuildingId, GameState, RealmId, ResourceDeltaState } from '@/game/state/types';
 import { RESOURCE_IDS } from '@/game/state/types';
@@ -50,7 +50,7 @@ export class RealmSystem {
     return realmCatalog.realms.find((realm) => realm.order === currentRealm.order + 1) ?? null;
   }
 
-  addCultivationProgress(amount: number, reason = 'Tu hÃ nh thÃªm má»™t nhá»‹p.'): Readonly<GameState> {
+  addCultivationProgress(amount: number, reason = 'Tu hành thêm một nhịp.'): Readonly<GameState> {
     const gain = Math.max(0, Math.trunc(amount));
     const snapshot = this.stateManager.update((draft) => {
       this.applyCultivationGainToDraft(draft, gain, reason);
@@ -76,29 +76,29 @@ export class RealmSystem {
       : 0;
 
     let amount = 2 + linhKhiBonus;
-    const lines: string[] = [`Ná»n cáº£nh giá»›i ${currentRealm.name}: +${2 + linhKhiBonus}`];
+    const lines: string[] = [`Nền cảnh giới ${currentRealm.name}: +${2 + linhKhiBonus}`];
 
     if (cultivation.cultivationMode === 'focused') {
       amount += 2;
-      lines.push('Cháº¿ Ä‘á»™ tá»¥ khÃ­: +2');
+      lines.push('Chế độ tụ khí: +2');
     } else {
       amount += 1;
-      lines.push('Cháº¿ Ä‘á»™ bÃ¬nh á»•n: +1');
+      lines.push('Chế độ bình ổn: +1');
     }
 
     if (tinhTuDuongLevel > 0) {
       amount += tinhTuDuongLevel;
-      lines.push(`TÄ©nh Tu ÄÆ°á»ng: +${tinhTuDuongLevel}`);
+      lines.push(`Tĩnh Tu Đường: +${tinhTuDuongLevel}`);
     }
 
     if (typeof equipped.dailyCultivationProgress === 'number' && equipped.dailyCultivationProgress > 0) {
       amount += equipped.dailyCultivationProgress;
-      lines.push(`CÃ´ng phÃ¡p chÃ­nh: +${equipped.dailyCultivationProgress}`);
+      lines.push(`Công pháp chính: +${equipped.dailyCultivationProgress}`);
     }
 
     if (artifactBonuses.dailyCultivationProgressBonus > 0) {
       amount += artifactBonuses.dailyCultivationProgressBonus;
-      lines.push(`PhÃ¡p khÃ­ há»™ thÃ¢n: +${artifactBonuses.dailyCultivationProgressBonus}`);
+      lines.push(`Pháp khí hộ thân: +${artifactBonuses.dailyCultivationProgressBonus}`);
     }
 
     if ((sectModifiers.playerCultivationDaily ?? 0) !== 0) {
@@ -110,31 +110,31 @@ export class RealmSystem {
 
     if (typeof equipped.linhKhiDailyBonus === 'number' && equipped.linhKhiDailyBonus > 0) {
       resourceDelta.linhKhi = equipped.linhKhiDailyBonus;
-      lines.push(`Äiá»u tá»©c linh khÃ­: +${equipped.linhKhiDailyBonus} linhKhi`);
+      lines.push(`Điều tức linh khí: +${equipped.linhKhiDailyBonus} linhKhi`);
     }
 
     if (cultivation.foundationStability < 40) {
       amount -= 1;
-      lines.push('Ná»n cÄƒn xao Ä‘á»™ng: -1');
+      lines.push('Nền căn xao động: -1');
     }
 
     if (cultivation.foundationStability < 25) {
       amount -= 1;
-      lines.push('Ná»n cÄƒn suy thÃªm: -1');
+      lines.push('Nền căn suy thêm: -1');
     }
 
     if (cultivation.tamMaPressure >= 30) {
       amount -= 1;
-      lines.push('TÃ¢m ma Ã¡p lá»±c: -1');
+      lines.push('Tâm ma áp lực: -1');
     }
 
     if (cultivation.tamMaPressure >= 60) {
       amount -= 1;
-      lines.push('TÃ¢m niá»‡m nhiá»…u náº·ng: -1');
+      lines.push('Tâm niệm nhiễu nặng: -1');
     }
 
     if (hoSonLevel > 0 && cultivation.cultivationMode === 'balanced') {
-      lines.push(`Há»™ SÆ¡n Tráº­n ÄÃ i giá»¯ tÃ¢m: -${hoSonLevel} tÃ¢m ma`);
+      lines.push(`Hộ Sơn Trận Đài giữ tâm: -${hoSonLevel} tâm ma`);
     }
 
     return {
@@ -160,7 +160,7 @@ export class RealmSystem {
     if (snapshot.player.cultivation.cultivationProgress < currentRealm.progressRequired) {
       return {
         eligible: false,
-        reason: `Tiáº¿n Ä‘á»™ chÆ°a Ä‘á»§ Ä‘á»ƒ vÆ°á»£t ${currentRealm.name}.`,
+        reason: `Tiến độ chưa đủ để vượt ${currentRealm.name}.`,
         currentRealm,
         nextRealm
       };
@@ -174,7 +174,7 @@ export class RealmSystem {
       const buildingName = buildingCatalog.buildings.find((entry) => entry.id === missingBuilding)?.name ?? missingBuilding;
       return {
         eligible: false,
-        reason: `Thiáº¿u cÃ´ng trÃ¬nh cáº§n cho Ä‘á»™t phÃ¡: ${buildingName}.`,
+        reason: `Thiếu công trình cần cho đột phá: ${buildingName}.`,
         currentRealm,
         nextRealm
       };
@@ -185,7 +185,7 @@ export class RealmSystem {
     if (!this.resourceSystem.canAfford(this.toNegativeDelta(cost))) {
       return {
         eligible: false,
-        reason: `TÃ i nguyÃªn chÆ°a Ä‘á»§ Ä‘á»ƒ Ä‘á»™t phÃ¡ ${nextRealm.name}.`,
+        reason: `Tài nguyên chưa đủ để đột phá ${nextRealm.name}.`,
         currentRealm,
         nextRealm
       };
@@ -196,7 +196,7 @@ export class RealmSystem {
     if (missingFlag) {
       return {
         eligible: false,
-        reason: `ChÆ°a Ä‘áº¡t Ä‘iá»u kiá»‡n truyá»‡n: ${missingFlag}.`,
+        reason: `Chưa đạt điều kiện truyện: ${missingFlag}.`,
         currentRealm,
         nextRealm
       };
@@ -204,7 +204,7 @@ export class RealmSystem {
 
     return {
       eligible: true,
-      reason: `Äá»§ Ä‘iá»u kiá»‡n Ä‘á»™t phÃ¡ lÃªn ${nextRealm.name}.`,
+      reason: `Đủ điều kiện đột phá lên ${nextRealm.name}.`,
       currentRealm,
       nextRealm
     };
@@ -246,7 +246,7 @@ export class RealmSystem {
           + (cultivation.foundationStability < 45 ? 6 : 2)
           - (equippedEffects.tamMaPressureMitigation ?? 0)
       );
-      cultivation.lastSummary = `ÄÃ£ Ä‘á»™t phÃ¡ lÃªn ${nextRealm.name}.`;
+      cultivation.lastSummary = `Đã đột phá lên ${nextRealm.name}.`;
       this.applyRealmUnlocks(draft, nextRealm);
 
       const reachedFlag = `realm_${nextRealm.id}_reached`;
@@ -258,13 +258,13 @@ export class RealmSystem {
         draft.story.storyFlags.push('first_breakthrough_done');
       }
 
-      draft.ui.statusMessage = `ÄÃ£ Ä‘á»™t phÃ¡ lÃªn ${nextRealm.name}.`;
+      draft.ui.statusMessage = `Đã đột phá lên ${nextRealm.name}.`;
     });
 
     this.saveSystem.saveGame(snapshot);
     return {
       ok: true,
-      message: `ÄÃ£ Ä‘á»™t phÃ¡ lÃªn ${nextRealm.name}.`,
+      message: `Đã đột phá lên ${nextRealm.name}.`,
       snapshot
     };
   }

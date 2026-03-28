@@ -265,18 +265,18 @@
       "requiredEnvironmentTags": [
         "ruined_path"
       ],
-      "title": "Tháº¡ch Mác Chæ°a Máº¥t HÆ°á»›ng",
-      "body": "BÃªn lá»‘i mÃ²n cÃ²n má»™t máº·t Ä‘Ã¡ kháº¯c ná»­a chÃ«m ná»­a má», dÆ°á»ng nhÆ° tá»«ng dÃ¹ng Ä‘á»ƒ dáº«n mÃ´n nhÃ¢n vá» háº­u cá»‘c trÃ¡nh Ä‘áº¡i biáº¿n. ÄÃ¢y khÃ´ng pháº£i báº£o váº­t, nhÆ°ng cÃ³ thá»ƒ lÃ  má»™t nhá»‹p nháº¯c Thanh Huyá»n MÃ´n váº«n cÃ²n dáº¥u xÆ°a.",
+      "title": "Thạch Mác Chæ°a Mất Hướng",
+      "body": "Bên lối mòn còn một mặt đá khắc nửa chëm nửa mờ, dường như từng dùng để dẫn môn nhân về hậu cốc tránh đại biến. Đây không phải bảo vật, nhưng có thể là một nhịp nhắc Thanh Huyền Môn vẫn còn dấu xưa.",
       "choices": [
         {
           "id": "copy_marks",
-          "label": "ChÃ©p láº¡i kháº¯c dáº¥u",
-          "outcome": "Mang vá» má»™t má»‘i manh vá» Ä‘áº¡o lá»™ cÅ©."
+          "label": "Chép lại khắc dấu",
+          "outcome": "Mang về một mối manh về đạo lộ cũ."
         },
         {
           "id": "clear_the_base",
-          "label": "Dá»n sáº¡ch chÃ¢n mÃ¡c",
-          "outcome": "Giá»¯ lÃ¡º¡i lá»‘i cÅ© cho ngÆ°á»i sau."
+          "label": "Dọn sạch chân mác",
+          "outcome": "Giữ lại lối cÅ© cho người sau."
         }
       ],
       "effects": {
@@ -305,18 +305,18 @@
       "requiredEnvironmentTags": [
         "black_forest"
       ],
-      "title": "TÃºi HÃ nh CÆ°á»›c Bá»‹ Bá» Láº¡i",
-      "body": "DÆ°á»›i gá»‘c háº¯c má»™c cÃ²n má»™t tÃºi da bá»‹ xÆ°á»›c sáº©m nhá»±a, trong cÃ³ mÃ£nh sá»• giao hÃ ng dÃ­nh áº¥n cá»§a XÃ­ch Luyá»‡n Báº£o. Váº­t trong tÃºi khÃ´ng nhiá»u, nhÆ°ng dÃ¡u vÃ¿t cÅ©ng chÆ°a lÃ¢u.",
+      "title": "Túi Hành Cước Bị Bỏ Lại",
+      "body": "Dưới gốc hắc mộc còn một túi da bị xước sẩm nhựa, trong có mãnh sổ giao hàng dính ấn của Xích Luyện Bảo. Vật trong túi không nhiều, nhưng dáu vÿt cũng chưa lâu.",
       "choices": [
         {
           "id": "take_goods_and_note",
-          "label": "Giá»¯ cáº£ hÃ ng láº«n sá»•",
-          "outcome": "Thu Ä‘Æ°á»£c váº­t hiáº¿m nhÆ°ng cÅ©ng cháº¡m vÃ o mÃ¡ch ngoáº¡i sÆ¡n."
+          "label": "Giữ cả hàng lẫn sổ",
+          "outcome": "Thu được vật hiếm nhưng cũng chạm vào mách ngoại sơn."
         },
         {
           "id": "send_note_back",
-          "label": "Mang sá»• vá» tráº£ láº¡i",
-          "outcome": "KhÃ´ng láº¥y háº¿t lá»£i trÆ°á»›c máº¯t, Ä‘á»•i láº¥y dáº¥u thiá»‡n chÃ­."
+          "label": "Mang sổ về trả lại",
+          "outcome": "Không lấy hết lợi trước mắt, đổi lấy dấu thiện chí."
         }
       ],
       "effects": {
@@ -352,18 +352,18 @@
       "requiredEnvironmentTags": [
         "sect_history"
       ],
-      "title": "Mộ Áº¤n Cá»§a TrÆ°á»Ÿng Lá»o Chi PhÃ¡i",
-      "body": "Trong khe Ä‘Ã¡ khuáº¥t giÃ³ cÃ³ má»™t mộ áº¥n ráº¥t nhá», trÃªn Ä‘á»‰nh kháº¯c biá»ƒu vÄƒn cá»§a má»™t chi nhÃ¡nh Thanh Huyá»n Ä‘Ã£ máº¥t tÃªn. Chung quanh khÃ´ng cÃ³ báº£o váº­t lÃ³e sÃ¡ng, chá»‰ cÃ³ cáº£m giÃ¡c ngÆ°á»i xÆ°a váº«n muá»‘n Ä‘á»ƒ láº¡i má»™t cÃ¢u dÄƒn cho káº» Ä‘i sau.",
+      "title": "Mộ Áº¤n Cá»§a Trưởng Lềo Chi Phái",
+      "body": "Trong khe đá khuất gió có má»™t mộ ấn rất nhỏ, trên đỉnh khắc biểu văn cá»§a má»™t chi nhánh Thanh Huyền đã mất tên. Chung quanh không có bảo vật lóe sáng, chỉ có cảm giác người xưa vẫn muốn để lại má»™t câu dăn cho kẻ Ä'i sau.",
       "choices": [
         {
           "id": "offer_quiet_respect",
-          "label": "Dá»«ng láº¡i hÃ nh lá»…",
-          "outcome": "Nháº­n láº¥y má»™t nhá»‹p yÃªn vÃ  chÃºt khÃ­ váº­n."
+          "label": "Dừng lại hành lễ",
+          "outcome": "Nhận lấy một nhịp yên và chút khí vận."
         },
         {
           "id": "lift_the_stone_case",
-          "label": "Má»Ÿ há»™c Ä‘Ã¡ nhá»",
-          "outcome": "Mang vá» máº£nh ghi chÃ©p cá»§a chi phÃ¡i cÅ©."
+          "label": "Mở hộc đá nhỏ",
+          "outcome": "Mang về mảnh ghi chép của chi phái cũ."
         }
       ],
       "effects": {
@@ -390,18 +390,18 @@
       "requiredEnvironmentTags": [
         "inheritance"
       ],
-      "title": "Váº¡ch HÆ°á»›ng Dáº«n Nứt Dà i",
-      "body": "Má»™t váº¡ch Ä‘Ã¡ sau tÃ n Ä‘iá»‡n cÃ²n khÃ¡ kháº¯c nhá»¯ng dÃ²ng khuyáº¿n giá»›i dÃ nh cho mÃ´n sinh khi má»›i vÃ o ná»™i mÃ´n. Ná»­a trÃªn khuyáº¿n ngÆ°á»i giÃ¯n khÃ­, ná»­a dÆ°á»›i khuyáº¿n giÃ¯n tÃ¢m; ráº¥t Ã­t dáº¡y phÃ¡p nÃ³i tháº³ng nhÆ° váº­y.",
+      "title": "Vạch Hướng Dẫn Nứt Dà i",
+      "body": "Một vạch đá sau tàn điện còn khá khắc những dòng khuyến giới dành cho môn sinh khi mới vào nội môn. Nửa trên khuyến người giïn khí, nửa dưới khuyến giïn tâm; rất ít dạy pháp nói thẳng như vậy.",
       "choices": [
         {
           "id": "read_until_dusk",
-          "label": "Äá»©ng láº¡i Ä‘á»c háº¿t",
-          "outcome": "Láº¥y chÃºt ngá»™ ra tá»« lá»i dÄƒn cá»§a ngÆ°á»i xÆ°a."
+          "label": "Đứng lại đọc hết",
+          "outcome": "Lấy chút ngộ ra từ lời dăn của người xưa."
         },
         {
           "id": "pry_loose_the_jade_pin",
-          "label": "Gá»¡ ngá»c chÃ´n trong kẽ nứt",
-          "outcome": "Mang vá» váº­t nhá» giÃºp Ä‘i Ä‘Æ°á»ng xa bÃªn ngoÃ i sÆ¡n."
+          "label": "Gỡ ngọc chôn trong kẽ nứt",
+          "outcome": "Mang về vật nhỏ giúp đi đường xa bên ngoài sơn."
         }
       ],
       "effects": {
