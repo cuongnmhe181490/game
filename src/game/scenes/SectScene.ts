@@ -2142,12 +2142,11 @@ export class SectScene extends Phaser.Scene {
 
     this.buildingDetailText.setText([
       `Dang chon: ${selectedBuildingDefinition.name}`,
-      `Trang thai: ${selectedBuildingState.status}`,
-      `Hieu qua: ${this.getBuildingEffectText(selectedBuildingId)}`,
-      `Dung ngay: ${constructCheck.ok ? 'Co the' : constructCheck.reason}`,
+      `Trang thai: ${selectedBuildingState.status} | Cap ${selectedBuildingState.level}`,
+      `Dung: ${constructCheck.ok ? 'Co the' : constructCheck.reason}`,
       `Nang cap: ${upgradeCheck.ok ? 'Co the' : upgradeCheck.reason}`,
-      `Chi phi dung: ${this.formatCost(selectedBuildingDefinition.buildCost as Record<string, number>)}`,
-      `Chi phi nang cap: ${this.formatCost(getBuildingSystem(this).getUpgradeCost(selectedBuildingId, selectedBuildingState.level))}`
+      `Hieu qua: ${this.getBuildingEffectText(selectedBuildingId)}`,
+      `Chi phi: ${this.formatCost(selectedBuildingDefinition.buildCost as Record<string, number>)}`
     ]);
 
     this.discipleListText.setText(
@@ -2167,17 +2166,12 @@ export class SectScene extends Phaser.Scene {
       selectedDisciple
         ? [
             `Dang chon: ${selectedDisciple.name}`,
-            `Tuoi: ${selectedDisciple.age} | Canh gioi: ${getDiscipleRealmName(selectedDisciple.realmId)}`,
-            `Linh can: ${selectedDisciple.rootType} | Ngo tinh ${selectedDisciple.comprehension}`,
-            `Tien do: ${selectedDisciple.cultivationProgress} | San dot pha: ${selectedDisciple.breakthroughReady ? 'Co' : 'Chua'}`,
-            `Tam trang: ${selectedDisciple.mood} | Trung thanh: ${selectedDisciple.loyalty} | The trang: ${selectedDisciple.health}`,
-            `Trang thai: ${getDiscipleStatusLabel(selectedDisciple.status)}`,
-            `Nhiem vu: ${TASK_LABELS[selectedDisciple.currentTask]}`,
-            `Cong trinh: ${selectedDiscipleBuildingName}`,
+            `Canh gioi: ${getDiscipleRealmName(selectedDisciple.realmId)} | Tuoi ${selectedDisciple.age}`,
+            `Nhiem vu: ${TASK_LABELS[selectedDisciple.currentTask]} | Cong trinh: ${selectedDiscipleBuildingName}`,
+            `Tien do: ${selectedDisciple.cultivationProgress} | Dot pha: ${selectedDisciple.breakthroughReady ? 'San sang' : 'Chua'}`,
+            `Tam trang ${selectedDisciple.mood} | Trung thanh ${selectedDisciple.loyalty} | The trang ${selectedDisciple.health}`,
             `Uu diem: ${selectedDisciple.positiveTraitIds.map((traitId) => this.getTraitLabel(traitId)).join(', ') || 'Chua co'}`,
-            `Khuyet diem: ${selectedDisciple.flawTraitIds.map((traitId) => this.getTraitLabel(traitId)).join(', ') || 'Chua co'}`,
-            `Risk: ${selectedDisciple.riskFlags.join(', ') || 'On'}`,
-            `Ghi chu: ${selectedDisciple.lastDailyNote}`
+            `Khuyet diem: ${selectedDisciple.flawTraitIds.map((traitId) => this.getTraitLabel(traitId)).join(', ') || 'Chua co'}`
           ].join('\n')
         : 'Chua co de tu.'
     );
@@ -2185,26 +2179,41 @@ export class SectScene extends Phaser.Scene {
     this.eventText.setText([
       getBuildInfoLine(),
       `Event active: ${activeEvent?.title ?? 'Khong co'}`,
-      `Loai: ${snapshot.events.activeEventType ?? 'Khong co'}`,
-      `Da thay: ${snapshot.story.seenEventIds.length}`,
-      `Da giai: ${snapshot.events.history.length}`,
-      `Tham hiem: ${starterMap.name} | ${mapUnlocked ? 'Da mo' : 'Chua mo'} | ${selectedMap.riskLevel} | ${selectedMap.recommendedRealm}`,
+      `Loai: ${snapshot.events.activeEventType ?? 'Khong co'} | Da giai ${snapshot.events.history.length}`,
+      `Tham hiem: ${selectedMap.name} | ${mapUnlocked ? 'Da mo' : 'Chua mo'} | Nguy co ${selectedMap.riskLevel}`,
       `Ngoai giao: ${snapshot.diplomacy.lastSummary}`,
-      '',
-      'Co dang chu y',
-      notableFlags.join(', ') || 'Chua co',
       '',
       'Canh bao phe phai',
       ...(diplomacyAlerts.length > 0
-        ? diplomacyAlerts.slice(0, 2).map((entry) => `${this.getFactionName(entry.factionId)} | ${entry.relationStatus} | canh bao ${entry.warningLevel}`)
+        ? diplomacyAlerts.slice(0, 2).map((entry) => `${this.getFactionName(entry.factionId)} | ${entry.relationStatus} | muc ${entry.warningLevel}`)
         : ['Chua co']),
       '',
       'Su kien gan day',
-      ...(historyLines.length > 0 ? historyLines : ['Chua co'])
+      ...(historyLines.slice(0, 3).length > 0 ? historyLines.slice(0, 3) : ['Chua co'])
     ]);
 
     this.summaryText.setText(
-      `Viec nen lam ngay\n${recommendedNextStep}\n\nUu tien hien tai\n${priorityNotice}\n\nVi sao nen quan tam\n${whyThisMatters}\n\nTien trinh nhanh\n${demoProgressLines.join('\n')}${chapterPressureLines.length > 0 ? `\n\nAp luc chuong hien tai\n${chapterPressureLines.join('\n')}` : ''}\n\nMuc tieu chuong\n${chapterObjectiveLines.join('\n')}\n\nTham hiem dang xem\n${selectedMap.description}\n${mapAccessSummary}\n${mapValueHint}\nBoss: ${mapBossCleared ? 'Da ha' : 'Chua ha'}\n\nThay doi gan nhat\n${latestChangeSummary}\n\nTong ket ngay gan nhat\n${snapshot.ui.daySummary}\n\nTham hiem gan nhat\n${snapshot.exploration.lastSummary}${tutorialLines.length > 0 ? `\n\n${tutorialLines.join('\n')}` : ''}\n\nKho tong mon\n${inventoryEntries.length} loai vat pham | ${snapshot.inventory.lastSummary}\n\nGhi chu phat hanh\nNeu can bat dau lai, bam Ve menu de dung Xoa du lieu save hoac Xuat save JSON.`
+      [
+        'Viec nen lam ngay',
+        recommendedNextStep,
+        '',
+        'Uu tien hien tai',
+        priorityNotice,
+        '',
+        'Muc tieu chuong',
+        ...chapterObjectiveLines.slice(0, 3),
+        '',
+        'Thay doi gan nhat',
+        latestChangeSummary,
+        '',
+        'Tong ket ngay',
+        snapshot.ui.daySummary,
+        '',
+        'Map dang xem',
+        `${selectedMap.name} | ${mapAccessSummary}`,
+        mapValueHint,
+        `Boss: ${mapBossCleared ? 'Da ha' : 'Chua ha'}`
+      ].join('\n')
     );
     this.statusText.setText(`Trang thai: ${latestChangeSummary}`);
     this.applyRefreshFeedback(snapshot, latestChangeSummary);
