@@ -30,7 +30,7 @@ export class InventoryPanel {
       width: width - 300,
       height: height - 168,
       fill: menuPalette.panel,
-      alpha: 0.97
+      alpha: 0.86
     });
 
     const titleText = scene.add.text(182, 116, 'Tui do', {

@@ -36,6 +36,7 @@ Day la kieu build uu tien cho Vercel, Netlify, Cloudflare Pages, hoac bat ky sta
 
 ## Scope dang playable
 
+- UI/UX: Giao diện Dark Teal / Muted Gold, glassmorphism panel, có background art (`sect_main_restored_01`) và event illustration.
 - quan ly tong mon theo ngay
 - cong trinh, de tu, tu hanh, event, ngoai giao co ban
 - tham hiem theo map, loot, inventory, luyen dan, phap khi
@@ -79,7 +80,9 @@ Day la kieu build uu tien cho Vercel, Netlify, Cloudflare Pages, hoac bat ky sta
 
 ## Han che dang biet
 
-- nhieu panel van con day thong tin
+## Han che dang biet
+
+- thong tin hien thi tren panel da duoc chia tab/HUD, nhung text van con nhieu (chua the hien duoi dang card template hoan toan)
 - audio hien tai la cue procedural nhe
 - tham hiem chi persist ket qua sau khi roi map
 - da co xuat save JSON, chua co import save
@@ -93,6 +96,7 @@ Day la kieu build uu tien cho Vercel, Netlify, Cloudflare Pages, hoac bat ky sta
 - [docs/world-lore.md](D:/game/docs/world-lore.md): lore va phe phai
 - [docs/chapters.md](D:/game/docs/chapters.md): chapter spine va escalation
 - [docs/event-rules.md](D:/game/docs/event-rules.md): quy tac event va content authoring
+- [docs/asset-naming-guide.md](D:/game/docs/asset-naming-guide.md): quy tac dat ten va them art vao `public/assets`
 - [docs/expansion-architecture.md](D:/game/docs/expansion-architecture.md): hook kien truc da co
 - [docs/expansion-roadmap.md](D:/game/docs/expansion-roadmap.md): roadmap expansion dai han
 - [docs/playtest-guide.md](D:/game/docs/playtest-guide.md): huong dan test build hien tai

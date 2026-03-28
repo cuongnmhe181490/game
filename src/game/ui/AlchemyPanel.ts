@@ -30,7 +30,7 @@ export class AlchemyPanel {
       width: width - 288,
       height: height - 172,
       fill: menuPalette.panel,
-      alpha: 0.97
+      alpha: 0.86
     });
 
     const titleText = scene.add.text(178, 118, 'Luyen dan', {

@@ -48,26 +48,33 @@ export class EventModal {
       .setInteractive();
 
     this.panel = scene.add.graphics();
-    this.panel.fillStyle(menuPalette.panel, 0.98);
+    this.panel.fillStyle(menuPalette.backgroundDeep, 0.98);
     this.panel.fillRoundedRect(centerX - 452, centerY - 268, 904, 536, 24);
     this.panel.lineStyle(2, menuPalette.frame, 1);
     this.panel.strokeRoundedRect(centerX - 452, centerY - 268, 904, 536, 24);
-    this.accentBar = scene.add.rectangle(centerX - 410, centerY - 236, 220, 8, menuPalette.accent, 0.92)
+    
+    // Feature image on the left side inside the panel
+    const eventImage = scene.add.image(centerX - 428, centerY - 244, 'event-discovery')
+      .setOrigin(0, 0)
+      .setDisplaySize(380, 488)
+      .setAlpha(0.95);
+
+    this.accentBar = scene.add.rectangle(centerX - 10, centerY - 236, 220, 8, menuPalette.accent, 0.92)
       .setOrigin(0, 0.5);
 
-    this.titleText = scene.add.text(centerX - 410, centerY - 226, '', {
+    this.titleText = scene.add.text(centerX - 10, centerY - 226, '', {
       color: menuPalette.textStrong,
       fontFamily: '"Palatino Linotype", "Book Antiqua", Georgia, serif',
       fontSize: '34px'
     });
 
-    this.subtitleText = scene.add.text(centerX - 410, centerY - 182, '', {
+    this.subtitleText = scene.add.text(centerX - 10, centerY - 182, '', {
       color: menuPalette.accentText,
       fontFamily: '"Segoe UI", Tahoma, sans-serif',
       fontSize: '17px'
     });
 
-    this.contextHeaderText = scene.add.text(centerX - 410, centerY - 154, '', {
+    this.contextHeaderText = scene.add.text(centerX - 10, centerY - 154, '', {
       color: menuPalette.textSoft,
       fontFamily: '"Segoe UI", Tahoma, sans-serif',
       fontSize: '13px',
@@ -81,20 +88,21 @@ export class EventModal {
 
     for (let index = 0; index < 3; index += 1) {
       const baseY = optionStartY + index * optionGap;
-      const background = scene.add.rectangle(centerX - 408, baseY, 820, 54, menuPalette.panelAlt, 1)
+      const background = scene.add.rectangle(centerX - 10, baseY, 440, 54, menuPalette.panelAlt, 1)
         .setStrokeStyle(1, menuPalette.frameSoft, 0.9)
-        .setInteractive({ useHandCursor: true });
+        .setInteractive({ useHandCursor: true })
+        .setOrigin(0, 0.5);
 
-      const label = scene.add.text(centerX - 384, baseY - 16, '', {
+      const label = scene.add.text(centerX + 14, baseY - 16, '', {
         color: menuPalette.textStrong,
         fontFamily: '"Segoe UI", Tahoma, sans-serif',
-        fontSize: '20px'
+        fontSize: '18px'
       });
 
-      const detail = scene.add.text(centerX - 384, baseY + 5, '', {
+      const detail = scene.add.text(centerX + 14, baseY + 6, '', {
         color: menuPalette.textMuted,
         fontFamily: '"Segoe UI", Tahoma, sans-serif',
-        fontSize: '15px'
+        fontSize: '14px'
       });
 
       const container = scene.add.container(0, 0, [background, label, detail]);
@@ -125,6 +133,7 @@ export class EventModal {
     this.root = scene.add.container(0, 0, [
       this.veil,
       this.panel,
+      eventImage,
       this.accentBar,
       this.titleText,
       this.subtitleText,
@@ -145,7 +154,7 @@ export class EventModal {
     const { width, height } = this.scene.scale;
     const centerX = width / 2;
     const centerY = height / 2;
-    const bodyX = centerX - 410;
+    const bodyX = centerX - 10;
     const bodyY = centerY - 120;
 
     this.root.setVisible(true);
@@ -172,9 +181,9 @@ export class EventModal {
       const lineText = this.scene.add.text(bodyX, bodyY + index * 26, line, {
         color: isContext ? variantPalette.context : menuPalette.textMuted,
         fontFamily: '"Segoe UI", Tahoma, sans-serif',
-        fontSize: isContext ? '15px' : '16px',
+        fontSize: isContext ? '15px' : '15px',
         fontStyle: isContext ? 'bold' : 'normal',
-        wordWrap: { width: 770 }
+        wordWrap: { width: 440 }
       });
       this.bodyTextLayer.add(lineText);
     });

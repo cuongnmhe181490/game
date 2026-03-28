@@ -33,7 +33,7 @@ export class DiplomacyPanel {
       width: width - 280,
       height: height - 164,
       fill: menuPalette.panel,
-      alpha: 0.97
+      alpha: 0.86
     });
 
     const titleText = scene.add.text(174, 114, 'Ngoai giao', {

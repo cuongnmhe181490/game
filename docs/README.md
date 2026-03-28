@@ -27,6 +27,8 @@ Tai lieu trong repo duoc chia theo vai tro ro rang. Neu dang mo mot task moi, do
   - Lore truth cho the gioi, phe phai, Thien Khu Bien, Van Tuong Linh Kinh
 - [naming-style.md](D:/game/docs/naming-style.md)
   - Naming va voice/tone truth cho text, event, faction, chapter labels
+- [asset-naming-guide.md](D:/game/docs/asset-naming-guide.md)
+  - Naming truth cho art asset, file path, va intake rule khi them file moi vao `public/assets`
 
 ### Chapter / content design
 - [chapters.md](D:/game/docs/chapters.md)
@@ -64,6 +66,12 @@ Tai lieu trong repo duoc chia theo vai tro ro rang. Neu dang mo mot task moi, do
 5. [chapters.md](D:/game/docs/chapters.md)
 6. [event-rules.md](D:/game/docs/event-rules.md)
 7. [naming-style.md](D:/game/docs/naming-style.md)
+
+### Neu lam art asset / icon / portrait / background integration
+1. [AGENTS.md](D:/game/AGENTS.md)
+2. [README.md](D:/game/README.md)
+3. [asset-naming-guide.md](D:/game/docs/asset-naming-guide.md)
+4. [naming-style.md](D:/game/docs/naming-style.md) neu asset co lien quan ten rieng trong the gioi
 
 ### Neu lam gameplay / systems / save / state
 1. [AGENTS.md](D:/game/AGENTS.md)
@@ -105,6 +113,10 @@ Tai lieu trong repo duoc chia theo vai tro ro rang. Neu dang mo mot task moi, do
 - Them map flavor / exploration discoveries / rare loot:
   - doc [world-lore.md](D:/game/docs/world-lore.md) + [event-rules.md](D:/game/docs/event-rules.md)
   - sua `src/game/data/maps.json`, `src/game/data/exploration_events.json`, `src/game/data/items.json`
+- Them art asset / portrait / icon / UI frame:
+  - doc [asset-naming-guide.md](D:/game/docs/asset-naming-guide.md)
+  - them vao dung nhanh con trong `public/assets`
+  - neu doi ten hoac doi thu muc, cap nhat reference code/data cung luc
 - Them chapter hoac arc tuong lai:
   - doc [expansion-architecture.md](D:/game/docs/expansion-architecture.md) truoc
   - planning theo [future-arc-template.md](D:/game/docs/future-arc-template.md)

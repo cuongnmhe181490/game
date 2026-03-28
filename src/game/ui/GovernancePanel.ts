@@ -33,7 +33,7 @@ export class GovernancePanel {
       width: width - 260,
       height: height - 140,
       fill: menuPalette.panel,
-      alpha: 0.97
+      alpha: 0.86
     });
 
     const titleText = scene.add.text(164, 100, 'Tri mon', {

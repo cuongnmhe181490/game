@@ -26,14 +26,14 @@ export class CultivationPanel {
     buttons: CultivationPanelButton[]
   ) {
     const { width, height } = scene.scale;
-    const veil = scene.add.rectangle(width / 2, height / 2, width, height, 0x050607, 0.78).setInteractive();
+    const veil = scene.add.rectangle(width / 2, height / 2, width, height, 0x050607, 0.65).setInteractive();
     const panel = drawInsetPanel(scene, {
       x: 150,
       y: 72,
       width: width - 300,
       height: height - 144,
       fill: menuPalette.panel,
-      alpha: 0.97
+      alpha: 0.86
     });
 
     const titleText = scene.add.text(184, 102, 'Tu hanh', {

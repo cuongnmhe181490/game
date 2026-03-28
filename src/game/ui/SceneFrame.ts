@@ -6,16 +6,16 @@ export function drawSceneFrame(scene: Phaser.Scene): Phaser.GameObjects.Graphics
   const { width, height } = scene.scale;
   const frame = scene.add.graphics();
 
-  frame.fillStyle(menuPalette.backgroundDeep, 1);
-  frame.fillRect(0, 0, width, height);
-  frame.fillStyle(menuPalette.backgroundLift, 0.42);
+  // Removed solid cover to let background image show
+  frame.fillStyle(menuPalette.backgroundLift, 0.20);
   frame.fillEllipse(width * 0.26, height * 0.18, width * 0.34, height * 0.2);
   frame.fillStyle(menuPalette.accentDeep, 0.1);
   frame.fillEllipse(width * 0.78, height * 0.12, width * 0.28, height * 0.14);
 
-  frame.fillStyle(menuPalette.panel, 0.92);
+  // Base frame as a glass effect (transparent)
+  frame.fillStyle(menuPalette.panel, 0.15); // Glassy
   frame.fillRoundedRect(40, 40, width - 80, height - 80, 28);
-  frame.lineStyle(2, menuPalette.frame, 0.9);
+  frame.lineStyle(2, menuPalette.frame, 0.8);
   frame.strokeRoundedRect(40, 40, width - 80, height - 80, 28);
   frame.lineStyle(1, 0xffffff, 0.05);
   frame.strokeRoundedRect(54, 54, width - 108, height - 108, 22);

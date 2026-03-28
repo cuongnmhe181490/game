@@ -74,6 +74,9 @@ export class PreloadScene extends Phaser.Scene {
 
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, cleanupLoadListeners);
 
-    this.load.svg('sect-crest', 'assets/ui/sect-crest.svg', { width: 256, height: 256 });
+    this.load.svg('sect-crest', 'assets/icons/ui/icon_ui_sect_crest.svg', { width: 256, height: 256 });
+    this.load.image('sect-main-bg', 'assets/backgrounds/sect/sect_main_restored_01.png');
+    this.load.image('event-discovery', 'assets/backgrounds/events/event_inheritance_discovery_01.png');
+    this.load.image('ui-frame-modal', 'assets/ui/frames/ui_frame_modal_ornate_01.png');
   }
 }

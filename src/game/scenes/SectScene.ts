@@ -154,59 +154,62 @@ export class SectScene extends Phaser.Scene {
     saveSystem.saveGame(syncedSnapshot);
 
     this.cameras.main.setBackgroundColor(menuPalette.background);
+    this.add.image(1280 / 2, 720 / 2, 'sect-main-bg').setDisplaySize(1280, 720).setDepth(-10).setAlpha(0.65);
     drawSceneFrame(this);
-    drawInsetPanel(this, { x: 58, y: 44, width: 1164, height: 146, fill: menuPalette.panel, alpha: 0.78 });
-    drawInsetPanel(this, { x: 58, y: 220, width: 332, height: 434, fill: menuPalette.panelAlt, alpha: 0.84 });
-    drawInsetPanel(this, { x: 436, y: 220, width: 334, height: 434, fill: menuPalette.panelAlt, alpha: 0.84 });
-    drawInsetPanel(this, { x: 818, y: 220, width: 404, height: 434, fill: menuPalette.panelAlt, alpha: 0.84 });
-    drawInsetPanel(this, { x: 58, y: 664, width: 1164, height: 70, fill: menuPalette.panel, alpha: 0.78 });
+    
+    // Top HUD
+    drawInsetPanel(this, { x: 58, y: 44, width: 1164, height: 100, fill: menuPalette.backgroundDeep, alpha: 0.90 });
+    // Left Nav (compact side navigation)
+    drawInsetPanel(this, { x: 58, y: 154, width: 200, height: 580, fill: menuPalette.panel, alpha: 0.90 });
+    // Main View Area (expandable panels area)
+    drawInsetPanel(this, { x: 268, y: 154, width: 954, height: 500, fill: menuPalette.panelSoft, alpha: 0.85 });
+    // Bottom Action Bar
+    drawInsetPanel(this, { x: 268, y: 664, width: 954, height: 70, fill: menuPalette.panel, alpha: 0.90 });
 
-    this.resourceBarText = this.add.text(72, 54, '', {
-      color: menuPalette.textStrong,
-      fontFamily: '"Segoe UI", Tahoma, sans-serif',
-      fontSize: '18px',
-      wordWrap: { width: 1140 }
-    });
-
-    this.headerText = this.add.text(74, 96, '', {
-      color: menuPalette.textStrong,
-      fontFamily: '"Palatino Linotype", "Book Antiqua", Georgia, serif',
-      fontSize: '34px'
-    });
-
-    this.chapterText = this.add.text(76, 136, '', {
+    this.resourceBarText = this.add.text(70, 50, '', {
       color: menuPalette.accentText,
-      fontFamily: '"Segoe UI", Tahoma, sans-serif',
-      fontSize: '17px',
-      wordWrap: { width: 1140 }
-    });
-
-    this.cultivationText = this.add.text(76, 164, '', {
-      color: menuPalette.textMuted,
       fontFamily: '"Segoe UI", Tahoma, sans-serif',
       fontSize: '16px',
       wordWrap: { width: 1140 }
     });
 
-    this.add.text(74, 206, 'Cong trinh', {
+    this.headerText = this.add.text(70, 76, '', {
+      color: menuPalette.textStrong,
+      fontFamily: '"Palatino Linotype", "Book Antiqua", Georgia, serif',
+      fontSize: '24px'
+    });
+
+    this.chapterText = this.add.text(320, 78, '', {
+      color: menuPalette.accentText,
+      fontFamily: '"Segoe UI", Tahoma, sans-serif',
+      fontSize: '15px'
+    });
+
+    this.cultivationText = this.add.text(70, 110, '', {
+      color: menuPalette.textMuted,
+      fontFamily: '"Segoe UI", Tahoma, sans-serif',
+      fontSize: '15px'
+    });
+
+    this.add.text(300, 180, 'Cong trinh', {
       color: menuPalette.textStrong,
       fontFamily: '"Palatino Linotype", "Book Antiqua", Georgia, serif',
       fontSize: '28px'
     });
 
-    this.add.text(452, 206, 'De tu', {
+    this.add.text(650, 180, 'De tu', {
       color: menuPalette.textStrong,
       fontFamily: '"Palatino Linotype", "Book Antiqua", Georgia, serif',
       fontSize: '28px'
     });
 
-    this.add.text(836, 206, 'Nhat ky va su kien', {
+    this.add.text(980, 180, 'Nhat ky va su kien', {
       color: menuPalette.textStrong,
       fontFamily: '"Palatino Linotype", "Book Antiqua", Georgia, serif',
       fontSize: '28px'
     });
 
-    this.buildingListText = this.add.text(76, 244, '', {
+    this.buildingListText = this.add.text(300, 220, '', {
       color: menuPalette.textMuted,
       fontFamily: '"Segoe UI", Tahoma, sans-serif',
       fontSize: '16px',
@@ -214,7 +217,7 @@ export class SectScene extends Phaser.Scene {
       wordWrap: { width: 320 }
     });
 
-    this.buildingDetailText = this.add.text(76, 468, '', {
+    this.buildingDetailText = this.add.text(300, 480, '', {
       color: menuPalette.accentText,
       fontFamily: '"Segoe UI", Tahoma, sans-serif',
       fontSize: '15px',
@@ -222,7 +225,7 @@ export class SectScene extends Phaser.Scene {
       wordWrap: { width: 320 }
     });
 
-    this.discipleListText = this.add.text(454, 244, '', {
+    this.discipleListText = this.add.text(650, 220, '', {
       color: menuPalette.textMuted,
       fontFamily: '"Segoe UI", Tahoma, sans-serif',
       fontSize: '16px',
@@ -230,7 +233,7 @@ export class SectScene extends Phaser.Scene {
       wordWrap: { width: 300 }
     });
 
-    this.discipleDetailText = this.add.text(454, 468, '', {
+    this.discipleDetailText = this.add.text(650, 480, '', {
       color: menuPalette.accentText,
       fontFamily: '"Segoe UI", Tahoma, sans-serif',
       fontSize: '15px',
@@ -238,7 +241,7 @@ export class SectScene extends Phaser.Scene {
       wordWrap: { width: 300 }
     });
 
-    this.eventText = this.add.text(838, 244, '', {
+    this.eventText = this.add.text(980, 220, '', {
       color: menuPalette.textMuted,
       fontFamily: '"Segoe UI", Tahoma, sans-serif',
       fontSize: '15px',
@@ -246,7 +249,7 @@ export class SectScene extends Phaser.Scene {
       wordWrap: { width: 360 }
     });
 
-    this.summaryText = this.add.text(838, 444, '', {
+    this.summaryText = this.add.text(980, 480, '', {
       color: menuPalette.accentText,
       fontFamily: '"Segoe UI", Tahoma, sans-serif',
       fontSize: '15px',
@@ -254,7 +257,7 @@ export class SectScene extends Phaser.Scene {
       wordWrap: { width: 360 }
     });
 
-    this.statusText = this.add.text(76, 654, '', {
+    this.statusText = this.add.text(280, 688, '', {
       color: menuPalette.textStrong,
       fontFamily: '"Segoe UI", Tahoma, sans-serif',
       fontSize: '16px',
@@ -616,12 +619,12 @@ export class SectScene extends Phaser.Scene {
     });
 
     const tasks: Array<{ task: DiscipleTaskId; x: number; y: number }> = [
-      { task: 'tu_luyen', x: 486, y: 606 },
-      { task: 'trong_duoc', x: 624, y: 606 },
-      { task: 'luyen_dan', x: 762, y: 606 },
-      { task: 'thu_thap', x: 486, y: 664 },
-      { task: 'tuan_tra', x: 624, y: 664 },
-      { task: 'nghi_ngoi', x: 762, y: 664 }
+      { task: 'tu_luyen', x: 670, y: 600 },
+      { task: 'trong_duoc', x: 780, y: 600 },
+      { task: 'luyen_dan', x: 890, y: 600 },
+      { task: 'thu_thap', x: 670, y: 638 },
+      { task: 'tuan_tra', x: 780, y: 638 },
+      { task: 'nghi_ngoi', x: 890, y: 638 }
     ];
 
     for (const entry of tasks) {
