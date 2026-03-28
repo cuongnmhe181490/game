@@ -39,13 +39,18 @@ import { TASK_LABELS } from '@/game/systems/DiscipleSystem';
 import {
   AlchemyPanel,
   createTextButton,
+  createPrimaryButton,
+  createSecondaryButton,
+  createResourceChip,
   CultivationPanel,
   DiplomacyPanel,
-  drawInsetPanel,
   drawSceneFrame,
   EventModal,
   GovernancePanel,
+  createInventorySlot,
   InventoryPanel,
+  NavBar,
+  PanelFrame,
   menuPalette
 } from '@/game/ui';
 
@@ -102,6 +107,16 @@ export class SectScene extends Phaser.Scene {
   private eventText!: Phaser.GameObjects.Text;
   private summaryText!: Phaser.GameObjects.Text;
   private statusText!: Phaser.GameObjects.Text;
+  private scrollViewportY = 0;
+  private scrollViewportHeight = 0;
+  private scrollContent!: Phaser.GameObjects.Container;
+  private scrollMask!: Phaser.Display.Masks.GeometryMask;
+  private scrollOffset = 0;
+  private contentHeight = 0;
+  private navBar!: NavBar;
+  private navAnchors: Record<string, number> = {};
+  private resourceChips: Phaser.GameObjects.Container[] = [];
+  private inventorySlots: Phaser.GameObjects.Container[] = [];
   private eventModal!: EventModal;
   private cultivationPanel!: CultivationPanel;
   private diplomacyPanel!: DiplomacyPanel;
@@ -154,119 +169,318 @@ export class SectScene extends Phaser.Scene {
     saveSystem.saveGame(syncedSnapshot);
 
     this.cameras.main.setBackgroundColor(menuPalette.background);
-    this.add.image(1280 / 2, 720 / 2, 'sect-main-bg').setDisplaySize(1280, 720).setDepth(-10).setAlpha(0.65);
     drawSceneFrame(this);
-    
-    // Top HUD
-    drawInsetPanel(this, { x: 58, y: 44, width: 1164, height: 100, fill: menuPalette.backgroundDeep, alpha: 0.90 });
-    // Left Nav (compact side navigation)
-    drawInsetPanel(this, { x: 58, y: 154, width: 200, height: 580, fill: menuPalette.panel, alpha: 0.90 });
-    // Main View Area (expandable panels area)
-    drawInsetPanel(this, { x: 268, y: 154, width: 954, height: 500, fill: menuPalette.panelSoft, alpha: 0.85 });
-    // Bottom Action Bar
-    drawInsetPanel(this, { x: 268, y: 664, width: 954, height: 70, fill: menuPalette.panel, alpha: 0.90 });
 
-    this.resourceBarText = this.add.text(70, 50, '', {
-      color: menuPalette.accentText,
-      fontFamily: '"Segoe UI", Tahoma, sans-serif',
-      fontSize: '16px',
-      wordWrap: { width: 1140 }
-    });
+    const { width, height } = this.scale;
+    const shellWidth = Math.min(430, width - 32);
+    const shellHeight = Math.min(844, height - 24);
+    const shellX = Math.floor((width - shellWidth) / 2);
+    const shellY = Math.floor((height - shellHeight) / 2);
 
-    this.headerText = this.add.text(70, 76, '', {
+    const shell = this.add.graphics();
+    shell.fillStyle(0x070e0b, 0.98);
+    shell.lineStyle(2, 0x1f2f27, 1);
+    shell.fillRoundedRect(shellX, shellY, shellWidth, shellHeight, 32);
+    shell.strokeRoundedRect(shellX, shellY, shellWidth, shellHeight, 32);
+    shell.lineStyle(1, menuPalette.frame, 0.45);
+    shell.strokeRoundedRect(shellX + 10, shellY + 10, shellWidth - 20, shellHeight - 20, 28);
+
+    const headerHeight = 150;
+    const navHeight = 84;
+    this.scrollViewportY = shellY + headerHeight;
+    this.scrollViewportHeight = shellHeight - headerHeight - navHeight;
+
+    const crest = this.add.image(shellX + 52, shellY + 52, 'sect-crest')
+      .setDisplaySize(56, 56)
+      .setOrigin(0.5);
+
+    this.headerText = this.add.text(shellX + 92, shellY + 26, '', {
       color: menuPalette.textStrong,
       fontFamily: '"Palatino Linotype", "Book Antiqua", Georgia, serif',
-      fontSize: '24px'
+      fontSize: '24px',
+      wordWrap: { width: shellWidth - 116 }
     });
 
-    this.chapterText = this.add.text(320, 78, '', {
+    this.chapterText = this.add.text(shellX + 92, shellY + 60, '', {
       color: menuPalette.accentText,
       fontFamily: '"Segoe UI", Tahoma, sans-serif',
-      fontSize: '15px'
+      fontSize: '12px',
+      wordWrap: { width: shellWidth - 116 }
     });
 
-    this.cultivationText = this.add.text(70, 110, '', {
+    this.cultivationText = this.add.text(shellX + 20, shellY + 96, '', {
       color: menuPalette.textMuted,
       fontFamily: '"Segoe UI", Tahoma, sans-serif',
-      fontSize: '15px'
+      fontSize: '13px',
+      wordWrap: { width: shellWidth - 40 }
     });
 
-    this.add.text(300, 180, 'Cong trinh', {
-      color: menuPalette.textStrong,
-      fontFamily: '"Palatino Linotype", "Book Antiqua", Georgia, serif',
-      fontSize: '28px'
+    this.resourceBarText = this.add.text(-1000, -1000, '', { fontSize: '1px' }).setVisible(false);
+    this.resourceChips = [
+      createResourceChip(this, { width: 118, label: 'LT', value: '0' }),
+      createResourceChip(this, { width: 118, label: 'LK', value: '0' }),
+      createResourceChip(this, { width: 118, label: 'DT', value: '0' }),
+      createResourceChip(this, { width: 118, label: 'KT', value: '0' }),
+      createResourceChip(this, { width: 118, label: 'LM', value: '0' })
+    ];
+    this.resourceChips.forEach((chip, index) => {
+      const col = index % 3;
+      const row = Math.floor(index / 3);
+      chip.setPosition(shellX + 20 + col * 126, shellY + 120 + row * 38);
     });
 
-    this.add.text(650, 180, 'De tu', {
-      color: menuPalette.textStrong,
-      fontFamily: '"Palatino Linotype", "Book Antiqua", Georgia, serif',
-      fontSize: '28px'
-    });
+    this.scrollContent = this.add.container(shellX + 16, this.scrollViewportY + 12);
+    const maskGraphic = this.make.graphics();
+    maskGraphic.fillStyle(0xffffff, 1);
+    maskGraphic.fillRect(shellX + 8, this.scrollViewportY, shellWidth - 16, this.scrollViewportHeight);
+    this.scrollMask = maskGraphic.createGeometryMask();
+    this.scrollContent.setMask(this.scrollMask);
 
-    this.add.text(980, 180, 'Nhat ky va su kien', {
-      color: menuPalette.textStrong,
-      fontFamily: '"Palatino Linotype", "Book Antiqua", Georgia, serif',
-      fontSize: '28px'
-    });
+    let contentY = 0;
+    const panelWidth = shellWidth - 32;
 
-    this.buildingListText = this.add.text(300, 220, '', {
+    const quickFrame = new PanelFrame(this, {
+      x: 0,
+      y: contentY,
+      width: panelWidth,
+      height: 220,
+      title: 'Cultivation',
+      subtitle: 'Realm, daily actions, current chapter pulse'
+    });
+    this.scrollContent.add(quickFrame.root);
+    this.statusText = this.add.text(quickFrame.root.x + 18, quickFrame.root.y + 88, '', {
       color: menuPalette.textMuted,
       fontFamily: '"Segoe UI", Tahoma, sans-serif',
-      fontSize: '16px',
-      lineSpacing: 6,
-      wordWrap: { width: 320 }
-    });
-
-    this.buildingDetailText = this.add.text(300, 480, '', {
-      color: menuPalette.accentText,
-      fontFamily: '"Segoe UI", Tahoma, sans-serif',
-      fontSize: '15px',
+      fontSize: '14px',
       lineSpacing: 5,
-      wordWrap: { width: 320 }
+      wordWrap: { width: panelWidth - 36 }
     });
+    this.scrollContent.add(this.statusText);
+    this.scrollContent.add(createPrimaryButton(this, {
+      width: 182,
+      label: 'Qua 1 ngay',
+      detail: 'Advance day and resolve events',
+      onClick: () => {
+        this.markTutorialFlag(TUTORIAL_CHOICE_FLAGS.advancedDay);
+        const result = getTimeSystem(this).advanceOneDay();
+        this.refreshView(result.snapshot, 'Da qua mot ngay. Hay doc tong ket va xu ly event hien tai.');
+        this.presentCurrentEvent('time');
+      }
+    }).setPosition(quickFrame.root.x + 18, quickFrame.root.y + 154));
+    this.scrollContent.add(createSecondaryButton(this, {
+      width: 182,
+      label: 'Tu hanh',
+      detail: 'Open cultivation details',
+      onClick: () => this.toggleCultivationPanel(true)
+    }).setPosition(quickFrame.root.x + 210, quickFrame.root.y + 154));
 
-    this.discipleListText = this.add.text(650, 220, '', {
+    contentY += 240;
+
+    const buildingFrame = new PanelFrame(this, {
+      x: 0,
+      y: contentY,
+      width: panelWidth,
+      height: 360,
+      title: 'Sect Buildings'
+    });
+    this.scrollContent.add(buildingFrame.root);
+    this.buildingListText = this.add.text(buildingFrame.root.x + 18, buildingFrame.root.y + 78, '', {
       color: menuPalette.textMuted,
       fontFamily: '"Segoe UI", Tahoma, sans-serif',
-      fontSize: '16px',
-      lineSpacing: 6,
-      wordWrap: { width: 300 }
+      fontSize: '14px',
+      lineSpacing: 5,
+      wordWrap: { width: 170 }
     });
-
-    this.discipleDetailText = this.add.text(650, 480, '', {
+    this.buildingDetailText = this.add.text(buildingFrame.root.x + 200, buildingFrame.root.y + 78, '', {
       color: menuPalette.accentText,
       fontFamily: '"Segoe UI", Tahoma, sans-serif',
-      fontSize: '15px',
+      fontSize: '13px',
       lineSpacing: 5,
-      wordWrap: { width: 300 }
+      wordWrap: { width: panelWidth - 218 }
     });
+    this.scrollContent.add([this.buildingListText, this.buildingDetailText]);
+    this.scrollContent.add(createSecondaryButton(this, {
+      width: 120,
+      label: 'Truoc',
+      detail: 'Building',
+      onClick: () => {
+        this.selectedBuildingIndex = this.wrapIndex(this.selectedBuildingIndex - 1, buildingCatalog.buildings.length);
+        this.refreshView(getStateManager(this).snapshot);
+      }
+    }).setPosition(buildingFrame.root.x + 18, buildingFrame.root.y + 274));
+    this.scrollContent.add(createSecondaryButton(this, {
+      width: 120,
+      label: 'Sau',
+      detail: 'Building',
+      onClick: () => {
+        this.selectedBuildingIndex = this.wrapIndex(this.selectedBuildingIndex + 1, buildingCatalog.buildings.length);
+        this.refreshView(getStateManager(this).snapshot);
+      }
+    }).setPosition(buildingFrame.root.x + 146, buildingFrame.root.y + 274));
+    this.scrollContent.add(createPrimaryButton(this, {
+      width: 120,
+      label: 'Dung',
+      detail: 'Construct',
+      onClick: () => {
+        const result = getBuildingSystem(this).constructBuilding(this.getSelectedBuildingId());
+        this.refreshView(result.snapshot, result.message);
+      }
+    }).setPosition(buildingFrame.root.x + 274, buildingFrame.root.y + 274));
+    this.scrollContent.add(createSecondaryButton(this, {
+      width: 120,
+      label: 'Nang cap',
+      detail: 'Upgrade',
+      onClick: () => {
+        const result = getBuildingSystem(this).upgradeBuilding(this.getSelectedBuildingId());
+        this.refreshView(result.snapshot, result.message);
+      }
+    }).setPosition(buildingFrame.root.x + 402, buildingFrame.root.y + 274));
 
-    this.eventText = this.add.text(980, 220, '', {
+    contentY += 380;
+
+    const discipleFrame = new PanelFrame(this, {
+      x: 0,
+      y: contentY,
+      width: panelWidth,
+      height: 430,
+      title: 'Disciples'
+    });
+    this.scrollContent.add(discipleFrame.root);
+    this.discipleListText = this.add.text(discipleFrame.root.x + 18, discipleFrame.root.y + 78, '', {
       color: menuPalette.textMuted,
       fontFamily: '"Segoe UI", Tahoma, sans-serif',
-      fontSize: '15px',
-      lineSpacing: 6,
-      wordWrap: { width: 360 }
+      fontSize: '14px',
+      lineSpacing: 5,
+      wordWrap: { width: 170 }
     });
-
-    this.summaryText = this.add.text(980, 480, '', {
+    this.discipleDetailText = this.add.text(discipleFrame.root.x + 200, discipleFrame.root.y + 78, '', {
       color: menuPalette.accentText,
       fontFamily: '"Segoe UI", Tahoma, sans-serif',
-      fontSize: '15px',
+      fontSize: '13px',
       lineSpacing: 5,
-      wordWrap: { width: 360 }
+      wordWrap: { width: panelWidth - 218 }
     });
+    this.scrollContent.add([this.discipleListText, this.discipleDetailText]);
 
-    this.statusText = this.add.text(280, 688, '', {
-      color: menuPalette.textStrong,
+    const discipleButtons = [
+      createSecondaryButton(this, {
+        width: 120,
+        label: 'Truoc',
+        detail: 'Disciple',
+        onClick: () => {
+          this.markTutorialFlag(TUTORIAL_CHOICE_FLAGS.checkedDisciple);
+          this.selectedDiscipleIndex = this.wrapIndex(this.selectedDiscipleIndex - 1, getStateManager(this).snapshot.disciples.roster.length);
+          this.refreshView(getStateManager(this).snapshot);
+        }
+      }).setPosition(discipleFrame.root.x + 18, discipleFrame.root.y + 330),
+      createSecondaryButton(this, {
+        width: 120,
+        label: 'Sau',
+        detail: 'Disciple',
+        onClick: () => {
+          this.markTutorialFlag(TUTORIAL_CHOICE_FLAGS.checkedDisciple);
+          this.selectedDiscipleIndex = this.wrapIndex(this.selectedDiscipleIndex + 1, getStateManager(this).snapshot.disciples.roster.length);
+          this.refreshView(getStateManager(this).snapshot);
+        }
+      }).setPosition(discipleFrame.root.x + 146, discipleFrame.root.y + 330),
+      createPrimaryButton(this, {
+        width: 120,
+        label: 'Thuong',
+        detail: '+mood +loyalty',
+        onClick: () => {
+          const disciple = this.getSelectedDisciple(getStateManager(this).snapshot);
+          if (!disciple) return;
+          const result = getDiscipleSystem(this).rewardDisciple(disciple.id);
+          this.refreshView(result.snapshot, result.message);
+        }
+      }).setPosition(discipleFrame.root.x + 274, discipleFrame.root.y + 330),
+      createSecondaryButton(this, {
+        width: 120,
+        label: 'Nghi',
+        detail: 'Recover',
+        onClick: () => {
+          const disciple = this.getSelectedDisciple(getStateManager(this).snapshot);
+          if (!disciple) return;
+          const result = getDiscipleSystem(this).restDisciple(disciple.id);
+          this.refreshView(getBuildingSystem(this).syncBuildingStates(), result.message);
+        }
+      }).setPosition(discipleFrame.root.x + 402, discipleFrame.root.y + 330)
+    ];
+    this.scrollContent.add(discipleButtons);
+
+    contentY += 450;
+
+    const journalFrame = new PanelFrame(this, {
+      x: 0,
+      y: contentY,
+      width: panelWidth,
+      height: 500,
+      title: 'Sect Journal'
+    });
+    this.scrollContent.add(journalFrame.root);
+    this.eventText = this.add.text(journalFrame.root.x + 18, journalFrame.root.y + 78, '', {
+      color: menuPalette.textMuted,
       fontFamily: '"Segoe UI", Tahoma, sans-serif',
-      fontSize: '16px',
-      wordWrap: { width: 1140 }
+      fontSize: '13px',
+      lineSpacing: 5,
+      wordWrap: { width: panelWidth - 36 }
+    });
+    this.summaryText = this.add.text(journalFrame.root.x + 18, journalFrame.root.y + 238, '', {
+      color: menuPalette.accentText,
+      fontFamily: '"Segoe UI", Tahoma, sans-serif',
+      fontSize: '13px',
+      lineSpacing: 5,
+      wordWrap: { width: panelWidth - 36 }
+    });
+    this.scrollContent.add([this.eventText, this.summaryText]);
+
+    const journalButtons = [
+      createSecondaryButton(this, { width: 120, label: 'Tri mon', detail: 'Rules', onClick: () => this.toggleGovernancePanel(true) }).setPosition(journalFrame.root.x + 18, journalFrame.root.y + 414),
+      createSecondaryButton(this, { width: 120, label: 'Ngoai giao', detail: 'Factions', onClick: () => this.toggleDiplomacyPanel(true) }).setPosition(journalFrame.root.x + 146, journalFrame.root.y + 414),
+      createSecondaryButton(this, { width: 120, label: 'Tui do', detail: 'Inventory', onClick: () => this.toggleInventoryPanel(true) }).setPosition(journalFrame.root.x + 274, journalFrame.root.y + 414),
+      createSecondaryButton(this, { width: 120, label: 'Luyen dan', detail: 'Alchemy', onClick: () => this.toggleAlchemyPanel(true) }).setPosition(journalFrame.root.x + 402, journalFrame.root.y + 414)
+    ];
+    this.scrollContent.add(journalButtons);
+
+    contentY += 520;
+
+    const quickInventory = new PanelFrame(this, {
+      x: 0,
+      y: contentY,
+      width: panelWidth,
+      height: 190,
+      title: 'Quick Inventory'
+    });
+    this.scrollContent.add(quickInventory.root);
+    this.inventorySlots = Array.from({ length: 8 }).map((_, index) => {
+      const slot = createInventorySlot(this, { size: 72, label: '-', count: '' });
+      const col = index % 4;
+      const row = Math.floor(index / 4);
+      slot.setPosition(quickInventory.root.x + 18 + col * 88, quickInventory.root.y + 78 + row * 88);
+      this.scrollContent.add(slot);
+      return slot;
     });
 
-    this.createTopButtons();
-    this.createBuildingButtons();
-    this.createDiscipleButtons();
+    this.contentHeight = contentY + 210;
+
+    this.navBar = new NavBar(this, shellX + 10, shellY + shellHeight - navHeight + 4, shellWidth - 20, [
+      { id: 'sect', label: 'Sect', onClick: () => this.scrollToAnchor('sect') },
+      { id: 'cultivate', label: 'Cultivate', onClick: () => this.scrollToAnchor('cultivate') },
+      { id: 'explore', label: 'Explore', onClick: () => this.scrollToAnchor('journal') },
+      { id: 'backpack', label: 'Backpack', onClick: () => this.toggleInventoryPanel(true) }
+    ]);
+    this.navBar.setActive('sect');
+    this.navAnchors = {
+      sect: 0,
+      cultivate: 0,
+      journal: 240 + 380 + 450
+    };
+    this.setScrollOffset(0);
+
+    this.input.on('wheel', (_pointer: Phaser.Input.Pointer, _gos: Phaser.GameObjects.GameObject[], _dx: number, dy: number) => {
+      this.setScrollOffset(this.scrollOffset - dy * 0.35);
+    });
+
     this.createCultivationPanel();
     this.createDiplomacyPanel();
     this.createGovernancePanel();
@@ -619,12 +833,12 @@ export class SectScene extends Phaser.Scene {
     });
 
     const tasks: Array<{ task: DiscipleTaskId; x: number; y: number }> = [
-      { task: 'tu_luyen', x: 670, y: 600 },
-      { task: 'trong_duoc', x: 780, y: 600 },
-      { task: 'luyen_dan', x: 890, y: 600 },
-      { task: 'thu_thap', x: 670, y: 638 },
-      { task: 'tuan_tra', x: 780, y: 638 },
-      { task: 'nghi_ngoi', x: 890, y: 638 }
+      { task: 'tu_luyen', x: 486, y: 606 },
+      { task: 'trong_duoc', x: 624, y: 606 },
+      { task: 'luyen_dan', x: 762, y: 606 },
+      { task: 'thu_thap', x: 486, y: 664 },
+      { task: 'tuan_tra', x: 624, y: 664 },
+      { task: 'nghi_ngoi', x: 762, y: 664 }
     ];
 
     for (const entry of tasks) {
@@ -741,6 +955,27 @@ export class SectScene extends Phaser.Scene {
         this.refreshView(result.snapshot, result.message);
       }
     });
+  }
+
+  private setScrollOffset(nextOffset: number): void {
+    const maxOffset = Math.max(0, this.contentHeight - this.scrollViewportHeight + 24);
+    this.scrollOffset = Phaser.Math.Clamp(nextOffset, 0, maxOffset);
+    this.scrollContent.y = this.scrollViewportY + 12 - this.scrollOffset;
+  }
+
+  private scrollToAnchor(anchorId: string): void {
+    if (!(anchorId in this.navAnchors)) {
+      return;
+    }
+
+    this.setScrollOffset(this.navAnchors[anchorId]);
+
+    if (anchorId === 'journal') {
+      this.navBar.setActive('explore');
+      return;
+    }
+
+    this.navBar.setActive(anchorId);
   }
 
   private createCultivationPanel(): void {
@@ -2124,6 +2359,18 @@ export class SectScene extends Phaser.Scene {
       `Linh moc ${snapshot.resources.linhMoc}`
     ].join('   |   '));
 
+    const chipValues = [
+      snapshot.resources.linhThach,
+      snapshot.resources.linhKhi,
+      snapshot.resources.duocThao,
+      snapshot.resources.khoangThach,
+      snapshot.resources.linhMoc
+    ];
+    this.resourceChips.forEach((chip, index) => {
+      const valueText = chip.getData('valueText') as Phaser.GameObjects.Text | undefined;
+      valueText?.setText(`${chipValues[index] ?? 0}`);
+    });
+
     this.headerText.setText(`${snapshot.sect.name} | ${formatDate(snapshot)}`);
     this.chapterText.setText(
       `Chuong hien tai: ${chapterName} (${chapterProgress}) | Uy danh ${snapshot.sect.prestige} | Khi van ${snapshot.sect.fortune} | On dinh ${snapshot.sect.stability} | Phong thu ${snapshot.sect.defense} | Suc chua de tu ${snapshot.sect.discipleCapacity} | Thu ngoai giao ${snapshot.diplomacy.pendingMessageEventIds.length} | Ket cuc ${snapshot.ending.completed ? getEndingSystem(this).getPresentation(snapshot).definition.routeName : 'chua mo'} | Am ${getFeedbackSystem(this).isMuted() ? 'tat' : 'bat'}`
@@ -2219,6 +2466,21 @@ export class SectScene extends Phaser.Scene {
       ].join('\n')
     );
     this.statusText.setText(`Trang thai: ${latestChangeSummary}`);
+
+    inventoryEntries.slice(0, this.inventorySlots.length).forEach((entry, index) => {
+      const slot = this.inventorySlots[index];
+      const labelText = slot.getData('labelText') as Phaser.GameObjects.Text | undefined;
+      const countText = slot.getData('countText') as Phaser.GameObjects.Text | undefined;
+      labelText?.setText(entry.definition.name);
+      countText?.setText(String(entry.quantity));
+    });
+    this.inventorySlots.slice(inventoryEntries.length).forEach((slot) => {
+      const labelText = slot.getData('labelText') as Phaser.GameObjects.Text | undefined;
+      const countText = slot.getData('countText') as Phaser.GameObjects.Text | undefined;
+      labelText?.setText('-');
+      countText?.setText('');
+    });
+
     this.applyRefreshFeedback(snapshot, latestChangeSummary);
     if (snapshot.ui.isCultivationPanelOpen) {
       this.cultivationPanel.show({

@@ -8,3 +8,8 @@ export * from '@/game/ui/buttonStyle';
 export * from '@/game/ui/EventModal';
 export * from '@/game/ui/SceneFrame';
 export * from '@/game/ui/TextButton';
+export * from '@/game/ui/PanelFrame';
+export * from '@/game/ui/ResourceChip';
+export * from '@/game/ui/InventorySlot';
+export * from '@/game/ui/ActionButtons';
+export * from '@/game/ui/NavBar';
