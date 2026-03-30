@@ -5,8 +5,23 @@ import { deserializeGameState } from '@/game/state/codec';
 const DEFAULT_SAVE_KEY = 'nhat-niem-khai-tong.save';
 const DEFAULT_BACKUP_SAVE_KEY = 'nhat-niem-khai-tong.save.backup';
 const DEFAULT_META_SAVE_KEY = 'nhat-niem-khai-tong.meta';
+const DEFAULT_CURRENT_SLOT_KEY = 'nhat-niem-khai-tong.current-slot';
+const DEFAULT_SAVE_SLOT_COUNT = 3;
 const DEFAULT_AUTOSAVE_INTERVAL_MS = 15000;
 const COMPLETION_META_VERSION = 1;
+
+export interface SaveSlotSummary {
+  slot: number;
+  hasSave: boolean;
+  saveVersion: number | null;
+  updatedAt: string | null;
+  chapterId: string | null;
+  day: number | null;
+  realmId: string | null;
+  sectName: string | null;
+  endingCompleted: boolean;
+  playtimeDays: number;
+}
 
 export interface SaveSummary {
   hasPrimarySave: boolean;
@@ -117,16 +132,77 @@ export class SaveSystem {
   constructor(
     private readonly saveKey = DEFAULT_SAVE_KEY,
     private readonly backupKey = DEFAULT_BACKUP_SAVE_KEY,
-    private readonly metaKey = DEFAULT_META_SAVE_KEY
+    private readonly metaKey = DEFAULT_META_SAVE_KEY,
+    private readonly currentSlotKey = DEFAULT_CURRENT_SLOT_KEY
   ) {}
 
+  getSlotCount(): number {
+    return DEFAULT_SAVE_SLOT_COUNT;
+  }
+
+  getCurrentSlot(): number {
+    const raw = this.safeGet(this.currentSlotKey);
+    const parsed = raw ? Number.parseInt(raw, 10) : Number.NaN;
+    return Number.isInteger(parsed) && parsed >= 1 && parsed <= DEFAULT_SAVE_SLOT_COUNT ? parsed : 1;
+  }
+
+  setCurrentSlot(slot: number): void {
+    const safeSlot = Math.max(1, Math.min(DEFAULT_SAVE_SLOT_COUNT, Math.trunc(slot)));
+    this.safeSet(this.currentSlotKey, String(safeSlot));
+  }
+
+  listSaveSlots(): SaveSlotSummary[] {
+    this.migrateLegacyPrimarySave();
+    return Array.from({ length: DEFAULT_SAVE_SLOT_COUNT }, (_value, index) => this.getSlotSummary(index + 1));
+  }
+
+  getSlotSummary(slot: number): SaveSlotSummary {
+    const primaryRaw = this.safeGet(this.getSlotSaveKey(slot));
+    const backupRaw = this.safeGet(this.getSlotBackupKey(slot));
+    const primary = primaryRaw ? deserializeGameState(primaryRaw) : null;
+    const backup = backupRaw ? deserializeGameState(backupRaw) : null;
+    const state = primary ?? backup;
+
+    if (!state) {
+      return {
+        slot,
+        hasSave: false,
+        saveVersion: null,
+        updatedAt: null,
+        chapterId: null,
+        day: null,
+        realmId: null,
+        sectName: null,
+        endingCompleted: false,
+        playtimeDays: 0
+      };
+    }
+
+    return {
+      slot,
+      hasSave: true,
+      saveVersion: state.meta.saveVersion,
+      updatedAt: state.meta.updatedAt,
+      chapterId: state.story.currentChapterId,
+      day: state.time.day,
+      realmId: state.player.cultivation.currentRealmId,
+      sectName: state.sect.name,
+      endingCompleted: state.ending.completed,
+      playtimeDays: Math.max(0, state.time.day - 1)
+    };
+  }
+
   hasSave(): boolean {
-    return this.safeGet(this.saveKey) !== null || this.safeGet(this.backupKey) !== null;
+    this.migrateLegacyPrimarySave();
+    const currentSlot = this.getCurrentSlot();
+    return this.safeGet(this.getSlotSaveKey(currentSlot)) !== null || this.safeGet(this.getSlotBackupKey(currentSlot)) !== null;
   }
 
   getSaveSummary(): SaveSummary {
-    const primaryRaw = this.safeGet(this.saveKey);
-    const backupRaw = this.safeGet(this.backupKey);
+    this.migrateLegacyPrimarySave();
+    const currentSlot = this.getCurrentSlot();
+    const primaryRaw = this.safeGet(this.getSlotSaveKey(currentSlot));
+    const backupRaw = this.safeGet(this.getSlotBackupKey(currentSlot));
     const primary = primaryRaw ? deserializeGameState(primaryRaw) : null;
     const backup = backupRaw ? deserializeGameState(backupRaw) : null;
     const state = primary ?? backup;
@@ -163,7 +239,9 @@ export class SaveSystem {
   }
 
   exportCurrentSave(): string | null {
-    return this.safeGet(this.saveKey) ?? this.safeGet(this.backupKey);
+    this.migrateLegacyPrimarySave();
+    const currentSlot = this.getCurrentSlot();
+    return this.safeGet(this.getSlotSaveKey(currentSlot)) ?? this.safeGet(this.getSlotBackupKey(currentSlot));
   }
 
   getReplayMeta(): ReplayMetaState {
@@ -250,6 +328,11 @@ export class SaveSystem {
     return nextSave;
   }
 
+  createNewSaveInSlot(slot: number, statusMessage?: string): GameState {
+    this.setCurrentSlot(slot);
+    return this.createNewSave(statusMessage);
+  }
+
   createNewSave(statusMessage?: string): GameState {
     const nextSave = createGameState();
     if (statusMessage) {
@@ -260,7 +343,9 @@ export class SaveSystem {
   }
 
   loadSave(): GameState {
-    const raw = this.safeGet(this.saveKey);
+    this.migrateLegacyPrimarySave();
+    const currentSlot = this.getCurrentSlot();
+    const raw = this.safeGet(this.getSlotSaveKey(currentSlot));
 
     if (!raw) {
       return this.createNewSave('Bat dau son mon moi. Hay doc huong dan ngan roi qua mot ngay dau tien.');
@@ -273,7 +358,7 @@ export class SaveSystem {
       return parsed;
     }
 
-    const backup = this.safeGet(this.backupKey);
+    const backup = this.safeGet(this.getSlotBackupKey(currentSlot));
     if (backup) {
       const restored = deserializeGameState(backup);
 
@@ -287,7 +372,14 @@ export class SaveSystem {
     return this.createNewSave('Save cu khong doc duoc. Da tao save moi an toan.');
   }
 
+  loadSlot(slot: number): GameState {
+    this.setCurrentSlot(slot);
+    return this.loadSave();
+  }
+
   saveGame(state: Readonly<GameState>, isAutosave = false): void {
+    this.migrateLegacyPrimarySave();
+    const currentSlot = this.getCurrentSlot();
     const payload: GameState = structuredClone(state);
 
     if (isAutosave) {
@@ -296,13 +388,15 @@ export class SaveSystem {
     }
 
     const serialized = JSON.stringify(payload);
-    const previous = this.safeGet(this.saveKey);
+    const primaryKey = this.getSlotSaveKey(currentSlot);
+    const backupKey = this.getSlotBackupKey(currentSlot);
+    const previous = this.safeGet(primaryKey);
 
     if (previous) {
-      this.safeSet(this.backupKey, previous);
+      this.safeSet(backupKey, previous);
     }
 
-    this.safeSet(this.saveKey, serialized);
+    this.safeSet(primaryKey, serialized);
   }
 
   startAutosave(getSnapshot: () => Readonly<GameState>, intervalMs = DEFAULT_AUTOSAVE_INTERVAL_MS): void {
@@ -320,10 +414,18 @@ export class SaveSystem {
   }
 
   clear(): void {
+    const currentSlot = this.getCurrentSlot();
     this.stopAutosave();
-    this.safeRemove(this.saveKey);
-    this.safeRemove(this.backupKey);
-    this.lastNotice = 'Da xoa save hien tai va ban du phong. Tien trinh replay da mo van duoc giu lai.';
+    this.safeRemove(this.getSlotSaveKey(currentSlot));
+    this.safeRemove(this.getSlotBackupKey(currentSlot));
+    this.lastNotice = `Da xoa du lieu slot ${currentSlot}. Tien trinh replay da mo van duoc giu lai.`;
+  }
+
+  clearSlot(slot: number): void {
+    this.stopAutosave();
+    this.safeRemove(this.getSlotSaveKey(slot));
+    this.safeRemove(this.getSlotBackupKey(slot));
+    this.lastNotice = `Da xoa du lieu slot ${slot}.`;
   }
 
   load(): GameState {
@@ -342,6 +444,37 @@ export class SaveSystem {
 
   private saveReplayMeta(meta: ReplayMetaState): void {
     this.safeSet(this.metaKey, JSON.stringify(normalizeReplayMeta(meta)));
+  }
+
+  private getSlotSaveKey(slot: number): string {
+    return `${this.saveKey}.slot${slot}`;
+  }
+
+  private getSlotBackupKey(slot: number): string {
+    return `${this.backupKey}.slot${slot}`;
+  }
+
+  private migrateLegacyPrimarySave(): void {
+    const slotOnePrimary = this.safeGet(this.getSlotSaveKey(1));
+    const slotOneBackup = this.safeGet(this.getSlotBackupKey(1));
+
+    if (!slotOnePrimary) {
+      const legacyPrimary = this.safeGet(this.saveKey);
+      if (legacyPrimary) {
+        this.safeSet(this.getSlotSaveKey(1), legacyPrimary);
+      }
+    }
+
+    if (!slotOneBackup) {
+      const legacyBackup = this.safeGet(this.backupKey);
+      if (legacyBackup) {
+        this.safeSet(this.getSlotBackupKey(1), legacyBackup);
+      }
+    }
+
+    if (!this.safeGet(this.currentSlotKey)) {
+      this.safeSet(this.currentSlotKey, '1');
+    }
   }
 
   private safeGet(key: string): string | null {

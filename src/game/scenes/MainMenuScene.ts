@@ -15,6 +15,7 @@ export class MainMenuScene extends Phaser.Scene {
     const stateManager = getStateManager(this);
     const saveSystem = getSaveStore(this);
     const saveSummary = saveSystem.getSaveSummary();
+    const slotSummaries = saveSystem.listSaveSlots();
     const replayMeta = saveSystem.getReplayMeta();
     const replayModifier = saveSystem.getSelectedReplayModifier(replayMeta);
     const canReplay = replayMeta.baseGameCompleted;
@@ -92,8 +93,9 @@ export class MainMenuScene extends Phaser.Scene {
     const primaryY = canReplay ? 338 : 372;
     const gameMoiY = canReplay ? 396 : 438;
     const replayY = 454;
-    const resetY = canReplay ? 512 : 504;
-    const exportY = canReplay ? 570 : 570;
+    const loadY = canReplay ? 512 : 504;
+    const settingsY = canReplay ? 570 : 562;
+    const exportY = canReplay ? 628 : 620;
 
     createTextButton(this, {
       x: 188,
@@ -154,7 +156,25 @@ export class MainMenuScene extends Phaser.Scene {
 
     createTextButton(this, {
       x: 188,
-      y: resetY,
+      y: loadY,
+      width: 320,
+      label: 'Load Game',
+      detail: `Mo save slots (${slotSummaries.filter((slot) => slot.hasSave).length}/${slotSummaries.length} dang co du lieu)`,
+      onClick: () => this.scene.start(SCENE_KEYS.saveSlots, { returnScene: SCENE_KEYS.mainMenu })
+    });
+
+    createTextButton(this, {
+      x: 188,
+      y: settingsY,
+      width: 320,
+      label: 'Settings',
+      detail: 'Audio, UI scale, animation, auto-save, tutorial hints',
+      onClick: () => this.scene.start(SCENE_KEYS.settings, { returnScene: SCENE_KEYS.mainMenu })
+    });
+
+    createTextButton(this, {
+      x: 188,
+      y: canReplay ? 686 : 678,
       width: 320,
       label: canReplay ? 'Xoa save hien tai' : 'Xoa du lieu save',
       detail: canReplay ? 'Xoa run hien tai, khong dong vao ending da thay' : 'Xoa save va backup roi tao lai',
@@ -199,6 +219,20 @@ export class MainMenuScene extends Phaser.Scene {
         window.URL.revokeObjectURL(url);
         setMenuStatus('Da tai save JSON. Neu gap loi, gui file nay kem mo ta buoc tai hien.');
       }
+    });
+
+    this.add.text(680, 560, [
+      'Credits',
+      'Phaser 3 + TypeScript + Vite',
+      'Nhat Niem Khai Tong la demo Early Access dang uu tien vertical slice va readability.',
+      'Asset pipeline: Pollinations + manual curation',
+      'Tone: huyền bí, tiết chế, dễ đọc'
+    ], {
+      color: menuPalette.textMuted,
+      fontFamily: '"Segoe UI", Tahoma, sans-serif',
+      fontSize: '15px',
+      lineSpacing: 8,
+      wordWrap: { width: 440 }
     });
 
     this.add.text(678, 118, 'Nen thu trong 15-20 phut dau', {

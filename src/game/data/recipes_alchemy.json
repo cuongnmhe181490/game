@@ -92,6 +92,1178 @@
         }
       ],
       "description": "Đan tán từ linh chi rừng đen, hỗ trợ bức tốc tu hành mà vẫn giữ khí tức bớt lệch."
+    },
+    {
+      "id": "recipe_co_ngoc_huyen_tuc",
+      "name": "Co Ngoc Huyen Tuc",
+      "requiredBuildingId": "luyen_khi_phong",
+      "ingredients": [
+        {
+          "itemId": "tan_phien_co_khi",
+          "amount": 1
+        },
+        {
+          "itemId": "khuyet_mach_thao",
+          "amount": 1
+        },
+        {
+          "itemId": "khoang_thach_tho",
+          "amount": 2
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "co_ngoc_huyen_tuc",
+          "amount": 1
+        }
+      ],
+      "description": "Luyen thanh co ngoc giu tuc, thich hop cho cac chuyen bi canh keo dai."
+    },
+    {
+      "id": "recipe_thanh_huyen_di_luc",
+      "name": "Thanh Huyen Di Luc Kinh Phien",
+      "requiredBuildingId": "luyen_khi_phong",
+      "ingredients": [
+        {
+          "itemId": "thua_ke_linh_bai",
+          "amount": 1
+        },
+        {
+          "itemId": "am_hoa_tinh_sa",
+          "amount": 1
+        },
+        {
+          "itemId": "u_hon_chi",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "thanh_huyen_di_luc",
+          "amount": 1
+        }
+      ],
+      "description": "Ghep lai di luc kinh phien tu di vat cu va linh tai hiem, tao phap khi ho tro tu hanh lau dai."
+    },
+    {
+      "id": "recipe_thanh_linh_dan",
+      "name": "Thanh Linh Dan",
+      "requiredBuildingId": "luyen_khi_phong",
+      "ingredients": [
+        {
+          "itemId": "linh_thao_co_ban",
+          "amount": 1
+        },
+        {
+          "itemId": "thien_dang_hoa",
+          "amount": 1
+        },
+        {
+          "itemId": "am_hoa_tinh_sa",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "thanh_linh_dan",
+          "amount": 1
+        }
+      ],
+      "description": "Dan phuong mo rong cho Thanh Linh Dan.",
+      "difficulty": 1,
+      "successRate": 0.95
+    },
+    {
+      "id": "recipe_kim_than_dan",
+      "name": "Kim Than Dan",
+      "requiredBuildingId": "luyen_khi_phong",
+      "ingredients": [
+        {
+          "itemId": "huyet_tam_thao",
+          "amount": 2
+        },
+        {
+          "itemId": "dia_tam_can",
+          "amount": 1
+        },
+        {
+          "itemId": "tinh_sa_huyen",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "kim_than_dan",
+          "amount": 1
+        }
+      ],
+      "description": "Dan phuong mo rong cho Kim Than Dan.",
+      "difficulty": 2,
+      "successRate": 0.94
+    },
+    {
+      "id": "recipe_linh_tam_dan",
+      "name": "Linh Tam Dan",
+      "requiredBuildingId": "luyen_khi_phong",
+      "ingredients": [
+        {
+          "itemId": "nguyet_linh_hoa",
+          "amount": 1
+        },
+        {
+          "itemId": "tu_van_linh_chi",
+          "amount": 1
+        },
+        {
+          "itemId": "kim_tinh_thach",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "linh_tam_dan",
+          "amount": 1
+        }
+      ],
+      "description": "Dan phuong mo rong cho Linh Tam Dan.",
+      "difficulty": 3,
+      "successRate": 0.93
+    },
+    {
+      "id": "recipe_van_khi_dan",
+      "name": "Van Khi Dan",
+      "requiredBuildingId": "luyen_khi_phong",
+      "ingredients": [
+        {
+          "itemId": "thanh_tuy_la",
+          "amount": 2
+        },
+        {
+          "itemId": "kim_sa_lien",
+          "amount": 1
+        },
+        {
+          "itemId": "nguyet_anh_thach",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "van_khi_dan",
+          "amount": 1
+        }
+      ],
+      "description": "Dan phuong mo rong cho Van Khi Dan.",
+      "difficulty": 4,
+      "successRate": 0.91
+    },
+    {
+      "id": "recipe_bach_lien_dan",
+      "name": "Bach Lien Dan",
+      "requiredBuildingId": "luyen_khi_phong",
+      "ingredients": [
+        {
+          "itemId": "kim_lien_tu",
+          "amount": 1
+        },
+        {
+          "itemId": "han_phach_lan",
+          "amount": 1
+        },
+        {
+          "itemId": "thien_hoa_thach",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "bach_lien_dan",
+          "amount": 1
+        }
+      ],
+      "description": "Dan phuong mo rong cho Bach Lien Dan.",
+      "difficulty": 5,
+      "successRate": 0.9
+    },
+    {
+      "id": "recipe_huyen_tuc_dan",
+      "name": "Huyen Tuc Dan",
+      "requiredBuildingId": "luyen_khi_phong",
+      "ingredients": [
+        {
+          "itemId": "bach_van_chi",
+          "amount": 2
+        },
+        {
+          "itemId": "xich_duong_diep",
+          "amount": 1
+        },
+        {
+          "itemId": "bach_ngoc_quang",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "huyen_tuc_dan",
+          "amount": 1
+        }
+      ],
+      "description": "Dan phuong mo rong cho Huyen Tuc Dan.",
+      "difficulty": 1,
+      "successRate": 0.89
+    },
+    {
+      "id": "recipe_kim_tuyet_dan",
+      "name": "Kim Tuyet Dan",
+      "requiredBuildingId": "luyen_khi_phong",
+      "ingredients": [
+        {
+          "itemId": "am_suong_thao",
+          "amount": 1
+        },
+        {
+          "itemId": "moc_tam_hoa",
+          "amount": 1
+        },
+        {
+          "itemId": "u_mach_tinh_thach",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "kim_tuyet_dan",
+          "amount": 1
+        }
+      ],
+      "description": "Dan phuong mo rong cho Kim Tuyet Dan.",
+      "difficulty": 2,
+      "successRate": 0.88
+    },
+    {
+      "id": "recipe_thien_quang_dan",
+      "name": "Thien Quang Dan",
+      "requiredBuildingId": "luyen_khi_phong",
+      "ingredients": [
+        {
+          "itemId": "thien_dang_hoa",
+          "amount": 2
+        },
+        {
+          "itemId": "linh_suong_thu",
+          "amount": 1
+        },
+        {
+          "itemId": "thanh_lam_thach",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "thien_quang_dan",
+          "amount": 1
+        }
+      ],
+      "description": "Dan phuong mo rong cho Thien Quang Dan.",
+      "difficulty": 3,
+      "successRate": 0.87
+    },
+    {
+      "id": "recipe_huyen_ngoc_dan",
+      "name": "Huyen Ngoc Dan",
+      "requiredBuildingId": "luyen_khi_phong",
+      "ingredients": [
+        {
+          "itemId": "dia_tam_can",
+          "amount": 1
+        },
+        {
+          "itemId": "bach_huyen_la",
+          "amount": 1
+        },
+        {
+          "itemId": "xich_luyen_sa",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "huyen_ngoc_dan",
+          "amount": 1
+        }
+      ],
+      "description": "Dan phuong mo rong cho Huyen Ngoc Dan.",
+      "difficulty": 4,
+      "successRate": 0.85
+    },
+    {
+      "id": "recipe_tam_hoa_dan",
+      "name": "Tam Hoa Dan",
+      "requiredBuildingId": "luyen_khi_phong",
+      "ingredients": [
+        {
+          "itemId": "tu_van_linh_chi",
+          "amount": 2
+        },
+        {
+          "itemId": "uyet_mach_chi",
+          "amount": 1
+        },
+        {
+          "itemId": "han_tuy_ngoc",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "tam_hoa_dan",
+          "amount": 1
+        }
+      ],
+      "description": "Dan phuong mo rong cho Tam Hoa Dan.",
+      "difficulty": 5,
+      "successRate": 0.84
+    },
+    {
+      "id": "recipe_thanh_mach_dan",
+      "name": "Thanh Mach Dan",
+      "requiredBuildingId": "luyen_khi_phong",
+      "ingredients": [
+        {
+          "itemId": "kim_sa_lien",
+          "amount": 1
+        },
+        {
+          "itemId": "thanh_hoa_moc",
+          "amount": 1
+        },
+        {
+          "itemId": "moc_tinh_tam",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "thanh_mach_dan",
+          "amount": 1
+        }
+      ],
+      "description": "Dan phuong mo rong cho Thanh Mach Dan.",
+      "difficulty": 1,
+      "successRate": 0.83
+    },
+    {
+      "id": "recipe_han_nguyet_dan",
+      "name": "Han Nguyet Dan",
+      "requiredBuildingId": "luyen_khi_phong",
+      "ingredients": [
+        {
+          "itemId": "han_phach_lan",
+          "amount": 2
+        },
+        {
+          "itemId": "cuu_diep_lien",
+          "amount": 1
+        },
+        {
+          "itemId": "thien_van_tuyet",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "han_nguyet_dan",
+          "amount": 1
+        }
+      ],
+      "description": "Dan phuong mo rong cho Han Nguyet Dan.",
+      "difficulty": 2,
+      "successRate": 0.82
+    },
+    {
+      "id": "recipe_liet_duong_dan",
+      "name": "Liet Duong Dan",
+      "requiredBuildingId": "luyen_khi_phong",
+      "ingredients": [
+        {
+          "itemId": "xich_duong_diep",
+          "amount": 1
+        },
+        {
+          "itemId": "huyen_tuy_thao",
+          "amount": 1
+        },
+        {
+          "itemId": "huyen_thach_cat",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "liet_duong_dan",
+          "amount": 1
+        }
+      ],
+      "description": "Dan phuong mo rong cho Liet Duong Dan.",
+      "difficulty": 3,
+      "successRate": 0.81
+    },
+    {
+      "id": "recipe_linh_tuy_dan",
+      "name": "Linh Tuy Dan",
+      "requiredBuildingId": "luyen_khi_phong",
+      "ingredients": [
+        {
+          "itemId": "moc_tam_hoa",
+          "amount": 2
+        },
+        {
+          "itemId": "thien_anh_lan",
+          "amount": 1
+        },
+        {
+          "itemId": "kim_hoa_tinh",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "linh_tuy_dan",
+          "amount": 1
+        }
+      ],
+      "description": "Dan phuong mo rong cho Linh Tuy Dan.",
+      "difficulty": 4,
+      "successRate": 0.79
+    },
+    {
+      "id": "recipe_chi_tinh_dan",
+      "name": "Chi Tinh Dan",
+      "requiredBuildingId": "luyen_khi_phong",
+      "ingredients": [
+        {
+          "itemId": "linh_suong_thu",
+          "amount": 1
+        },
+        {
+          "itemId": "ngoc_diep_can",
+          "amount": 1
+        },
+        {
+          "itemId": "bach_tuyet_chau",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "chi_tinh_dan",
+          "amount": 1
+        }
+      ],
+      "description": "Dan phuong mo rong cho Chi Tinh Dan.",
+      "difficulty": 5,
+      "successRate": 0.78
+    },
+    {
+      "id": "recipe_thanh_hoa_dan",
+      "name": "Thanh Hoa Dan",
+      "requiredBuildingId": "luyen_khi_phong",
+      "ingredients": [
+        {
+          "itemId": "bach_huyen_la",
+          "amount": 2
+        },
+        {
+          "itemId": "tam_duong_thao",
+          "amount": 1
+        },
+        {
+          "itemId": "thuy_ngoc_tuy",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "thanh_hoa_dan",
+          "amount": 1
+        }
+      ],
+      "description": "Dan phuong mo rong cho Thanh Hoa Dan.",
+      "difficulty": 1,
+      "successRate": 0.77
+    },
+    {
+      "id": "recipe_van_tam_dan",
+      "name": "Van Tam Dan",
+      "requiredBuildingId": "luyen_khi_phong",
+      "ingredients": [
+        {
+          "itemId": "uyet_mach_chi",
+          "amount": 1
+        },
+        {
+          "itemId": "kim_tam_hoa",
+          "amount": 1
+        },
+        {
+          "itemId": "linh_moc_chi",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "van_tam_dan",
+          "amount": 1
+        }
+      ],
+      "description": "Dan phuong mo rong cho Van Tam Dan.",
+      "difficulty": 2,
+      "successRate": 0.76
+    },
+    {
+      "id": "recipe_thien_tuc_dan",
+      "name": "Thien Tuc Dan",
+      "requiredBuildingId": "luyen_khi_phong",
+      "ingredients": [
+        {
+          "itemId": "thanh_hoa_moc",
+          "amount": 2
+        },
+        {
+          "itemId": "bach_loc_nha",
+          "amount": 1
+        },
+        {
+          "itemId": "phach_thach_tam",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "thien_tuc_dan",
+          "amount": 1
+        }
+      ],
+      "description": "Dan phuong mo rong cho Thien Tuc Dan.",
+      "difficulty": 3,
+      "successRate": 0.75
+    },
+    {
+      "id": "recipe_kim_lien_dan",
+      "name": "Kim Lien Dan",
+      "requiredBuildingId": "luyen_khi_phong",
+      "ingredients": [
+        {
+          "itemId": "cuu_diep_lien",
+          "amount": 1
+        },
+        {
+          "itemId": "linh_huyen_mai",
+          "amount": 1
+        },
+        {
+          "itemId": "am_van_khoang",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "kim_lien_dan",
+          "amount": 1
+        }
+      ],
+      "description": "Dan phuong mo rong cho Kim Lien Dan.",
+      "difficulty": 4,
+      "successRate": 0.73
+    },
+    {
+      "id": "recipe_huyen_linh_dan",
+      "name": "Huyen Linh Dan",
+      "requiredBuildingId": "luyen_khi_phong",
+      "ingredients": [
+        {
+          "itemId": "huyen_tuy_thao",
+          "amount": 2
+        },
+        {
+          "itemId": "phong_anh_co",
+          "amount": 1
+        },
+        {
+          "itemId": "thach_anh_tinh_tuy",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "huyen_linh_dan",
+          "amount": 1
+        }
+      ],
+      "description": "Dan phuong mo rong cho Huyen Linh Dan.",
+      "difficulty": 5,
+      "successRate": 0.72
+    },
+    {
+      "id": "recipe_ngoc_tam_dan",
+      "name": "Ngoc Tam Dan",
+      "requiredBuildingId": "luyen_khi_phong",
+      "ingredients": [
+        {
+          "itemId": "thien_anh_lan",
+          "amount": 1
+        },
+        {
+          "itemId": "hoa_suong_chi",
+          "amount": 1
+        },
+        {
+          "itemId": "cuu_huyen_tinh_phan",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "ngoc_tam_dan",
+          "amount": 1
+        }
+      ],
+      "description": "Dan phuong mo rong cho Ngoc Tam Dan.",
+      "difficulty": 1,
+      "successRate": 0.71
+    },
+    {
+      "id": "recipe_xuan_khi_dan",
+      "name": "Xuan Khi Dan",
+      "requiredBuildingId": "luyen_khi_phong",
+      "ingredients": [
+        {
+          "itemId": "ngoc_diep_can",
+          "amount": 2
+        },
+        {
+          "itemId": "thiet_tam_lien",
+          "amount": 1
+        },
+        {
+          "itemId": "lam_hoa_thach",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "xuan_khi_dan",
+          "amount": 1
+        }
+      ],
+      "description": "Dan phuong mo rong cho Xuan Khi Dan.",
+      "difficulty": 2,
+      "successRate": 0.7
+    },
+    {
+      "id": "recipe_thuy_moc_dan",
+      "name": "Thuy Moc Dan",
+      "requiredBuildingId": "luyen_khi_phong",
+      "ingredients": [
+        {
+          "itemId": "tam_duong_thao",
+          "amount": 1
+        },
+        {
+          "itemId": "am_nguyet_moc",
+          "amount": 1
+        },
+        {
+          "itemId": "tuyet_ngoc_sa",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "thuy_moc_dan",
+          "amount": 1
+        }
+      ],
+      "description": "Dan phuong mo rong cho Thuy Moc Dan.",
+      "difficulty": 3,
+      "successRate": 0.69
+    },
+    {
+      "id": "recipe_am_hoa_dan",
+      "name": "Am Hoa Dan",
+      "requiredBuildingId": "luyen_khi_phong",
+      "ingredients": [
+        {
+          "itemId": "kim_tam_hoa",
+          "amount": 2
+        },
+        {
+          "itemId": "thien_linh_re",
+          "amount": 1
+        },
+        {
+          "itemId": "huyen_moc_tuy",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "am_hoa_dan",
+          "amount": 1
+        }
+      ],
+      "description": "Dan phuong mo rong cho Am Hoa Dan.",
+      "difficulty": 4,
+      "successRate": 0.67
+    },
+    {
+      "id": "recipe_bac_van_dan",
+      "name": "Bac Van Dan",
+      "requiredBuildingId": "luyen_khi_phong",
+      "ingredients": [
+        {
+          "itemId": "bach_loc_nha",
+          "amount": 1
+        },
+        {
+          "itemId": "van_hoa_thao",
+          "amount": 1
+        },
+        {
+          "itemId": "thien_loc_quang",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "bac_van_dan",
+          "amount": 1
+        }
+      ],
+      "description": "Dan phuong mo rong cho Bac Van Dan.",
+      "difficulty": 5,
+      "successRate": 0.66
+    },
+    {
+      "id": "recipe_cuu_lien_dan",
+      "name": "Cuu Lien Dan",
+      "requiredBuildingId": "luyen_khi_phong",
+      "ingredients": [
+        {
+          "itemId": "linh_huyen_mai",
+          "amount": 2
+        },
+        {
+          "itemId": "tu_hon_la",
+          "amount": 1
+        },
+        {
+          "itemId": "bach_hoa_tinh_cat",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "cuu_lien_dan",
+          "amount": 1
+        }
+      ],
+      "description": "Dan phuong mo rong cho Cuu Lien Dan.",
+      "difficulty": 1,
+      "successRate": 0.65
+    },
+    {
+      "id": "recipe_hoan_nguyen_dan",
+      "name": "Hoan Nguyen Dan",
+      "requiredBuildingId": "luyen_khi_phong",
+      "ingredients": [
+        {
+          "itemId": "phong_anh_co",
+          "amount": 1
+        },
+        {
+          "itemId": "lam_tuy_chi",
+          "amount": 1
+        },
+        {
+          "itemId": "tran_mach_thach",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "hoan_nguyen_dan",
+          "amount": 1
+        }
+      ],
+      "description": "Dan phuong mo rong cho Hoan Nguyen Dan.",
+      "difficulty": 2,
+      "successRate": 0.64
+    },
+    {
+      "id": "recipe_khai_khieu_dan",
+      "name": "Khai Khieu Dan",
+      "requiredBuildingId": "luyen_khi_phong",
+      "ingredients": [
+        {
+          "itemId": "hoa_suong_chi",
+          "amount": 2
+        },
+        {
+          "itemId": "moc_anh_nha",
+          "amount": 1
+        },
+        {
+          "itemId": "linh_tam_sa",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "khai_khieu_dan",
+          "amount": 1
+        }
+      ],
+      "description": "Dan phuong mo rong cho Khai Khieu Dan.",
+      "difficulty": 3,
+      "successRate": 0.63
+    },
+    {
+      "id": "recipe_tran_tam_dan",
+      "name": "Tran Tam Dan",
+      "requiredBuildingId": "luyen_khi_phong",
+      "ingredients": [
+        {
+          "itemId": "thiet_tam_lien",
+          "amount": 1
+        },
+        {
+          "itemId": "ngoc_suong_lan",
+          "amount": 1
+        },
+        {
+          "itemId": "kim_tuyet_tinh",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "tran_tam_dan",
+          "amount": 1
+        }
+      ],
+      "description": "Dan phuong mo rong cho Tran Tam Dan.",
+      "difficulty": 4,
+      "successRate": 0.61
+    },
+    {
+      "id": "recipe_van_hoa_dan",
+      "name": "Van Hoa Dan",
+      "requiredBuildingId": "luyen_khi_phong",
+      "ingredients": [
+        {
+          "itemId": "am_nguyet_moc",
+          "amount": 2
+        },
+        {
+          "itemId": "huyen_vu_thao",
+          "amount": 1
+        },
+        {
+          "itemId": "thien_huyen_tam_thach",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "van_hoa_dan",
+          "amount": 1
+        }
+      ],
+      "description": "Dan phuong mo rong cho Van Hoa Dan.",
+      "difficulty": 5,
+      "successRate": 0.6
+    },
+    {
+      "id": "recipe_co_ngoc_linh_phu",
+      "name": "Co Ngoc Linh Phu",
+      "requiredBuildingId": "luyen_khi_phong",
+      "ingredients": [
+        {
+          "itemId": "mat_lenh_bac_son",
+          "amount": 1
+        },
+        {
+          "itemId": "tinh_sa_huyen",
+          "amount": 1
+        },
+        {
+          "itemId": "huyet_tam_thao",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "co_ngoc_linh_phu",
+          "amount": 1
+        }
+      ],
+      "description": "Che thanh Co Ngoc Linh Phu tu di vat va linh tai hiem.",
+      "difficulty": 3,
+      "successRate": 0.72
+    },
+    {
+      "id": "recipe_thien_huyen_hoan",
+      "name": "Thien Huyen Hoan",
+      "requiredBuildingId": "luyen_khi_phong",
+      "ingredients": [
+        {
+          "itemId": "thien_khu_manh_do",
+          "amount": 1
+        },
+        {
+          "itemId": "nguyet_anh_thach",
+          "amount": 1
+        },
+        {
+          "itemId": "kim_lien_tu",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "thien_huyen_hoan",
+          "amount": 1
+        }
+      ],
+      "description": "Che thanh Thien Huyen Hoan tu di vat va linh tai hiem.",
+      "difficulty": 4,
+      "successRate": 0.7
+    },
+    {
+      "id": "recipe_bach_lien_ngoc_boi",
+      "name": "Bach Lien Ngoc Boi",
+      "requiredBuildingId": "luyen_khi_phong",
+      "ingredients": [
+        {
+          "itemId": "di_tich_thanh_bia",
+          "amount": 1
+        },
+        {
+          "itemId": "bach_ngoc_quang",
+          "amount": 1
+        },
+        {
+          "itemId": "thien_dang_hoa",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "bach_lien_ngoc_boi",
+          "amount": 1
+        }
+      ],
+      "description": "Che thanh Bach Lien Ngoc Boi tu di vat va linh tai hiem.",
+      "difficulty": 5,
+      "successRate": 0.68
+    },
+    {
+      "id": "recipe_u_hoa_am_phu",
+      "name": "U Hoa Am Phu",
+      "requiredBuildingId": "luyen_khi_phong",
+      "ingredients": [
+        {
+          "itemId": "co_quyen_huyen_an",
+          "amount": 1
+        },
+        {
+          "itemId": "thanh_lam_thach",
+          "amount": 1
+        },
+        {
+          "itemId": "kim_sa_lien",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "u_hoa_am_phu",
+          "amount": 1
+        }
+      ],
+      "description": "Che thanh U Hoa Am Phu tu di vat va linh tai hiem.",
+      "difficulty": 3,
+      "successRate": 0.66
+    },
+    {
+      "id": "recipe_kim_lang_ho_tam",
+      "name": "Kim Lang Ho Tam",
+      "requiredBuildingId": "luyen_khi_phong",
+      "ingredients": [
+        {
+          "itemId": "thach_an_truyen_thu",
+          "amount": 1
+        },
+        {
+          "itemId": "han_tuy_ngoc",
+          "amount": 1
+        },
+        {
+          "itemId": "moc_tam_hoa",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "kim_lang_ho_tam",
+          "amount": 1
+        }
+      ],
+      "description": "Che thanh Kim Lang Ho Tam tu di vat va linh tai hiem.",
+      "difficulty": 4,
+      "successRate": 0.64
+    },
+    {
+      "id": "recipe_thanh_tam_linh_ban",
+      "name": "Thanh Tam Linh Ban",
+      "requiredBuildingId": "luyen_khi_phong",
+      "ingredients": [
+        {
+          "itemId": "linh_khac_co_ban",
+          "amount": 1
+        },
+        {
+          "itemId": "thien_van_tuyet",
+          "amount": 1
+        },
+        {
+          "itemId": "uyet_mach_chi",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "thanh_tam_linh_ban",
+          "amount": 1
+        }
+      ],
+      "description": "Che thanh Thanh Tam Linh Ban tu di vat va linh tai hiem.",
+      "difficulty": 5,
+      "successRate": 0.62
+    },
+    {
+      "id": "recipe_tran_mach_ngoc_cham",
+      "name": "Tran Mach Ngoc Cham",
+      "requiredBuildingId": "luyen_khi_phong",
+      "ingredients": [
+        {
+          "itemId": "mat_do_mach_cu",
+          "amount": 1
+        },
+        {
+          "itemId": "kim_hoa_tinh",
+          "amount": 1
+        },
+        {
+          "itemId": "huyen_tuy_thao",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "tran_mach_ngoc_cham",
+          "amount": 1
+        }
+      ],
+      "description": "Che thanh Tran Mach Ngoc Cham tu di vat va linh tai hiem.",
+      "difficulty": 3,
+      "successRate": 0.6
+    },
+    {
+      "id": "recipe_huyen_quang_gioi_chi",
+      "name": "Huyen Quang Gioi Chi",
+      "requiredBuildingId": "luyen_khi_phong",
+      "ingredients": [
+        {
+          "itemId": "tan_lenh_phan_doan",
+          "amount": 1
+        },
+        {
+          "itemId": "thuy_ngoc_tuy",
+          "amount": 1
+        },
+        {
+          "itemId": "tam_duong_thao",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "huyen_quang_gioi_chi",
+          "amount": 1
+        }
+      ],
+      "description": "Che thanh Huyen Quang Gioi Chi tu di vat va linh tai hiem.",
+      "difficulty": 4,
+      "successRate": 0.58
+    },
+    {
+      "id": "recipe_nguyet_tam_bao_xuyen",
+      "name": "Nguyet Tam Bao Xuyen",
+      "requiredBuildingId": "luyen_khi_phong",
+      "ingredients": [
+        {
+          "itemId": "co_phu_an_van",
+          "amount": 1
+        },
+        {
+          "itemId": "phach_thach_tam",
+          "amount": 1
+        },
+        {
+          "itemId": "linh_huyen_mai",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "nguyet_tam_bao_xuyen",
+          "amount": 1
+        }
+      ],
+      "description": "Che thanh Nguyet Tam Bao Xuyen tu di vat va linh tai hiem.",
+      "difficulty": 5,
+      "successRate": 0.56
+    },
+    {
+      "id": "recipe_cuu_van_phu_an",
+      "name": "Cuu Van Phu An",
+      "requiredBuildingId": "luyen_khi_phong",
+      "ingredients": [
+        {
+          "itemId": "thu_tich_that_truyen",
+          "amount": 1
+        },
+        {
+          "itemId": "thach_anh_tinh_tuy",
+          "amount": 1
+        },
+        {
+          "itemId": "thiet_tam_lien",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "cuu_van_phu_an",
+          "amount": 1
+        }
+      ],
+      "description": "Che thanh Cuu Van Phu An tu di vat va linh tai hiem.",
+      "difficulty": 3,
+      "successRate": 0.54
     }
   ]
 }

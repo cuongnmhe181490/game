@@ -11,7 +11,9 @@ import type {
   DiscipleProfile,
   DiscipleTaskId,
   GameState,
-  RealmId
+  RealmId,
+  ResourceDeltaState,
+  ResourceId
 } from '@/game/state/types';
 import { SaveSystem } from '@/game/systems/LocalSaveStore';
 import { ResourceSystem } from '@/game/systems/ResourceSystem';
@@ -47,6 +49,23 @@ export interface DiscipleActionResult {
 
 export interface DailyDiscipleUpdateResult {
   lines: string[];
+}
+
+export interface SectManagementOverview {
+  cultivationSupport: number;
+  cultivationPower: number;
+  resourceDelta: ResourceDeltaState;
+  inventoryRewards: Record<string, number>;
+  alchemyCostReduction: number;
+  explorationRewardMultiplier: number;
+  taskCounts: {
+    cultivation: number;
+    gathering: number;
+    alchemy: number;
+    exploration: number;
+    rest: number;
+  };
+  summaryLines: string[];
 }
 
 function clampPercent(value: number): number {
@@ -204,10 +223,33 @@ export class DiscipleSystem {
       }
 
       target.currentTask = task;
+      const suggestedBuildingId = this.getSuggestedBuildingForTask(task, draft);
+
+      if (target.assignedBuildingId && target.assignedBuildingId !== suggestedBuildingId) {
+        const previousBuilding = draft.sect.buildings[target.assignedBuildingId];
+        previousBuilding.assignedDiscipleIds = previousBuilding.assignedDiscipleIds.filter((entry) => entry !== discipleId);
+      }
+
+      target.assignedBuildingId = suggestedBuildingId;
+      if (suggestedBuildingId) {
+        const nextBuilding = draft.sect.buildings[suggestedBuildingId];
+        if (!nextBuilding.assignedDiscipleIds.includes(discipleId)) {
+          nextBuilding.assignedDiscipleIds.push(discipleId);
+        }
+      }
       target.mood = clampPercent(target.mood + (task === 'nghi_ngoi' ? 2 : 0));
+      const suggestedBuildingName = suggestedBuildingId
+        ? buildingCatalog.buildings.find((entry) => entry.id === suggestedBuildingId)?.name ?? suggestedBuildingId
+        : null;
       target.lastDailyNote = `Được giao nhiệm vụ ${TASK_LABELS[task]}.`;
+      target.lastDailyNote = suggestedBuildingName
+        ? `Duoc giao nhiem vu ${TASK_LABELS[task]} tai ${suggestedBuildingName}.`
+        : `Duoc giao nhiem vu ${TASK_LABELS[task]}.`;
       updateRiskFlagsInPlace(target);
       refreshSectLevelDiscipleFlags(draft);
+      draft.ui.statusMessage = suggestedBuildingName
+        ? `${target.name} chuyen sang ${TASK_LABELS[task]} tai ${suggestedBuildingName}.`
+        : `${target.name} chuyen sang nhiem vu ${TASK_LABELS[task]}.`;
       draft.ui.statusMessage = `${target.name} chuyển sang nhiệm vụ ${TASK_LABELS[task]}.`;
     });
 
@@ -474,6 +516,34 @@ export class DiscipleSystem {
       }
     }
 
+    const management = this.getSectManagementOverview(draft);
+    for (const resourceId of Object.keys(management.resourceDelta) as ResourceId[]) {
+      const change = management.resourceDelta[resourceId] ?? 0;
+      if (change !== 0) {
+        draft.resources[resourceId] = Math.max(0, draft.resources[resourceId] + change);
+      }
+    }
+
+    for (const [itemId, amount] of Object.entries(management.inventoryRewards)) {
+      if (amount > 0) {
+        draft.inventory.items[itemId] = (draft.inventory.items[itemId] ?? 0) + amount;
+      }
+    }
+
+    if (management.cultivationSupport > 0) {
+      const currentRealm = findRealm(draft.player.cultivation.currentRealmId);
+      draft.player.cultivation.cultivationProgress += management.cultivationSupport;
+      draft.player.cultivation.lastGain += management.cultivationSupport;
+      draft.player.cultivation.breakthroughReady = draft.player.cultivation.cultivationProgress >= currentRealm.progressRequired;
+      draft.player.cultivation.lastSummary = `${draft.player.cultivation.lastSummary}\nNoi mon ho tro: +${management.cultivationSupport} tien do tu hanh.`;
+    }
+
+    if (management.summaryLines.length > 0) {
+      draft.ui.statusMessage = management.summaryLines[management.summaryLines.length - 1] ?? draft.ui.statusMessage;
+      draft.inventory.lastSummary = management.summaryLines[management.summaryLines.length - 1] ?? draft.inventory.lastSummary;
+      lines.push(...management.summaryLines);
+    }
+
     refreshSectLevelDiscipleFlags(draft);
     return {
       lines: lines.slice(-6)
@@ -490,6 +560,153 @@ export class DiscipleSystem {
     }
 
     refreshSectLevelDiscipleFlags(draft);
+  }
+
+  getSectManagementOverview(snapshot: Readonly<GameState> = this.stateManager.snapshot): SectManagementOverview {
+    const taskCounts = {
+      cultivation: 0,
+      gathering: 0,
+      alchemy: 0,
+      exploration: 0,
+      rest: 0
+    };
+    const resourceDelta: ResourceDeltaState = {};
+    const inventoryRewards: Record<string, number> = {};
+    const summaryLines: string[] = [];
+    let cultivationSupport = 0;
+    let cultivationPower = 0;
+    let herbWorkers = 0;
+    let gatherWorkers = 0;
+
+    const libraryLevel = snapshot.sect.buildings.tang_kinh_cac.level;
+    const herbGardenLevel = snapshot.sect.buildings.duoc_vien.level;
+    const cultivationHallLevel = snapshot.sect.buildings.tinh_tu_duong.level;
+    const alchemyPavilionLevel = snapshot.sect.buildings.luyen_khi_phong.level;
+    const guardArrayLevel = snapshot.sect.buildings.ho_son_tran_dai.level;
+
+    for (const disciple of snapshot.disciples.roster) {
+      const realmOrder = findRealm(disciple.realmId).order;
+      cultivationPower += realmOrder * 8 + Math.floor(disciple.comprehension / 12);
+
+      switch (disciple.currentTask) {
+        case 'tu_luyen':
+          taskCounts.cultivation += 1;
+          cultivationSupport += 1 + (disciple.assignedBuildingId === 'tinh_tu_duong' ? 1 : 0) + (libraryLevel > 0 ? 1 : 0);
+          break;
+        case 'trong_duoc':
+          taskCounts.gathering += 1;
+          herbWorkers += 1 + (disciple.assignedBuildingId === 'duoc_vien' ? 1 : 0);
+          break;
+        case 'thu_thap':
+          taskCounts.gathering += 1;
+          gatherWorkers += 1 + (disciple.assignedBuildingId === 'linh_thach_kho' ? 1 : 0);
+          break;
+        case 'luyen_dan':
+          taskCounts.alchemy += 1;
+          cultivationPower += 4;
+          break;
+        case 'tuan_tra':
+          taskCounts.exploration += 1;
+          cultivationPower += 2;
+          break;
+        default:
+          taskCounts.rest += 1;
+          break;
+      }
+    }
+
+    if (taskCounts.cultivation > 0 && cultivationHallLevel > 0) {
+      const hallBonus = Math.min(taskCounts.cultivation, cultivationHallLevel);
+      cultivationSupport += hallBonus;
+      summaryLines.push(`Tinh Tu Duong day nhanh nhip tu hanh noi mon: +${hallBonus} tien do.`);
+    }
+
+    if (herbWorkers > 0) {
+      resourceDelta.duocThao = (resourceDelta.duocThao ?? 0) + herbWorkers;
+      inventoryRewards.linh_thao_co_ban = Math.floor((herbWorkers + herbGardenLevel) / 2);
+      summaryLines.push(`De tu trong duoc bo sung ${herbWorkers} duoc thao cho son mon.`);
+    }
+
+    if (gatherWorkers > 0) {
+      resourceDelta.khoangThach = (resourceDelta.khoangThach ?? 0) + gatherWorkers;
+      resourceDelta.linhMoc = (resourceDelta.linhMoc ?? 0) + Math.max(0, Math.floor(gatherWorkers / 2));
+      inventoryRewards.khoang_thach_tho = Math.floor(gatherWorkers / 2);
+      summaryLines.push(`De tu thu thap gom them ${gatherWorkers} khoang thach cho tong mon.`);
+    }
+
+    if ((inventoryRewards.linh_thao_co_ban ?? 0) > 0) {
+      summaryLines.push(`Vuon duoc noi mon ket ra ${inventoryRewards.linh_thao_co_ban} Linh Thao Co Ban.`);
+    }
+
+    if ((inventoryRewards.khoang_thach_tho ?? 0) > 0) {
+      summaryLines.push(`Nhom thu thap dua ve ${inventoryRewards.khoang_thach_tho} Khoang Thach Tho.`);
+    }
+
+    return {
+      cultivationSupport,
+      cultivationPower,
+      resourceDelta,
+      inventoryRewards: Object.fromEntries(Object.entries(inventoryRewards).filter(([, amount]) => amount > 0)),
+      alchemyCostReduction: Math.min(2, (taskCounts.alchemy > 0 ? 1 : 0) + (alchemyPavilionLevel >= 2 ? 1 : 0)),
+      explorationRewardMultiplier: 1 + Math.min(0.2, taskCounts.exploration * 0.05 + guardArrayLevel * 0.03),
+      taskCounts,
+      summaryLines
+    };
+  }
+
+  getSuggestedBuildingForTask(task: DiscipleTaskId, snapshot: Readonly<GameState> = this.stateManager.snapshot): BuildingId | null {
+    switch (task) {
+      case 'tu_luyen':
+        return snapshot.sect.buildings.tinh_tu_duong.isConstructed
+          ? 'tinh_tu_duong'
+          : snapshot.sect.buildings.tang_kinh_cac.isConstructed
+            ? 'tang_kinh_cac'
+            : null;
+      case 'trong_duoc':
+        return snapshot.sect.buildings.duoc_vien.isConstructed ? 'duoc_vien' : null;
+      case 'luyen_dan':
+        return snapshot.sect.buildings.luyen_khi_phong.isConstructed ? 'luyen_khi_phong' : null;
+      case 'thu_thap':
+        return snapshot.sect.buildings.linh_thach_kho.isConstructed ? 'linh_thach_kho' : null;
+      case 'tuan_tra':
+        return snapshot.sect.buildings.ho_son_tran_dai.isConstructed ? 'ho_son_tran_dai' : null;
+      default:
+        return null;
+    }
+  }
+
+  applyReputationMilestonesInDraft(draft: GameState, previousReputation: number): string[] {
+    const unlockedLines: string[] = [];
+    const milestones: Array<{ threshold: number; archetype: string; flag: string }> = [
+      { threshold: 10, archetype: 'talented_youth', flag: 'reputation_disciple_10' },
+      { threshold: 22, archetype: 'branch_descendant', flag: 'reputation_disciple_22' },
+      { threshold: 36, archetype: 'ruined_sect_refugee', flag: 'reputation_disciple_36' }
+    ];
+
+    for (const milestone of milestones) {
+      if (previousReputation >= milestone.threshold || draft.sect.reputation < milestone.threshold) {
+        continue;
+      }
+
+      addUniqueFlag(draft.story.worldFlags, milestone.flag);
+      draft.sect.prestige += 1;
+
+      if (draft.disciples.roster.length >= draft.sect.discipleCapacity) {
+        unlockedLines.push(`Danh vong dat moc ${milestone.threshold}, nhung tong mon chua con cho de nhan de tu moi.`);
+        continue;
+      }
+
+      const recruit = this.createRecruitProfile(draft, milestone.archetype);
+      draft.disciples.roster.push(recruit);
+      unlockedLines.push(`${recruit.name} nghe danh Thanh Huyen Mon ma tu nguyen xin nhap mon.`);
+    }
+
+    if (unlockedLines.length > 0) {
+      draft.ui.statusMessage = unlockedLines[unlockedLines.length - 1];
+      refreshSectLevelDiscipleFlags(draft);
+    }
+
+    return unlockedLines;
   }
 
   private getDailyProgressGain(draft: Readonly<GameState>, disciple: DiscipleProfile): number {

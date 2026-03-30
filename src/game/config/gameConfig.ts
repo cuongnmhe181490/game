@@ -2,10 +2,13 @@ import Phaser from 'phaser';
 
 import { AlchemySystem } from '@/game/systems/AlchemySystem';
 import { ArtifactSystem } from '@/game/systems/ArtifactSystem';
+import { BeastSystem } from '@/game/systems/BeastSystem';
 import { REGISTRY_KEYS } from '@/game/config/registry';
 import { BootScene } from '@/game/scenes/BootScene';
+import { BeastsScene } from '@/game/scenes/BeastsScene';
 import { EndingScene } from '@/game/scenes/EndingScene';
 import { ExplorationScene } from '@/game/scenes/ExplorationScene';
+import { InventoryScene } from '@/game/scenes/InventoryScene';
 import { MainMenuScene } from '@/game/scenes/MainMenuScene';
 import { PreloadScene } from '@/game/scenes/PreloadScene';
 import { SectScene } from '@/game/scenes/SectScene';
@@ -22,8 +25,13 @@ import { ResourceSystem } from '@/game/systems/ResourceSystem';
 import { SaveSystem } from '@/game/systems/LocalSaveStore';
 import { SectIdentitySystem } from '@/game/systems/SectIdentitySystem';
 import { TechniqueSystem } from '@/game/systems/TechniqueSystem';
+import { TribulationSystem } from '@/game/systems/TribulationSystem';
 import type { GameStateManager } from '@/game/state/GameStateManager';
 import { TimeSystem } from '@/game/systems/TimeSystem';
+import { SettingsStore } from '@/game/systems/SettingsStore';
+import { SaveSlotsScene } from '@/game/scenes/SaveSlotsScene';
+import { SettingsScene } from '@/game/scenes/SettingsScene';
+import { SystemMenuScene } from '@/game/scenes/SystemMenuScene';
 
 export function createGameConfig(
   parent: HTMLElement,
@@ -36,7 +44,7 @@ export function createGameConfig(
     width: 1280,
     height: 720,
     backgroundColor: '#081014',
-    scene: [BootScene, PreloadScene, MainMenuScene, SectScene, ExplorationScene, EndingScene],
+    scene: [BootScene, PreloadScene, MainMenuScene, SectScene, BeastsScene, InventoryScene, ExplorationScene, EndingScene, SaveSlotsScene, SettingsScene, SystemMenuScene],
     physics: {
       default: 'arcade',
       arcade: {
@@ -60,16 +68,20 @@ export function createGameConfig(
         const discipleSystem = new DiscipleSystem(stateManager, saveSystem, resourceSystem, sectIdentitySystem);
         const techniqueSystem = new TechniqueSystem(stateManager, saveSystem);
         const artifactSystem = new ArtifactSystem(stateManager, saveSystem);
+        const beastSystem = new BeastSystem(stateManager, saveSystem);
+        const tribulationSystem = new TribulationSystem(techniqueSystem, beastSystem, discipleSystem);
         const realmSystem = new RealmSystem(
           stateManager,
           saveSystem,
           resourceSystem,
           techniqueSystem,
           artifactSystem,
-          sectIdentitySystem
+          sectIdentitySystem,
+          tribulationSystem,
+          discipleSystem
         );
         const inventorySystem = new InventorySystem(stateManager, saveSystem);
-        const alchemySystem = new AlchemySystem(stateManager, saveSystem, buildingSystem, inventorySystem, sectIdentitySystem);
+        const alchemySystem = new AlchemySystem(stateManager, saveSystem, buildingSystem, inventorySystem, sectIdentitySystem, discipleSystem);
         const eventRuntimeSystem = new EventRuntimeSystem(
           stateManager,
           saveSystem,
@@ -78,8 +90,11 @@ export function createGameConfig(
           sectIdentitySystem,
           endingSystem
         );
-        const explorationSystem = new ExplorationSystem(stateManager, saveSystem, resourceSystem, inventorySystem, artifactSystem);
+        const explorationSystem = new ExplorationSystem(stateManager, saveSystem, resourceSystem, inventorySystem, artifactSystem, beastSystem, discipleSystem);
         const feedbackSystem = new FeedbackSystem();
+        const settingsStore = new SettingsStore();
+        const settings = settingsStore.getSettings();
+        feedbackSystem.setVolumePreferences(settings.masterVolume, settings.sfxVolume);
         const timeSystem = new TimeSystem(
           stateManager,
           saveSystem,
@@ -92,15 +107,18 @@ export function createGameConfig(
 
         game.registry.set(REGISTRY_KEYS.stateManager, stateManager);
         game.registry.set(REGISTRY_KEYS.saveSystem, saveSystem);
+        game.registry.set(REGISTRY_KEYS.settingsStore, settingsStore);
         game.registry.set(REGISTRY_KEYS.buildingSystem, buildingSystem);
         game.registry.set(REGISTRY_KEYS.discipleSystem, discipleSystem);
         game.registry.set(REGISTRY_KEYS.diplomacySystem, diplomacySystem);
         game.registry.set(REGISTRY_KEYS.endingSystem, endingSystem);
         game.registry.set(REGISTRY_KEYS.sectIdentitySystem, sectIdentitySystem);
         game.registry.set(REGISTRY_KEYS.inventorySystem, inventorySystem);
+        game.registry.set(REGISTRY_KEYS.beastSystem, beastSystem);
         game.registry.set(REGISTRY_KEYS.artifactSystem, artifactSystem);
         game.registry.set(REGISTRY_KEYS.alchemySystem, alchemySystem);
         game.registry.set(REGISTRY_KEYS.techniqueSystem, techniqueSystem);
+        game.registry.set(REGISTRY_KEYS.tribulationSystem, tribulationSystem);
         game.registry.set(REGISTRY_KEYS.realmSystem, realmSystem);
         game.registry.set(REGISTRY_KEYS.resourceSystem, resourceSystem);
         game.registry.set(REGISTRY_KEYS.timeSystem, timeSystem);

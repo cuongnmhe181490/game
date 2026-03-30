@@ -94,6 +94,37 @@ function normalizeInventory(input: unknown, fallback: GameState['inventory']): G
   };
 }
 
+function normalizeBeasts(input: unknown, fallback: GameState['beasts']): GameState['beasts'] {
+  if (!isRecord(input)) {
+    return structuredClone(fallback);
+  }
+
+  const owned = Array.isArray(input.owned)
+    ? input.owned
+        .filter(isRecord)
+        .map((entry) => ({
+          beastId: isString(entry.beastId) ? entry.beastId : '',
+          level: isNumber(entry.level) ? Math.max(1, Math.trunc(entry.level)) : 1,
+          training: isNumber(entry.training) ? Math.max(0, Math.trunc(entry.training)) : 0,
+          attack: isNumber(entry.attack) ? Math.max(1, Math.trunc(entry.attack)) : 1,
+          defense: isNumber(entry.defense) ? Math.max(0, Math.trunc(entry.defense)) : 0,
+          health: isNumber(entry.health) ? Math.max(1, Math.trunc(entry.health)) : 1
+        }))
+        .filter((entry) => entry.beastId.length > 0)
+    : fallback.owned;
+
+  const activeBeastId = isString(input.activeBeastId) ? input.activeBeastId : null;
+  const safeActiveBeastId = owned.some((entry) => entry.beastId === activeBeastId)
+    ? activeBeastId
+    : owned[0]?.beastId ?? null;
+
+  return {
+    owned,
+    activeBeastId: safeActiveBeastId,
+    lastSummary: isString(input.lastSummary) ? input.lastSummary : fallback.lastSummary
+  };
+}
+
 function normalizeBuildings(input: unknown, fallback: GameState['sect']['buildings']): GameState['sect']['buildings'] {
   const result = structuredClone(fallback);
 
@@ -359,6 +390,14 @@ function normalizeExploration(input: unknown, fallback: GameState['exploration']
 
   return {
     unlockedMapIds: safeUnlockedMapIds,
+    discoveredSecretRealmIds: Array.from(new Set(normalizeStringArray(input.discoveredSecretRealmIds))),
+    secretRealmLastEntryDays: isRecord(input.secretRealmLastEntryDays)
+      ? Object.fromEntries(
+          Object.entries(input.secretRealmLastEntryDays)
+            .filter((entry): entry is [string, number] => isNumber(entry[1]))
+            .map(([mapId, day]) => [mapId, Math.max(1, Math.trunc(day))])
+        )
+      : { ...fallback.secretRealmLastEntryDays },
     totalRuns: isNumber(input.totalRuns) ? Math.max(0, Math.trunc(input.totalRuns)) : fallback.totalRuns,
     defeatedBossIds: Array.from(new Set(normalizeStringArray(input.defeatedBossIds))),
     history: Array.isArray(input.history)
@@ -471,6 +510,9 @@ function normalizeGameState(parsed: unknown): GameState | null {
                     ? Math.max(0, Math.trunc(parsed.player.cultivation.cultivationProgress))
                     : base.player.cultivation.cultivationProgress,
                   breakthroughReady: parsed.player.cultivation.breakthroughReady === true,
+                  breakthroughBonus: isNumber(parsed.player.cultivation.breakthroughBonus)
+                    ? Math.max(0, Math.trunc(parsed.player.cultivation.breakthroughBonus))
+                    : base.player.cultivation.breakthroughBonus,
                   foundationStability: isNumber(parsed.player.cultivation.foundationStability)
                     ? Math.max(0, Math.min(100, Math.trunc(parsed.player.cultivation.foundationStability)))
                     : base.player.cultivation.foundationStability,
@@ -499,6 +541,7 @@ function normalizeGameState(parsed: unknown): GameState | null {
         ? {
             name: isString(parsed.sect.name) ? parsed.sect.name : base.sect.name,
             prestige: isNumber(parsed.sect.prestige) ? Math.max(0, Math.trunc(parsed.sect.prestige)) : base.sect.prestige,
+            reputation: isNumber(parsed.sect.reputation) ? Math.max(0, Math.trunc(parsed.sect.reputation)) : base.sect.reputation,
             fortune: isNumber(parsed.sect.fortune) ? Math.max(0, Math.min(100, Math.trunc(parsed.sect.fortune))) : base.sect.fortune,
             stability: isNumber(parsed.sect.stability) ? Math.max(0, Math.min(100, Math.trunc(parsed.sect.stability))) : base.sect.stability,
             chapterId:
@@ -553,6 +596,7 @@ function normalizeGameState(parsed: unknown): GameState | null {
         : base.time,
       resources: normalizeResources(parsed.resources, base.resources),
       inventory: normalizeInventory(parsed.inventory, base.inventory),
+      beasts: normalizeBeasts(parsed.beasts, base.beasts),
       disciples:
         isRecord(parsed.disciples) && Array.isArray(parsed.disciples.roster)
           ? {
@@ -758,6 +802,7 @@ function normalizeGameState(parsed: unknown): GameState | null {
           }
         : base.time,
       resources: remapLegacyResources(parsed.resources, base.resources),
+      beasts: base.beasts,
       disciples:
         isRecord(parsed.disciples) && Array.isArray(parsed.disciples.roster)
           ? {

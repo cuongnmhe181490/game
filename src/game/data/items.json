@@ -314,6 +314,1826 @@
         "artifact",
         "inheritance"
       ]
+    },
+    {
+      "id": "thanh_linh_dan",
+      "name": "Thanh Linh Dan",
+      "category": "pill",
+      "rarity": "common",
+      "description": "Thanh Linh Dan la dan duoc tu hanh duoc mo rong cho sprint content nay.",
+      "flavorText": "Thanh Linh Dan giu khi tuc deu va de dung trong vong tu hanh.",
+      "stackable": true,
+      "value": 18,
+      "usableEffect": {
+        "type": "player_cultivation_progress",
+        "value": 6
+      },
+      "craftingTags": [
+        "pill",
+        "cultivation"
+      ]
+    },
+    {
+      "id": "kim_than_dan",
+      "name": "Kim Than Dan",
+      "category": "pill",
+      "rarity": "common",
+      "description": "Kim Than Dan la dan duoc tu hanh duoc mo rong cho sprint content nay.",
+      "flavorText": "Kim Than Dan giu khi tuc deu va de dung trong vong tu hanh.",
+      "stackable": true,
+      "value": 20,
+      "usableEffect": {
+        "type": "foundation_stability",
+        "value": 5,
+        "tamMaPressureDelta": -1
+      },
+      "craftingTags": [
+        "pill",
+        "stability"
+      ]
+    },
+    {
+      "id": "linh_tam_dan",
+      "name": "Linh Tam Dan",
+      "category": "pill",
+      "rarity": "common",
+      "description": "Linh Tam Dan la dan duoc tu hanh duoc mo rong cho sprint content nay.",
+      "flavorText": "Linh Tam Dan giu khi tuc deu va de dung trong vong tu hanh.",
+      "stackable": true,
+      "value": 22,
+      "usableEffect": {
+        "type": "player_cultivation_progress",
+        "value": 7
+      },
+      "craftingTags": [
+        "pill",
+        "cultivation"
+      ]
+    },
+    {
+      "id": "van_khi_dan",
+      "name": "Van Khi Dan",
+      "category": "pill",
+      "rarity": "common",
+      "description": "Van Khi Dan la dan duoc tu hanh duoc mo rong cho sprint content nay.",
+      "flavorText": "Van Khi Dan giu khi tuc deu va de dung trong vong tu hanh.",
+      "stackable": true,
+      "value": 24,
+      "usableEffect": {
+        "type": "player_cultivation_progress",
+        "value": 7
+      },
+      "craftingTags": [
+        "pill",
+        "cultivation"
+      ]
+    },
+    {
+      "id": "bach_lien_dan",
+      "name": "Bach Lien Dan",
+      "category": "pill",
+      "rarity": "common",
+      "description": "Bach Lien Dan la dan duoc tu hanh duoc mo rong cho sprint content nay.",
+      "flavorText": "Bach Lien Dan giu khi tuc deu va de dung trong vong tu hanh.",
+      "stackable": true,
+      "value": 26,
+      "usableEffect": {
+        "type": "foundation_stability",
+        "value": 6,
+        "tamMaPressureDelta": -1
+      },
+      "craftingTags": [
+        "pill",
+        "stability"
+      ]
+    },
+    {
+      "id": "huyen_tuc_dan",
+      "name": "Huyen Tuc Dan",
+      "category": "pill",
+      "rarity": "common",
+      "description": "Huyen Tuc Dan la dan duoc tu hanh duoc mo rong cho sprint content nay.",
+      "flavorText": "Huyen Tuc Dan giu khi tuc deu va de dung trong vong tu hanh.",
+      "stackable": true,
+      "value": 28,
+      "usableEffect": {
+        "type": "player_cultivation_progress",
+        "value": 8
+      },
+      "craftingTags": [
+        "pill",
+        "cultivation"
+      ]
+    },
+    {
+      "id": "kim_tuyet_dan",
+      "name": "Kim Tuyet Dan",
+      "category": "pill",
+      "rarity": "common",
+      "description": "Kim Tuyet Dan la dan duoc tu hanh duoc mo rong cho sprint content nay.",
+      "flavorText": "Kim Tuyet Dan giu khi tuc deu va de dung trong vong tu hanh.",
+      "stackable": true,
+      "value": 30,
+      "usableEffect": {
+        "type": "player_cultivation_progress",
+        "value": 9
+      },
+      "craftingTags": [
+        "pill",
+        "cultivation"
+      ]
+    },
+    {
+      "id": "thien_quang_dan",
+      "name": "Thien Quang Dan",
+      "category": "pill",
+      "rarity": "common",
+      "description": "Thien Quang Dan la dan duoc tu hanh duoc mo rong cho sprint content nay.",
+      "flavorText": "Thien Quang Dan giu khi tuc deu va de dung trong vong tu hanh.",
+      "stackable": true,
+      "value": 32,
+      "usableEffect": {
+        "type": "foundation_stability",
+        "value": 7,
+        "tamMaPressureDelta": -2
+      },
+      "craftingTags": [
+        "pill",
+        "stability"
+      ]
+    },
+    {
+      "id": "huyen_ngoc_dan",
+      "name": "Huyen Ngoc Dan",
+      "category": "pill",
+      "rarity": "uncommon",
+      "description": "Huyen Ngoc Dan la dan duoc tu hanh duoc mo rong cho sprint content nay.",
+      "flavorText": "Huyen Ngoc Dan giu khi tuc deu va de dung trong vong tu hanh.",
+      "stackable": true,
+      "value": 34,
+      "usableEffect": {
+        "type": "player_cultivation_progress",
+        "value": 10
+      },
+      "craftingTags": [
+        "pill",
+        "cultivation"
+      ]
+    },
+    {
+      "id": "tam_hoa_dan",
+      "name": "Tam Hoa Dan",
+      "category": "pill",
+      "rarity": "uncommon",
+      "description": "Tam Hoa Dan la dan duoc tu hanh duoc mo rong cho sprint content nay.",
+      "flavorText": "Tam Hoa Dan giu khi tuc deu va de dung trong vong tu hanh.",
+      "stackable": true,
+      "value": 36,
+      "usableEffect": {
+        "type": "player_cultivation_progress",
+        "value": 10
+      },
+      "craftingTags": [
+        "pill",
+        "cultivation"
+      ]
+    },
+    {
+      "id": "thanh_mach_dan",
+      "name": "Thanh Mach Dan",
+      "category": "pill",
+      "rarity": "uncommon",
+      "description": "Thanh Mach Dan la dan duoc tu hanh duoc mo rong cho sprint content nay.",
+      "flavorText": "Thanh Mach Dan giu khi tuc deu va de dung trong vong tu hanh.",
+      "stackable": true,
+      "value": 38,
+      "usableEffect": {
+        "type": "foundation_stability",
+        "value": 8,
+        "tamMaPressureDelta": -2
+      },
+      "craftingTags": [
+        "pill",
+        "stability"
+      ]
+    },
+    {
+      "id": "han_nguyet_dan",
+      "name": "Han Nguyet Dan",
+      "category": "pill",
+      "rarity": "uncommon",
+      "description": "Han Nguyet Dan la dan duoc tu hanh duoc mo rong cho sprint content nay.",
+      "flavorText": "Han Nguyet Dan giu khi tuc deu va de dung trong vong tu hanh.",
+      "stackable": true,
+      "value": 40,
+      "usableEffect": {
+        "type": "player_cultivation_progress",
+        "value": 11
+      },
+      "craftingTags": [
+        "pill",
+        "cultivation"
+      ]
+    },
+    {
+      "id": "liet_duong_dan",
+      "name": "Liet Duong Dan",
+      "category": "pill",
+      "rarity": "uncommon",
+      "description": "Liet Duong Dan la dan duoc tu hanh duoc mo rong cho sprint content nay.",
+      "flavorText": "Liet Duong Dan giu khi tuc deu va de dung trong vong tu hanh.",
+      "stackable": true,
+      "value": 42,
+      "usableEffect": {
+        "type": "player_cultivation_progress",
+        "value": 12
+      },
+      "craftingTags": [
+        "pill",
+        "cultivation"
+      ]
+    },
+    {
+      "id": "linh_tuy_dan",
+      "name": "Linh Tuy Dan",
+      "category": "pill",
+      "rarity": "uncommon",
+      "description": "Linh Tuy Dan la dan duoc tu hanh duoc mo rong cho sprint content nay.",
+      "flavorText": "Linh Tuy Dan giu khi tuc deu va de dung trong vong tu hanh.",
+      "stackable": true,
+      "value": 44,
+      "usableEffect": {
+        "type": "foundation_stability",
+        "value": 9,
+        "tamMaPressureDelta": -3
+      },
+      "craftingTags": [
+        "pill",
+        "stability"
+      ]
+    },
+    {
+      "id": "chi_tinh_dan",
+      "name": "Chi Tinh Dan",
+      "category": "pill",
+      "rarity": "uncommon",
+      "description": "Chi Tinh Dan la dan duoc tu hanh duoc mo rong cho sprint content nay.",
+      "flavorText": "Chi Tinh Dan giu khi tuc deu va de dung trong vong tu hanh.",
+      "stackable": true,
+      "value": 46,
+      "usableEffect": {
+        "type": "player_cultivation_progress",
+        "value": 13
+      },
+      "craftingTags": [
+        "pill",
+        "cultivation"
+      ]
+    },
+    {
+      "id": "thanh_hoa_dan",
+      "name": "Thanh Hoa Dan",
+      "category": "pill",
+      "rarity": "uncommon",
+      "description": "Thanh Hoa Dan la dan duoc tu hanh duoc mo rong cho sprint content nay.",
+      "flavorText": "Thanh Hoa Dan giu khi tuc deu va de dung trong vong tu hanh.",
+      "stackable": true,
+      "value": 48,
+      "usableEffect": {
+        "type": "player_cultivation_progress",
+        "value": 13
+      },
+      "craftingTags": [
+        "pill",
+        "cultivation"
+      ]
+    },
+    {
+      "id": "van_tam_dan",
+      "name": "Van Tam Dan",
+      "category": "pill",
+      "rarity": "rare",
+      "description": "Van Tam Dan la dan duoc tu hanh duoc mo rong cho sprint content nay.",
+      "flavorText": "Van Tam Dan giu khi tuc deu va de dung trong vong tu hanh.",
+      "stackable": true,
+      "value": 50,
+      "usableEffect": {
+        "type": "foundation_stability",
+        "value": 10,
+        "tamMaPressureDelta": -3
+      },
+      "craftingTags": [
+        "pill",
+        "stability"
+      ]
+    },
+    {
+      "id": "thien_tuc_dan",
+      "name": "Thien Tuc Dan",
+      "category": "pill",
+      "rarity": "rare",
+      "description": "Thien Tuc Dan la dan duoc tu hanh duoc mo rong cho sprint content nay.",
+      "flavorText": "Thien Tuc Dan giu khi tuc deu va de dung trong vong tu hanh.",
+      "stackable": true,
+      "value": 52,
+      "usableEffect": {
+        "type": "player_cultivation_progress",
+        "value": 14
+      },
+      "craftingTags": [
+        "pill",
+        "cultivation"
+      ]
+    },
+    {
+      "id": "kim_lien_dan",
+      "name": "Kim Lien Dan",
+      "category": "pill",
+      "rarity": "rare",
+      "description": "Kim Lien Dan la dan duoc tu hanh duoc mo rong cho sprint content nay.",
+      "flavorText": "Kim Lien Dan giu khi tuc deu va de dung trong vong tu hanh.",
+      "stackable": true,
+      "value": 54,
+      "usableEffect": {
+        "type": "player_cultivation_progress",
+        "value": 15
+      },
+      "craftingTags": [
+        "pill",
+        "cultivation"
+      ]
+    },
+    {
+      "id": "huyen_linh_dan",
+      "name": "Huyen Linh Dan",
+      "category": "pill",
+      "rarity": "rare",
+      "description": "Huyen Linh Dan la dan duoc tu hanh duoc mo rong cho sprint content nay.",
+      "flavorText": "Huyen Linh Dan giu khi tuc deu va de dung trong vong tu hanh.",
+      "stackable": true,
+      "value": 56,
+      "usableEffect": {
+        "type": "foundation_stability",
+        "value": 11,
+        "tamMaPressureDelta": -4
+      },
+      "craftingTags": [
+        "pill",
+        "stability"
+      ]
+    },
+    {
+      "id": "ngoc_tam_dan",
+      "name": "Ngoc Tam Dan",
+      "category": "pill",
+      "rarity": "rare",
+      "description": "Ngoc Tam Dan la dan duoc tu hanh duoc mo rong cho sprint content nay.",
+      "flavorText": "Ngoc Tam Dan giu khi tuc deu va de dung trong vong tu hanh.",
+      "stackable": true,
+      "value": 58,
+      "usableEffect": {
+        "type": "player_cultivation_progress",
+        "value": 16
+      },
+      "craftingTags": [
+        "pill",
+        "cultivation"
+      ]
+    },
+    {
+      "id": "xuan_khi_dan",
+      "name": "Xuan Khi Dan",
+      "category": "pill",
+      "rarity": "rare",
+      "description": "Xuan Khi Dan la dan duoc tu hanh duoc mo rong cho sprint content nay.",
+      "flavorText": "Xuan Khi Dan giu khi tuc deu va de dung trong vong tu hanh.",
+      "stackable": true,
+      "value": 60,
+      "usableEffect": {
+        "type": "player_cultivation_progress",
+        "value": 16
+      },
+      "craftingTags": [
+        "pill",
+        "cultivation"
+      ]
+    },
+    {
+      "id": "thuy_moc_dan",
+      "name": "Thuy Moc Dan",
+      "category": "pill",
+      "rarity": "rare",
+      "description": "Thuy Moc Dan la dan duoc tu hanh duoc mo rong cho sprint content nay.",
+      "flavorText": "Thuy Moc Dan giu khi tuc deu va de dung trong vong tu hanh.",
+      "stackable": true,
+      "value": 62,
+      "usableEffect": {
+        "type": "foundation_stability",
+        "value": 12,
+        "tamMaPressureDelta": -4
+      },
+      "craftingTags": [
+        "pill",
+        "stability"
+      ]
+    },
+    {
+      "id": "am_hoa_dan",
+      "name": "Am Hoa Dan",
+      "category": "pill",
+      "rarity": "rare",
+      "description": "Am Hoa Dan la dan duoc tu hanh duoc mo rong cho sprint content nay.",
+      "flavorText": "Am Hoa Dan giu khi tuc deu va de dung trong vong tu hanh.",
+      "stackable": true,
+      "value": 64,
+      "usableEffect": {
+        "type": "player_cultivation_progress",
+        "value": 17
+      },
+      "craftingTags": [
+        "pill",
+        "cultivation"
+      ]
+    },
+    {
+      "id": "bac_van_dan",
+      "name": "Bac Van Dan",
+      "category": "pill",
+      "rarity": "rare",
+      "description": "Bac Van Dan la dan duoc tu hanh duoc mo rong cho sprint content nay.",
+      "flavorText": "Bac Van Dan giu khi tuc deu va de dung trong vong tu hanh.",
+      "stackable": true,
+      "value": 66,
+      "usableEffect": {
+        "type": "player_cultivation_progress",
+        "value": 18
+      },
+      "craftingTags": [
+        "pill",
+        "cultivation"
+      ]
+    },
+    {
+      "id": "cuu_lien_dan",
+      "name": "Cuu Lien Dan",
+      "category": "pill",
+      "rarity": "epic",
+      "description": "Cuu Lien Dan la dan duoc tu hanh duoc mo rong cho sprint content nay.",
+      "flavorText": "Cuu Lien Dan giu khi tuc deu va de dung trong vong tu hanh.",
+      "stackable": true,
+      "value": 68,
+      "usableEffect": {
+        "type": "foundation_stability",
+        "value": 13,
+        "tamMaPressureDelta": -5
+      },
+      "craftingTags": [
+        "pill",
+        "stability"
+      ]
+    },
+    {
+      "id": "hoan_nguyen_dan",
+      "name": "Hoan Nguyen Dan",
+      "category": "pill",
+      "rarity": "epic",
+      "description": "Hoan Nguyen Dan la dan duoc tu hanh duoc mo rong cho sprint content nay.",
+      "flavorText": "Hoan Nguyen Dan giu khi tuc deu va de dung trong vong tu hanh.",
+      "stackable": true,
+      "value": 70,
+      "usableEffect": {
+        "type": "player_cultivation_progress",
+        "value": 19
+      },
+      "craftingTags": [
+        "pill",
+        "cultivation"
+      ]
+    },
+    {
+      "id": "khai_khieu_dan",
+      "name": "Khai Khieu Dan",
+      "category": "pill",
+      "rarity": "epic",
+      "description": "Khai Khieu Dan la dan duoc tu hanh duoc mo rong cho sprint content nay.",
+      "flavorText": "Khai Khieu Dan giu khi tuc deu va de dung trong vong tu hanh.",
+      "stackable": true,
+      "value": 72,
+      "usableEffect": {
+        "type": "player_cultivation_progress",
+        "value": 19
+      },
+      "craftingTags": [
+        "pill",
+        "cultivation"
+      ]
+    },
+    {
+      "id": "tran_tam_dan",
+      "name": "Tran Tam Dan",
+      "category": "pill",
+      "rarity": "epic",
+      "description": "Tran Tam Dan la dan duoc tu hanh duoc mo rong cho sprint content nay.",
+      "flavorText": "Tran Tam Dan giu khi tuc deu va de dung trong vong tu hanh.",
+      "stackable": true,
+      "value": 74,
+      "usableEffect": {
+        "type": "foundation_stability",
+        "value": 14,
+        "tamMaPressureDelta": -5
+      },
+      "craftingTags": [
+        "pill",
+        "stability"
+      ]
+    },
+    {
+      "id": "van_hoa_dan",
+      "name": "Van Hoa Dan",
+      "category": "pill",
+      "rarity": "legendary",
+      "description": "Van Hoa Dan la dan duoc tu hanh duoc mo rong cho sprint content nay.",
+      "flavorText": "Van Hoa Dan giu khi tuc deu va de dung trong vong tu hanh.",
+      "stackable": true,
+      "value": 76,
+      "usableEffect": {
+        "type": "player_cultivation_progress",
+        "value": 20
+      },
+      "craftingTags": [
+        "pill",
+        "cultivation"
+      ]
+    },
+    {
+      "id": "huyet_tam_thao",
+      "name": "Huyet Tam Thao",
+      "category": "herb",
+      "rarity": "common",
+      "description": "Huyet Tam Thao la linh thao danh cho luyen dan va bo kinh mach.",
+      "flavorText": "Huyet Tam Thao toat ra linh tuc on dinh, hop voi nhieu dan phuong.",
+      "stackable": true,
+      "value": 8,
+      "craftingTags": [
+        "herb",
+        "starter_herb"
+      ]
+    },
+    {
+      "id": "nguyet_linh_hoa",
+      "name": "Nguyet Linh Hoa",
+      "category": "herb",
+      "rarity": "common",
+      "description": "Nguyet Linh Hoa la linh thao danh cho luyen dan va bo kinh mach.",
+      "flavorText": "Nguyet Linh Hoa toat ra linh tuc on dinh, hop voi nhieu dan phuong.",
+      "stackable": true,
+      "value": 12,
+      "craftingTags": [
+        "herb",
+        "starter_herb"
+      ]
+    },
+    {
+      "id": "thanh_tuy_la",
+      "name": "Thanh Tuy La",
+      "category": "herb",
+      "rarity": "common",
+      "description": "Thanh Tuy La la linh thao danh cho luyen dan va bo kinh mach.",
+      "flavorText": "Thanh Tuy La toat ra linh tuc on dinh, hop voi nhieu dan phuong.",
+      "stackable": true,
+      "value": 16,
+      "craftingTags": [
+        "herb",
+        "starter_herb"
+      ]
+    },
+    {
+      "id": "kim_lien_tu",
+      "name": "Kim Lien Tu",
+      "category": "herb",
+      "rarity": "common",
+      "description": "Kim Lien Tu la linh thao danh cho luyen dan va bo kinh mach.",
+      "flavorText": "Kim Lien Tu toat ra linh tuc on dinh, hop voi nhieu dan phuong.",
+      "stackable": true,
+      "value": 20,
+      "craftingTags": [
+        "herb",
+        "starter_herb"
+      ]
+    },
+    {
+      "id": "bach_van_chi",
+      "name": "Bach Van Chi",
+      "category": "herb",
+      "rarity": "common",
+      "description": "Bach Van Chi la linh thao danh cho luyen dan va bo kinh mach.",
+      "flavorText": "Bach Van Chi toat ra linh tuc on dinh, hop voi nhieu dan phuong.",
+      "stackable": true,
+      "value": 24,
+      "craftingTags": [
+        "herb",
+        "starter_herb"
+      ]
+    },
+    {
+      "id": "am_suong_thao",
+      "name": "Am Suong Thao",
+      "category": "herb",
+      "rarity": "common",
+      "description": "Am Suong Thao la linh thao danh cho luyen dan va bo kinh mach.",
+      "flavorText": "Am Suong Thao toat ra linh tuc on dinh, hop voi nhieu dan phuong.",
+      "stackable": true,
+      "value": 8,
+      "craftingTags": [
+        "herb",
+        "starter_herb"
+      ]
+    },
+    {
+      "id": "thien_dang_hoa",
+      "name": "Thien Dang Hoa",
+      "category": "herb",
+      "rarity": "common",
+      "description": "Thien Dang Hoa la linh thao danh cho luyen dan va bo kinh mach.",
+      "flavorText": "Thien Dang Hoa toat ra linh tuc on dinh, hop voi nhieu dan phuong.",
+      "stackable": true,
+      "value": 12,
+      "craftingTags": [
+        "herb",
+        "starter_herb"
+      ]
+    },
+    {
+      "id": "dia_tam_can",
+      "name": "Dia Tam Can",
+      "category": "herb",
+      "rarity": "common",
+      "description": "Dia Tam Can la linh thao danh cho luyen dan va bo kinh mach.",
+      "flavorText": "Dia Tam Can toat ra linh tuc on dinh, hop voi nhieu dan phuong.",
+      "stackable": true,
+      "value": 16,
+      "craftingTags": [
+        "herb",
+        "starter_herb"
+      ]
+    },
+    {
+      "id": "tu_van_linh_chi",
+      "name": "Tu Van Linh Chi",
+      "category": "herb",
+      "rarity": "uncommon",
+      "description": "Tu Van Linh Chi la linh thao danh cho luyen dan va bo kinh mach.",
+      "flavorText": "Tu Van Linh Chi toat ra linh tuc on dinh, hop voi nhieu dan phuong.",
+      "stackable": true,
+      "value": 20,
+      "craftingTags": [
+        "herb",
+        "rare_herb"
+      ]
+    },
+    {
+      "id": "kim_sa_lien",
+      "name": "Kim Sa Lien",
+      "category": "herb",
+      "rarity": "uncommon",
+      "description": "Kim Sa Lien la linh thao danh cho luyen dan va bo kinh mach.",
+      "flavorText": "Kim Sa Lien toat ra linh tuc on dinh, hop voi nhieu dan phuong.",
+      "stackable": true,
+      "value": 24,
+      "craftingTags": [
+        "herb",
+        "rare_herb"
+      ]
+    },
+    {
+      "id": "han_phach_lan",
+      "name": "Han Phach Lan",
+      "category": "herb",
+      "rarity": "uncommon",
+      "description": "Han Phach Lan la linh thao danh cho luyen dan va bo kinh mach.",
+      "flavorText": "Han Phach Lan toat ra linh tuc on dinh, hop voi nhieu dan phuong.",
+      "stackable": true,
+      "value": 8,
+      "craftingTags": [
+        "herb",
+        "rare_herb"
+      ]
+    },
+    {
+      "id": "xich_duong_diep",
+      "name": "Xich Duong Diep",
+      "category": "herb",
+      "rarity": "uncommon",
+      "description": "Xich Duong Diep la linh thao danh cho luyen dan va bo kinh mach.",
+      "flavorText": "Xich Duong Diep toat ra linh tuc on dinh, hop voi nhieu dan phuong.",
+      "stackable": true,
+      "value": 12,
+      "craftingTags": [
+        "herb",
+        "rare_herb"
+      ]
+    },
+    {
+      "id": "moc_tam_hoa",
+      "name": "Moc Tam Hoa",
+      "category": "herb",
+      "rarity": "uncommon",
+      "description": "Moc Tam Hoa la linh thao danh cho luyen dan va bo kinh mach.",
+      "flavorText": "Moc Tam Hoa toat ra linh tuc on dinh, hop voi nhieu dan phuong.",
+      "stackable": true,
+      "value": 16,
+      "craftingTags": [
+        "herb",
+        "rare_herb"
+      ]
+    },
+    {
+      "id": "linh_suong_thu",
+      "name": "Linh Suong Thu",
+      "category": "herb",
+      "rarity": "uncommon",
+      "description": "Linh Suong Thu la linh thao danh cho luyen dan va bo kinh mach.",
+      "flavorText": "Linh Suong Thu toat ra linh tuc on dinh, hop voi nhieu dan phuong.",
+      "stackable": true,
+      "value": 20,
+      "craftingTags": [
+        "herb",
+        "rare_herb"
+      ]
+    },
+    {
+      "id": "bach_huyen_la",
+      "name": "Bach Huyen La",
+      "category": "herb",
+      "rarity": "uncommon",
+      "description": "Bach Huyen La la linh thao danh cho luyen dan va bo kinh mach.",
+      "flavorText": "Bach Huyen La toat ra linh tuc on dinh, hop voi nhieu dan phuong.",
+      "stackable": true,
+      "value": 24,
+      "craftingTags": [
+        "herb",
+        "rare_herb"
+      ]
+    },
+    {
+      "id": "uyet_mach_chi",
+      "name": "Uyet Mach Chi",
+      "category": "herb",
+      "rarity": "uncommon",
+      "description": "Uyet Mach Chi la linh thao danh cho luyen dan va bo kinh mach.",
+      "flavorText": "Uyet Mach Chi toat ra linh tuc on dinh, hop voi nhieu dan phuong.",
+      "stackable": true,
+      "value": 8,
+      "craftingTags": [
+        "herb",
+        "rare_herb"
+      ]
+    },
+    {
+      "id": "thanh_hoa_moc",
+      "name": "Thanh Hoa Moc",
+      "category": "herb",
+      "rarity": "rare",
+      "description": "Thanh Hoa Moc la linh thao danh cho luyen dan va bo kinh mach.",
+      "flavorText": "Thanh Hoa Moc toat ra linh tuc on dinh, hop voi nhieu dan phuong.",
+      "stackable": true,
+      "value": 12,
+      "craftingTags": [
+        "herb",
+        "rare_herb"
+      ]
+    },
+    {
+      "id": "cuu_diep_lien",
+      "name": "Cuu Diep Lien",
+      "category": "herb",
+      "rarity": "rare",
+      "description": "Cuu Diep Lien la linh thao danh cho luyen dan va bo kinh mach.",
+      "flavorText": "Cuu Diep Lien toat ra linh tuc on dinh, hop voi nhieu dan phuong.",
+      "stackable": true,
+      "value": 16,
+      "craftingTags": [
+        "herb",
+        "rare_herb"
+      ]
+    },
+    {
+      "id": "huyen_tuy_thao",
+      "name": "Huyen Tuy Thao",
+      "category": "herb",
+      "rarity": "rare",
+      "description": "Huyen Tuy Thao la linh thao danh cho luyen dan va bo kinh mach.",
+      "flavorText": "Huyen Tuy Thao toat ra linh tuc on dinh, hop voi nhieu dan phuong.",
+      "stackable": true,
+      "value": 20,
+      "craftingTags": [
+        "herb",
+        "rare_herb"
+      ]
+    },
+    {
+      "id": "thien_anh_lan",
+      "name": "Thien Anh Lan",
+      "category": "herb",
+      "rarity": "rare",
+      "description": "Thien Anh Lan la linh thao danh cho luyen dan va bo kinh mach.",
+      "flavorText": "Thien Anh Lan toat ra linh tuc on dinh, hop voi nhieu dan phuong.",
+      "stackable": true,
+      "value": 24,
+      "craftingTags": [
+        "herb",
+        "rare_herb"
+      ]
+    },
+    {
+      "id": "ngoc_diep_can",
+      "name": "Ngoc Diep Can",
+      "category": "herb",
+      "rarity": "rare",
+      "description": "Ngoc Diep Can la linh thao danh cho luyen dan va bo kinh mach.",
+      "flavorText": "Ngoc Diep Can toat ra linh tuc on dinh, hop voi nhieu dan phuong.",
+      "stackable": true,
+      "value": 8,
+      "craftingTags": [
+        "herb",
+        "rare_herb"
+      ]
+    },
+    {
+      "id": "tam_duong_thao",
+      "name": "Tam Duong Thao",
+      "category": "herb",
+      "rarity": "rare",
+      "description": "Tam Duong Thao la linh thao danh cho luyen dan va bo kinh mach.",
+      "flavorText": "Tam Duong Thao toat ra linh tuc on dinh, hop voi nhieu dan phuong.",
+      "stackable": true,
+      "value": 12,
+      "craftingTags": [
+        "herb",
+        "rare_herb"
+      ]
+    },
+    {
+      "id": "kim_tam_hoa",
+      "name": "Kim Tam Hoa",
+      "category": "herb",
+      "rarity": "rare",
+      "description": "Kim Tam Hoa la linh thao danh cho luyen dan va bo kinh mach.",
+      "flavorText": "Kim Tam Hoa toat ra linh tuc on dinh, hop voi nhieu dan phuong.",
+      "stackable": true,
+      "value": 16,
+      "craftingTags": [
+        "herb",
+        "rare_herb"
+      ]
+    },
+    {
+      "id": "bach_loc_nha",
+      "name": "Bach Loc Nha",
+      "category": "herb",
+      "rarity": "rare",
+      "description": "Bach Loc Nha la linh thao danh cho luyen dan va bo kinh mach.",
+      "flavorText": "Bach Loc Nha toat ra linh tuc on dinh, hop voi nhieu dan phuong.",
+      "stackable": true,
+      "value": 20,
+      "craftingTags": [
+        "herb",
+        "rare_herb"
+      ]
+    },
+    {
+      "id": "linh_huyen_mai",
+      "name": "Linh Huyen Mai",
+      "category": "herb",
+      "rarity": "rare",
+      "description": "Linh Huyen Mai la linh thao danh cho luyen dan va bo kinh mach.",
+      "flavorText": "Linh Huyen Mai toat ra linh tuc on dinh, hop voi nhieu dan phuong.",
+      "stackable": true,
+      "value": 24,
+      "craftingTags": [
+        "herb",
+        "rare_herb"
+      ]
+    },
+    {
+      "id": "phong_anh_co",
+      "name": "Phong Anh Co",
+      "category": "herb",
+      "rarity": "epic",
+      "description": "Phong Anh Co la linh thao danh cho luyen dan va bo kinh mach.",
+      "flavorText": "Phong Anh Co toat ra linh tuc on dinh, hop voi nhieu dan phuong.",
+      "stackable": true,
+      "value": 8,
+      "craftingTags": [
+        "herb",
+        "rare_herb"
+      ]
+    },
+    {
+      "id": "hoa_suong_chi",
+      "name": "Hoa Suong Chi",
+      "category": "herb",
+      "rarity": "epic",
+      "description": "Hoa Suong Chi la linh thao danh cho luyen dan va bo kinh mach.",
+      "flavorText": "Hoa Suong Chi toat ra linh tuc on dinh, hop voi nhieu dan phuong.",
+      "stackable": true,
+      "value": 12,
+      "craftingTags": [
+        "herb",
+        "rare_herb"
+      ]
+    },
+    {
+      "id": "thiet_tam_lien",
+      "name": "Thiet Tam Lien",
+      "category": "herb",
+      "rarity": "epic",
+      "description": "Thiet Tam Lien la linh thao danh cho luyen dan va bo kinh mach.",
+      "flavorText": "Thiet Tam Lien toat ra linh tuc on dinh, hop voi nhieu dan phuong.",
+      "stackable": true,
+      "value": 16,
+      "craftingTags": [
+        "herb",
+        "rare_herb"
+      ]
+    },
+    {
+      "id": "am_nguyet_moc",
+      "name": "Am Nguyet Moc",
+      "category": "herb",
+      "rarity": "epic",
+      "description": "Am Nguyet Moc la linh thao danh cho luyen dan va bo kinh mach.",
+      "flavorText": "Am Nguyet Moc toat ra linh tuc on dinh, hop voi nhieu dan phuong.",
+      "stackable": true,
+      "value": 20,
+      "craftingTags": [
+        "herb",
+        "rare_herb"
+      ]
+    },
+    {
+      "id": "thien_linh_re",
+      "name": "Thien Linh Re",
+      "category": "herb",
+      "rarity": "epic",
+      "description": "Thien Linh Re la linh thao danh cho luyen dan va bo kinh mach.",
+      "flavorText": "Thien Linh Re toat ra linh tuc on dinh, hop voi nhieu dan phuong.",
+      "stackable": true,
+      "value": 24,
+      "craftingTags": [
+        "herb",
+        "rare_herb"
+      ]
+    },
+    {
+      "id": "van_hoa_thao",
+      "name": "Van Hoa Thao",
+      "category": "herb",
+      "rarity": "epic",
+      "description": "Van Hoa Thao la linh thao danh cho luyen dan va bo kinh mach.",
+      "flavorText": "Van Hoa Thao toat ra linh tuc on dinh, hop voi nhieu dan phuong.",
+      "stackable": true,
+      "value": 8,
+      "craftingTags": [
+        "herb",
+        "rare_herb"
+      ]
+    },
+    {
+      "id": "tu_hon_la",
+      "name": "Tu Hon La",
+      "category": "herb",
+      "rarity": "epic",
+      "description": "Tu Hon La la linh thao danh cho luyen dan va bo kinh mach.",
+      "flavorText": "Tu Hon La toat ra linh tuc on dinh, hop voi nhieu dan phuong.",
+      "stackable": true,
+      "value": 20,
+      "craftingTags": [
+        "herb",
+        "rare_herb"
+      ]
+    },
+    {
+      "id": "lam_tuy_chi",
+      "name": "Lam Tuy Chi",
+      "category": "herb",
+      "rarity": "epic",
+      "description": "Lam Tuy Chi la linh thao danh cho luyen dan va bo kinh mach.",
+      "flavorText": "Lam Tuy Chi toat ra linh tuc on dinh, hop voi nhieu dan phuong.",
+      "stackable": true,
+      "value": 24,
+      "craftingTags": [
+        "herb",
+        "rare_herb"
+      ]
+    },
+    {
+      "id": "moc_anh_nha",
+      "name": "Moc Anh Nha",
+      "category": "herb",
+      "rarity": "epic",
+      "description": "Moc Anh Nha la linh thao danh cho luyen dan va bo kinh mach.",
+      "flavorText": "Moc Anh Nha toat ra linh tuc on dinh, hop voi nhieu dan phuong.",
+      "stackable": true,
+      "value": 28,
+      "craftingTags": [
+        "herb",
+        "rare_herb"
+      ]
+    },
+    {
+      "id": "ngoc_suong_lan",
+      "name": "Ngoc Suong Lan",
+      "category": "herb",
+      "rarity": "epic",
+      "description": "Ngoc Suong Lan la linh thao danh cho luyen dan va bo kinh mach.",
+      "flavorText": "Ngoc Suong Lan toat ra linh tuc on dinh, hop voi nhieu dan phuong.",
+      "stackable": true,
+      "value": 32,
+      "craftingTags": [
+        "herb",
+        "rare_herb"
+      ]
+    },
+    {
+      "id": "huyen_vu_thao",
+      "name": "Huyen Vu Thao",
+      "category": "herb",
+      "rarity": "epic",
+      "description": "Huyen Vu Thao la linh thao danh cho luyen dan va bo kinh mach.",
+      "flavorText": "Huyen Vu Thao toat ra linh tuc on dinh, hop voi nhieu dan phuong.",
+      "stackable": true,
+      "value": 16,
+      "craftingTags": [
+        "herb",
+        "rare_herb"
+      ]
+    },
+    {
+      "id": "bach_ngoc_mai",
+      "name": "Bach Ngoc Mai",
+      "category": "herb",
+      "rarity": "epic",
+      "description": "Bach Ngoc Mai la linh thao danh cho luyen dan va bo kinh mach.",
+      "flavorText": "Bach Ngoc Mai toat ra linh tuc on dinh, hop voi nhieu dan phuong.",
+      "stackable": true,
+      "value": 20,
+      "craftingTags": [
+        "herb",
+        "rare_herb"
+      ]
+    },
+    {
+      "id": "thanh_truc_tam",
+      "name": "Thanh Truc Tam",
+      "category": "herb",
+      "rarity": "epic",
+      "description": "Thanh Truc Tam la linh thao danh cho luyen dan va bo kinh mach.",
+      "flavorText": "Thanh Truc Tam toat ra linh tuc on dinh, hop voi nhieu dan phuong.",
+      "stackable": true,
+      "value": 24,
+      "craftingTags": [
+        "herb",
+        "rare_herb"
+      ]
+    },
+    {
+      "id": "cuu_sac_lan",
+      "name": "Cuu Sac Lan",
+      "category": "herb",
+      "rarity": "epic",
+      "description": "Cuu Sac Lan la linh thao danh cho luyen dan va bo kinh mach.",
+      "flavorText": "Cuu Sac Lan toat ra linh tuc on dinh, hop voi nhieu dan phuong.",
+      "stackable": true,
+      "value": 28,
+      "craftingTags": [
+        "herb",
+        "rare_herb"
+      ]
+    },
+    {
+      "id": "thuy_van_duong",
+      "name": "Thuy Van Duong",
+      "category": "herb",
+      "rarity": "epic",
+      "description": "Thuy Van Duong la linh thao danh cho luyen dan va bo kinh mach.",
+      "flavorText": "Thuy Van Duong toat ra linh tuc on dinh, hop voi nhieu dan phuong.",
+      "stackable": true,
+      "value": 32,
+      "craftingTags": [
+        "herb",
+        "rare_herb"
+      ]
+    },
+    {
+      "id": "tinh_sa_huyen",
+      "name": "Tinh Sa Huyen",
+      "category": "ore",
+      "rarity": "common",
+      "description": "Tinh Sa Huyen la vat lieu linh tai dung trong che phap khi va luyen dan.",
+      "flavorText": "Tinh Sa Huyen co ket cau de nhan ra, phu hop lam vat lieu che tao.",
+      "stackable": true,
+      "value": 10,
+      "craftingTags": [
+        "craft_material"
+      ]
+    },
+    {
+      "id": "kim_tinh_thach",
+      "name": "Kim Tinh Thach",
+      "category": "ore",
+      "rarity": "common",
+      "description": "Kim Tinh Thach la vat lieu linh tai dung trong che phap khi va luyen dan.",
+      "flavorText": "Kim Tinh Thach co ket cau de nhan ra, phu hop lam vat lieu che tao.",
+      "stackable": true,
+      "value": 15,
+      "craftingTags": [
+        "craft_material"
+      ]
+    },
+    {
+      "id": "nguyet_anh_thach",
+      "name": "Nguyet Anh Thach",
+      "category": "ore",
+      "rarity": "common",
+      "description": "Nguyet Anh Thach la vat lieu linh tai dung trong che phap khi va luyen dan.",
+      "flavorText": "Nguyet Anh Thach co ket cau de nhan ra, phu hop lam vat lieu che tao.",
+      "stackable": true,
+      "value": 20,
+      "craftingTags": [
+        "craft_material"
+      ]
+    },
+    {
+      "id": "thien_hoa_thach",
+      "name": "Thien Hoa Thach",
+      "category": "ore",
+      "rarity": "common",
+      "description": "Thien Hoa Thach la vat lieu linh tai dung trong che phap khi va luyen dan.",
+      "flavorText": "Thien Hoa Thach co ket cau de nhan ra, phu hop lam vat lieu che tao.",
+      "stackable": true,
+      "value": 25,
+      "craftingTags": [
+        "craft_material"
+      ]
+    },
+    {
+      "id": "bach_ngoc_quang",
+      "name": "Bach Ngoc Quang",
+      "category": "ore",
+      "rarity": "common",
+      "description": "Bach Ngoc Quang la vat lieu linh tai dung trong che phap khi va luyen dan.",
+      "flavorText": "Bach Ngoc Quang co ket cau de nhan ra, phu hop lam vat lieu che tao.",
+      "stackable": true,
+      "value": 30,
+      "craftingTags": [
+        "craft_material"
+      ]
+    },
+    {
+      "id": "u_mach_tinh_thach",
+      "name": "U Mach Tinh Thach",
+      "category": "ore",
+      "rarity": "common",
+      "description": "U Mach Tinh Thach la vat lieu linh tai dung trong che phap khi va luyen dan.",
+      "flavorText": "U Mach Tinh Thach co ket cau de nhan ra, phu hop lam vat lieu che tao.",
+      "stackable": true,
+      "value": 35,
+      "craftingTags": [
+        "craft_material"
+      ]
+    },
+    {
+      "id": "thanh_lam_thach",
+      "name": "Thanh Lam Thach",
+      "category": "ore",
+      "rarity": "common",
+      "description": "Thanh Lam Thach la vat lieu linh tai dung trong che phap khi va luyen dan.",
+      "flavorText": "Thanh Lam Thach co ket cau de nhan ra, phu hop lam vat lieu che tao.",
+      "stackable": true,
+      "value": 10,
+      "craftingTags": [
+        "craft_material"
+      ]
+    },
+    {
+      "id": "xich_luyen_sa",
+      "name": "Xich Luyen Sa",
+      "category": "ore",
+      "rarity": "common",
+      "description": "Xich Luyen Sa la vat lieu linh tai dung trong che phap khi va luyen dan.",
+      "flavorText": "Xich Luyen Sa co ket cau de nhan ra, phu hop lam vat lieu che tao.",
+      "stackable": true,
+      "value": 15,
+      "craftingTags": [
+        "craft_material"
+      ]
+    },
+    {
+      "id": "han_tuy_ngoc",
+      "name": "Han Tuy Ngoc",
+      "category": "ore",
+      "rarity": "uncommon",
+      "description": "Han Tuy Ngoc la vat lieu linh tai dung trong che phap khi va luyen dan.",
+      "flavorText": "Han Tuy Ngoc co ket cau de nhan ra, phu hop lam vat lieu che tao.",
+      "stackable": true,
+      "value": 20,
+      "craftingTags": [
+        "craft_material"
+      ]
+    },
+    {
+      "id": "moc_tinh_tam",
+      "name": "Moc Tinh Tam",
+      "category": "ore",
+      "rarity": "uncommon",
+      "description": "Moc Tinh Tam la vat lieu linh tai dung trong che phap khi va luyen dan.",
+      "flavorText": "Moc Tinh Tam co ket cau de nhan ra, phu hop lam vat lieu che tao.",
+      "stackable": true,
+      "value": 25,
+      "craftingTags": [
+        "craft_material"
+      ]
+    },
+    {
+      "id": "thien_van_tuyet",
+      "name": "Thien Van Tuyet",
+      "category": "material",
+      "rarity": "uncommon",
+      "description": "Thien Van Tuyet la vat lieu linh tai dung trong che phap khi va luyen dan.",
+      "flavorText": "Thien Van Tuyet co ket cau de nhan ra, phu hop lam vat lieu che tao.",
+      "stackable": true,
+      "value": 30,
+      "craftingTags": [
+        "craft_material"
+      ]
+    },
+    {
+      "id": "huyen_thach_cat",
+      "name": "Huyen Thach Cat",
+      "category": "material",
+      "rarity": "uncommon",
+      "description": "Huyen Thach Cat la vat lieu linh tai dung trong che phap khi va luyen dan.",
+      "flavorText": "Huyen Thach Cat co ket cau de nhan ra, phu hop lam vat lieu che tao.",
+      "stackable": true,
+      "value": 35,
+      "craftingTags": [
+        "craft_material"
+      ]
+    },
+    {
+      "id": "kim_hoa_tinh",
+      "name": "Kim Hoa Tinh",
+      "category": "material",
+      "rarity": "uncommon",
+      "description": "Kim Hoa Tinh la vat lieu linh tai dung trong che phap khi va luyen dan.",
+      "flavorText": "Kim Hoa Tinh co ket cau de nhan ra, phu hop lam vat lieu che tao.",
+      "stackable": true,
+      "value": 10,
+      "craftingTags": [
+        "craft_material"
+      ]
+    },
+    {
+      "id": "bach_tuyet_chau",
+      "name": "Bach Tuyet Chau",
+      "category": "material",
+      "rarity": "uncommon",
+      "description": "Bach Tuyet Chau la vat lieu linh tai dung trong che phap khi va luyen dan.",
+      "flavorText": "Bach Tuyet Chau co ket cau de nhan ra, phu hop lam vat lieu che tao.",
+      "stackable": true,
+      "value": 15,
+      "craftingTags": [
+        "craft_material"
+      ]
+    },
+    {
+      "id": "thuy_ngoc_tuy",
+      "name": "Thuy Ngoc Tuy",
+      "category": "material",
+      "rarity": "uncommon",
+      "description": "Thuy Ngoc Tuy la vat lieu linh tai dung trong che phap khi va luyen dan.",
+      "flavorText": "Thuy Ngoc Tuy co ket cau de nhan ra, phu hop lam vat lieu che tao.",
+      "stackable": true,
+      "value": 20,
+      "craftingTags": [
+        "craft_material"
+      ]
+    },
+    {
+      "id": "linh_moc_chi",
+      "name": "Linh Moc Chi",
+      "category": "material",
+      "rarity": "uncommon",
+      "description": "Linh Moc Chi la vat lieu linh tai dung trong che phap khi va luyen dan.",
+      "flavorText": "Linh Moc Chi co ket cau de nhan ra, phu hop lam vat lieu che tao.",
+      "stackable": true,
+      "value": 25,
+      "craftingTags": [
+        "craft_material"
+      ]
+    },
+    {
+      "id": "phach_thach_tam",
+      "name": "Phach Thach Tam",
+      "category": "ore",
+      "rarity": "rare",
+      "description": "Phach Thach Tam la vat lieu linh tai dung trong che phap khi va luyen dan.",
+      "flavorText": "Phach Thach Tam co ket cau de nhan ra, phu hop lam vat lieu che tao.",
+      "stackable": true,
+      "value": 30,
+      "craftingTags": [
+        "craft_material"
+      ]
+    },
+    {
+      "id": "am_van_khoang",
+      "name": "Am Van Khoang",
+      "category": "ore",
+      "rarity": "rare",
+      "description": "Am Van Khoang la vat lieu linh tai dung trong che phap khi va luyen dan.",
+      "flavorText": "Am Van Khoang co ket cau de nhan ra, phu hop lam vat lieu che tao.",
+      "stackable": true,
+      "value": 35,
+      "craftingTags": [
+        "craft_material"
+      ]
+    },
+    {
+      "id": "thach_anh_tinh_tuy",
+      "name": "Thach Anh Tinh Tuy",
+      "category": "material",
+      "rarity": "rare",
+      "description": "Thach Anh Tinh Tuy la vat lieu linh tai dung trong che phap khi va luyen dan.",
+      "flavorText": "Thach Anh Tinh Tuy co ket cau de nhan ra, phu hop lam vat lieu che tao.",
+      "stackable": true,
+      "value": 10,
+      "craftingTags": [
+        "craft_material"
+      ]
+    },
+    {
+      "id": "cuu_huyen_tinh_phan",
+      "name": "Cuu Huyen Tinh Phan",
+      "category": "material",
+      "rarity": "rare",
+      "description": "Cuu Huyen Tinh Phan la vat lieu linh tai dung trong che phap khi va luyen dan.",
+      "flavorText": "Cuu Huyen Tinh Phan co ket cau de nhan ra, phu hop lam vat lieu che tao.",
+      "stackable": true,
+      "value": 15,
+      "craftingTags": [
+        "craft_material"
+      ]
+    },
+    {
+      "id": "lam_hoa_thach",
+      "name": "Lam Hoa Thach",
+      "category": "ore",
+      "rarity": "rare",
+      "description": "Lam Hoa Thach la vat lieu linh tai dung trong che phap khi va luyen dan.",
+      "flavorText": "Lam Hoa Thach co ket cau de nhan ra, phu hop lam vat lieu che tao.",
+      "stackable": true,
+      "value": 20,
+      "craftingTags": [
+        "craft_material"
+      ]
+    },
+    {
+      "id": "tuyet_ngoc_sa",
+      "name": "Tuyet Ngoc Sa",
+      "category": "material",
+      "rarity": "rare",
+      "description": "Tuyet Ngoc Sa la vat lieu linh tai dung trong che phap khi va luyen dan.",
+      "flavorText": "Tuyet Ngoc Sa co ket cau de nhan ra, phu hop lam vat lieu che tao.",
+      "stackable": true,
+      "value": 31,
+      "craftingTags": [
+        "craft_material"
+      ]
+    },
+    {
+      "id": "huyen_moc_tuy",
+      "name": "Huyen Moc Tuy",
+      "category": "material",
+      "rarity": "rare",
+      "description": "Huyen Moc Tuy la vat lieu linh tai dung trong che phap khi va luyen dan.",
+      "flavorText": "Huyen Moc Tuy co ket cau de nhan ra, phu hop lam vat lieu che tao.",
+      "stackable": true,
+      "value": 36,
+      "craftingTags": [
+        "craft_material"
+      ]
+    },
+    {
+      "id": "thien_loc_quang",
+      "name": "Thien Loc Quang",
+      "category": "ore",
+      "rarity": "rare",
+      "description": "Thien Loc Quang la vat lieu linh tai dung trong che phap khi va luyen dan.",
+      "flavorText": "Thien Loc Quang co ket cau de nhan ra, phu hop lam vat lieu che tao.",
+      "stackable": true,
+      "value": 41,
+      "craftingTags": [
+        "craft_material"
+      ]
+    },
+    {
+      "id": "bach_hoa_tinh_cat",
+      "name": "Bach Hoa Tinh Cat",
+      "category": "material",
+      "rarity": "rare",
+      "description": "Bach Hoa Tinh Cat la vat lieu linh tai dung trong che phap khi va luyen dan.",
+      "flavorText": "Bach Hoa Tinh Cat co ket cau de nhan ra, phu hop lam vat lieu che tao.",
+      "stackable": true,
+      "value": 16,
+      "craftingTags": [
+        "craft_material"
+      ]
+    },
+    {
+      "id": "tran_mach_thach",
+      "name": "Tran Mach Thach",
+      "category": "ore",
+      "rarity": "epic",
+      "description": "Tran Mach Thach la vat lieu linh tai dung trong che phap khi va luyen dan.",
+      "flavorText": "Tran Mach Thach co ket cau de nhan ra, phu hop lam vat lieu che tao.",
+      "stackable": true,
+      "value": 21,
+      "craftingTags": [
+        "craft_material"
+      ]
+    },
+    {
+      "id": "linh_tam_sa",
+      "name": "Linh Tam Sa",
+      "category": "material",
+      "rarity": "epic",
+      "description": "Linh Tam Sa la vat lieu linh tai dung trong che phap khi va luyen dan.",
+      "flavorText": "Linh Tam Sa co ket cau de nhan ra, phu hop lam vat lieu che tao.",
+      "stackable": true,
+      "value": 26,
+      "craftingTags": [
+        "craft_material"
+      ]
+    },
+    {
+      "id": "kim_tuyet_tinh",
+      "name": "Kim Tuyet Tinh",
+      "category": "material",
+      "rarity": "epic",
+      "description": "Kim Tuyet Tinh la vat lieu linh tai dung trong che phap khi va luyen dan.",
+      "flavorText": "Kim Tuyet Tinh co ket cau de nhan ra, phu hop lam vat lieu che tao.",
+      "stackable": true,
+      "value": 31,
+      "craftingTags": [
+        "craft_material"
+      ]
+    },
+    {
+      "id": "thien_huyen_tam_thach",
+      "name": "Thien Huyen Tam Thach",
+      "category": "ore",
+      "rarity": "epic",
+      "description": "Thien Huyen Tam Thach la vat lieu linh tai dung trong che phap khi va luyen dan.",
+      "flavorText": "Thien Huyen Tam Thach co ket cau de nhan ra, phu hop lam vat lieu che tao.",
+      "stackable": true,
+      "value": 36,
+      "craftingTags": [
+        "craft_material"
+      ]
+    },
+    {
+      "id": "u_minh_ngoc_sa",
+      "name": "U Minh Ngoc Sa",
+      "category": "material",
+      "rarity": "epic",
+      "description": "U Minh Ngoc Sa la vat lieu linh tai dung trong che phap khi va luyen dan.",
+      "flavorText": "U Minh Ngoc Sa co ket cau de nhan ra, phu hop lam vat lieu che tao.",
+      "stackable": true,
+      "value": 41,
+      "craftingTags": [
+        "craft_material"
+      ]
+    },
+    {
+      "id": "co_ngoc_linh_phu",
+      "name": "Co Ngoc Linh Phu",
+      "category": "artifact",
+      "rarity": "uncommon",
+      "description": "Co Ngoc Linh Phu la phap khi hiem cho bonus thu dong nhe.",
+      "flavorText": "Co Ngoc Linh Phu giu lai dao y co va hoi quang tiet che.",
+      "stackable": false,
+      "value": 56,
+      "artifactEffect": {
+        "type": "daily_cultivation_progress",
+        "value": 1
+      },
+      "craftingTags": [
+        "artifact",
+        "cultivation"
+      ]
+    },
+    {
+      "id": "thien_huyen_hoan",
+      "name": "Thien Huyen Hoan",
+      "category": "artifact",
+      "rarity": "uncommon",
+      "description": "Thien Huyen Hoan la phap khi hiem cho bonus thu dong nhe.",
+      "flavorText": "Thien Huyen Hoan giu lai dao y co va hoi quang tiet che.",
+      "stackable": false,
+      "value": 64,
+      "artifactEffect": {
+        "type": "exploration_max_health",
+        "value": 10
+      },
+      "craftingTags": [
+        "artifact",
+        "exploration"
+      ]
+    },
+    {
+      "id": "bach_lien_ngoc_boi",
+      "name": "Bach Lien Ngoc Boi",
+      "category": "artifact",
+      "rarity": "uncommon",
+      "description": "Bach Lien Ngoc Boi la phap khi hiem cho bonus thu dong nhe.",
+      "flavorText": "Bach Lien Ngoc Boi giu lai dao y co va hoi quang tiet che.",
+      "stackable": false,
+      "value": 72,
+      "artifactEffect": {
+        "type": "daily_cultivation_progress",
+        "value": 1
+      },
+      "craftingTags": [
+        "artifact",
+        "cultivation"
+      ]
+    },
+    {
+      "id": "u_hoa_am_phu",
+      "name": "U Hoa Am Phu",
+      "category": "artifact",
+      "rarity": "uncommon",
+      "description": "U Hoa Am Phu la phap khi hiem cho bonus thu dong nhe.",
+      "flavorText": "U Hoa Am Phu giu lai dao y co va hoi quang tiet che.",
+      "stackable": false,
+      "value": 80,
+      "artifactEffect": {
+        "type": "exploration_max_health",
+        "value": 14
+      },
+      "craftingTags": [
+        "artifact",
+        "exploration"
+      ]
+    },
+    {
+      "id": "kim_lang_ho_tam",
+      "name": "Kim Lang Ho Tam",
+      "category": "artifact",
+      "rarity": "uncommon",
+      "description": "Kim Lang Ho Tam la phap khi hiem cho bonus thu dong nhe.",
+      "flavorText": "Kim Lang Ho Tam giu lai dao y co va hoi quang tiet che.",
+      "stackable": false,
+      "value": 88,
+      "artifactEffect": {
+        "type": "daily_cultivation_progress",
+        "value": 1
+      },
+      "craftingTags": [
+        "artifact",
+        "cultivation"
+      ]
+    },
+    {
+      "id": "thanh_tam_linh_ban",
+      "name": "Thanh Tam Linh Ban",
+      "category": "artifact",
+      "rarity": "uncommon",
+      "description": "Thanh Tam Linh Ban la phap khi hiem cho bonus thu dong nhe.",
+      "flavorText": "Thanh Tam Linh Ban giu lai dao y co va hoi quang tiet che.",
+      "stackable": false,
+      "value": 96,
+      "artifactEffect": {
+        "type": "exploration_max_health",
+        "value": 18
+      },
+      "craftingTags": [
+        "artifact",
+        "exploration"
+      ]
+    },
+    {
+      "id": "tran_mach_ngoc_cham",
+      "name": "Tran Mach Ngoc Cham",
+      "category": "artifact",
+      "rarity": "uncommon",
+      "description": "Tran Mach Ngoc Cham la phap khi hiem cho bonus thu dong nhe.",
+      "flavorText": "Tran Mach Ngoc Cham giu lai dao y co va hoi quang tiet che.",
+      "stackable": false,
+      "value": 104,
+      "artifactEffect": {
+        "type": "daily_cultivation_progress",
+        "value": 2
+      },
+      "craftingTags": [
+        "artifact",
+        "cultivation"
+      ]
+    },
+    {
+      "id": "huyen_quang_gioi_chi",
+      "name": "Huyen Quang Gioi Chi",
+      "category": "artifact",
+      "rarity": "uncommon",
+      "description": "Huyen Quang Gioi Chi la phap khi hiem cho bonus thu dong nhe.",
+      "flavorText": "Huyen Quang Gioi Chi giu lai dao y co va hoi quang tiet che.",
+      "stackable": false,
+      "value": 112,
+      "artifactEffect": {
+        "type": "exploration_max_health",
+        "value": 22
+      },
+      "craftingTags": [
+        "artifact",
+        "exploration"
+      ]
+    },
+    {
+      "id": "nguyet_tam_bao_xuyen",
+      "name": "Nguyet Tam Bao Xuyen",
+      "category": "artifact",
+      "rarity": "rare",
+      "description": "Nguyet Tam Bao Xuyen la phap khi hiem cho bonus thu dong nhe.",
+      "flavorText": "Nguyet Tam Bao Xuyen giu lai dao y co va hoi quang tiet che.",
+      "stackable": false,
+      "value": 120,
+      "artifactEffect": {
+        "type": "daily_cultivation_progress",
+        "value": 2
+      },
+      "craftingTags": [
+        "artifact",
+        "cultivation"
+      ]
+    },
+    {
+      "id": "cuu_van_phu_an",
+      "name": "Cuu Van Phu An",
+      "category": "artifact",
+      "rarity": "rare",
+      "description": "Cuu Van Phu An la phap khi hiem cho bonus thu dong nhe.",
+      "flavorText": "Cuu Van Phu An giu lai dao y co va hoi quang tiet che.",
+      "stackable": false,
+      "value": 128,
+      "artifactEffect": {
+        "type": "exploration_max_health",
+        "value": 26
+      },
+      "craftingTags": [
+        "artifact",
+        "exploration"
+      ]
+    },
+    {
+      "id": "mat_lenh_bac_son",
+      "name": "Mat Lenh Bac Son",
+      "category": "quest",
+      "rarity": "rare",
+      "description": "Mat Lenh Bac Son la di vat truyen thua phu hop event va che phap khi.",
+      "flavorText": "Mat Lenh Bac Son mang vet tich lich su va truyen thua cu.",
+      "stackable": true,
+      "value": 52,
+      "craftingTags": [
+        "inheritance",
+        "sect_records"
+      ]
+    },
+    {
+      "id": "thien_khu_manh_do",
+      "name": "Thien Khu Manh Do",
+      "category": "quest",
+      "rarity": "rare",
+      "description": "Thien Khu Manh Do la di vat truyen thua phu hop event va che phap khi.",
+      "flavorText": "Thien Khu Manh Do mang vet tich lich su va truyen thua cu.",
+      "stackable": true,
+      "value": 52,
+      "craftingTags": [
+        "inheritance",
+        "sect_records"
+      ]
+    },
+    {
+      "id": "di_tich_thanh_bia",
+      "name": "Di Tich Thanh Bia",
+      "category": "quest",
+      "rarity": "rare",
+      "description": "Di Tich Thanh Bia la di vat truyen thua phu hop event va che phap khi.",
+      "flavorText": "Di Tich Thanh Bia mang vet tich lich su va truyen thua cu.",
+      "stackable": true,
+      "value": 52,
+      "craftingTags": [
+        "inheritance",
+        "sect_records"
+      ]
+    },
+    {
+      "id": "co_quyen_huyen_an",
+      "name": "Co Quyen Huyen An",
+      "category": "quest",
+      "rarity": "rare",
+      "description": "Co Quyen Huyen An la di vat truyen thua phu hop event va che phap khi.",
+      "flavorText": "Co Quyen Huyen An mang vet tich lich su va truyen thua cu.",
+      "stackable": true,
+      "value": 52,
+      "craftingTags": [
+        "inheritance",
+        "sect_records"
+      ]
+    },
+    {
+      "id": "thach_an_truyen_thu",
+      "name": "Thach An Truyen Thu",
+      "category": "quest",
+      "rarity": "rare",
+      "description": "Thach An Truyen Thu la di vat truyen thua phu hop event va che phap khi.",
+      "flavorText": "Thach An Truyen Thu mang vet tich lich su va truyen thua cu.",
+      "stackable": true,
+      "value": 52,
+      "craftingTags": [
+        "inheritance",
+        "sect_records"
+      ]
+    },
+    {
+      "id": "linh_khac_co_ban",
+      "name": "Linh Khac Co Ban",
+      "category": "quest",
+      "rarity": "rare",
+      "description": "Linh Khac Co Ban la di vat truyen thua phu hop event va che phap khi.",
+      "flavorText": "Linh Khac Co Ban mang vet tich lich su va truyen thua cu.",
+      "stackable": true,
+      "value": 52,
+      "craftingTags": [
+        "inheritance",
+        "sect_records"
+      ]
+    },
+    {
+      "id": "mat_do_mach_cu",
+      "name": "Mat Do Mach Cu",
+      "category": "quest",
+      "rarity": "rare",
+      "description": "Mat Do Mach Cu la di vat truyen thua phu hop event va che phap khi.",
+      "flavorText": "Mat Do Mach Cu mang vet tich lich su va truyen thua cu.",
+      "stackable": true,
+      "value": 52,
+      "craftingTags": [
+        "inheritance",
+        "sect_records"
+      ]
+    },
+    {
+      "id": "tan_lenh_phan_doan",
+      "name": "Tan Lenh Phan Doan",
+      "category": "quest",
+      "rarity": "rare",
+      "description": "Tan Lenh Phan Doan la di vat truyen thua phu hop event va che phap khi.",
+      "flavorText": "Tan Lenh Phan Doan mang vet tich lich su va truyen thua cu.",
+      "stackable": true,
+      "value": 52,
+      "craftingTags": [
+        "inheritance",
+        "sect_records"
+      ]
+    },
+    {
+      "id": "co_phu_an_van",
+      "name": "Co Phu An Van",
+      "category": "quest",
+      "rarity": "rare",
+      "description": "Co Phu An Van la di vat truyen thua phu hop event va che phap khi.",
+      "flavorText": "Co Phu An Van mang vet tich lich su va truyen thua cu.",
+      "stackable": true,
+      "value": 52,
+      "craftingTags": [
+        "inheritance",
+        "sect_records"
+      ]
+    },
+    {
+      "id": "thu_tich_that_truyen",
+      "name": "Thu Tich That Truyen",
+      "category": "quest",
+      "rarity": "rare",
+      "description": "Thu Tich That Truyen la di vat truyen thua phu hop event va che phap khi.",
+      "flavorText": "Thu Tich That Truyen mang vet tich lich su va truyen thua cu.",
+      "stackable": true,
+      "value": 52,
+      "craftingTags": [
+        "inheritance",
+        "sect_records"
+      ]
     }
   ]
 }

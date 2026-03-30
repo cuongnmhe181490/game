@@ -152,6 +152,653 @@
         ],
         "minSectPrestige": 20
       }
+    },
+    {
+      "id": "co_tich_co_khu",
+      "name": "Cổ Tích Cổ Khư",
+      "description": "Một nhánh phế tích cổ bị khóa trong linh triều đứt quãng, chỉ hiện ra khi tông môn đã đủ uy danh và người dò thám vượt qua một mốc cảnh giới cao hơn.",
+      "isSecretRealm": true,
+      "discoveryBanner": "Bí cảnh ẩn hiện: Cổ Tích Cổ Khư đã mở.",
+      "chapterUnlock": "chapter_3_kinh_chieu_cuu_thien",
+      "riskLevel": 4,
+      "recommendedRealm": "kim_dan",
+      "enemyPool": [
+        "thanh_huyen_tan_anh",
+        "co_tran_thach_linh",
+        "u_vu_moc_yeu"
+      ],
+      "bossId": "thanh_huyen_thu_ve",
+      "rewardProfile": {
+        "guaranteed": {
+          "linhThach": 18,
+          "khoangThach": 8,
+          "duocThao": 6
+        },
+        "bossBonus": {
+          "linhThach": 36,
+          "khoangThach": 10,
+          "linhMoc": 6
+        },
+        "retreatKeepRatio": 1,
+        "itemRewards": {
+          "khuyet_mach_thao": 1,
+          "thua_ke_linh_bai": 1
+        },
+        "sectPrestigeBonus": 3,
+        "playerCultivationProgressBonus": 10
+      },
+      "eventPool": [
+        "explore.hidden_chamber",
+        "explore.branch_elder_cairn",
+        "explore.cracked_guidance_wall"
+      ],
+      "environmentTags": [
+        "ruins",
+        "secret_realm",
+        "inheritance"
+      ],
+      "specialDiscoveryTags": [
+        "secret_realm",
+        "rare_relic",
+        "tribulation_trace"
+      ],
+      "unlockConditions": {
+        "requiredWorldFlags": [
+          "map_tan_tich_thanh_huyen_cleared"
+        ],
+        "requiredStoryFlags": [
+          "first_breakthrough_done"
+        ],
+        "minPlayerRealmOrder": 4,
+        "minSectPrestige": 28,
+        "minSectReputation": 8
+      },
+      "secretRealmConfig": {
+        "entryCooldownDays": 6,
+        "rareDropNote": "Nơi này để lại di vật và linh thảo hiếm, nhưng chỉ mở theo từng nhịp ngày."
+      }
+    },
+    {
+      "id": "linh_son_mat_dao",
+      "name": "Linh Sơn Mật Đạo",
+      "description": "Đỉnh linh sơn ẩn sau màn vân thấp, chỉ hiện khi khí vận tông môn đã gom đủ và người thám hiểm có lực chống kiếp.",
+      "isSecretRealm": true,
+      "discoveryBanner": "Bí cảnh ẩn hiện: Linh Sơn Mật Đạo đã mở.",
+      "chapterUnlock": "chapter_4_nhat_niem_dinh_dao",
+      "riskLevel": 5,
+      "recommendedRealm": "nguyen_anh",
+      "enemyPool": [
+        "co_tran_thach_linh",
+        "thanh_huyen_tan_anh",
+        "hac_moc_yeu_lang"
+      ],
+      "bossId": "thanh_huyen_thu_ve",
+      "rewardProfile": {
+        "guaranteed": {
+          "linhThach": 24,
+          "duocThao": 8,
+          "khoangThach": 8
+        },
+        "bossBonus": {
+          "linhThach": 44,
+          "duocThao": 10,
+          "linhMoc": 8
+        },
+        "retreatKeepRatio": 1,
+        "itemRewards": {
+          "am_hoa_tinh_sa": 1,
+          "thanh_huyen_ngoai_chi": 1
+        },
+        "sectPrestigeBonus": 4,
+        "playerCultivationProgressBonus": 14
+      },
+      "eventPool": [
+        "explore.hidden_chamber",
+        "explore.ruined_altar",
+        "explore.sect_records_cache"
+      ],
+      "environmentTags": [
+        "spirit_mountain",
+        "secret_realm",
+        "law_resonance"
+      ],
+      "specialDiscoveryTags": [
+        "secret_realm",
+        "rare_material",
+        "artifact_trace"
+      ],
+      "unlockConditions": {
+        "requiredWorldFlags": [
+          "map_co_tich_co_khu_cleared"
+        ],
+        "minPlayerRealmOrder": 5,
+        "minSectPrestige": 34,
+        "minSectReputation": 16
+      },
+      "secretRealmConfig": {
+        "entryCooldownDays": 8,
+        "rareDropNote": "Mức thưởng ở đây nghiêng về pháp khí và linh tài hiếm gặp, nhưng không thể vào liên tục."
+      }
+    },
+    {
+      "id": "ancient_ruins",
+      "name": "Ancient Ruins",
+      "description": "Ancient Ruins la khu tham hiem mo rong trong sprint content nay.",
+      "chapterUnlock": "chapter_2_tong_mon_lap_the",
+      "riskLevel": 3,
+      "recommendedRealm": "truc_co",
+      "enemyPool": [
+        "thanh_huyen_tan_anh",
+        "co_tran_thach_linh"
+      ],
+      "bossId": "thanh_huyen_thu_ve",
+      "rewardProfile": {
+        "guaranteed": {
+          "linhThach": 10,
+          "khoangThach": 5
+        },
+        "bossBonus": {
+          "linhThach": 28,
+          "khoangThach": 8,
+          "duocThao": 3
+        },
+        "retreatKeepRatio": 1,
+        "itemRewards": {
+          "tan_phien_co_khi": 1,
+          "mat_lenh_bac_son": 1
+        },
+        "sectPrestigeBonus": 2,
+        "playerCultivationProgressBonus": 6
+      },
+      "eventPool": [
+        "explore.ancient_ruins_trace",
+        "explore.ancient_ruins_cache",
+        "explore.herb_patch"
+      ],
+      "environmentTags": [
+        "ruins",
+        "ancient_ruins",
+        "dust"
+      ],
+      "specialDiscoveryTags": [
+        "ruins",
+        "ancient_ruins"
+      ],
+      "unlockConditions": {
+        "requiredWorldFlags": [
+          "map_tan_tich_thanh_huyen_cleared"
+        ],
+        "minSectPrestige": 14,
+        "minPlayerRealmOrder": 3
+      }
+    },
+    {
+      "id": "spirit_mountain",
+      "name": "Spirit Mountain",
+      "description": "Spirit Mountain la khu tham hiem mo rong trong sprint content nay.",
+      "chapterUnlock": "chapter_2_tong_mon_lap_the",
+      "riskLevel": 3,
+      "recommendedRealm": "truc_co",
+      "enemyPool": [
+        "am_tich_lang",
+        "linh_tuc_diep_hau",
+        "hac_moc_yeu_lang"
+      ],
+      "bossId": "hau_son_thu_linh",
+      "rewardProfile": {
+        "guaranteed": {
+          "duocThao": 6,
+          "linhMoc": 3
+        },
+        "bossBonus": {
+          "linhThach": 22,
+          "duocThao": 7,
+          "linhMoc": 4
+        },
+        "retreatKeepRatio": 1,
+        "itemRewards": {
+          "nguyet_linh_hoa": 1
+        },
+        "sectPrestigeBonus": 2,
+        "playerCultivationProgressBonus": 6
+      },
+      "eventPool": [
+        "explore.spirit_mountain_trace",
+        "explore.spirit_mountain_cache",
+        "explore.herb_patch"
+      ],
+      "environmentTags": [
+        "spirit_mountain",
+        "herb_patch",
+        "cloud"
+      ],
+      "specialDiscoveryTags": [
+        "spirit_mountain",
+        "herb_patch"
+      ],
+      "unlockConditions": {
+        "requiredWorldFlags": [
+          "map_tan_tich_thanh_huyen_cleared"
+        ],
+        "minSectPrestige": 12,
+        "minPlayerRealmOrder": 3
+      }
+    },
+    {
+      "id": "frozen_valley",
+      "name": "Frozen Valley",
+      "description": "Frozen Valley la khu tham hiem mo rong trong sprint content nay.",
+      "chapterUnlock": "chapter_3_kinh_chieu_cuu_thien",
+      "riskLevel": 4,
+      "recommendedRealm": "kim_dan",
+      "enemyPool": [
+        "thach_tu_xa",
+        "co_tran_thach_linh"
+      ],
+      "bossId": "hac_moc_thu_vuong",
+      "rewardProfile": {
+        "guaranteed": {
+          "khoangThach": 7,
+          "duocThao": 4
+        },
+        "bossBonus": {
+          "linhThach": 26,
+          "khoangThach": 9,
+          "linhMoc": 2
+        },
+        "retreatKeepRatio": 1,
+        "itemRewards": {
+          "han_phach_lan": 1,
+          "tuyet_ngoc_sa": 1
+        },
+        "sectPrestigeBonus": 3,
+        "playerCultivationProgressBonus": 8
+      },
+      "eventPool": [
+        "explore.frozen_valley_trace",
+        "explore.frozen_valley_cache",
+        "explore.herb_patch"
+      ],
+      "environmentTags": [
+        "frozen_valley",
+        "ice",
+        "ore"
+      ],
+      "specialDiscoveryTags": [
+        "frozen_valley",
+        "ice"
+      ],
+      "unlockConditions": {
+        "requiredWorldFlags": [
+          "map_tan_tich_thanh_huyen_cleared"
+        ],
+        "minSectPrestige": 18,
+        "minPlayerRealmOrder": 4
+      }
+    },
+    {
+      "id": "abyss_cavern",
+      "name": "Abyss Cavern",
+      "description": "Abyss Cavern la khu tham hiem mo rong trong sprint content nay.",
+      "chapterUnlock": "chapter_3_kinh_chieu_cuu_thien",
+      "riskLevel": 4,
+      "recommendedRealm": "kim_dan",
+      "enemyPool": [
+        "hac_moc_yeu_lang",
+        "u_vu_moc_yeu"
+      ],
+      "bossId": "hac_moc_thu_vuong",
+      "rewardProfile": {
+        "guaranteed": {
+          "linhMoc": 5,
+          "duocThao": 5
+        },
+        "bossBonus": {
+          "linhThach": 24,
+          "linhMoc": 8,
+          "khoangThach": 4
+        },
+        "retreatKeepRatio": 1,
+        "itemRewards": {
+          "am_hoa_tinh_sa": 1,
+          "u_minh_ngoc_sa": 1
+        },
+        "sectPrestigeBonus": 3,
+        "playerCultivationProgressBonus": 8
+      },
+      "eventPool": [
+        "explore.abyss_cavern_trace",
+        "explore.abyss_cavern_cache",
+        "explore.herb_patch"
+      ],
+      "environmentTags": [
+        "abyss_cavern",
+        "shadow",
+        "resin"
+      ],
+      "specialDiscoveryTags": [
+        "abyss_cavern",
+        "shadow"
+      ],
+      "unlockConditions": {
+        "requiredWorldFlags": [
+          "map_tan_tich_thanh_huyen_cleared"
+        ],
+        "minSectPrestige": 20,
+        "minPlayerRealmOrder": 4
+      }
+    },
+    {
+      "id": "forgotten_sect",
+      "name": "Forgotten Sect",
+      "description": "Forgotten Sect la khu tham hiem mo rong trong sprint content nay.",
+      "chapterUnlock": "chapter_3_kinh_chieu_cuu_thien",
+      "riskLevel": 4,
+      "recommendedRealm": "kim_dan",
+      "enemyPool": [
+        "thanh_huyen_tan_anh",
+        "u_vu_moc_yeu"
+      ],
+      "bossId": "thanh_huyen_thu_ve",
+      "rewardProfile": {
+        "guaranteed": {
+          "linhThach": 12,
+          "duocThao": 5
+        },
+        "bossBonus": {
+          "linhThach": 30,
+          "khoangThach": 8,
+          "duocThao": 5
+        },
+        "retreatKeepRatio": 1,
+        "itemRewards": {
+          "co_quyen_huyen_an": 1,
+          "di_tich_thanh_bia": 1
+        },
+        "sectPrestigeBonus": 3,
+        "playerCultivationProgressBonus": 8
+      },
+      "eventPool": [
+        "explore.forgotten_sect_trace",
+        "explore.forgotten_sect_cache",
+        "explore.herb_patch"
+      ],
+      "environmentTags": [
+        "forgotten_sect",
+        "inheritance",
+        "sect_history"
+      ],
+      "specialDiscoveryTags": [
+        "forgotten_sect",
+        "inheritance"
+      ],
+      "unlockConditions": {
+        "requiredWorldFlags": [
+          "map_tan_tich_thanh_huyen_cleared"
+        ],
+        "minSectPrestige": 22,
+        "minPlayerRealmOrder": 4
+      }
+    },
+    {
+      "id": "demon_forest",
+      "name": "Demon Forest",
+      "description": "Demon Forest la khu tham hiem mo rong trong sprint content nay.",
+      "chapterUnlock": "chapter_3_kinh_chieu_cuu_thien",
+      "riskLevel": 4,
+      "recommendedRealm": "kim_dan",
+      "enemyPool": [
+        "hac_moc_yeu_lang",
+        "am_tich_lang",
+        "u_vu_moc_yeu"
+      ],
+      "bossId": "hac_moc_thu_vuong",
+      "rewardProfile": {
+        "guaranteed": {
+          "linhMoc": 7,
+          "duocThao": 6
+        },
+        "bossBonus": {
+          "linhThach": 26,
+          "linhMoc": 10,
+          "duocThao": 6
+        },
+        "retreatKeepRatio": 1,
+        "itemRewards": {
+          "u_hon_chi": 1,
+          "hac_moc_tam": 1
+        },
+        "sectPrestigeBonus": 3,
+        "playerCultivationProgressBonus": 8
+      },
+      "eventPool": [
+        "explore.demon_forest_trace",
+        "explore.demon_forest_cache",
+        "explore.herb_patch"
+      ],
+      "environmentTags": [
+        "demon_forest",
+        "spirit_fog",
+        "beast_den"
+      ],
+      "specialDiscoveryTags": [
+        "demon_forest",
+        "spirit_fog"
+      ],
+      "unlockConditions": {
+        "requiredWorldFlags": [
+          "map_tan_tich_thanh_huyen_cleared"
+        ],
+        "minSectPrestige": 18,
+        "minPlayerRealmOrder": 4
+      }
+    },
+    {
+      "id": "jade_peak",
+      "name": "Jade Peak",
+      "description": "Jade Peak la khu tham hiem mo rong trong sprint content nay.",
+      "chapterUnlock": "chapter_4_nhat_niem_dinh_dao",
+      "riskLevel": 5,
+      "recommendedRealm": "nguyen_anh",
+      "enemyPool": [
+        "co_tran_thach_linh",
+        "thanh_huyen_tan_anh"
+      ],
+      "bossId": "thanh_huyen_thu_ve",
+      "rewardProfile": {
+        "guaranteed": {
+          "linhThach": 18,
+          "khoangThach": 9
+        },
+        "bossBonus": {
+          "linhThach": 38,
+          "khoangThach": 12,
+          "duocThao": 4
+        },
+        "retreatKeepRatio": 1,
+        "itemRewards": {
+          "bach_ngoc_quang": 1,
+          "ngoc_tam_dan": 1
+        },
+        "sectPrestigeBonus": 4,
+        "playerCultivationProgressBonus": 10
+      },
+      "eventPool": [
+        "explore.jade_peak_trace",
+        "explore.jade_peak_cache",
+        "explore.herb_patch"
+      ],
+      "environmentTags": [
+        "jade_peak",
+        "ore",
+        "cloud"
+      ],
+      "specialDiscoveryTags": [
+        "jade_peak",
+        "ore"
+      ],
+      "unlockConditions": {
+        "requiredWorldFlags": [
+          "map_co_tich_co_khu_cleared"
+        ],
+        "minSectPrestige": 28,
+        "minPlayerRealmOrder": 5
+      }
+    },
+    {
+      "id": "thunder_ridge",
+      "name": "Thunder Ridge",
+      "description": "Thunder Ridge la khu tham hiem mo rong trong sprint content nay.",
+      "chapterUnlock": "chapter_4_nhat_niem_dinh_dao",
+      "riskLevel": 5,
+      "recommendedRealm": "nguyen_anh",
+      "enemyPool": [
+        "thanh_huyen_tan_anh",
+        "am_tich_lang"
+      ],
+      "bossId": "thanh_huyen_thu_ve",
+      "rewardProfile": {
+        "guaranteed": {
+          "linhThach": 16,
+          "khoangThach": 8
+        },
+        "bossBonus": {
+          "linhThach": 40,
+          "khoangThach": 10,
+          "linhMoc": 4
+        },
+        "retreatKeepRatio": 1,
+        "itemRewards": {
+          "thien_hoa_thach": 1
+        },
+        "sectPrestigeBonus": 4,
+        "playerCultivationProgressBonus": 10
+      },
+      "eventPool": [
+        "explore.thunder_ridge_trace",
+        "explore.thunder_ridge_cache",
+        "explore.herb_patch"
+      ],
+      "environmentTags": [
+        "thunder_ridge",
+        "storm",
+        "ore"
+      ],
+      "specialDiscoveryTags": [
+        "thunder_ridge",
+        "storm"
+      ],
+      "unlockConditions": {
+        "requiredWorldFlags": [
+          "map_co_tich_co_khu_cleared"
+        ],
+        "minSectPrestige": 30,
+        "minPlayerRealmOrder": 5
+      }
+    },
+    {
+      "id": "blood_marsh",
+      "name": "Blood Marsh",
+      "description": "Blood Marsh la khu tham hiem mo rong trong sprint content nay.",
+      "chapterUnlock": "chapter_4_nhat_niem_dinh_dao",
+      "riskLevel": 5,
+      "recommendedRealm": "nguyen_anh",
+      "enemyPool": [
+        "hac_moc_yeu_lang",
+        "thach_tu_xa"
+      ],
+      "bossId": "hac_moc_thu_vuong",
+      "rewardProfile": {
+        "guaranteed": {
+          "duocThao": 8,
+          "linhMoc": 5
+        },
+        "bossBonus": {
+          "linhThach": 34,
+          "duocThao": 10,
+          "linhMoc": 6
+        },
+        "retreatKeepRatio": 1,
+        "itemRewards": {
+          "huyet_tam_thao": 1,
+          "uyet_mach_chi": 1
+        },
+        "sectPrestigeBonus": 4,
+        "playerCultivationProgressBonus": 10
+      },
+      "eventPool": [
+        "explore.blood_marsh_trace",
+        "explore.blood_marsh_cache",
+        "explore.herb_patch"
+      ],
+      "environmentTags": [
+        "blood_marsh",
+        "swamp",
+        "rare_herb"
+      ],
+      "specialDiscoveryTags": [
+        "blood_marsh",
+        "swamp"
+      ],
+      "unlockConditions": {
+        "requiredWorldFlags": [
+          "map_co_tich_co_khu_cleared"
+        ],
+        "minSectPrestige": 32,
+        "minPlayerRealmOrder": 5
+      }
+    },
+    {
+      "id": "moonwell_grove",
+      "name": "Moonwell Grove",
+      "description": "Moonwell Grove la khu tham hiem mo rong trong sprint content nay.",
+      "chapterUnlock": "chapter_4_nhat_niem_dinh_dao",
+      "riskLevel": 5,
+      "recommendedRealm": "nguyen_anh",
+      "enemyPool": [
+        "linh_tuc_diep_hau",
+        "thach_tu_xa"
+      ],
+      "bossId": "hau_son_thu_linh",
+      "rewardProfile": {
+        "guaranteed": {
+          "duocThao": 9,
+          "linhMoc": 4
+        },
+        "bossBonus": {
+          "linhThach": 32,
+          "duocThao": 11,
+          "khoangThach": 4
+        },
+        "retreatKeepRatio": 1,
+        "itemRewards": {
+          "nguyet_linh_hoa": 1,
+          "thien_khu_manh_do": 1
+        },
+        "sectPrestigeBonus": 4,
+        "playerCultivationProgressBonus": 10
+      },
+      "eventPool": [
+        "explore.moonwell_grove_trace",
+        "explore.moonwell_grove_cache",
+        "explore.herb_patch"
+      ],
+      "environmentTags": [
+        "moonwell_grove",
+        "moonlight",
+        "herb_patch"
+      ],
+      "specialDiscoveryTags": [
+        "moonwell_grove",
+        "moonlight"
+      ],
+      "unlockConditions": {
+        "requiredWorldFlags": [
+          "map_co_tich_co_khu_cleared"
+        ],
+        "minSectPrestige": 30,
+        "minPlayerRealmOrder": 5
+      }
     }
   ]
 }

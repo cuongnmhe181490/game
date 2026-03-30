@@ -1,0 +1,370 @@
+{
+  "version": 1,
+  "beasts": [
+    {
+      "id": "thanh_lang",
+      "name": "Thanh Lang",
+      "title": "Linh thú giữ sơn đạo",
+      "rarity": "uncommon",
+      "baseStats": {
+        "attack": 14,
+        "defense": 10,
+        "health": 42
+      },
+      "skillName": "Phong Lang Kích",
+      "skillText": "Khi lao lên mở đường, Thanh Lang bộc phát một nhịp cắn nhanh giúp phá thế áp sát ban đầu.",
+      "portraitKey": "beast_portrait_thanh_lang_01",
+      "fallbackPortraitKey": "enemy_spirit_wolf"
+    },
+    {
+      "id": "thach_giap_thu",
+      "name": "Thạch Giáp Thú",
+      "title": "Linh thú trấn mạch đá",
+      "rarity": "rare",
+      "baseStats": {
+        "attack": 11,
+        "defense": 16,
+        "health": 58
+      },
+      "skillName": "Thạch Giáp Chấn",
+      "skillText": "Thân giáp kết linh thạch, hợp với những chuyến thám hiểm nơi địa mạch bất ổn và cần giữ tuyến đầu.",
+      "portraitKey": "beast_portrait_thach_giap_thu_01",
+      "fallbackPortraitKey": "enemy_ancient_golem"
+    },
+    {
+      "id": "xich_nha_thu",
+      "name": "Xích Nha Thú",
+      "title": "Hung thú mang tà hỏa",
+      "rarity": "epic",
+      "baseStats": {
+        "attack": 18,
+        "defense": 12,
+        "health": 54
+      },
+      "skillName": "Hỏa Nha Phệ Tức",
+      "skillText": "Nha hỏa bộc phát khi bị dồn ép, thích hợp với chiến lối mạnh tay nhưng cần giữ nhịp ổn định để không phản chủ.",
+      "portraitKey": "beast_portrait_xich_nha_thu_01",
+      "fallbackPortraitKey": "enemy_demon_beast"
+    },
+    {
+      "id": "linh_ho",
+      "name": "Linh Ho",
+      "title": "Linh thu canh gio",
+      "rarity": "common",
+      "baseStats": {
+        "attack": 10,
+        "defense": 9,
+        "health": 36
+      },
+      "skillName": "Linh Ho Thuat",
+      "skillText": "Linh Ho tao mot nhip ho tro nhe cho hanh trinh va tranh dau.",
+      "flavorText": "Linh Ho co silhouette ro, de nhan ra tren the linh thu.",
+      "portraitKey": "beast_portrait_linh_ho_01",
+      "fallbackPortraitKey": "enemy_spirit_wolf"
+    },
+    {
+      "id": "loi_ung",
+      "name": "Loi Ung",
+      "title": "Linh thu son lam",
+      "rarity": "common",
+      "baseStats": {
+        "attack": 11,
+        "defense": 9,
+        "health": 38
+      },
+      "skillName": "Loi Ung Thuat",
+      "skillText": "Loi Ung tao mot nhip ho tro nhe cho hanh trinh va tranh dau.",
+      "flavorText": "Loi Ung co silhouette ro, de nhan ra tren the linh thu.",
+      "portraitKey": "beast_portrait_loi_ung_01",
+      "fallbackPortraitKey": "enemy_ancient_golem"
+    },
+    {
+      "id": "ngoc_xa",
+      "name": "Ngoc Xa",
+      "title": "Linh thu am sat",
+      "rarity": "common",
+      "baseStats": {
+        "attack": 12,
+        "defense": 10,
+        "health": 40
+      },
+      "skillName": "Ngoc Xa Thuat",
+      "skillText": "Ngoc Xa tao mot nhip ho tro nhe cho hanh trinh va tranh dau.",
+      "flavorText": "Ngoc Xa co silhouette ro, de nhan ra tren the linh thu.",
+      "portraitKey": "beast_portrait_ngoc_xa_01",
+      "fallbackPortraitKey": "enemy_demon_beast"
+    },
+    {
+      "id": "son_quy",
+      "name": "Son Quy",
+      "title": "Linh thu ho menh",
+      "rarity": "uncommon",
+      "baseStats": {
+        "attack": 13,
+        "defense": 11,
+        "health": 42
+      },
+      "skillName": "Son Quy Thuat",
+      "skillText": "Son Quy tao mot nhip ho tro nhe cho hanh trinh va tranh dau.",
+      "flavorText": "Son Quy co silhouette ro, de nhan ra tren the linh thu.",
+      "portraitKey": "beast_portrait_son_quy_01",
+      "fallbackPortraitKey": "enemy_spirit_wolf"
+    },
+    {
+      "id": "am_lang",
+      "name": "Am Lang",
+      "title": "Linh thu tran mach",
+      "rarity": "uncommon",
+      "baseStats": {
+        "attack": 14,
+        "defense": 11,
+        "health": 44
+      },
+      "skillName": "Am Lang Thuat",
+      "skillText": "Am Lang tao mot nhip ho tro nhe cho hanh trinh va tranh dau.",
+      "flavorText": "Am Lang co silhouette ro, de nhan ra tren the linh thu.",
+      "portraitKey": "beast_portrait_am_lang_01",
+      "fallbackPortraitKey": "enemy_ancient_golem"
+    },
+    {
+      "id": "bach_hac",
+      "name": "Bach Hac",
+      "title": "Linh thu canh gio",
+      "rarity": "uncommon",
+      "baseStats": {
+        "attack": 15,
+        "defense": 12,
+        "health": 46
+      },
+      "skillName": "Bach Hac Thuat",
+      "skillText": "Bach Hac tao mot nhip ho tro nhe cho hanh trinh va tranh dau.",
+      "flavorText": "Bach Hac co silhouette ro, de nhan ra tren the linh thu.",
+      "portraitKey": "beast_portrait_bach_hac_01",
+      "fallbackPortraitKey": "enemy_demon_beast"
+    },
+    {
+      "id": "kim_vien",
+      "name": "Kim Vien",
+      "title": "Linh thu son lam",
+      "rarity": "uncommon",
+      "baseStats": {
+        "attack": 16,
+        "defense": 13,
+        "health": 48
+      },
+      "skillName": "Kim Vien Thuat",
+      "skillText": "Kim Vien tao mot nhip ho tro nhe cho hanh trinh va tranh dau.",
+      "flavorText": "Kim Vien co silhouette ro, de nhan ra tren the linh thu.",
+      "portraitKey": "beast_portrait_kim_vien_01",
+      "fallbackPortraitKey": "enemy_spirit_wolf"
+    },
+    {
+      "id": "huyen_bao",
+      "name": "Huyen Bao",
+      "title": "Linh thu am sat",
+      "rarity": "uncommon",
+      "baseStats": {
+        "attack": 17,
+        "defense": 13,
+        "health": 50
+      },
+      "skillName": "Huyen Bao Thuat",
+      "skillText": "Huyen Bao tao mot nhip ho tro nhe cho hanh trinh va tranh dau.",
+      "flavorText": "Huyen Bao co silhouette ro, de nhan ra tren the linh thu.",
+      "portraitKey": "beast_portrait_huyen_bao_01",
+      "fallbackPortraitKey": "enemy_ancient_golem"
+    },
+    {
+      "id": "thuy_lan",
+      "name": "Thuy Lan",
+      "title": "Linh thu ho menh",
+      "rarity": "rare",
+      "baseStats": {
+        "attack": 18,
+        "defense": 14,
+        "health": 52
+      },
+      "skillName": "Thuy Lan Thuat",
+      "skillText": "Thuy Lan tao mot nhip ho tro nhe cho hanh trinh va tranh dau.",
+      "flavorText": "Thuy Lan co silhouette ro, de nhan ra tren the linh thu.",
+      "portraitKey": "beast_portrait_thuy_lan_01",
+      "fallbackPortraitKey": "enemy_demon_beast"
+    },
+    {
+      "id": "xich_ho",
+      "name": "Xich Ho",
+      "title": "Linh thu tran mach",
+      "rarity": "rare",
+      "baseStats": {
+        "attack": 19,
+        "defense": 15,
+        "health": 54
+      },
+      "skillName": "Xich Ho Thuat",
+      "skillText": "Xich Ho tao mot nhip ho tro nhe cho hanh trinh va tranh dau.",
+      "flavorText": "Xich Ho co silhouette ro, de nhan ra tren the linh thu.",
+      "portraitKey": "beast_portrait_xich_ho_01",
+      "fallbackPortraitKey": "enemy_spirit_wolf"
+    },
+    {
+      "id": "van_ly",
+      "name": "Van Ly",
+      "title": "Linh thu canh gio",
+      "rarity": "rare",
+      "baseStats": {
+        "attack": 20,
+        "defense": 16,
+        "health": 56
+      },
+      "skillName": "Van Ly Thuat",
+      "skillText": "Van Ly tao mot nhip ho tro nhe cho hanh trinh va tranh dau.",
+      "flavorText": "Van Ly co silhouette ro, de nhan ra tren the linh thu.",
+      "portraitKey": "beast_portrait_van_ly_01",
+      "fallbackPortraitKey": "enemy_ancient_golem"
+    },
+    {
+      "id": "thien_tuoc",
+      "name": "Thien Tuoc",
+      "title": "Linh thu son lam",
+      "rarity": "rare",
+      "baseStats": {
+        "attack": 21,
+        "defense": 16,
+        "health": 58
+      },
+      "skillName": "Thien Tuoc Thuat",
+      "skillText": "Thien Tuoc tao mot nhip ho tro nhe cho hanh trinh va tranh dau.",
+      "flavorText": "Thien Tuoc co silhouette ro, de nhan ra tren the linh thu.",
+      "portraitKey": "beast_portrait_thien_tuoc_01",
+      "fallbackPortraitKey": "enemy_demon_beast"
+    },
+    {
+      "id": "moc_tinh_hau",
+      "name": "Moc Tinh Hau",
+      "title": "Linh thu am sat",
+      "rarity": "rare",
+      "baseStats": {
+        "attack": 22,
+        "defense": 17,
+        "health": 60
+      },
+      "skillName": "Moc Tinh Hau Thuat",
+      "skillText": "Moc Tinh Hau tao mot nhip ho tro nhe cho hanh trinh va tranh dau.",
+      "flavorText": "Moc Tinh Hau co silhouette ro, de nhan ra tren the linh thu.",
+      "portraitKey": "beast_portrait_moc_tinh_hau_01",
+      "fallbackPortraitKey": "enemy_spirit_wolf"
+    },
+    {
+      "id": "huyen_long_ngau",
+      "name": "Huyen Long Ngau",
+      "title": "Linh thu ho menh",
+      "rarity": "legendary",
+      "baseStats": {
+        "attack": 23,
+        "defense": 18,
+        "health": 62
+      },
+      "skillName": "Huyen Long Ngau Thuat",
+      "skillText": "Huyen Long Ngau tao mot nhip ho tro nhe cho hanh trinh va tranh dau.",
+      "flavorText": "Huyen Long Ngau co silhouette ro, de nhan ra tren the linh thu.",
+      "portraitKey": "beast_portrait_huyen_long_ngau_01",
+      "fallbackPortraitKey": "enemy_ancient_golem"
+    },
+    {
+      "id": "lam_dieu",
+      "name": "Lam Dieu",
+      "title": "Linh thu tran mach",
+      "rarity": "rare",
+      "baseStats": {
+        "attack": 24,
+        "defense": 18,
+        "health": 64
+      },
+      "skillName": "Lam Dieu Thuat",
+      "skillText": "Lam Dieu tao mot nhip ho tro nhe cho hanh trinh va tranh dau.",
+      "flavorText": "Lam Dieu co silhouette ro, de nhan ra tren the linh thu.",
+      "portraitKey": "beast_portrait_lam_dieu_01",
+      "fallbackPortraitKey": "enemy_demon_beast"
+    },
+    {
+      "id": "bach_tuong_thu",
+      "name": "Bach Tuong Thu",
+      "title": "Linh thu canh gio",
+      "rarity": "rare",
+      "baseStats": {
+        "attack": 25,
+        "defense": 19,
+        "health": 66
+      },
+      "skillName": "Bach Tuong Thu Thuat",
+      "skillText": "Bach Tuong Thu tao mot nhip ho tro nhe cho hanh trinh va tranh dau.",
+      "flavorText": "Bach Tuong Thu co silhouette ro, de nhan ra tren the linh thu.",
+      "portraitKey": "beast_portrait_bach_tuong_thu_01",
+      "fallbackPortraitKey": "enemy_spirit_wolf"
+    },
+    {
+      "id": "u_minh_mieu",
+      "name": "U Minh Mieu",
+      "title": "Linh thu son lam",
+      "rarity": "rare",
+      "baseStats": {
+        "attack": 26,
+        "defense": 20,
+        "health": 68
+      },
+      "skillName": "U Minh Mieu Thuat",
+      "skillText": "U Minh Mieu tao mot nhip ho tro nhe cho hanh trinh va tranh dau.",
+      "flavorText": "U Minh Mieu co silhouette ro, de nhan ra tren the linh thu.",
+      "portraitKey": "beast_portrait_u_minh_mieu_01",
+      "fallbackPortraitKey": "enemy_ancient_golem"
+    },
+    {
+      "id": "thach_hau",
+      "name": "Thach Hau",
+      "title": "Linh thu am sat",
+      "rarity": "epic",
+      "baseStats": {
+        "attack": 27,
+        "defense": 20,
+        "health": 70
+      },
+      "skillName": "Thach Hau Thuat",
+      "skillText": "Thach Hau tao mot nhip ho tro nhe cho hanh trinh va tranh dau.",
+      "flavorText": "Thach Hau co silhouette ro, de nhan ra tren the linh thu.",
+      "portraitKey": "beast_portrait_thach_hau_01",
+      "fallbackPortraitKey": "enemy_demon_beast"
+    },
+    {
+      "id": "kim_lan_hau",
+      "name": "Kim Lan Hau",
+      "title": "Linh thu ho menh",
+      "rarity": "epic",
+      "baseStats": {
+        "attack": 28,
+        "defense": 21,
+        "health": 72
+      },
+      "skillName": "Kim Lan Hau Thuat",
+      "skillText": "Kim Lan Hau tao mot nhip ho tro nhe cho hanh trinh va tranh dau.",
+      "flavorText": "Kim Lan Hau co silhouette ro, de nhan ra tren the linh thu.",
+      "portraitKey": "beast_portrait_kim_lan_hau_01",
+      "fallbackPortraitKey": "enemy_spirit_wolf"
+    },
+    {
+      "id": "nguyet_tho",
+      "name": "Nguyet Tho",
+      "title": "Linh thu tran mach",
+      "rarity": "epic",
+      "baseStats": {
+        "attack": 29,
+        "defense": 22,
+        "health": 74
+      },
+      "skillName": "Nguyet Tho Thuat",
+      "skillText": "Nguyet Tho tao mot nhip ho tro nhe cho hanh trinh va tranh dau.",
+      "flavorText": "Nguyet Tho co silhouette ro, de nhan ra tren the linh thu.",
+      "portraitKey": "beast_portrait_nguyet_tho_01",
+      "fallbackPortraitKey": "enemy_ancient_golem"
+    }
+  ]
+}

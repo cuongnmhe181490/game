@@ -16,27 +16,27 @@ export function createTextButton(
   scene: Phaser.Scene,
   options: TextButtonOptions
 ): Phaser.GameObjects.Container {
-  const background = scene.add.rectangle(0, 0, options.width, 58, buttonStyle.background, 1)
+  const background = scene.add.rectangle(0, 0, options.width, 42, buttonStyle.background, 1)
     .setStrokeStyle(1, buttonStyle.border, 0.85)
     .setInteractive({ useHandCursor: true });
   background.setOrigin(0.5);
 
-  const accent = scene.add.rectangle(-options.width / 2 + 8, 0, 6, 42, buttonStyle.accent, 0.82);
-  const sheen = scene.add.rectangle(0, -18, options.width - 18, 10, 0xffffff, 0.04);
+  const accent = scene.add.rectangle(-options.width / 2 + 8, 0, 4, 30, buttonStyle.accent, 0.82);
+  const sheen = scene.add.rectangle(0, -14, options.width - 18, 6, 0xffffff, 0.04);
 
-  const label = scene.add.text(-options.width / 2 + 22, -18, options.label, {
+  const label = scene.add.text(-options.width / 2 + 18, -14, options.label, {
     color: buttonStyle.text,
     fontFamily: '"Segoe UI", Tahoma, sans-serif',
-    fontSize: '17px',
+    fontSize: '14px',
     fontStyle: 'bold',
-    wordWrap: { width: options.width - 42 }
+    wordWrap: { width: options.width - 32 }
   });
 
-  const detail = scene.add.text(-options.width / 2 + 22, 7, options.detail ?? '', {
+  const detail = scene.add.text(-options.width / 2 + 18, 4, options.detail ?? '', {
     color: buttonStyle.textMuted,
     fontFamily: '"Segoe UI", Tahoma, sans-serif',
-    fontSize: '13px',
-    wordWrap: { width: options.width - 42 }
+    fontSize: '11px',
+    wordWrap: { width: options.width - 32 }
   });
 
   const container = scene.add.container(options.x, options.y, [background, sheen, accent, label, detail]);

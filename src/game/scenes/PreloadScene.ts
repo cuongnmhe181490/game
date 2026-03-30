@@ -1,11 +1,21 @@
 import Phaser from 'phaser';
 
+import { assetManifest, type AssetManifestEntry } from '@/game/config/assetManifest';
 import { SCENE_KEYS } from '@/game/scenes/sceneKeys';
 import { menuPalette } from '@/game/ui/theme';
 
 export class PreloadScene extends Phaser.Scene {
   constructor() {
     super(SCENE_KEYS.preload);
+  }
+
+  private queueAsset(entry: AssetManifestEntry): void {
+    if (entry.type === 'svg') {
+      this.load.svg(entry.key, entry.path, entry.svgConfig);
+      return;
+    }
+
+    this.load.image(entry.key, entry.path);
   }
 
   preload(): void {
@@ -45,7 +55,7 @@ export class PreloadScene extends Phaser.Scene {
     };
 
     const handleLoadError = (file: Phaser.Loader.File) => {
-      if (file.key === 'sect-crest') {
+      if (file.key === 'sect-crest' || file.key === 'icon_ui_sect_crest') {
         progressText.setText('Khong tai duoc bieu trung tong mon. Game van tiep tuc voi giao dien du phong.');
         return;
       }
@@ -74,9 +84,6 @@ export class PreloadScene extends Phaser.Scene {
 
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, cleanupLoadListeners);
 
-    this.load.svg('sect-crest', 'assets/icons/ui/icon_ui_sect_crest.svg', { width: 256, height: 256 });
-    this.load.image('sect-main-bg', 'assets/backgrounds/sect/sect_main_restored_01.png');
-    this.load.image('event-discovery', 'assets/backgrounds/events/event_inheritance_discovery_01.png');
-    this.load.image('ui-frame-modal', 'assets/ui/frames/ui_frame_modal_ornate_01.png');
+    assetManifest.forEach((entry) => this.queueAsset(entry));
   }
 }

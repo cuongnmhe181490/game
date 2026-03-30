@@ -1,4 +1,5 @@
 import buildingsJson from '@/game/data/buildings.json';
+import beastsJson from '@/game/data/beasts.json';
 import discipleNamesJson from '@/game/data/disciple_names.json';
 import discipleTraitsJson from '@/game/data/disciple_traits.json';
 import endingsJson from '@/game/data/endings.json';
@@ -27,6 +28,7 @@ export const LOCALIZATION_VERSION = 2 as const;
 export const DISCIPLE_TRAITS_VERSION = 2 as const;
 export const DISCIPLE_NAMES_VERSION = 1 as const;
 export const BUILDING_CATALOG_VERSION = 1 as const;
+export const BEAST_CATALOG_VERSION = 1 as const;
 export const REALM_CATALOG_VERSION = 2 as const;
 export const TECHNIQUE_CATALOG_VERSION = 1 as const;
 export const EXPLORATION_MAP_CATALOG_VERSION = 1 as const;
@@ -68,12 +70,13 @@ export type DiscipleTraitType = 'positive' | 'flaw' | 'temperament';
 export type TechniqueCategory = 'cultivation' | 'mind' | 'support';
 export type EnemyBehaviorType = 'idle_chase' | 'boss_guardian';
 export type ItemCategory = 'resource' | 'herb' | 'ore' | 'pill' | 'material' | 'artifact' | 'quest' | 'misc';
-export type ItemRarity = 'common' | 'uncommon' | 'rare';
+export type ItemRarity = 'common' | 'uncommon' | 'rare' | 'epic' | 'legendary';
 export type GovernanceStyleId = string;
 export type SectRuleId = string;
 export type ElderRoleId = string;
 export type EndingPathId = 'orthodox' | 'dominion' | 'outsider';
 export type RealmTierId = 'mortal' | 'spirit' | 'immortal' | 'transcendent';
+export type BeastRarity = 'common' | 'uncommon' | 'rare' | 'epic' | 'legendary';
 
 export interface ResourceDelta extends Partial<Record<ResourceId, number>> {}
 
@@ -313,6 +316,28 @@ export interface BuildingCatalog {
   buildings: BuildingDefinition[];
 }
 
+export interface BeastDefinition {
+  id: string;
+  name: string;
+  title: string;
+  rarity: BeastRarity;
+  baseStats: {
+    attack: number;
+    defense: number;
+    health: number;
+  };
+  skillName: string;
+  skillText: string;
+  flavorText?: string;
+  portraitKey?: string | null;
+  fallbackPortraitKey?: string | null;
+}
+
+export interface BeastCatalog {
+  version: typeof BEAST_CATALOG_VERSION;
+  beasts: BeastDefinition[];
+}
+
 export interface RealmDefinition {
   id: string;
   name: string;
@@ -412,6 +437,8 @@ export interface AlchemyRecipeDefinition {
   ingredients: RecipeIngredientDefinition[];
   outputs: RecipeIngredientDefinition[];
   description: string;
+  difficulty?: number;
+  successRate?: number;
 }
 
 export interface AlchemyRecipeCatalog {
@@ -512,6 +539,8 @@ export interface ExplorationMapDefinition {
   id: string;
   name: string;
   description: string;
+  isSecretRealm?: boolean;
+  discoveryBanner?: string;
   chapterUnlock: string;
   riskLevel: number;
   recommendedRealm: string;
@@ -527,6 +556,11 @@ export interface ExplorationMapDefinition {
     requiredClearedMapIds?: string[];
     minPlayerRealmOrder?: number;
     minSectPrestige?: number;
+    minSectReputation?: number;
+  };
+  secretRealmConfig?: {
+    entryCooldownDays: number;
+    rareDropNote: string;
   };
 }
 
@@ -604,6 +638,7 @@ export const localizationViCatalog = localizationViJson as unknown as Localizati
 export const discipleTraitCatalog = discipleTraitsJson as unknown as DiscipleTraitCatalog;
 export const discipleNamesCatalog = discipleNamesJson as unknown as DiscipleNamesCatalog;
 export const buildingCatalog = buildingsJson as unknown as BuildingCatalog;
+export const beastCatalog = beastsJson as unknown as BeastCatalog;
 export const realmCatalog = realmsJson as unknown as RealmCatalog;
 export const techniqueCatalog = techniquesJson as unknown as TechniqueCatalog;
 export const itemCatalog = itemsJson as unknown as ItemCatalog;

@@ -1,5 +1,6 @@
 export * from '@/game/systems/AlchemySystem';
 export * from '@/game/systems/ArtifactSystem';
+export * from '@/game/systems/BeastSystem';
 export * from '@/game/systems/BuildingSystem';
 export * from '@/game/systems/DiscipleSystem';
 export * from '@/game/systems/EndingSystem';

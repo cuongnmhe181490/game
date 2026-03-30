@@ -14,12 +14,14 @@ export interface AlchemyPanelContent {
   title: string;
   summaryLines: string[];
   detailLines: string[];
+  iconKeys?: Array<string | undefined>;
 }
 
 export class AlchemyPanel {
   private readonly root: Phaser.GameObjects.Container;
   private readonly summaryText: Phaser.GameObjects.Text;
   private readonly detailText: Phaser.GameObjects.Text;
+  private readonly iconNodes: Phaser.GameObjects.Image[];
 
   constructor(scene: Phaser.Scene, buttons: AlchemyPanelButton[]) {
     const { width, height } = scene.scale;
@@ -69,6 +71,12 @@ export class AlchemyPanel {
       wordWrap: { width: 418 }
     });
 
+    this.iconNodes = Array.from({ length: 4 }).map((_, index) => {
+      const node = scene.add.image(0, 0, '').setVisible(false);
+      node.setPosition(182 + index * 48, 150).setDisplaySize(34, 34);
+      return node;
+    });
+
     const buttonNodes = buttons.map((button, index) => {
       const column = index % 2;
       const row = Math.floor(index / 2);
@@ -82,7 +90,7 @@ export class AlchemyPanel {
       });
     });
 
-    this.root = scene.add.container(0, 0, [veil, panel, titleText, leftHeader, rightHeader, this.summaryText, this.detailText, ...buttonNodes]);
+    this.root = scene.add.container(0, 0, [veil, panel, titleText, leftHeader, rightHeader, this.summaryText, this.detailText, ...this.iconNodes, ...buttonNodes]);
     this.root.setDepth(1095);
     this.root.setVisible(false);
   }
@@ -90,6 +98,14 @@ export class AlchemyPanel {
   show(content: AlchemyPanelContent): void {
     this.summaryText.setText(content.summaryLines.join('\n'));
     this.detailText.setText(content.detailLines.join('\n'));
+    this.iconNodes.forEach((node, index) => {
+      const iconKey = content.iconKeys?.[index];
+      if (iconKey && this.root.scene.textures.exists(iconKey)) {
+        node.setTexture(iconKey).setVisible(true);
+      } else {
+        node.setVisible(false);
+      }
+    });
     this.root.setVisible(true);
   }
 

@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 
 import { AlchemySystem } from '@/game/systems/AlchemySystem';
 import { ArtifactSystem } from '@/game/systems/ArtifactSystem';
+import { BeastSystem } from '@/game/systems/BeastSystem';
 import { BuildingSystem } from '@/game/systems/BuildingSystem';
 import { DiscipleSystem } from '@/game/systems/DiscipleSystem';
 import { DiplomacySystem } from '@/game/systems/DiplomacySystem';
@@ -15,6 +16,8 @@ import { ResourceSystem } from '@/game/systems/ResourceSystem';
 import { SaveSystem } from '@/game/systems/LocalSaveStore';
 import { SectIdentitySystem } from '@/game/systems/SectIdentitySystem';
 import { TechniqueSystem } from '@/game/systems/TechniqueSystem';
+import { TribulationSystem } from '@/game/systems/TribulationSystem';
+import { SettingsStore } from '@/game/systems/SettingsStore';
 import { GameStateManager } from '@/game/state/GameStateManager';
 import { TimeSystem } from '@/game/systems/TimeSystem';
 
@@ -27,14 +30,17 @@ export const REGISTRY_KEYS = {
   explorationSystem: 'exploration-system',
   feedbackSystem: 'feedback-system',
   inventorySystem: 'inventory-system',
+  beastSystem: 'beast-system',
   artifactSystem: 'artifact-system',
   alchemySystem: 'alchemy-system',
   realmSystem: 'realm-system',
   resourceSystem: 'resource-system',
   saveSystem: 'save-system',
+  settingsStore: 'settings-store',
   sectIdentitySystem: 'sect-identity-system',
   stateManager: 'state-manager',
   techniqueSystem: 'technique-system',
+  tribulationSystem: 'tribulation-system',
   timeSystem: 'time-system'
 } as const;
 
@@ -53,6 +59,16 @@ export function getSaveStore(scene: Phaser.Scene): SaveSystem {
 
   if (!(store instanceof SaveSystem)) {
     throw new Error('SaveSystem is not registered.');
+  }
+
+  return store;
+}
+
+export function getSettingsStore(scene: Phaser.Scene): SettingsStore {
+  const store = scene.registry.get(REGISTRY_KEYS.settingsStore);
+
+  if (!(store instanceof SettingsStore)) {
+    throw new Error('SettingsStore is not registered.');
   }
 
   return store;
@@ -83,6 +99,16 @@ export function getInventorySystem(scene: Phaser.Scene): InventorySystem {
 
   if (!(system instanceof InventorySystem)) {
     throw new Error('InventorySystem is not registered.');
+  }
+
+  return system;
+}
+
+export function getBeastSystem(scene: Phaser.Scene): BeastSystem {
+  const system = scene.registry.get(REGISTRY_KEYS.beastSystem);
+
+  if (!(system instanceof BeastSystem)) {
+    throw new Error('BeastSystem is not registered.');
   }
 
   return system;
@@ -183,6 +209,16 @@ export function getTechniqueSystem(scene: Phaser.Scene): TechniqueSystem {
 
   if (!(system instanceof TechniqueSystem)) {
     throw new Error('TechniqueSystem is not registered.');
+  }
+
+  return system;
+}
+
+export function getTribulationSystem(scene: Phaser.Scene): TribulationSystem {
+  const system = scene.registry.get(REGISTRY_KEYS.tribulationSystem);
+
+  if (!(system instanceof TribulationSystem)) {
+    throw new Error('TribulationSystem is not registered.');
   }
 
   return system;

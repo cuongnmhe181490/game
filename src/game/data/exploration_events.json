@@ -458,6 +458,1000 @@
           ]
         }
       }
+    },
+    {
+      "id": "explore.ancient_ruins_trace",
+      "allowedMapIds": [
+        "ancient_ruins"
+      ],
+      "requiredEnvironmentTags": [
+        "ruins"
+      ],
+      "title": "Dau vet Ancient Ruins",
+      "body": "Trong Ancient Ruins co mot dau vet linh tai co the thu lay.",
+      "choices": [
+        {
+          "id": "careful",
+          "label": "Thu lay can than",
+          "outcome": "Lay duoc vat tai on dinh."
+        },
+        {
+          "id": "rush",
+          "label": "Lay nhanh",
+          "outcome": "Lay nhieu hon nhung de hao ton."
+        }
+      ],
+      "effects": {
+        "careful": {
+          "resources": {
+            "duocThao": 2,
+            "khoangThach": 1
+          },
+          "itemAdds": {
+            "thanh_hoa_moc": 1
+          }
+        },
+        "rush": {
+          "resources": {
+            "duocThao": 3,
+            "khoangThach": 2
+          },
+          "itemAdds": {
+            "kim_hoa_tinh": 1
+          },
+          "healthDelta": -8
+        }
+      }
+    },
+    {
+      "id": "explore.ancient_ruins_cache",
+      "allowedMapIds": [
+        "ancient_ruins"
+      ],
+      "requiredEnvironmentTags": [
+        "ancient_ruins"
+      ],
+      "title": "Thu tang Ancient Ruins",
+      "body": "Mot o nho trong Ancient Ruins giu lai manh co vat va duoc lieu.",
+      "choices": [
+        {
+          "id": "record",
+          "label": "Ghi chep truoc",
+          "outcome": "Lay vat tai va giu dau moi."
+        },
+        {
+          "id": "break",
+          "label": "Mo ngay",
+          "outcome": "Co them thu hoach nhung ton suc."
+        }
+      ],
+      "effects": {
+        "record": {
+          "itemAdds": {
+            "linh_khac_co_ban": 1
+          },
+          "playerCultivationProgress": 2
+        },
+        "break": {
+          "itemAdds": {
+            "thanh_lam_thach": 1
+          },
+          "healthDelta": -6,
+          "resources": {
+            "linhThach": 4
+          }
+        }
+      }
+    },
+    {
+      "id": "explore.spirit_mountain_trace",
+      "allowedMapIds": [
+        "spirit_mountain"
+      ],
+      "requiredEnvironmentTags": [
+        "spirit_mountain"
+      ],
+      "title": "Dau vet Spirit Mountain",
+      "body": "Trong Spirit Mountain co mot dau vet linh tai co the thu lay.",
+      "choices": [
+        {
+          "id": "careful",
+          "label": "Thu lay can than",
+          "outcome": "Lay duoc vat tai on dinh."
+        },
+        {
+          "id": "rush",
+          "label": "Lay nhanh",
+          "outcome": "Lay nhieu hon nhung de hao ton."
+        }
+      ],
+      "effects": {
+        "careful": {
+          "resources": {
+            "duocThao": 2,
+            "khoangThach": 1
+          },
+          "itemAdds": {
+            "xich_duong_diep": 1
+          }
+        },
+        "rush": {
+          "resources": {
+            "duocThao": 3,
+            "khoangThach": 2
+          },
+          "itemAdds": {
+            "phach_thach_tam": 1
+          },
+          "healthDelta": -8
+        }
+      }
+    },
+    {
+      "id": "explore.spirit_mountain_cache",
+      "allowedMapIds": [
+        "spirit_mountain"
+      ],
+      "requiredEnvironmentTags": [
+        "herb_patch"
+      ],
+      "title": "Thu tang Spirit Mountain",
+      "body": "Mot o nho trong Spirit Mountain giu lai manh co vat va duoc lieu.",
+      "choices": [
+        {
+          "id": "record",
+          "label": "Ghi chep truoc",
+          "outcome": "Lay vat tai va giu dau moi."
+        },
+        {
+          "id": "break",
+          "label": "Mo ngay",
+          "outcome": "Co them thu hoach nhung ton suc."
+        }
+      ],
+      "effects": {
+        "record": {
+          "itemAdds": {
+            "thien_khu_manh_do": 1
+          },
+          "playerCultivationProgress": 2
+        },
+        "break": {
+          "itemAdds": {
+            "thien_hoa_thach": 1
+          },
+          "healthDelta": -6,
+          "resources": {
+            "linhThach": 4
+          }
+        }
+      }
+    },
+    {
+      "id": "explore.frozen_valley_trace",
+      "allowedMapIds": [
+        "frozen_valley"
+      ],
+      "requiredEnvironmentTags": [
+        "frozen_valley"
+      ],
+      "title": "Dau vet Frozen Valley",
+      "body": "Trong Frozen Valley co mot dau vet linh tai co the thu lay.",
+      "choices": [
+        {
+          "id": "careful",
+          "label": "Thu lay can than",
+          "outcome": "Lay duoc vat tai on dinh."
+        },
+        {
+          "id": "rush",
+          "label": "Lay nhanh",
+          "outcome": "Lay nhieu hon nhung de hao ton."
+        }
+      ],
+      "effects": {
+        "careful": {
+          "resources": {
+            "duocThao": 2,
+            "khoangThach": 1
+          },
+          "itemAdds": {
+            "linh_suong_thu": 1
+          }
+        },
+        "rush": {
+          "resources": {
+            "duocThao": 3,
+            "khoangThach": 2
+          },
+          "itemAdds": {
+            "cuu_huyen_tinh_phan": 1
+          },
+          "healthDelta": -8
+        }
+      }
+    },
+    {
+      "id": "explore.frozen_valley_cache",
+      "allowedMapIds": [
+        "frozen_valley"
+      ],
+      "requiredEnvironmentTags": [
+        "ice"
+      ],
+      "title": "Thu tang Frozen Valley",
+      "body": "Mot o nho trong Frozen Valley giu lai manh co vat va duoc lieu.",
+      "choices": [
+        {
+          "id": "record",
+          "label": "Ghi chep truoc",
+          "outcome": "Lay vat tai va giu dau moi."
+        },
+        {
+          "id": "break",
+          "label": "Mo ngay",
+          "outcome": "Co them thu hoach nhung ton suc."
+        }
+      ],
+      "effects": {
+        "record": {
+          "itemAdds": {
+            "thach_an_truyen_thu": 1
+          },
+          "playerCultivationProgress": 2
+        },
+        "break": {
+          "itemAdds": {
+            "linh_tam_sa": 1
+          },
+          "healthDelta": -6,
+          "resources": {
+            "linhThach": 4
+          }
+        }
+      }
+    },
+    {
+      "id": "explore.abyss_cavern_trace",
+      "allowedMapIds": [
+        "abyss_cavern"
+      ],
+      "requiredEnvironmentTags": [
+        "abyss_cavern"
+      ],
+      "title": "Dau vet Abyss Cavern",
+      "body": "Trong Abyss Cavern co mot dau vet linh tai co the thu lay.",
+      "choices": [
+        {
+          "id": "careful",
+          "label": "Thu lay can than",
+          "outcome": "Lay duoc vat tai on dinh."
+        },
+        {
+          "id": "rush",
+          "label": "Lay nhanh",
+          "outcome": "Lay nhieu hon nhung de hao ton."
+        }
+      ],
+      "effects": {
+        "careful": {
+          "resources": {
+            "duocThao": 2,
+            "khoangThach": 1
+          },
+          "itemAdds": {
+            "nguyet_linh_hoa": 1
+          }
+        },
+        "rush": {
+          "resources": {
+            "duocThao": 3,
+            "khoangThach": 2
+          },
+          "itemAdds": {
+            "am_van_khoang": 1
+          },
+          "healthDelta": -8
+        }
+      }
+    },
+    {
+      "id": "explore.abyss_cavern_cache",
+      "allowedMapIds": [
+        "abyss_cavern"
+      ],
+      "requiredEnvironmentTags": [
+        "shadow"
+      ],
+      "title": "Thu tang Abyss Cavern",
+      "body": "Mot o nho trong Abyss Cavern giu lai manh co vat va duoc lieu.",
+      "choices": [
+        {
+          "id": "record",
+          "label": "Ghi chep truoc",
+          "outcome": "Lay vat tai va giu dau moi."
+        },
+        {
+          "id": "break",
+          "label": "Mo ngay",
+          "outcome": "Co them thu hoach nhung ton suc."
+        }
+      ],
+      "effects": {
+        "record": {
+          "itemAdds": {
+            "co_phu_an_van": 1
+          },
+          "playerCultivationProgress": 2
+        },
+        "break": {
+          "itemAdds": {
+            "am_van_khoang": 1
+          },
+          "healthDelta": -6,
+          "resources": {
+            "linhThach": 4
+          }
+        }
+      }
+    },
+    {
+      "id": "explore.forgotten_sect_trace",
+      "allowedMapIds": [
+        "forgotten_sect"
+      ],
+      "requiredEnvironmentTags": [
+        "forgotten_sect"
+      ],
+      "title": "Dau vet Forgotten Sect",
+      "body": "Trong Forgotten Sect co mot dau vet linh tai co the thu lay.",
+      "choices": [
+        {
+          "id": "careful",
+          "label": "Thu lay can than",
+          "outcome": "Lay duoc vat tai on dinh."
+        },
+        {
+          "id": "rush",
+          "label": "Lay nhanh",
+          "outcome": "Lay nhieu hon nhung de hao ton."
+        }
+      ],
+      "effects": {
+        "careful": {
+          "resources": {
+            "duocThao": 2,
+            "khoangThach": 1
+          },
+          "itemAdds": {
+            "bach_loc_nha": 1
+          }
+        },
+        "rush": {
+          "resources": {
+            "duocThao": 3,
+            "khoangThach": 2
+          },
+          "itemAdds": {
+            "tuyet_ngoc_sa": 1
+          },
+          "healthDelta": -8
+        }
+      }
+    },
+    {
+      "id": "explore.forgotten_sect_cache",
+      "allowedMapIds": [
+        "forgotten_sect"
+      ],
+      "requiredEnvironmentTags": [
+        "inheritance"
+      ],
+      "title": "Thu tang Forgotten Sect",
+      "body": "Mot o nho trong Forgotten Sect giu lai manh co vat va duoc lieu.",
+      "choices": [
+        {
+          "id": "record",
+          "label": "Ghi chep truoc",
+          "outcome": "Lay vat tai va giu dau moi."
+        },
+        {
+          "id": "break",
+          "label": "Mo ngay",
+          "outcome": "Co them thu hoach nhung ton suc."
+        }
+      ],
+      "effects": {
+        "record": {
+          "itemAdds": {
+            "mat_do_mach_cu": 1
+          },
+          "playerCultivationProgress": 2
+        },
+        "break": {
+          "itemAdds": {
+            "moc_tinh_tam": 1
+          },
+          "healthDelta": -6,
+          "resources": {
+            "linhThach": 4
+          }
+        }
+      }
+    },
+    {
+      "id": "explore.demon_forest_trace",
+      "allowedMapIds": [
+        "demon_forest"
+      ],
+      "requiredEnvironmentTags": [
+        "demon_forest"
+      ],
+      "title": "Dau vet Demon Forest",
+      "body": "Trong Demon Forest co mot dau vet linh tai co the thu lay.",
+      "choices": [
+        {
+          "id": "careful",
+          "label": "Thu lay can than",
+          "outcome": "Lay duoc vat tai on dinh."
+        },
+        {
+          "id": "rush",
+          "label": "Lay nhanh",
+          "outcome": "Lay nhieu hon nhung de hao ton."
+        }
+      ],
+      "effects": {
+        "careful": {
+          "resources": {
+            "duocThao": 2,
+            "khoangThach": 1
+          },
+          "itemAdds": {
+            "xich_duong_diep": 1
+          }
+        },
+        "rush": {
+          "resources": {
+            "duocThao": 3,
+            "khoangThach": 2
+          },
+          "itemAdds": {
+            "xich_luyen_sa": 1
+          },
+          "healthDelta": -8
+        }
+      }
+    },
+    {
+      "id": "explore.demon_forest_cache",
+      "allowedMapIds": [
+        "demon_forest"
+      ],
+      "requiredEnvironmentTags": [
+        "spirit_fog"
+      ],
+      "title": "Thu tang Demon Forest",
+      "body": "Mot o nho trong Demon Forest giu lai manh co vat va duoc lieu.",
+      "choices": [
+        {
+          "id": "record",
+          "label": "Ghi chep truoc",
+          "outcome": "Lay vat tai va giu dau moi."
+        },
+        {
+          "id": "break",
+          "label": "Mo ngay",
+          "outcome": "Co them thu hoach nhung ton suc."
+        }
+      ],
+      "effects": {
+        "record": {
+          "itemAdds": {
+            "di_tich_thanh_bia": 1
+          },
+          "playerCultivationProgress": 2
+        },
+        "break": {
+          "itemAdds": {
+            "bach_ngoc_quang": 1
+          },
+          "healthDelta": -6,
+          "resources": {
+            "linhThach": 4
+          }
+        }
+      }
+    },
+    {
+      "id": "explore.jade_peak_trace",
+      "allowedMapIds": [
+        "jade_peak"
+      ],
+      "requiredEnvironmentTags": [
+        "jade_peak"
+      ],
+      "title": "Dau vet Jade Peak",
+      "body": "Trong Jade Peak co mot dau vet linh tai co the thu lay.",
+      "choices": [
+        {
+          "id": "careful",
+          "label": "Thu lay can than",
+          "outcome": "Lay duoc vat tai on dinh."
+        },
+        {
+          "id": "rush",
+          "label": "Lay nhanh",
+          "outcome": "Lay nhieu hon nhung de hao ton."
+        }
+      ],
+      "effects": {
+        "careful": {
+          "resources": {
+            "duocThao": 2,
+            "khoangThach": 1
+          },
+          "itemAdds": {
+            "huyen_vu_thao": 1
+          }
+        },
+        "rush": {
+          "resources": {
+            "duocThao": 3,
+            "khoangThach": 2
+          },
+          "itemAdds": {
+            "tran_mach_thach": 1
+          },
+          "healthDelta": -8
+        }
+      }
+    },
+    {
+      "id": "explore.jade_peak_cache",
+      "allowedMapIds": [
+        "jade_peak"
+      ],
+      "requiredEnvironmentTags": [
+        "ore"
+      ],
+      "title": "Thu tang Jade Peak",
+      "body": "Mot o nho trong Jade Peak giu lai manh co vat va duoc lieu.",
+      "choices": [
+        {
+          "id": "record",
+          "label": "Ghi chep truoc",
+          "outcome": "Lay vat tai va giu dau moi."
+        },
+        {
+          "id": "break",
+          "label": "Mo ngay",
+          "outcome": "Co them thu hoach nhung ton suc."
+        }
+      ],
+      "effects": {
+        "record": {
+          "itemAdds": {
+            "linh_khac_co_ban": 1
+          },
+          "playerCultivationProgress": 2
+        },
+        "break": {
+          "itemAdds": {
+            "kim_hoa_tinh": 1
+          },
+          "healthDelta": -6,
+          "resources": {
+            "linhThach": 4
+          }
+        }
+      }
+    },
+    {
+      "id": "explore.thunder_ridge_trace",
+      "allowedMapIds": [
+        "thunder_ridge"
+      ],
+      "requiredEnvironmentTags": [
+        "thunder_ridge"
+      ],
+      "title": "Dau vet Thunder Ridge",
+      "body": "Trong Thunder Ridge co mot dau vet linh tai co the thu lay.",
+      "choices": [
+        {
+          "id": "careful",
+          "label": "Thu lay can than",
+          "outcome": "Lay duoc vat tai on dinh."
+        },
+        {
+          "id": "rush",
+          "label": "Lay nhanh",
+          "outcome": "Lay nhieu hon nhung de hao ton."
+        }
+      ],
+      "effects": {
+        "careful": {
+          "resources": {
+            "duocThao": 2,
+            "khoangThach": 1
+          },
+          "itemAdds": {
+            "thanh_tuy_la": 1
+          }
+        },
+        "rush": {
+          "resources": {
+            "duocThao": 3,
+            "khoangThach": 2
+          },
+          "itemAdds": {
+            "kim_hoa_tinh": 1
+          },
+          "healthDelta": -8
+        }
+      }
+    },
+    {
+      "id": "explore.thunder_ridge_cache",
+      "allowedMapIds": [
+        "thunder_ridge"
+      ],
+      "requiredEnvironmentTags": [
+        "storm"
+      ],
+      "title": "Thu tang Thunder Ridge",
+      "body": "Mot o nho trong Thunder Ridge giu lai manh co vat va duoc lieu.",
+      "choices": [
+        {
+          "id": "record",
+          "label": "Ghi chep truoc",
+          "outcome": "Lay vat tai va giu dau moi."
+        },
+        {
+          "id": "break",
+          "label": "Mo ngay",
+          "outcome": "Co them thu hoach nhung ton suc."
+        }
+      ],
+      "effects": {
+        "record": {
+          "itemAdds": {
+            "mat_do_mach_cu": 1
+          },
+          "playerCultivationProgress": 2
+        },
+        "break": {
+          "itemAdds": {
+            "nguyet_anh_thach": 1
+          },
+          "healthDelta": -6,
+          "resources": {
+            "linhThach": 4
+          }
+        }
+      }
+    },
+    {
+      "id": "explore.blood_marsh_trace",
+      "allowedMapIds": [
+        "blood_marsh"
+      ],
+      "requiredEnvironmentTags": [
+        "blood_marsh"
+      ],
+      "title": "Dau vet Blood Marsh",
+      "body": "Trong Blood Marsh co mot dau vet linh tai co the thu lay.",
+      "choices": [
+        {
+          "id": "careful",
+          "label": "Thu lay can than",
+          "outcome": "Lay duoc vat tai on dinh."
+        },
+        {
+          "id": "rush",
+          "label": "Lay nhanh",
+          "outcome": "Lay nhieu hon nhung de hao ton."
+        }
+      ],
+      "effects": {
+        "careful": {
+          "resources": {
+            "duocThao": 2,
+            "khoangThach": 1
+          },
+          "itemAdds": {
+            "huyen_vu_thao": 1
+          }
+        },
+        "rush": {
+          "resources": {
+            "duocThao": 3,
+            "khoangThach": 2
+          },
+          "itemAdds": {
+            "thach_anh_tinh_tuy": 1
+          },
+          "healthDelta": -8
+        }
+      }
+    },
+    {
+      "id": "explore.blood_marsh_cache",
+      "allowedMapIds": [
+        "blood_marsh"
+      ],
+      "requiredEnvironmentTags": [
+        "swamp"
+      ],
+      "title": "Thu tang Blood Marsh",
+      "body": "Mot o nho trong Blood Marsh giu lai manh co vat va duoc lieu.",
+      "choices": [
+        {
+          "id": "record",
+          "label": "Ghi chep truoc",
+          "outcome": "Lay vat tai va giu dau moi."
+        },
+        {
+          "id": "break",
+          "label": "Mo ngay",
+          "outcome": "Co them thu hoach nhung ton suc."
+        }
+      ],
+      "effects": {
+        "record": {
+          "itemAdds": {
+            "thach_an_truyen_thu": 1
+          },
+          "playerCultivationProgress": 2
+        },
+        "break": {
+          "itemAdds": {
+            "kim_tinh_thach": 1
+          },
+          "healthDelta": -6,
+          "resources": {
+            "linhThach": 4
+          }
+        }
+      }
+    },
+    {
+      "id": "explore.moonwell_grove_trace",
+      "allowedMapIds": [
+        "moonwell_grove"
+      ],
+      "requiredEnvironmentTags": [
+        "moonwell_grove"
+      ],
+      "title": "Dau vet Moonwell Grove",
+      "body": "Trong Moonwell Grove co mot dau vet linh tai co the thu lay.",
+      "choices": [
+        {
+          "id": "careful",
+          "label": "Thu lay can than",
+          "outcome": "Lay duoc vat tai on dinh."
+        },
+        {
+          "id": "rush",
+          "label": "Lay nhanh",
+          "outcome": "Lay nhieu hon nhung de hao ton."
+        }
+      ],
+      "effects": {
+        "careful": {
+          "resources": {
+            "duocThao": 2,
+            "khoangThach": 1
+          },
+          "itemAdds": {
+            "phong_anh_co": 1
+          }
+        },
+        "rush": {
+          "resources": {
+            "duocThao": 3,
+            "khoangThach": 2
+          },
+          "itemAdds": {
+            "han_tuy_ngoc": 1
+          },
+          "healthDelta": -8
+        }
+      }
+    },
+    {
+      "id": "explore.moonwell_grove_cache",
+      "allowedMapIds": [
+        "moonwell_grove"
+      ],
+      "requiredEnvironmentTags": [
+        "moonlight"
+      ],
+      "title": "Thu tang Moonwell Grove",
+      "body": "Mot o nho trong Moonwell Grove giu lai manh co vat va duoc lieu.",
+      "choices": [
+        {
+          "id": "record",
+          "label": "Ghi chep truoc",
+          "outcome": "Lay vat tai va giu dau moi."
+        },
+        {
+          "id": "break",
+          "label": "Mo ngay",
+          "outcome": "Co them thu hoach nhung ton suc."
+        }
+      ],
+      "effects": {
+        "record": {
+          "itemAdds": {
+            "linh_khac_co_ban": 1
+          },
+          "playerCultivationProgress": 2
+        },
+        "break": {
+          "itemAdds": {
+            "thien_huyen_tam_thach": 1
+          },
+          "healthDelta": -6,
+          "resources": {
+            "linhThach": 4
+          }
+        }
+      }
+    },
+    {
+      "id": "explore.secret_realm_glimmer",
+      "allowedMapIds": [
+        "co_tich_co_khu",
+        "linh_son_mat_dao"
+      ],
+      "requiredEnvironmentTags": [
+        "secret_realm"
+      ],
+      "title": "Linh Quang Khe An",
+      "body": "Mot vet linh quang hien ra trong giay lat roi tat di.",
+      "choices": [
+        {
+          "id": "align",
+          "label": "Dung than cam nhan",
+          "outcome": "Thu duoc mot chut dao y."
+        },
+        {
+          "id": "seize",
+          "label": "Cuong thu ngay",
+          "outcome": "Lay duoc linh tai hiem nhung hao ton."
+        }
+      ],
+      "effects": {
+        "align": {
+          "playerCultivationProgress": 5,
+          "foundationStability": 2
+        },
+        "seize": {
+          "itemAdds": {
+            "cuu_huyen_tinh_phan": 1
+          },
+          "healthDelta": -10
+        }
+      }
+    },
+    {
+      "id": "explore.spirit_mountain_echo",
+      "allowedMapIds": [
+        "linh_son",
+        "linh_son_mat_dao"
+      ],
+      "requiredEnvironmentTags": [
+        "spirit_mountain"
+      ],
+      "title": "Tieng Vang Tren Linh Son",
+      "body": "Tieng vang doi lai trong khe nui, nhu co ai van dang ngoi dinh than trong may.",
+      "choices": [
+        {
+          "id": "listen",
+          "label": "Dung lai lang nghe",
+          "outcome": "Nhan mot chut ngo ra."
+        },
+        {
+          "id": "press_on",
+          "label": "Di tiep ngay",
+          "outcome": "Thu duoc vat tai nho."
+        }
+      ],
+      "effects": {
+        "listen": {
+          "playerCultivationProgress": 3,
+          "foundationStability": 1
+        },
+        "press_on": {
+          "resources": {
+            "duocThao": 2
+          },
+          "itemAdds": {
+            "thien_linh_re": 1
+          }
+        }
+      }
+    },
+    {
+      "id": "explore.ancient_ruins_tablet",
+      "allowedMapIds": [
+        "ancient_ruins",
+        "forgotten_sect"
+      ],
+      "requiredEnvironmentTags": [
+        "ancient_ruins"
+      ],
+      "title": "Phien Bia Co Rut Nut",
+      "body": "Mot phien bia cu rut nut de lo mat trong co van.",
+      "choices": [
+        {
+          "id": "copy",
+          "label": "Chep lai van tu",
+          "outcome": "Mang ve dau moi nghien cuu."
+        },
+        {
+          "id": "lift",
+          "label": "Nang ca phien bia",
+          "outcome": "Thu duoc vat lieu nhung hao suc."
+        }
+      ],
+      "effects": {
+        "copy": {
+          "itemAdds": {
+            "linh_khac_co_ban": 1
+          },
+          "playerCultivationProgress": 2
+        },
+        "lift": {
+          "itemAdds": {
+            "tran_mach_thach": 1
+          },
+          "healthDelta": -6
+        }
+      }
+    },
+    {
+      "id": "explore.blood_marsh_reed",
+      "allowedMapIds": [
+        "blood_marsh"
+      ],
+      "requiredEnvironmentTags": [
+        "swamp"
+      ],
+      "title": "Lau Do Duoi Dam",
+      "body": "Bui lau do hut am khi va de lai bot huyet sa o goc re.",
+      "choices": [
+        {
+          "id": "harvest",
+          "label": "Gat can than",
+          "outcome": "Thu duoc duoc lieu hiem."
+        },
+        {
+          "id": "drag",
+          "label": "Keo ca bui",
+          "outcome": "Thu duoc nhieu hon nhung ton khi."
+        }
+      ],
+      "effects": {
+        "harvest": {
+          "itemAdds": {
+            "huyet_tam_thao": 1
+          },
+          "resources": {
+            "duocThao": 2
+          }
+        },
+        "drag": {
+          "itemAdds": {
+            "uyet_mach_chi": 1
+          },
+          "resources": {
+            "duocThao": 3
+          },
+          "healthDelta": -7
+        }
+      }
     }
   ]
 }

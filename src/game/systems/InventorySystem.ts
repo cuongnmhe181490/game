@@ -53,7 +53,7 @@ export class InventorySystem {
 
     const snapshot = this.stateManager.update((draft) => {
       draft.inventory.items[itemId] = (draft.inventory.items[itemId] ?? 0) + delta;
-      draft.inventory.lastSummary = `Nhận ${delta} ${definition.name} vào kho tông môn.`;
+      draft.inventory.lastSummary = `Nhan ${delta} ${definition.name} vao kho tong mon.`;
       draft.ui.statusMessage = draft.inventory.lastSummary;
     });
 
@@ -81,7 +81,7 @@ export class InventorySystem {
         }
       }
 
-      draft.inventory.lastSummary = `Xuất ${delta} ${definition.name} khỏi kho tông môn.`;
+      draft.inventory.lastSummary = `Xuat ${delta} ${definition.name} khoi kho tong mon.`;
     });
 
     this.saveSystem.saveGame(snapshot);
@@ -93,15 +93,15 @@ export class InventorySystem {
     const definition = this.getItemDefinition(itemId);
 
     if (!definition) {
-      return { ok: false, message: 'Không tìm thấy vật phẩm.', snapshot: before };
+      return { ok: false, message: 'Khong tim thay vat pham.', snapshot: before };
     }
 
     if (!definition.usableEffect) {
-      return { ok: false, message: `${definition.name} chưa có cách dùng trong sprint này.`, snapshot: before };
+      return { ok: false, message: `${definition.name} chua co cach dung trong sprint nay.`, snapshot: before };
     }
 
     if (!this.hasItem(itemId, 1, before)) {
-      return { ok: false, message: `${definition.name} không còn trong kho.`, snapshot: before };
+      return { ok: false, message: `${definition.name} khong con trong kho.`, snapshot: before };
     }
 
     const snapshot = this.stateManager.update((draft) => {
@@ -115,7 +115,11 @@ export class InventorySystem {
           ?? realmCatalog.realms[0];
         draft.player.cultivation.cultivationProgress += definition.usableEffect.value;
         draft.player.cultivation.lastGain = definition.usableEffect.value;
-        draft.player.cultivation.lastSummary = `${definition.name}: +${definition.usableEffect.value} tiến độ tu hành.`;
+        draft.player.cultivation.breakthroughBonus = Math.max(
+          draft.player.cultivation.breakthroughBonus,
+          definition.rarity === 'rare' ? 6 : definition.rarity === 'uncommon' ? 4 : 2
+        );
+        draft.player.cultivation.lastSummary = `${definition.name}: +${definition.usableEffect.value} tien do tu hanh.`;
         draft.player.cultivation.breakthroughReady = draft.player.cultivation.cultivationProgress >= currentRealm.progressRequired;
       }
 
@@ -132,14 +136,15 @@ export class InventorySystem {
           );
         }
 
-        draft.player.cultivation.lastSummary = `${definition.name}: ổn định khí tức và nền căn.`;
+        draft.player.cultivation.breakthroughBonus = Math.max(draft.player.cultivation.breakthroughBonus, 3);
+        draft.player.cultivation.lastSummary = `${definition.name}: on dinh khi tuc va nen can.`;
       }
 
-      draft.inventory.lastSummary = `Đã dùng ${definition.name}.`;
+      draft.inventory.lastSummary = `Da dung ${definition.name}.`;
       draft.ui.statusMessage = draft.inventory.lastSummary;
     });
 
     this.saveSystem.saveGame(snapshot);
-    return { ok: true, message: `Đã dùng ${definition.name}.`, snapshot };
+    return { ok: true, message: `Da dung ${definition.name}.`, snapshot };
   }
 }

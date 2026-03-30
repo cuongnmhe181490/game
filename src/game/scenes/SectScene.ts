@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 
+import { Icons } from '@/game/config/assets';
 import { getBuildInfoLine } from '@/game/config/buildInfo';
 import {
   getAlchemySystem,
@@ -14,9 +15,11 @@ import {
   getInventorySystem,
   getRealmSystem,
   getSaveStore,
+  getSettingsStore,
   getSectIdentitySystem,
   getStateManager,
   getTechniqueSystem,
+  getTribulationSystem,
   getTimeSystem
 } from '@/game/config/registry';
 import {
@@ -41,16 +44,19 @@ import {
   createTextButton,
   createPrimaryButton,
   createSecondaryButton,
-  createResourceChip,
   CultivationPanel,
   DiplomacyPanel,
   drawSceneFrame,
   EventModal,
   GovernancePanel,
+  Header,
   createInventorySlot,
   InventoryPanel,
   NavBar,
   PanelFrame,
+  ProgressBar,
+  ResourceBar,
+  resolveItemTextureKey,
   menuPalette
 } from '@/game/ui';
 
@@ -95,11 +101,15 @@ function getDiscipleStatusLabel(status: GameState['disciples']['roster'][number]
   }
 }
 
+function getSectLevel(snapshot: Readonly<GameState>): number {
+  const builtCount = Object.values(snapshot.sect.buildings).filter((building) => building.level > 0).length;
+  const totalBuildingLevels = Object.values(snapshot.sect.buildings).reduce((sum, building) => sum + building.level, 0);
+  const score = snapshot.sect.prestige + builtCount * 8 + totalBuildingLevels * 4 + snapshot.sect.defense;
+  return Math.max(1, Math.min(9, 1 + Math.floor(score / 30)));
+}
+
 export class SectScene extends Phaser.Scene {
   private resourceBarText!: Phaser.GameObjects.Text;
-  private headerText!: Phaser.GameObjects.Text;
-  private chapterText!: Phaser.GameObjects.Text;
-  private cultivationText!: Phaser.GameObjects.Text;
   private buildingListText!: Phaser.GameObjects.Text;
   private buildingDetailText!: Phaser.GameObjects.Text;
   private discipleListText!: Phaser.GameObjects.Text;
@@ -107,6 +117,9 @@ export class SectScene extends Phaser.Scene {
   private eventText!: Phaser.GameObjects.Text;
   private summaryText!: Phaser.GameObjects.Text;
   private statusText!: Phaser.GameObjects.Text;
+  private cultivationProgressBar!: ProgressBar;
+  private cultivationEmblem!: Phaser.GameObjects.Image;
+  private headerShell!: Header;
   private scrollViewportY = 0;
   private scrollViewportHeight = 0;
   private scrollContent!: Phaser.GameObjects.Container;
@@ -115,7 +128,7 @@ export class SectScene extends Phaser.Scene {
   private contentHeight = 0;
   private navBar!: NavBar;
   private navAnchors: Record<string, number> = {};
-  private resourceChips: Phaser.GameObjects.Container[] = [];
+  private resourceBars: ResourceBar[] = [];
   private inventorySlots: Phaser.GameObjects.Container[] = [];
   private eventModal!: EventModal;
   private cultivationPanel!: CultivationPanel;
@@ -185,48 +198,45 @@ export class SectScene extends Phaser.Scene {
     shell.lineStyle(1, menuPalette.frame, 0.45);
     shell.strokeRoundedRect(shellX + 10, shellY + 10, shellWidth - 20, shellHeight - 20, 28);
 
-    const headerHeight = 150;
+    const openSystemMenu = (): void => {
+      if (!this.scene.isActive(SCENE_KEYS.systemMenu)) {
+        this.scene.launch(SCENE_KEYS.systemMenu, { returnScene: SCENE_KEYS.sect });
+      }
+    };
+    this.input.keyboard?.on('keydown-ESC', openSystemMenu);
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
+      this.input.keyboard?.off('keydown-ESC', openSystemMenu);
+    });
+    createTextButton(this, {
+      x: shellX + shellWidth - 62,
+      y: shellY + 34,
+      width: 84,
+      label: 'Menu',
+      detail: 'Esc',
+      onClick: openSystemMenu
+    });
+
+    const headerHeight = 238;
     const navHeight = 84;
     this.scrollViewportY = shellY + headerHeight;
     this.scrollViewportHeight = shellHeight - headerHeight - navHeight;
 
-    const crest = this.add.image(shellX + 52, shellY + 52, 'sect-crest')
-      .setDisplaySize(56, 56)
-      .setOrigin(0.5);
-
-    this.headerText = this.add.text(shellX + 92, shellY + 26, '', {
-      color: menuPalette.textStrong,
-      fontFamily: '"Palatino Linotype", "Book Antiqua", Georgia, serif',
-      fontSize: '24px',
-      wordWrap: { width: shellWidth - 116 }
-    });
-
-    this.chapterText = this.add.text(shellX + 92, shellY + 60, '', {
-      color: menuPalette.accentText,
-      fontFamily: '"Segoe UI", Tahoma, sans-serif',
-      fontSize: '12px',
-      wordWrap: { width: shellWidth - 116 }
-    });
-
-    this.cultivationText = this.add.text(shellX + 20, shellY + 96, '', {
-      color: menuPalette.textMuted,
-      fontFamily: '"Segoe UI", Tahoma, sans-serif',
-      fontSize: '13px',
-      wordWrap: { width: shellWidth - 40 }
-    });
+    this.headerShell = new Header(this, {
+      width: shellWidth - 24,
+      playerName: syncedSnapshot.player.name,
+      playerTitle: syncedSnapshot.player.title,
+      realm: realmCatalog.realms.find((realm) => realm.id === syncedSnapshot.player.cultivation.currentRealmId)?.name ?? syncedSnapshot.player.cultivation.currentRealmId,
+      avatarKey: Icons.ui.sectCrest
+    }).setPosition(shellX + 12, shellY + 14);
 
     this.resourceBarText = this.add.text(-1000, -1000, '', { fontSize: '1px' }).setVisible(false);
-    this.resourceChips = [
-      createResourceChip(this, { width: 118, label: 'LT', value: '0' }),
-      createResourceChip(this, { width: 118, label: 'LK', value: '0' }),
-      createResourceChip(this, { width: 118, label: 'DT', value: '0' }),
-      createResourceChip(this, { width: 118, label: 'KT', value: '0' }),
-      createResourceChip(this, { width: 118, label: 'LM', value: '0' })
+    this.resourceBars = [
+      new ResourceBar(this, { width: shellWidth - 104, name: 'Linh thach', current: 0, max: 10000, iconKey: Icons.resource.spiritStone, color: 'gold' }),
+      new ResourceBar(this, { width: shellWidth - 104, name: 'Tu vi', current: 0, max: 100, iconKey: Icons.resource.spiritualEnergy, color: 'gold' }),
+      new ResourceBar(this, { width: shellWidth - 104, name: 'Linh luc', current: 0, max: 100, iconKey: Icons.resource.linhKhi, color: 'spirit' })
     ];
-    this.resourceChips.forEach((chip, index) => {
-      const col = index % 3;
-      const row = Math.floor(index / 3);
-      chip.setPosition(shellX + 20 + col * 126, shellY + 120 + row * 38);
+    this.resourceBars.forEach((bar, index) => {
+      bar.setPosition(shellX + 86, shellY + 102 + index * 40);
     });
 
     this.scrollContent = this.add.container(shellX + 16, this.scrollViewportY + 12);
@@ -239,241 +249,288 @@ export class SectScene extends Phaser.Scene {
     let contentY = 0;
     const panelWidth = shellWidth - 32;
 
-    const quickFrame = new PanelFrame(this, {
+    const sectFrame = new PanelFrame(this, {
       x: 0,
       y: contentY,
       width: panelWidth,
-      height: 220,
-      title: 'Cultivation',
-      subtitle: 'Realm, daily actions, current chapter pulse'
+      height: 260,
+      title: 'Tông Môn',
+      subtitle: 'Danh vọng, cấp tông, và nhịp điều hành hiện tại',
+      iconKey: Icons.ui.sectCrest
     });
-    this.scrollContent.add(quickFrame.root);
-    this.statusText = this.add.text(quickFrame.root.x + 18, quickFrame.root.y + 88, '', {
-      color: menuPalette.textMuted,
+    this.scrollContent.add(sectFrame.root);
+
+    this.eventText = this.add.text(sectFrame.root.x + 18, sectFrame.root.y + 84, '', {
+      color: menuPalette.textStrong,
       fontFamily: '"Segoe UI", Tahoma, sans-serif',
       fontSize: '14px',
       lineSpacing: 5,
       wordWrap: { width: panelWidth - 36 }
     });
+    this.summaryText = this.add.text(sectFrame.root.x + 18, sectFrame.root.y + 154, '', {
+      color: menuPalette.textMuted,
+      fontFamily: '"Segoe UI", Tahoma, sans-serif',
+      fontSize: '12px',
+      lineSpacing: 4,
+      wordWrap: { width: panelWidth - 36 }
+    });
+    this.scrollContent.add([this.eventText, this.summaryText]);
+
+    contentY += 280;
+
+    const buildingsFrame = new PanelFrame(this, {
+      x: 0,
+      y: contentY,
+      width: panelWidth,
+      height: 318,
+      title: 'Công Trình',
+      subtitle: 'Các công trình đang vận hành hoặc chờ phục hồi'
+    });
+    this.scrollContent.add(buildingsFrame.root);
+    this.buildingListText = this.add.text(buildingsFrame.root.x + 18, buildingsFrame.root.y + 84, '', {
+      color: menuPalette.textMuted,
+      fontFamily: '"Segoe UI", Tahoma, sans-serif',
+      fontSize: '12px',
+      lineSpacing: 6,
+      wordWrap: { width: panelWidth - 36 }
+    });
+    this.scrollContent.add(this.buildingListText);
+    this.scrollContent.add(createSecondaryButton(this, {
+      width: 120,
+      label: 'Cong trinh truoc',
+      detail: 'Doi muc dang xem',
+      onClick: () => {
+        this.selectedBuildingIndex = this.wrapIndex(this.selectedBuildingIndex - 1, buildingCatalog.buildings.length);
+        this.refreshView(getStateManager(this).snapshot);
+      }
+    }).setPosition(buildingsFrame.root.x + 18, buildingsFrame.root.y + 258));
+    this.scrollContent.add(createSecondaryButton(this, {
+      width: 120,
+      label: 'Cong trinh sau',
+      detail: 'Doi muc dang xem',
+      onClick: () => {
+        this.selectedBuildingIndex = this.wrapIndex(this.selectedBuildingIndex + 1, buildingCatalog.buildings.length);
+        this.refreshView(getStateManager(this).snapshot);
+      }
+    }).setPosition(buildingsFrame.root.x + 154, buildingsFrame.root.y + 258));
+    this.scrollContent.add(createPrimaryButton(this, {
+      width: 120,
+      label: 'Dung / nang',
+      detail: 'Tac dong len muc dang chon',
+      onClick: () => {
+        const snapshotNow = getStateManager(this).snapshot;
+        const buildingId = this.getSelectedBuildingId();
+        const buildingState = snapshotNow.sect.buildings[buildingId];
+        const result = buildingState.isConstructed
+          ? getBuildingSystem(this).upgradeBuilding(buildingId)
+          : getBuildingSystem(this).constructBuilding(buildingId);
+        this.refreshView(result.snapshot, result.message);
+      }
+    }).setPosition(buildingsFrame.root.x + 290, buildingsFrame.root.y + 258));
+
+    contentY += 338;
+
+    const membersFrame = new PanelFrame(this, {
+      x: 0,
+      y: contentY,
+      width: panelWidth,
+      height: 404,
+      title: 'Môn Nhân',
+      subtitle: 'Xem nhanh đệ tử, nhiệm vụ, và trạng thái trung thành'
+    });
+    this.scrollContent.add(membersFrame.root);
+    this.discipleListText = this.add.text(membersFrame.root.x + 18, membersFrame.root.y + 84, '', {
+      color: menuPalette.textMuted,
+      fontFamily: '"Segoe UI", Tahoma, sans-serif',
+      fontSize: '12px',
+      lineSpacing: 6,
+      wordWrap: { width: panelWidth - 36 }
+    });
+    this.scrollContent.add(this.discipleListText);
+    this.scrollContent.add(createSecondaryButton(this, {
+      width: 120,
+      label: 'De tu truoc',
+      detail: 'Doi nguoi dang xem',
+      onClick: () => {
+        this.markTutorialFlag(TUTORIAL_CHOICE_FLAGS.checkedDisciple);
+        this.selectedDiscipleIndex = this.wrapIndex(this.selectedDiscipleIndex - 1, getStateManager(this).snapshot.disciples.roster.length);
+        this.refreshView(getStateManager(this).snapshot);
+      }
+    }).setPosition(membersFrame.root.x + 18, membersFrame.root.y + 302));
+    this.scrollContent.add(createSecondaryButton(this, {
+      width: 120,
+      label: 'De tu sau',
+      detail: 'Doi nguoi dang xem',
+      onClick: () => {
+        this.markTutorialFlag(TUTORIAL_CHOICE_FLAGS.checkedDisciple);
+        this.selectedDiscipleIndex = this.wrapIndex(this.selectedDiscipleIndex + 1, getStateManager(this).snapshot.disciples.roster.length);
+        this.refreshView(getStateManager(this).snapshot);
+      }
+    }).setPosition(membersFrame.root.x + 154, membersFrame.root.y + 302));
+    this.scrollContent.add(createPrimaryButton(this, {
+      width: 120,
+      label: 'Tu luyen',
+      detail: 'Tang tong luc tu hanh',
+      onClick: () => this.assignSelectedDiscipleTask('tu_luyen')
+    }).setPosition(membersFrame.root.x + 290, membersFrame.root.y + 302));
+    this.scrollContent.add(createSecondaryButton(this, {
+      width: 120,
+      label: 'Thu gom',
+      detail: 'Trong duoc cham',
+      onClick: () => this.assignSelectedDiscipleTask('trong_duoc')
+    }).setPosition(membersFrame.root.x + 18, membersFrame.root.y + 354));
+    this.scrollContent.add(createSecondaryButton(this, {
+      width: 120,
+      label: 'Tro dan',
+      detail: 'Ho tro tiet kiem lieu',
+      onClick: () => this.assignSelectedDiscipleTask('luyen_dan')
+    }).setPosition(membersFrame.root.x + 154, membersFrame.root.y + 354));
+    this.scrollContent.add(createSecondaryButton(this, {
+      width: 120,
+      label: 'Ho tro bi canh',
+      detail: 'Tang thuong tham hiem',
+      onClick: () => this.assignSelectedDiscipleTask('tuan_tra')
+    }).setPosition(membersFrame.root.x + 290, membersFrame.root.y + 354));
+
+    contentY += 424;
+
+    const actionsFrame = new PanelFrame(this, {
+      x: 0,
+      y: contentY,
+      width: panelWidth,
+      height: 212,
+      title: 'Điều Hành',
+      subtitle: 'Thao tác nhanh cho nâng cấp, nhân sự, và ngoại giao'
+    });
+    this.scrollContent.add(actionsFrame.root);
+    this.statusText = this.add.text(actionsFrame.root.x + 18, actionsFrame.root.y + 84, '', {
+      color: menuPalette.textMuted,
+      fontFamily: '"Segoe UI", Tahoma, sans-serif',
+      fontSize: '12px',
+      lineSpacing: 4,
+      wordWrap: { width: panelWidth - 36 }
+    });
     this.scrollContent.add(this.statusText);
     this.scrollContent.add(createPrimaryButton(this, {
       width: 182,
+      label: 'Nâng cấp tông',
+      detail: 'Đi tới khu công trình',
+      onClick: () => this.scrollToAnchor('buildings')
+    }).setPosition(actionsFrame.root.x + 18, actionsFrame.root.y + 122));
+    this.scrollContent.add(createSecondaryButton(this, {
+      width: 182,
+      label: 'Quản lý môn nhân',
+      detail: 'Đi tới danh sách đệ tử',
+      onClick: () => this.scrollToAnchor('members')
+    }).setPosition(actionsFrame.root.x + 210, actionsFrame.root.y + 122));
+    this.scrollContent.add(createSecondaryButton(this, {
+      width: panelWidth - 36,
+      label: 'Ngoại giao',
+      detail: 'Mở bảng phe phái hiện có',
+      onClick: () => this.toggleDiplomacyPanel(true)
+    }).setPosition(actionsFrame.root.x + 18, actionsFrame.root.y + 174));
+
+    contentY += 232;
+
+    const cultivationFrame = new PanelFrame(this, {
+      x: 0,
+      y: contentY,
+      width: panelWidth,
+      height: 248,
+      title: 'Tu Hành',
+      subtitle: 'Theo dõi cảnh giới và mở panel tu luyện'
+    });
+    this.scrollContent.add(cultivationFrame.root);
+
+    const cultivationIconRing = this.add.circle(cultivationFrame.root.x + 54, cultivationFrame.root.y + 122, 38, 0x0b1812, 0.82)
+      .setStrokeStyle(2, 0x8c6b22, 0.95);
+    const cultivationIcon = this.add.image(cultivationFrame.root.x + 54, cultivationFrame.root.y + 122, 'icon_status_qi_refining')
+      .setDisplaySize(44, 44);
+    const cultivationProgressBar = new ProgressBar(this, {
+      width: panelWidth - 118,
+      value: 0,
+      max: 100,
+      label: 'Tien do canh gioi',
+      iconKey: 'icon_status_qi_refining'
+    }).setPosition(cultivationFrame.root.x + 92, cultivationFrame.root.y + 104);
+    this.cultivationEmblem = cultivationIcon;
+    this.cultivationProgressBar = cultivationProgressBar;
+    this.scrollContent.add([cultivationIconRing, cultivationIcon, cultivationProgressBar]);
+    this.scrollContent.add(createPrimaryButton(this, {
+      width: 182,
       label: 'Qua 1 ngay',
-      detail: 'Advance day and resolve events',
+      detail: 'Qua một ngày và xử lý biến động',
       onClick: () => {
         this.markTutorialFlag(TUTORIAL_CHOICE_FLAGS.advancedDay);
         const result = getTimeSystem(this).advanceOneDay();
         this.refreshView(result.snapshot, 'Da qua mot ngay. Hay doc tong ket va xu ly event hien tai.');
         this.presentCurrentEvent('time');
       }
-    }).setPosition(quickFrame.root.x + 18, quickFrame.root.y + 154));
+    }).setPosition(cultivationFrame.root.x + 18, cultivationFrame.root.y + 194));
     this.scrollContent.add(createSecondaryButton(this, {
       width: 182,
       label: 'Tu hanh',
-      detail: 'Open cultivation details',
+      detail: 'Mở bảng tu hành chi tiết',
       onClick: () => this.toggleCultivationPanel(true)
-    }).setPosition(quickFrame.root.x + 210, quickFrame.root.y + 154));
+    }).setPosition(cultivationFrame.root.x + 210, cultivationFrame.root.y + 194));
 
-    contentY += 240;
+    contentY += 268;
 
-    const buildingFrame = new PanelFrame(this, {
+    const inventoryFrame = new PanelFrame(this, {
       x: 0,
       y: contentY,
       width: panelWidth,
-      height: 360,
-      title: 'Sect Buildings'
+      height: 270,
+      title: 'Túi Đồ Nhanh',
+      subtitle: 'Xem nhanh vài vật phẩm chính trước khi mở trang túi đồ'
     });
-    this.scrollContent.add(buildingFrame.root);
-    this.buildingListText = this.add.text(buildingFrame.root.x + 18, buildingFrame.root.y + 78, '', {
-      color: menuPalette.textMuted,
-      fontFamily: '"Segoe UI", Tahoma, sans-serif',
-      fontSize: '14px',
-      lineSpacing: 5,
-      wordWrap: { width: 170 }
-    });
-    this.buildingDetailText = this.add.text(buildingFrame.root.x + 200, buildingFrame.root.y + 78, '', {
-      color: menuPalette.accentText,
-      fontFamily: '"Segoe UI", Tahoma, sans-serif',
-      fontSize: '13px',
-      lineSpacing: 5,
-      wordWrap: { width: panelWidth - 218 }
-    });
-    this.scrollContent.add([this.buildingListText, this.buildingDetailText]);
-    this.scrollContent.add(createSecondaryButton(this, {
-      width: 120,
-      label: 'Truoc',
-      detail: 'Building',
-      onClick: () => {
-        this.selectedBuildingIndex = this.wrapIndex(this.selectedBuildingIndex - 1, buildingCatalog.buildings.length);
-        this.refreshView(getStateManager(this).snapshot);
-      }
-    }).setPosition(buildingFrame.root.x + 18, buildingFrame.root.y + 274));
-    this.scrollContent.add(createSecondaryButton(this, {
-      width: 120,
-      label: 'Sau',
-      detail: 'Building',
-      onClick: () => {
-        this.selectedBuildingIndex = this.wrapIndex(this.selectedBuildingIndex + 1, buildingCatalog.buildings.length);
-        this.refreshView(getStateManager(this).snapshot);
-      }
-    }).setPosition(buildingFrame.root.x + 146, buildingFrame.root.y + 274));
-    this.scrollContent.add(createPrimaryButton(this, {
-      width: 120,
-      label: 'Dung',
-      detail: 'Construct',
-      onClick: () => {
-        const result = getBuildingSystem(this).constructBuilding(this.getSelectedBuildingId());
-        this.refreshView(result.snapshot, result.message);
-      }
-    }).setPosition(buildingFrame.root.x + 274, buildingFrame.root.y + 274));
-    this.scrollContent.add(createSecondaryButton(this, {
-      width: 120,
-      label: 'Nang cap',
-      detail: 'Upgrade',
-      onClick: () => {
-        const result = getBuildingSystem(this).upgradeBuilding(this.getSelectedBuildingId());
-        this.refreshView(result.snapshot, result.message);
-      }
-    }).setPosition(buildingFrame.root.x + 402, buildingFrame.root.y + 274));
-
-    contentY += 380;
-
-    const discipleFrame = new PanelFrame(this, {
-      x: 0,
-      y: contentY,
-      width: panelWidth,
-      height: 430,
-      title: 'Disciples'
-    });
-    this.scrollContent.add(discipleFrame.root);
-    this.discipleListText = this.add.text(discipleFrame.root.x + 18, discipleFrame.root.y + 78, '', {
-      color: menuPalette.textMuted,
-      fontFamily: '"Segoe UI", Tahoma, sans-serif',
-      fontSize: '14px',
-      lineSpacing: 5,
-      wordWrap: { width: 170 }
-    });
-    this.discipleDetailText = this.add.text(discipleFrame.root.x + 200, discipleFrame.root.y + 78, '', {
-      color: menuPalette.accentText,
-      fontFamily: '"Segoe UI", Tahoma, sans-serif',
-      fontSize: '13px',
-      lineSpacing: 5,
-      wordWrap: { width: panelWidth - 218 }
-    });
-    this.scrollContent.add([this.discipleListText, this.discipleDetailText]);
-
-    const discipleButtons = [
-      createSecondaryButton(this, {
-        width: 120,
-        label: 'Truoc',
-        detail: 'Disciple',
-        onClick: () => {
-          this.markTutorialFlag(TUTORIAL_CHOICE_FLAGS.checkedDisciple);
-          this.selectedDiscipleIndex = this.wrapIndex(this.selectedDiscipleIndex - 1, getStateManager(this).snapshot.disciples.roster.length);
-          this.refreshView(getStateManager(this).snapshot);
-        }
-      }).setPosition(discipleFrame.root.x + 18, discipleFrame.root.y + 330),
-      createSecondaryButton(this, {
-        width: 120,
-        label: 'Sau',
-        detail: 'Disciple',
-        onClick: () => {
-          this.markTutorialFlag(TUTORIAL_CHOICE_FLAGS.checkedDisciple);
-          this.selectedDiscipleIndex = this.wrapIndex(this.selectedDiscipleIndex + 1, getStateManager(this).snapshot.disciples.roster.length);
-          this.refreshView(getStateManager(this).snapshot);
-        }
-      }).setPosition(discipleFrame.root.x + 146, discipleFrame.root.y + 330),
-      createPrimaryButton(this, {
-        width: 120,
-        label: 'Thuong',
-        detail: '+mood +loyalty',
-        onClick: () => {
-          const disciple = this.getSelectedDisciple(getStateManager(this).snapshot);
-          if (!disciple) return;
-          const result = getDiscipleSystem(this).rewardDisciple(disciple.id);
-          this.refreshView(result.snapshot, result.message);
-        }
-      }).setPosition(discipleFrame.root.x + 274, discipleFrame.root.y + 330),
-      createSecondaryButton(this, {
-        width: 120,
-        label: 'Nghi',
-        detail: 'Recover',
-        onClick: () => {
-          const disciple = this.getSelectedDisciple(getStateManager(this).snapshot);
-          if (!disciple) return;
-          const result = getDiscipleSystem(this).restDisciple(disciple.id);
-          this.refreshView(getBuildingSystem(this).syncBuildingStates(), result.message);
-        }
-      }).setPosition(discipleFrame.root.x + 402, discipleFrame.root.y + 330)
-    ];
-    this.scrollContent.add(discipleButtons);
-
-    contentY += 450;
-
-    const journalFrame = new PanelFrame(this, {
-      x: 0,
-      y: contentY,
-      width: panelWidth,
-      height: 500,
-      title: 'Sect Journal'
-    });
-    this.scrollContent.add(journalFrame.root);
-    this.eventText = this.add.text(journalFrame.root.x + 18, journalFrame.root.y + 78, '', {
-      color: menuPalette.textMuted,
-      fontFamily: '"Segoe UI", Tahoma, sans-serif',
-      fontSize: '13px',
-      lineSpacing: 5,
-      wordWrap: { width: panelWidth - 36 }
-    });
-    this.summaryText = this.add.text(journalFrame.root.x + 18, journalFrame.root.y + 238, '', {
-      color: menuPalette.accentText,
-      fontFamily: '"Segoe UI", Tahoma, sans-serif',
-      fontSize: '13px',
-      lineSpacing: 5,
-      wordWrap: { width: panelWidth - 36 }
-    });
-    this.scrollContent.add([this.eventText, this.summaryText]);
-
-    const journalButtons = [
-      createSecondaryButton(this, { width: 120, label: 'Tri mon', detail: 'Rules', onClick: () => this.toggleGovernancePanel(true) }).setPosition(journalFrame.root.x + 18, journalFrame.root.y + 414),
-      createSecondaryButton(this, { width: 120, label: 'Ngoai giao', detail: 'Factions', onClick: () => this.toggleDiplomacyPanel(true) }).setPosition(journalFrame.root.x + 146, journalFrame.root.y + 414),
-      createSecondaryButton(this, { width: 120, label: 'Tui do', detail: 'Inventory', onClick: () => this.toggleInventoryPanel(true) }).setPosition(journalFrame.root.x + 274, journalFrame.root.y + 414),
-      createSecondaryButton(this, { width: 120, label: 'Luyen dan', detail: 'Alchemy', onClick: () => this.toggleAlchemyPanel(true) }).setPosition(journalFrame.root.x + 402, journalFrame.root.y + 414)
-    ];
-    this.scrollContent.add(journalButtons);
-
-    contentY += 520;
-
-    const quickInventory = new PanelFrame(this, {
-      x: 0,
-      y: contentY,
-      width: panelWidth,
-      height: 190,
-      title: 'Quick Inventory'
-    });
-    this.scrollContent.add(quickInventory.root);
+    this.scrollContent.add(inventoryFrame.root);
     this.inventorySlots = Array.from({ length: 8 }).map((_, index) => {
       const slot = createInventorySlot(this, { size: 72, label: '-', count: '' });
       const col = index % 4;
       const row = Math.floor(index / 4);
-      slot.setPosition(quickInventory.root.x + 18 + col * 88, quickInventory.root.y + 78 + row * 88);
+      slot.setPosition(inventoryFrame.root.x + 18 + col * 88, inventoryFrame.root.y + 88 + row * 88);
       this.scrollContent.add(slot);
       return slot;
     });
 
-    this.contentHeight = contentY + 210;
+    contentY += 290;
+
+    this.contentHeight = contentY;
+
+    this.buildingDetailText = this.add.text(-1000, -1000, '', { fontSize: '1px' }).setVisible(false);
+    this.discipleDetailText = this.add.text(-1000, -1000, '', { fontSize: '1px' }).setVisible(false);
 
     this.navBar = new NavBar(this, shellX + 10, shellY + shellHeight - navHeight + 4, shellWidth - 20, [
-      { id: 'sect', label: 'Sect', onClick: () => this.scrollToAnchor('sect') },
-      { id: 'cultivate', label: 'Cultivate', onClick: () => this.scrollToAnchor('cultivate') },
-      { id: 'explore', label: 'Explore', onClick: () => this.scrollToAnchor('journal') },
-      { id: 'backpack', label: 'Backpack', onClick: () => this.toggleInventoryPanel(true) }
+      { id: 'sect', label: 'Tông môn', iconKey: Icons.ui.sectCrest, onClick: () => this.scrollToAnchor('sect') },
+      { id: 'cultivate', label: 'Tu hành', iconKey: Icons.status.qiRefining, onClick: () => this.scrollToAnchor('cultivate') },
+      {
+        id: 'explore',
+        label: 'Bí cảnh',
+        iconKey: Icons.resource.spiritualEnergy,
+        badge: 1,
+        onClick: () => {
+          const snapshotNow = getStateManager(this).snapshot;
+          const map = this.getSelectedMap();
+          const unlocked = snapshotNow.exploration.unlockedMapIds.includes(map.id);
+          if (!unlocked) {
+            this.refreshView(snapshotNow, `Khu ${map.name} chua du dieu kien mo.`);
+            return;
+          }
+          this.markTutorialFlag(TUTORIAL_CHOICE_FLAGS.enteredExploration);
+          getSaveStore(this).saveGame(snapshotNow);
+          this.scene.start(SCENE_KEYS.exploration, { mapId: map.id });
+        }
+      },
+      { id: 'backpack', label: 'Túi đồ', iconKey: Icons.resource.spiritStone, badge: 3, onClick: () => this.scene.start(SCENE_KEYS.inventory) }
     ]);
     this.navBar.setActive('sect');
     this.navAnchors = {
       sect: 0,
-      cultivate: 0,
-      journal: 240 + 380 + 450
+      buildings: 280,
+      members: 618,
+      cultivate: 1274,
+      inventory: 1542
     };
     this.setScrollOffset(0);
 
@@ -969,16 +1026,11 @@ export class SectScene extends Phaser.Scene {
     }
 
     this.setScrollOffset(this.navAnchors[anchorId]);
-
-    if (anchorId === 'journal') {
-      this.navBar.setActive('explore');
-      return;
-    }
-
     this.navBar.setActive(anchorId);
   }
 
   private createCultivationPanel(): void {
+    const allowDebugCultivation = typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('debug') === '1';
     this.cultivationPanel = new CultivationPanel(this, [
       {
         label: 'Đổi chế độ',
@@ -995,7 +1047,8 @@ export class SectScene extends Phaser.Scene {
       },
       {
         label: 'Tụ khí thử',
-        detail: 'Debug +10 tiến độ',
+        detail: allowDebugCultivation ? 'Debug +10 tiến độ' : 'Chỉ mở trong chế độ debug',
+        disabled: !allowDebugCultivation,
         onClick: () => {
           const snapshot = getRealmSystem(this).addCultivationProgress(10, 'Tụ khí thử: +10 tiến độ tu hành.');
           this.refreshView(snapshot, 'Tụ khí thử: +10 tiến độ tu hành.');
@@ -1039,8 +1092,7 @@ export class SectScene extends Phaser.Scene {
         label: 'Đột phá',
         detail: 'Khi đủ điều kiện',
         onClick: () => {
-          const result = getRealmSystem(this).performBreakthrough();
-          this.refreshView(result.snapshot, result.message);
+          this.presentTribulationPreview();
         }
       },
       {
@@ -1347,12 +1399,91 @@ export class SectScene extends Phaser.Scene {
     ]);
   }
 
+  private assignSelectedDiscipleTask(task: DiscipleTaskId): void {
+    const snapshot = getStateManager(this).snapshot;
+    const disciple = this.getSelectedDisciple(snapshot);
+
+    if (!disciple) {
+      this.refreshView(snapshot, 'Chua co de tu de phan cong.');
+      return;
+    }
+
+    const result = getDiscipleSystem(this).setCurrentTask(disciple.id, task);
+    const syncedSnapshot = getBuildingSystem(this).syncBuildingStates();
+    this.refreshView(syncedSnapshot, result.message);
+  }
+
   private toggleCultivationPanel(visible: boolean): void {
     if (visible) {
       this.markTutorialFlag(TUTORIAL_CHOICE_FLAGS.openedCultivation);
     }
 
     this.setPanelVisibility('cultivation', visible);
+  }
+
+  private presentTribulationPreview(): void {
+    const snapshot = getStateManager(this).snapshot;
+    const eligibility = getRealmSystem(this).checkBreakthroughEligibility(snapshot);
+
+    if (!eligibility.eligible || !eligibility.nextRealm) {
+      this.playFeedback('ui-invalid');
+      this.refreshView(snapshot, eligibility.reason);
+      return;
+    }
+
+    const assessment = getTribulationSystem(this).assess(snapshot);
+    if (!assessment) {
+      const result = getRealmSystem(this).performBreakthrough();
+      this.refreshView(result.snapshot, result.message);
+      return;
+    }
+
+    this.eventModal.show({
+      title: `Thien Kiep ${assessment.nextRealmName}`,
+      subtitle: `Tu ${assessment.currentRealmName} len ${assessment.nextRealmName}`,
+      variant: 'omen',
+      contextLines: [
+        `Xac suat hien tai: ${assessment.score}/100`,
+        `Du luc dan duoc: +${snapshot.player.cultivation.breakthroughBonus}`,
+        `Nen can: ${snapshot.player.cultivation.foundationStability} | Tam ma: ${snapshot.player.cultivation.tamMaPressure}`
+      ],
+      body: [
+        assessment.summary,
+        '',
+        ...assessment.factorLines
+      ],
+      options: [
+        {
+          label: 'Chong kiep ngay',
+          detail: 'Thu dot pha voi trang thai hien tai',
+          onSelect: () => {
+            this.eventModal.hide();
+            this.time.delayedCall(120, () => {
+              const result = getRealmSystem(this).performBreakthrough();
+              this.refreshView(result.snapshot, result.message);
+              this.eventModal.show({
+                title: result.ok ? 'Thien Kiep da qua' : 'Kiep Van de lai vet',
+                subtitle: result.ok ? 'Canh gioi da doi nhiep' : 'Can them mot nhip chuan bi',
+                variant: result.ok ? 'major' : 'omen',
+                body: [result.message],
+                options: [
+                  {
+                    label: 'Lui ve tu hanh',
+                    detail: 'Dong thong bao va tiep tuc dieu tuc',
+                    onSelect: () => this.eventModal.hide()
+                  }
+                ]
+              });
+            });
+          }
+        },
+        {
+          label: 'Tri hoan',
+          detail: 'Bo sung dan duoc, linh thu, va cong phap truoc khi thu lai',
+          onSelect: () => this.eventModal.hide()
+        }
+      ]
+    });
   }
 
   private toggleDiplomacyPanel(visible: boolean): void {
@@ -1423,7 +1554,8 @@ export class SectScene extends Phaser.Scene {
   }
 
   private shouldShowTutorial(snapshot: Readonly<GameState>): boolean {
-    return !snapshot.story.choiceFlags.includes(TUTORIAL_CHOICE_FLAGS.skipped);
+    return getSettingsStore(this).getSettings().tutorialHintsEnabled
+      && !snapshot.story.choiceFlags.includes(TUTORIAL_CHOICE_FLAGS.skipped);
   }
 
   private getTutorialLines(snapshot: Readonly<GameState>): string[] {
@@ -1912,6 +2044,10 @@ export class SectScene extends Phaser.Scene {
     const rewardLines: string[] = [];
     const itemRewardIds = Object.keys(selectedMap.rewardProfile.itemRewards ?? {});
 
+    if (selectedMap.isSecretRealm) {
+      rewardLines.push('san linh tai hiem va tang danh vong tong mon');
+    }
+
     if ((selectedMap.rewardProfile.guaranteed?.duocThao ?? 0) > 0) {
       rewardLines.push('bo sung duoc thao cho luyen dan va sinh ton');
     }
@@ -2316,6 +2452,7 @@ export class SectScene extends Phaser.Scene {
     const selectedItemEntry = this.getSelectedInventoryEntry(snapshot);
     const selectedRecipe = this.getSelectedRecipe();
     const inventoryEntries = this.getInventoryEntries(snapshot);
+    const managementOverview = getDiscipleSystem(this).getSectManagementOverview(snapshot);
     const equippedArtifact = getArtifactSystem(this).getEquippedArtifact(snapshot);
     const currentRealm = getRealmSystem(this).getCurrentRealm(snapshot);
     const breakthrough = getRealmSystem(this).checkBreakthroughEligibility(snapshot);
@@ -2361,33 +2498,63 @@ export class SectScene extends Phaser.Scene {
 
     const chipValues = [
       snapshot.resources.linhThach,
-      snapshot.resources.linhKhi,
-      snapshot.resources.duocThao,
-      snapshot.resources.khoangThach,
-      snapshot.resources.linhMoc
+      snapshot.player.cultivation.cultivationProgress,
+      snapshot.player.cultivation.foundationStability
     ];
-    this.resourceChips.forEach((chip, index) => {
-      const valueText = chip.getData('valueText') as Phaser.GameObjects.Text | undefined;
-      valueText?.setText(`${chipValues[index] ?? 0}`);
+    const chipMaxValues = [
+      Math.max(snapshot.resources.linhThach, 10000),
+      currentRealm.progressRequired,
+      100
+    ];
+    this.resourceBars.forEach((bar, index) => {
+      bar.setValue(chipValues[index] ?? 0, chipMaxValues[index] ?? 100);
     });
 
-    this.headerText.setText(`${snapshot.sect.name} | ${formatDate(snapshot)}`);
-    this.chapterText.setText(
-      `Chuong hien tai: ${chapterName} (${chapterProgress}) | Uy danh ${snapshot.sect.prestige} | Khi van ${snapshot.sect.fortune} | On dinh ${snapshot.sect.stability} | Phong thu ${snapshot.sect.defense} | Suc chua de tu ${snapshot.sect.discipleCapacity} | Thu ngoai giao ${snapshot.diplomacy.pendingMessageEventIds.length} | Ket cuc ${snapshot.ending.completed ? getEndingSystem(this).getPresentation(snapshot).definition.routeName : 'chua mo'} | Am ${getFeedbackSystem(this).isMuted() ? 'tat' : 'bat'}`
-    );
-    this.cultivationText.setText(
-      `Chuong mon: ${currentRealm.name} | Tien do ${snapshot.player.cultivation.cultivationProgress}/${currentRealm.progressRequired} | Nen can ${snapshot.player.cultivation.foundationStability} | Tam ma ${snapshot.player.cultivation.tamMaPressure} | Cong phap ${this.getEquippedTechniqueLabel(snapshot)} | Phap khi ${equippedArtifact?.name ?? 'Chua trang bi'}`
-    );
+    this.headerShell
+      .setPlayerName(snapshot.player.name)
+      .setPlayerTitle(`${snapshot.player.title} • ${formatDate(snapshot)}`)
+      .setRealm(`${currentRealm.name} • ${chapterName}`);
+    this.cultivationProgressBar
+      .setLabel(`Tien do ${currentRealm.name}`)
+      .setProgress(snapshot.player.cultivation.cultivationProgress, currentRealm.progressRequired);
+    const realmIconMap: Record<string, string> = {
+      pham_the: 'icon_status_qi_refining',
+      luyen_khi: 'icon_status_qi_refining',
+      truc_co: 'icon_status_foundation_establishment',
+      kim_dan: 'icon_status_golden_core',
+      nguyen_anh: 'icon_status_nascent_soul',
+      hoa_than: 'icon_status_spirit_transformation'
+    };
+    const realmIconKey = realmIconMap[snapshot.player.cultivation.currentRealmId] ?? 'icon_status_qi_refining';
+    if (this.textures.exists(realmIconKey)) {
+      this.cultivationEmblem.setTexture(realmIconKey);
+    }
 
     this.buildingListText.setText(
-      buildingCatalog.buildings
-        .map((building, index) => {
-          const state = snapshot.sect.buildings[building.id as BuildingId];
-          const marker = index === this.selectedBuildingIndex ? '>' : ' ';
-          const status = state.isConstructed ? 'Da dung' : state.isUnlocked ? 'Co the dung' : 'Chua mo';
-          return `${marker} ${building.name}\nCap ${state.level} | ${status} | Gan ${state.assignedDiscipleIds.length}`;
-        })
-        .join('\n\n')
+      [
+        `Dang xem: ${selectedBuildingDefinition.name}`,
+        `Cap ${selectedBuildingState.level} | ${selectedBuildingState.isConstructed ? 'Da dung' : selectedBuildingState.isUnlocked ? 'Co the dung' : 'Chua mo'} | Gan ${selectedBuildingState.assignedDiscipleIds.length}`,
+        `Hieu qua: ${this.getBuildingEffectText(selectedBuildingId)}`,
+        `Tac dong hien tai: ${selectedBuildingId === 'tinh_tu_duong'
+          ? 'Tang toc tu hanh cho de tu lam nhiem vu Tu luyen.'
+          : selectedBuildingId === 'duoc_vien'
+            ? 'Tang duoc thao thu dong va bo sung Linh Thao Co Ban cho kho.'
+            : selectedBuildingId === 'luyen_khi_phong'
+              ? 'Giam nguyen lieu luyen dan khi co de tu ho tro.'
+              : selectedBuildingId === 'tang_kinh_cac'
+                ? 'Day nhanh nhip hoc va tong luc tu hanh noi mon.'
+                : selectedBuildingId === 'ho_son_tran_dai'
+                  ? 'Tang thuong khi co de tu ho tro bi canh.'
+                  : 'Giup tong mon giu nhip van hanh on dinh.'}`,
+        '',
+        'Mot vai cong trinh dang van hanh',
+        ...buildingCatalog.buildings
+          .slice(0, 3)
+          .map((building) => {
+            const state = snapshot.sect.buildings[building.id as BuildingId];
+            return `${building.name}: cap ${state.level} | ${state.isConstructed ? 'dang van hanh' : state.isUnlocked ? 'san sang dung' : 'chua mo'}`;
+          })
+      ].join('\n')
     );
 
     this.buildingDetailText.setText([
@@ -2400,16 +2567,29 @@ export class SectScene extends Phaser.Scene {
     ]);
 
     this.discipleListText.setText(
-      snapshot.disciples.roster
-        .map((disciple, index) => {
-          const marker = index === this.selectedDiscipleIndex ? '>' : ' ';
-          return [
-            `${marker} ${disciple.name}`,
-            `${getDiscipleRealmName(disciple.realmId)} | ${disciple.temperament}`,
-            `Task: ${TASK_LABELS[disciple.currentTask]} | Tam trang ${disciple.mood} | Trung thanh ${disciple.loyalty} | ${disciple.breakthroughReady ? 'San dot pha' : getDiscipleStatusLabel(disciple.status)}`
-          ].join('\n');
-        })
-        .join('\n\n')
+      selectedDisciple
+        ? [
+            `Dang chon: ${selectedDisciple.name}`,
+            `${getDiscipleRealmName(selectedDisciple.realmId)} | ${selectedDisciple.temperament} | The trang ${selectedDisciple.health}`,
+            `Nhiem vu: ${TASK_LABELS[selectedDisciple.currentTask]} | Cong trinh: ${selectedDiscipleBuildingName}`,
+            `Mood ${selectedDisciple.mood} | Loyalty ${selectedDisciple.loyalty} | ${selectedDisciple.breakthroughReady ? 'San dot pha' : getDiscipleStatusLabel(selectedDisciple.status)}`,
+            '',
+            `Ho tro hien tai: ${selectedDisciple.currentTask === 'tu_luyen'
+              ? 'Dong gop tong luc tu hanh cho chuong mon.'
+              : selectedDisciple.currentTask === 'trong_duoc'
+                ? 'Tao duoc thao va Linh Thao Co Ban cham moi ngay.'
+                : selectedDisciple.currentTask === 'luyen_dan'
+                  ? 'Giam nguyen lieu khi luyen dan.'
+                  : selectedDisciple.currentTask === 'tuan_tra'
+                    ? 'Tang thuong cho chuyen tham hiem tiep theo.'
+                    : 'Dang duong suc, it dong gop hon nhung an toan.'}`,
+            '',
+            'Mon nhan khac',
+            ...snapshot.disciples.roster
+              .slice(0, 3)
+              .map((disciple) => `${disciple.name}: ${TASK_LABELS[disciple.currentTask]} | mood ${disciple.mood} | loyalty ${disciple.loyalty}`)
+          ].join('\n')
+        : 'Chua co de tu. Hay tiep tuc event va tuyen nhan de lap lai tong mon.'
     );
 
     this.discipleDetailText.setText(
@@ -2427,58 +2607,43 @@ export class SectScene extends Phaser.Scene {
     );
 
     this.eventText.setText([
-      getBuildInfoLine(),
-      `Event active: ${activeEvent?.title ?? 'Khong co'}`,
-      `Loai: ${snapshot.events.activeEventType ?? 'Khong co'} | Da giai ${snapshot.events.history.length}`,
-      `Tham hiem: ${selectedMap.name} | ${mapUnlocked ? 'Da mo' : 'Chua mo'} | Nguy co ${selectedMap.riskLevel}`,
-      `Ngoai giao: ${snapshot.diplomacy.lastSummary}`,
-      '',
-      'Canh bao phe phai',
-      ...(diplomacyAlerts.length > 0
-        ? diplomacyAlerts.slice(0, 2).map((entry) => `${this.getFactionName(entry.factionId)} | ${entry.relationStatus} | muc ${entry.warningLevel}`)
-        : ['Chua co']),
-      '',
-      'Su kien gan day',
-      ...(historyLines.slice(0, 3).length > 0 ? historyLines.slice(0, 3) : ['Chua co'])
-    ]);
+      `${snapshot.sect.name}`,
+      `Cap tong mon ${getSectLevel(snapshot)} | Uy danh ${snapshot.sect.prestige} | Danh vong ${snapshot.sect.reputation} | On dinh ${snapshot.sect.stability}`,
+      `Tong so de tu ${snapshot.disciples.roster.length}/${snapshot.sect.discipleCapacity} | Tong luc tu hanh ${managementOverview.cultivationPower}`,
+      `Tai nguyen tong mon: LT ${snapshot.resources.linhThach} | Duoc ${snapshot.resources.duocThao} | Khoang ${snapshot.resources.khoangThach}`,
+      `Chuong hien tai: ${chapterName} | Tien do: ${chapterProgress}`,
+      `Ngoai giao: ${snapshot.diplomacy.lastSummary}`
+    ].join('\n'));
 
-    this.summaryText.setText(
+    this.summaryText.setText([
+      `Muc tieu ngay: ${recommendedNextStep}`,
+      `Uu tien hien tai: ${priorityNotice}`,
+      `Thay doi gan nhat: ${latestChangeSummary}`,
+      `Nhip noi mon: ${managementOverview.summaryLines[0] ?? 'Chua co de tu dang tao hieu qua noi mon ro rang.'}`
+    ].join('\n'));
+    this.statusText.setText(
       [
-        'Viec nen lam ngay',
-        recommendedNextStep,
-        '',
-        'Uu tien hien tai',
-        priorityNotice,
-        '',
-        'Muc tieu chuong',
-        ...chapterObjectiveLines.slice(0, 3),
-        '',
-        'Thay doi gan nhat',
-        latestChangeSummary,
-        '',
-        'Tong ket ngay',
-        snapshot.ui.daySummary,
-        '',
-        'Map dang xem',
-        `${selectedMap.name} | ${mapAccessSummary}`,
-        mapValueHint,
-        `Boss: ${mapBossCleared ? 'Da ha' : 'Chua ha'}`
+        `Nhac nhanh: ${whyThisMatters}`,
+        `Tro dan: -${managementOverview.alchemyCostReduction} nguyen lieu | Ho tro bi canh: x${managementOverview.explorationRewardMultiplier.toFixed(2)} thuong | Kiep luc: +${snapshot.player.cultivation.breakthroughBonus}`
       ].join('\n')
     );
-    this.statusText.setText(`Trang thai: ${latestChangeSummary}`);
 
     inventoryEntries.slice(0, this.inventorySlots.length).forEach((entry, index) => {
       const slot = this.inventorySlots[index];
       const labelText = slot.getData('labelText') as Phaser.GameObjects.Text | undefined;
       const countText = slot.getData('countText') as Phaser.GameObjects.Text | undefined;
+      const iconSetter = slot as unknown as { setIcon?: (iconKey?: string) => unknown };
       labelText?.setText(entry.definition.name);
       countText?.setText(String(entry.quantity));
+      iconSetter.setIcon?.(resolveItemTextureKey(this, entry.definition.id, entry.definition.category));
     });
     this.inventorySlots.slice(inventoryEntries.length).forEach((slot) => {
       const labelText = slot.getData('labelText') as Phaser.GameObjects.Text | undefined;
       const countText = slot.getData('countText') as Phaser.GameObjects.Text | undefined;
+      const iconSetter = slot as unknown as { setIcon?: (iconKey?: string) => unknown };
       labelText?.setText('-');
       countText?.setText('');
+      iconSetter.setIcon?.(undefined);
     });
 
     this.applyRefreshFeedback(snapshot, latestChangeSummary);
@@ -2632,7 +2797,23 @@ export class SectScene extends Phaser.Scene {
           ...selectedRecipe.ingredients.map((ingredient) => `${itemCatalog.items.find((item) => item.id === ingredient.itemId)?.name ?? ingredient.itemId} x${ingredient.amount} • đang có ${snapshot.inventory.items[ingredient.itemId] ?? 0}`),
           '',
           'Thành phẩm',
-          ...selectedRecipe.outputs.map((output) => `${itemCatalog.items.find((item) => item.id === output.itemId)?.name ?? output.itemId} x${output.amount}`)
+          ...selectedRecipe.outputs.flatMap((output) => {
+            const itemName = itemCatalog.items.find((item) => item.id === output.itemId)?.name ?? output.itemId;
+            return [
+              `${itemName} x${output.amount}`,
+              `→ ${this.describeItem(output.itemId)}`
+            ];
+          })
+        ],
+        iconKeys: [
+          ...selectedRecipe.ingredients.slice(0, 2).map((ingredient) => {
+            const definition = itemCatalog.items.find((item) => item.id === ingredient.itemId);
+            return definition ? resolveItemTextureKey(this, definition.id, definition.category) : undefined;
+          }),
+          ...selectedRecipe.outputs.slice(0, 2).map((output) => {
+            const definition = itemCatalog.items.find((item) => item.id === output.itemId);
+            return definition ? resolveItemTextureKey(this, definition.id, definition.category) : undefined;
+          })
         ]
       });
     } else {
@@ -2764,6 +2945,14 @@ export class SectScene extends Phaser.Scene {
 
     if (definition.artifactEffect?.type === 'exploration_max_health') {
       return `Trang bị: +${definition.artifactEffect.value} HP khi thám hiểm.`;
+    }
+
+    if (definition.category === 'herb' || definition.category === 'ore' || definition.category === 'material') {
+      return `Nguyên liệu luyện đan / chế tác. ${definition.description}`;
+    }
+
+    if (definition.category === 'pill') {
+      return `Đan dược dùng trực tiếp để hỗ trợ tu hành. ${definition.description}`;
     }
 
     return definition.description;

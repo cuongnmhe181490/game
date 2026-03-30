@@ -1,6 +1,6 @@
 import type { EntityId } from '@/game/entities';
 
-export const SAVE_SCHEMA_VERSION = 15 as const;
+export const SAVE_SCHEMA_VERSION = 17 as const;
 
 export const BUILDING_IDS = [
   'chinh_dien',
@@ -85,6 +85,7 @@ export interface PlayerCultivationState {
   currentRealmId: RealmId;
   cultivationProgress: number;
   breakthroughReady: boolean;
+  breakthroughBonus: number;
   foundationStability: number;
   tamMaPressure: number;
   cultivationMode: CultivationMode;
@@ -129,6 +130,7 @@ export interface SectGuestState {
 export interface SectState {
   name: string;
   prestige: number;
+  reputation: number;
   fortune: number;
   stability: number;
   chapterId: ChapterId;
@@ -284,6 +286,21 @@ export interface InventoryState {
   lastSummary: string;
 }
 
+export interface OwnedBeastState {
+  beastId: string;
+  level: number;
+  training: number;
+  attack: number;
+  defense: number;
+  health: number;
+}
+
+export interface BeastCollectionState {
+  owned: OwnedBeastState[];
+  activeBeastId: string | null;
+  lastSummary: string;
+}
+
 export interface UiState {
   activeScreen: ActiveScreen;
   activeTab: SectView;
@@ -309,6 +326,8 @@ export interface ExplorationHistoryRecord {
 
 export interface ExplorationState {
   unlockedMapIds: string[];
+  discoveredSecretRealmIds: string[];
+  secretRealmLastEntryDays: Record<string, number>;
   totalRuns: number;
   defeatedBossIds: string[];
   history: ExplorationHistoryRecord[];
@@ -322,6 +341,7 @@ export interface SaveData {
   time: TimeState;
   resources: ResourceState;
   inventory: InventoryState;
+  beasts: BeastCollectionState;
   disciples: DiscipleState;
   story: StoryState;
   ending: EndingState;

@@ -1,4 +1,5 @@
 import {
+  beastCatalog,
   buildingCatalog,
   discipleNamesCatalog,
   discipleTraitCatalog,
@@ -165,6 +166,33 @@ function createStarterDisciples(): DiscipleProfile[] {
   }));
 }
 
+function createStarterBeasts(): GameState['beasts'] {
+  const starterDefinition = beastCatalog.beasts[0];
+
+  if (!starterDefinition) {
+    return {
+      owned: [],
+      activeBeastId: null,
+      lastSummary: 'Sơn môn chưa thuần dưỡng được linh thú nào.'
+    };
+  }
+
+  return {
+    owned: [
+      {
+        beastId: starterDefinition.id,
+        level: 1,
+        training: 0,
+        attack: starterDefinition.baseStats.attack,
+        defense: starterDefinition.baseStats.defense,
+        health: starterDefinition.baseStats.health
+      }
+    ],
+    activeBeastId: starterDefinition.id,
+    lastSummary: `${starterDefinition.name} vừa theo về sơn môn, tạm giữ đường núi và làm linh thú đầu tiên.`
+  };
+}
+
 function createInitialFactionRelations(): Record<string, number> {
   return factionCatalog.factions.reduce<Record<string, number>>((result, faction) => {
     const defaults: Record<string, number> = {
@@ -258,6 +286,7 @@ export function createGameState(options: CreateGameStateOptions = {}): GameState
         currentRealmId: 'pham_the',
         cultivationProgress: 6,
         breakthroughReady: false,
+        breakthroughBonus: 0,
         foundationStability: 72,
         tamMaPressure: 0,
         cultivationMode: 'balanced',
@@ -270,6 +299,7 @@ export function createGameState(options: CreateGameStateOptions = {}): GameState
     sect: {
       name: storyChapterCatalog.playerSectName,
       prestige: 6,
+      reputation: 0,
       fortune: 50,
       stability: 62,
       chapterId: firstChapterId,
@@ -307,6 +337,7 @@ export function createGameState(options: CreateGameStateOptions = {}): GameState
       equippedArtifactItemId: null,
       lastSummary: 'Kho tông môn vừa được chỉnh lý lại, có vài dược liệu và một món pháp khí cũ.'
     },
+    beasts: createStarterBeasts(),
     disciples: {
       roster: createStarterDisciples()
     },
@@ -368,6 +399,8 @@ export function createGameState(options: CreateGameStateOptions = {}): GameState
     },
     exploration: {
       unlockedMapIds: ['hau_son_coc'],
+      discoveredSecretRealmIds: [],
+      secretRealmLastEntryDays: {},
       totalRuns: 0,
       defeatedBossIds: [],
       history: [],

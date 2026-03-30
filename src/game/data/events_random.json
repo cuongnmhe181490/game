@@ -3105,6 +3105,1391 @@
         "letter",
         "hidden_guidance"
       ]
+    },
+    {
+      "id": "random.sect_internal.content_1",
+      "title": "Su kien noi mon 1",
+      "category": "sect_internal",
+      "weight": 6,
+      "conditions": {
+        "chapters": [
+          "chapter_1_du_tan_khai_son",
+          "chapter_2_tong_mon_lap_the"
+        ],
+        "minDay": 2,
+        "cooldownDays": 3
+      },
+      "actorRules": null,
+      "textTemplate": {
+        "body": "Su kien content 1 mo rong doi song tong mon va dao lo cua Nhat Niem Khai Tong."
+      },
+      "choices": [
+        {
+          "id": "steady",
+          "label": "Xu ly theo quy cu",
+          "outcome": "Giai quyet theo cach on dinh nhat."
+        },
+        {
+          "id": "insight",
+          "label": "Nhin thanh co hoi",
+          "outcome": "Thu khai thac them dao y va loi ich."
+        },
+        {
+          "id": "delay",
+          "label": "Tam de lai",
+          "outcome": "Khong xu ly manh tay ngay luc nay."
+        }
+      ],
+      "effects": {
+        "steady": {
+          "resources": {
+            "spiritStone": -3
+          },
+          "sectPrestige": 1
+        },
+        "insight": {
+          "sectStability": 2
+        },
+        "delay": {
+          "sectPrestige": -1
+        }
+      },
+      "tags": [
+        "discipline"
+      ]
+    },
+    {
+      "id": "random.disciple.content_2",
+      "title": "Su kien noi mon 2",
+      "category": "disciple",
+      "weight": 7,
+      "conditions": {
+        "chapters": [
+          "chapter_2_tong_mon_lap_the",
+          "chapter_3_kinh_chieu_cuu_thien"
+        ],
+        "minDay": 3,
+        "cooldownDays": 4
+      },
+      "actorRules": null,
+      "textTemplate": {
+        "body": "Su kien content 2 mo rong doi song tong mon va dao lo cua Nhat Niem Khai Tong."
+      },
+      "choices": [
+        {
+          "id": "steady",
+          "label": "Xu ly theo quy cu",
+          "outcome": "Giai quyet theo cach on dinh nhat."
+        },
+        {
+          "id": "insight",
+          "label": "Nhin thanh co hoi",
+          "outcome": "Thu khai thac them dao y va loi ich."
+        },
+        {
+          "id": "delay",
+          "label": "Tam de lai",
+          "outcome": "Khong xu ly manh tay ngay luc nay."
+        }
+      ],
+      "effects": {
+        "steady": {
+          "discipleMoodDelta": 3,
+          "discipleLoyaltyDelta": 2
+        },
+        "insight": {
+          "playerCultivationProgress": 3
+        },
+        "delay": {
+          "discipleMoodDelta": -2,
+          "sectPrestige": 1
+        }
+      },
+      "tags": [
+        "growth"
+      ]
+    },
+    {
+      "id": "random.cultivation.content_3",
+      "title": "Su kien noi mon 3",
+      "category": "cultivation",
+      "weight": 8,
+      "conditions": {
+        "chapters": [
+          "chapter_3_kinh_chieu_cuu_thien",
+          "chapter_4_nhat_niem_dinh_dao"
+        ],
+        "minDay": 4,
+        "cooldownDays": 5
+      },
+      "actorRules": null,
+      "textTemplate": {
+        "body": "Su kien content 3 mo rong doi song tong mon va dao lo cua Nhat Niem Khai Tong."
+      },
+      "choices": [
+        {
+          "id": "steady",
+          "label": "Xu ly theo quy cu",
+          "outcome": "Giai quyet theo cach on dinh nhat."
+        },
+        {
+          "id": "insight",
+          "label": "Nhin thanh co hoi",
+          "outcome": "Thu khai thac them dao y va loi ich."
+        },
+        {
+          "id": "delay",
+          "label": "Tam de lai",
+          "outcome": "Khong xu ly manh tay ngay luc nay."
+        }
+      ],
+      "effects": {
+        "steady": {
+          "playerCultivationProgress": 4,
+          "foundationStability": 2
+        },
+        "insight": {
+          "foundationStability": 4,
+          "tamMaPressure": -2
+        },
+        "delay": {
+          "playerCultivationProgress": 2,
+          "tamMaPressure": 2
+        }
+      },
+      "tags": [
+        "cultivation"
+      ]
+    },
+    {
+      "id": "random.opportunity.content_4",
+      "title": "Su kien noi mon 4",
+      "category": "opportunity",
+      "weight": 9,
+      "conditions": {
+        "chapters": [
+          "chapter_1_du_tan_khai_son",
+          "chapter_2_tong_mon_lap_the",
+          "chapter_3_kinh_chieu_cuu_thien",
+          "chapter_4_nhat_niem_dinh_dao"
+        ],
+        "minDay": 5,
+        "cooldownDays": 3
+      },
+      "actorRules": null,
+      "textTemplate": {
+        "body": "Su kien content 4 mo rong doi song tong mon va dao lo cua Nhat Niem Khai Tong."
+      },
+      "choices": [
+        {
+          "id": "steady",
+          "label": "Xu ly theo quy cu",
+          "outcome": "Giai quyet theo cach on dinh nhat."
+        },
+        {
+          "id": "insight",
+          "label": "Nhin thanh co hoi",
+          "outcome": "Thu khai thac them dao y va loi ich."
+        },
+        {
+          "id": "delay",
+          "label": "Tam de lai",
+          "outcome": "Khong xu ly manh tay ngay luc nay."
+        }
+      ],
+      "effects": {
+        "steady": {
+          "resources": {
+            "spiritStone": 6
+          },
+          "sectPrestige": 1
+        },
+        "insight": {
+          "addFlags": [
+            "minor_opportunity_logged"
+          ]
+        },
+        "delay": {
+          "resources": {
+            "spiritStone": -2
+          }
+        }
+      },
+      "tags": [
+        "trade"
+      ]
+    },
+    {
+      "id": "random.omen.content_5",
+      "title": "Su kien noi mon 5",
+      "category": "omen",
+      "weight": 10,
+      "conditions": {
+        "chapters": [
+          "chapter_1_du_tan_khai_son",
+          "chapter_2_tong_mon_lap_the"
+        ],
+        "minDay": 2,
+        "cooldownDays": 4
+      },
+      "actorRules": null,
+      "textTemplate": {
+        "body": "Su kien content 5 mo rong doi song tong mon va dao lo cua Nhat Niem Khai Tong."
+      },
+      "choices": [
+        {
+          "id": "steady",
+          "label": "Xu ly theo quy cu",
+          "outcome": "Giai quyet theo cach on dinh nhat."
+        },
+        {
+          "id": "insight",
+          "label": "Nhin thanh co hoi",
+          "outcome": "Thu khai thac them dao y va loi ich."
+        },
+        {
+          "id": "delay",
+          "label": "Tam de lai",
+          "outcome": "Khong xu ly manh tay ngay luc nay."
+        }
+      ],
+      "effects": {
+        "steady": {
+          "addFlags": [
+            "omen_recorded"
+          ],
+          "sectPrestige": 1
+        },
+        "insight": {
+          "foundationStability": 1
+        },
+        "delay": {
+          "sectPrestige": -1
+        }
+      },
+      "tags": [
+        "omen"
+      ]
+    },
+    {
+      "id": "random.sect_internal.content_6",
+      "title": "Su kien noi mon 6",
+      "category": "sect_internal",
+      "weight": 6,
+      "conditions": {
+        "chapters": [
+          "chapter_2_tong_mon_lap_the",
+          "chapter_3_kinh_chieu_cuu_thien"
+        ],
+        "minDay": 3,
+        "cooldownDays": 5
+      },
+      "actorRules": null,
+      "textTemplate": {
+        "body": "Su kien content 6 mo rong doi song tong mon va dao lo cua Nhat Niem Khai Tong."
+      },
+      "choices": [
+        {
+          "id": "steady",
+          "label": "Xu ly theo quy cu",
+          "outcome": "Giai quyet theo cach on dinh nhat."
+        },
+        {
+          "id": "insight",
+          "label": "Nhin thanh co hoi",
+          "outcome": "Thu khai thac them dao y va loi ich."
+        },
+        {
+          "id": "delay",
+          "label": "Tam de lai",
+          "outcome": "Khong xu ly manh tay ngay luc nay."
+        }
+      ],
+      "effects": {
+        "steady": {
+          "resources": {
+            "spiritStone": -3
+          },
+          "sectPrestige": 1
+        },
+        "insight": {
+          "sectStability": 2
+        },
+        "delay": {
+          "sectPrestige": -1
+        }
+      },
+      "tags": [
+        "resource"
+      ]
+    },
+    {
+      "id": "random.disciple.content_7",
+      "title": "Su kien noi mon 7",
+      "category": "disciple",
+      "weight": 7,
+      "conditions": {
+        "chapters": [
+          "chapter_3_kinh_chieu_cuu_thien",
+          "chapter_4_nhat_niem_dinh_dao"
+        ],
+        "minDay": 4,
+        "cooldownDays": 3
+      },
+      "actorRules": null,
+      "textTemplate": {
+        "body": "Su kien content 7 mo rong doi song tong mon va dao lo cua Nhat Niem Khai Tong."
+      },
+      "choices": [
+        {
+          "id": "steady",
+          "label": "Xu ly theo quy cu",
+          "outcome": "Giai quyet theo cach on dinh nhat."
+        },
+        {
+          "id": "insight",
+          "label": "Nhin thanh co hoi",
+          "outcome": "Thu khai thac them dao y va loi ich."
+        },
+        {
+          "id": "delay",
+          "label": "Tam de lai",
+          "outcome": "Khong xu ly manh tay ngay luc nay."
+        }
+      ],
+      "effects": {
+        "steady": {
+          "discipleMoodDelta": 3,
+          "discipleLoyaltyDelta": 2
+        },
+        "insight": {
+          "playerCultivationProgress": 3
+        },
+        "delay": {
+          "discipleMoodDelta": -2,
+          "sectPrestige": 1
+        }
+      },
+      "tags": [
+        "exploration"
+      ]
+    },
+    {
+      "id": "random.cultivation.content_8",
+      "title": "Su kien noi mon 8",
+      "category": "cultivation",
+      "weight": 8,
+      "conditions": {
+        "chapters": [
+          "chapter_1_du_tan_khai_son",
+          "chapter_2_tong_mon_lap_the",
+          "chapter_3_kinh_chieu_cuu_thien",
+          "chapter_4_nhat_niem_dinh_dao"
+        ],
+        "minDay": 5,
+        "cooldownDays": 4
+      },
+      "actorRules": null,
+      "textTemplate": {
+        "body": "Su kien content 8 mo rong doi song tong mon va dao lo cua Nhat Niem Khai Tong."
+      },
+      "choices": [
+        {
+          "id": "steady",
+          "label": "Xu ly theo quy cu",
+          "outcome": "Giai quyet theo cach on dinh nhat."
+        },
+        {
+          "id": "insight",
+          "label": "Nhin thanh co hoi",
+          "outcome": "Thu khai thac them dao y va loi ich."
+        },
+        {
+          "id": "delay",
+          "label": "Tam de lai",
+          "outcome": "Khong xu ly manh tay ngay luc nay."
+        }
+      ],
+      "effects": {
+        "steady": {
+          "playerCultivationProgress": 4,
+          "foundationStability": 2
+        },
+        "insight": {
+          "foundationStability": 4,
+          "tamMaPressure": -2
+        },
+        "delay": {
+          "playerCultivationProgress": 2,
+          "tamMaPressure": 2
+        }
+      },
+      "tags": [
+        "mirror"
+      ]
+    },
+    {
+      "id": "random.opportunity.content_9",
+      "title": "Su kien noi mon 9",
+      "category": "opportunity",
+      "weight": 9,
+      "conditions": {
+        "chapters": [
+          "chapter_1_du_tan_khai_son",
+          "chapter_2_tong_mon_lap_the"
+        ],
+        "minDay": 2,
+        "cooldownDays": 5
+      },
+      "actorRules": null,
+      "textTemplate": {
+        "body": "Su kien content 9 mo rong doi song tong mon va dao lo cua Nhat Niem Khai Tong."
+      },
+      "choices": [
+        {
+          "id": "steady",
+          "label": "Xu ly theo quy cu",
+          "outcome": "Giai quyet theo cach on dinh nhat."
+        },
+        {
+          "id": "insight",
+          "label": "Nhin thanh co hoi",
+          "outcome": "Thu khai thac them dao y va loi ich."
+        },
+        {
+          "id": "delay",
+          "label": "Tam de lai",
+          "outcome": "Khong xu ly manh tay ngay luc nay."
+        }
+      ],
+      "effects": {
+        "steady": {
+          "resources": {
+            "spiritStone": 6
+          },
+          "sectPrestige": 1
+        },
+        "insight": {
+          "addFlags": [
+            "minor_opportunity_logged"
+          ]
+        },
+        "delay": {
+          "resources": {
+            "spiritStone": -2
+          }
+        }
+      },
+      "tags": [
+        "inheritance"
+      ]
+    },
+    {
+      "id": "random.omen.content_10",
+      "title": "Su kien noi mon 10",
+      "category": "omen",
+      "weight": 10,
+      "conditions": {
+        "chapters": [
+          "chapter_2_tong_mon_lap_the",
+          "chapter_3_kinh_chieu_cuu_thien"
+        ],
+        "minDay": 3,
+        "cooldownDays": 3
+      },
+      "actorRules": null,
+      "textTemplate": {
+        "body": "Su kien content 10 mo rong doi song tong mon va dao lo cua Nhat Niem Khai Tong."
+      },
+      "choices": [
+        {
+          "id": "steady",
+          "label": "Xu ly theo quy cu",
+          "outcome": "Giai quyet theo cach on dinh nhat."
+        },
+        {
+          "id": "insight",
+          "label": "Nhin thanh co hoi",
+          "outcome": "Thu khai thac them dao y va loi ich."
+        },
+        {
+          "id": "delay",
+          "label": "Tam de lai",
+          "outcome": "Khong xu ly manh tay ngay luc nay."
+        }
+      ],
+      "effects": {
+        "steady": {
+          "addFlags": [
+            "omen_recorded"
+          ],
+          "sectPrestige": 1
+        },
+        "insight": {
+          "foundationStability": 1
+        },
+        "delay": {
+          "sectPrestige": -1
+        }
+      },
+      "tags": [
+        "truth"
+      ]
+    },
+    {
+      "id": "random.sect_internal.content_11",
+      "title": "Su kien noi mon 11",
+      "category": "sect_internal",
+      "weight": 6,
+      "conditions": {
+        "chapters": [
+          "chapter_3_kinh_chieu_cuu_thien",
+          "chapter_4_nhat_niem_dinh_dao"
+        ],
+        "minDay": 4,
+        "cooldownDays": 4
+      },
+      "actorRules": null,
+      "textTemplate": {
+        "body": "Su kien content 11 mo rong doi song tong mon va dao lo cua Nhat Niem Khai Tong."
+      },
+      "choices": [
+        {
+          "id": "steady",
+          "label": "Xu ly theo quy cu",
+          "outcome": "Giai quyet theo cach on dinh nhat."
+        },
+        {
+          "id": "insight",
+          "label": "Nhin thanh co hoi",
+          "outcome": "Thu khai thac them dao y va loi ich."
+        },
+        {
+          "id": "delay",
+          "label": "Tam de lai",
+          "outcome": "Khong xu ly manh tay ngay luc nay."
+        }
+      ],
+      "effects": {
+        "steady": {
+          "resources": {
+            "spiritStone": -3
+          },
+          "sectPrestige": 1
+        },
+        "insight": {
+          "sectStability": 2
+        },
+        "delay": {
+          "sectPrestige": -1
+        }
+      },
+      "tags": [
+        "discipline"
+      ]
+    },
+    {
+      "id": "random.disciple.content_12",
+      "title": "Su kien noi mon 12",
+      "category": "disciple",
+      "weight": 7,
+      "conditions": {
+        "chapters": [
+          "chapter_1_du_tan_khai_son",
+          "chapter_2_tong_mon_lap_the",
+          "chapter_3_kinh_chieu_cuu_thien",
+          "chapter_4_nhat_niem_dinh_dao"
+        ],
+        "minDay": 5,
+        "cooldownDays": 5
+      },
+      "actorRules": null,
+      "textTemplate": {
+        "body": "Su kien content 12 mo rong doi song tong mon va dao lo cua Nhat Niem Khai Tong."
+      },
+      "choices": [
+        {
+          "id": "steady",
+          "label": "Xu ly theo quy cu",
+          "outcome": "Giai quyet theo cach on dinh nhat."
+        },
+        {
+          "id": "insight",
+          "label": "Nhin thanh co hoi",
+          "outcome": "Thu khai thac them dao y va loi ich."
+        },
+        {
+          "id": "delay",
+          "label": "Tam de lai",
+          "outcome": "Khong xu ly manh tay ngay luc nay."
+        }
+      ],
+      "effects": {
+        "steady": {
+          "discipleMoodDelta": 3,
+          "discipleLoyaltyDelta": 2
+        },
+        "insight": {
+          "playerCultivationProgress": 3
+        },
+        "delay": {
+          "discipleMoodDelta": -2,
+          "sectPrestige": 1
+        }
+      },
+      "tags": [
+        "growth"
+      ]
+    },
+    {
+      "id": "random.cultivation.content_13",
+      "title": "Su kien noi mon 13",
+      "category": "cultivation",
+      "weight": 8,
+      "conditions": {
+        "chapters": [
+          "chapter_1_du_tan_khai_son",
+          "chapter_2_tong_mon_lap_the"
+        ],
+        "minDay": 2,
+        "cooldownDays": 3
+      },
+      "actorRules": null,
+      "textTemplate": {
+        "body": "Su kien content 13 mo rong doi song tong mon va dao lo cua Nhat Niem Khai Tong."
+      },
+      "choices": [
+        {
+          "id": "steady",
+          "label": "Xu ly theo quy cu",
+          "outcome": "Giai quyet theo cach on dinh nhat."
+        },
+        {
+          "id": "insight",
+          "label": "Nhin thanh co hoi",
+          "outcome": "Thu khai thac them dao y va loi ich."
+        },
+        {
+          "id": "delay",
+          "label": "Tam de lai",
+          "outcome": "Khong xu ly manh tay ngay luc nay."
+        }
+      ],
+      "effects": {
+        "steady": {
+          "playerCultivationProgress": 4,
+          "foundationStability": 2
+        },
+        "insight": {
+          "foundationStability": 4,
+          "tamMaPressure": -2
+        },
+        "delay": {
+          "playerCultivationProgress": 2,
+          "tamMaPressure": 2
+        }
+      },
+      "tags": [
+        "cultivation"
+      ]
+    },
+    {
+      "id": "random.opportunity.content_14",
+      "title": "Su kien noi mon 14",
+      "category": "opportunity",
+      "weight": 9,
+      "conditions": {
+        "chapters": [
+          "chapter_2_tong_mon_lap_the",
+          "chapter_3_kinh_chieu_cuu_thien"
+        ],
+        "minDay": 3,
+        "cooldownDays": 4
+      },
+      "actorRules": null,
+      "textTemplate": {
+        "body": "Su kien content 14 mo rong doi song tong mon va dao lo cua Nhat Niem Khai Tong."
+      },
+      "choices": [
+        {
+          "id": "steady",
+          "label": "Xu ly theo quy cu",
+          "outcome": "Giai quyet theo cach on dinh nhat."
+        },
+        {
+          "id": "insight",
+          "label": "Nhin thanh co hoi",
+          "outcome": "Thu khai thac them dao y va loi ich."
+        },
+        {
+          "id": "delay",
+          "label": "Tam de lai",
+          "outcome": "Khong xu ly manh tay ngay luc nay."
+        }
+      ],
+      "effects": {
+        "steady": {
+          "resources": {
+            "spiritStone": 6
+          },
+          "sectPrestige": 1
+        },
+        "insight": {
+          "addFlags": [
+            "minor_opportunity_logged"
+          ]
+        },
+        "delay": {
+          "resources": {
+            "spiritStone": -2
+          }
+        }
+      },
+      "tags": [
+        "trade"
+      ]
+    },
+    {
+      "id": "random.omen.content_15",
+      "title": "Su kien noi mon 15",
+      "category": "omen",
+      "weight": 10,
+      "conditions": {
+        "chapters": [
+          "chapter_3_kinh_chieu_cuu_thien",
+          "chapter_4_nhat_niem_dinh_dao"
+        ],
+        "minDay": 4,
+        "cooldownDays": 5
+      },
+      "actorRules": null,
+      "textTemplate": {
+        "body": "Su kien content 15 mo rong doi song tong mon va dao lo cua Nhat Niem Khai Tong."
+      },
+      "choices": [
+        {
+          "id": "steady",
+          "label": "Xu ly theo quy cu",
+          "outcome": "Giai quyet theo cach on dinh nhat."
+        },
+        {
+          "id": "insight",
+          "label": "Nhin thanh co hoi",
+          "outcome": "Thu khai thac them dao y va loi ich."
+        },
+        {
+          "id": "delay",
+          "label": "Tam de lai",
+          "outcome": "Khong xu ly manh tay ngay luc nay."
+        }
+      ],
+      "effects": {
+        "steady": {
+          "addFlags": [
+            "omen_recorded"
+          ],
+          "sectPrestige": 1
+        },
+        "insight": {
+          "foundationStability": 1
+        },
+        "delay": {
+          "sectPrestige": -1
+        }
+      },
+      "tags": [
+        "omen"
+      ]
+    },
+    {
+      "id": "random.sect_internal.content_16",
+      "title": "Su kien noi mon 16",
+      "category": "sect_internal",
+      "weight": 6,
+      "conditions": {
+        "chapters": [
+          "chapter_1_du_tan_khai_son",
+          "chapter_2_tong_mon_lap_the",
+          "chapter_3_kinh_chieu_cuu_thien",
+          "chapter_4_nhat_niem_dinh_dao"
+        ],
+        "minDay": 5,
+        "cooldownDays": 3
+      },
+      "actorRules": null,
+      "textTemplate": {
+        "body": "Su kien content 16 mo rong doi song tong mon va dao lo cua Nhat Niem Khai Tong."
+      },
+      "choices": [
+        {
+          "id": "steady",
+          "label": "Xu ly theo quy cu",
+          "outcome": "Giai quyet theo cach on dinh nhat."
+        },
+        {
+          "id": "insight",
+          "label": "Nhin thanh co hoi",
+          "outcome": "Thu khai thac them dao y va loi ich."
+        },
+        {
+          "id": "delay",
+          "label": "Tam de lai",
+          "outcome": "Khong xu ly manh tay ngay luc nay."
+        }
+      ],
+      "effects": {
+        "steady": {
+          "resources": {
+            "spiritStone": -3
+          },
+          "sectPrestige": 1
+        },
+        "insight": {
+          "sectStability": 2
+        },
+        "delay": {
+          "sectPrestige": -1
+        }
+      },
+      "tags": [
+        "resource"
+      ]
+    },
+    {
+      "id": "random.disciple.content_17",
+      "title": "Su kien noi mon 17",
+      "category": "disciple",
+      "weight": 7,
+      "conditions": {
+        "chapters": [
+          "chapter_1_du_tan_khai_son",
+          "chapter_2_tong_mon_lap_the"
+        ],
+        "minDay": 2,
+        "cooldownDays": 4
+      },
+      "actorRules": null,
+      "textTemplate": {
+        "body": "Su kien content 17 mo rong doi song tong mon va dao lo cua Nhat Niem Khai Tong."
+      },
+      "choices": [
+        {
+          "id": "steady",
+          "label": "Xu ly theo quy cu",
+          "outcome": "Giai quyet theo cach on dinh nhat."
+        },
+        {
+          "id": "insight",
+          "label": "Nhin thanh co hoi",
+          "outcome": "Thu khai thac them dao y va loi ich."
+        },
+        {
+          "id": "delay",
+          "label": "Tam de lai",
+          "outcome": "Khong xu ly manh tay ngay luc nay."
+        }
+      ],
+      "effects": {
+        "steady": {
+          "discipleMoodDelta": 3,
+          "discipleLoyaltyDelta": 2
+        },
+        "insight": {
+          "playerCultivationProgress": 3
+        },
+        "delay": {
+          "discipleMoodDelta": -2,
+          "sectPrestige": 1
+        }
+      },
+      "tags": [
+        "exploration"
+      ]
+    },
+    {
+      "id": "random.cultivation.content_18",
+      "title": "Su kien noi mon 18",
+      "category": "cultivation",
+      "weight": 8,
+      "conditions": {
+        "chapters": [
+          "chapter_2_tong_mon_lap_the",
+          "chapter_3_kinh_chieu_cuu_thien"
+        ],
+        "minDay": 3,
+        "cooldownDays": 5
+      },
+      "actorRules": null,
+      "textTemplate": {
+        "body": "Su kien content 18 mo rong doi song tong mon va dao lo cua Nhat Niem Khai Tong."
+      },
+      "choices": [
+        {
+          "id": "steady",
+          "label": "Xu ly theo quy cu",
+          "outcome": "Giai quyet theo cach on dinh nhat."
+        },
+        {
+          "id": "insight",
+          "label": "Nhin thanh co hoi",
+          "outcome": "Thu khai thac them dao y va loi ich."
+        },
+        {
+          "id": "delay",
+          "label": "Tam de lai",
+          "outcome": "Khong xu ly manh tay ngay luc nay."
+        }
+      ],
+      "effects": {
+        "steady": {
+          "playerCultivationProgress": 4,
+          "foundationStability": 2
+        },
+        "insight": {
+          "foundationStability": 4,
+          "tamMaPressure": -2
+        },
+        "delay": {
+          "playerCultivationProgress": 2,
+          "tamMaPressure": 2
+        }
+      },
+      "tags": [
+        "mirror"
+      ]
+    },
+    {
+      "id": "random.opportunity.content_19",
+      "title": "Su kien noi mon 19",
+      "category": "opportunity",
+      "weight": 9,
+      "conditions": {
+        "chapters": [
+          "chapter_3_kinh_chieu_cuu_thien",
+          "chapter_4_nhat_niem_dinh_dao"
+        ],
+        "minDay": 4,
+        "cooldownDays": 3
+      },
+      "actorRules": null,
+      "textTemplate": {
+        "body": "Su kien content 19 mo rong doi song tong mon va dao lo cua Nhat Niem Khai Tong."
+      },
+      "choices": [
+        {
+          "id": "steady",
+          "label": "Xu ly theo quy cu",
+          "outcome": "Giai quyet theo cach on dinh nhat."
+        },
+        {
+          "id": "insight",
+          "label": "Nhin thanh co hoi",
+          "outcome": "Thu khai thac them dao y va loi ich."
+        },
+        {
+          "id": "delay",
+          "label": "Tam de lai",
+          "outcome": "Khong xu ly manh tay ngay luc nay."
+        }
+      ],
+      "effects": {
+        "steady": {
+          "resources": {
+            "spiritStone": 6
+          },
+          "sectPrestige": 1
+        },
+        "insight": {
+          "addFlags": [
+            "minor_opportunity_logged"
+          ]
+        },
+        "delay": {
+          "resources": {
+            "spiritStone": -2
+          }
+        }
+      },
+      "tags": [
+        "inheritance"
+      ]
+    },
+    {
+      "id": "random.omen.content_20",
+      "title": "Su kien noi mon 20",
+      "category": "omen",
+      "weight": 10,
+      "conditions": {
+        "chapters": [
+          "chapter_1_du_tan_khai_son",
+          "chapter_2_tong_mon_lap_the",
+          "chapter_3_kinh_chieu_cuu_thien",
+          "chapter_4_nhat_niem_dinh_dao"
+        ],
+        "minDay": 5,
+        "cooldownDays": 4
+      },
+      "actorRules": null,
+      "textTemplate": {
+        "body": "Su kien content 20 mo rong doi song tong mon va dao lo cua Nhat Niem Khai Tong."
+      },
+      "choices": [
+        {
+          "id": "steady",
+          "label": "Xu ly theo quy cu",
+          "outcome": "Giai quyet theo cach on dinh nhat."
+        },
+        {
+          "id": "insight",
+          "label": "Nhin thanh co hoi",
+          "outcome": "Thu khai thac them dao y va loi ich."
+        },
+        {
+          "id": "delay",
+          "label": "Tam de lai",
+          "outcome": "Khong xu ly manh tay ngay luc nay."
+        }
+      ],
+      "effects": {
+        "steady": {
+          "addFlags": [
+            "omen_recorded"
+          ],
+          "sectPrestige": 1
+        },
+        "insight": {
+          "foundationStability": 1
+        },
+        "delay": {
+          "sectPrestige": -1
+        }
+      },
+      "tags": [
+        "truth"
+      ]
+    },
+    {
+      "id": "random.sect_internal.content_21",
+      "title": "Su kien noi mon 21",
+      "category": "sect_internal",
+      "weight": 6,
+      "conditions": {
+        "chapters": [
+          "chapter_1_du_tan_khai_son",
+          "chapter_2_tong_mon_lap_the"
+        ],
+        "minDay": 2,
+        "cooldownDays": 5
+      },
+      "actorRules": null,
+      "textTemplate": {
+        "body": "Su kien content 21 mo rong doi song tong mon va dao lo cua Nhat Niem Khai Tong."
+      },
+      "choices": [
+        {
+          "id": "steady",
+          "label": "Xu ly theo quy cu",
+          "outcome": "Giai quyet theo cach on dinh nhat."
+        },
+        {
+          "id": "insight",
+          "label": "Nhin thanh co hoi",
+          "outcome": "Thu khai thac them dao y va loi ich."
+        },
+        {
+          "id": "delay",
+          "label": "Tam de lai",
+          "outcome": "Khong xu ly manh tay ngay luc nay."
+        }
+      ],
+      "effects": {
+        "steady": {
+          "resources": {
+            "spiritStone": -3
+          },
+          "sectPrestige": 1
+        },
+        "insight": {
+          "sectStability": 2
+        },
+        "delay": {
+          "sectPrestige": -1
+        }
+      },
+      "tags": [
+        "discipline"
+      ]
+    },
+    {
+      "id": "random.disciple.content_22",
+      "title": "Su kien noi mon 22",
+      "category": "disciple",
+      "weight": 7,
+      "conditions": {
+        "chapters": [
+          "chapter_2_tong_mon_lap_the",
+          "chapter_3_kinh_chieu_cuu_thien"
+        ],
+        "minDay": 3,
+        "cooldownDays": 3
+      },
+      "actorRules": null,
+      "textTemplate": {
+        "body": "Su kien content 22 mo rong doi song tong mon va dao lo cua Nhat Niem Khai Tong."
+      },
+      "choices": [
+        {
+          "id": "steady",
+          "label": "Xu ly theo quy cu",
+          "outcome": "Giai quyet theo cach on dinh nhat."
+        },
+        {
+          "id": "insight",
+          "label": "Nhin thanh co hoi",
+          "outcome": "Thu khai thac them dao y va loi ich."
+        },
+        {
+          "id": "delay",
+          "label": "Tam de lai",
+          "outcome": "Khong xu ly manh tay ngay luc nay."
+        }
+      ],
+      "effects": {
+        "steady": {
+          "discipleMoodDelta": 3,
+          "discipleLoyaltyDelta": 2
+        },
+        "insight": {
+          "playerCultivationProgress": 3
+        },
+        "delay": {
+          "discipleMoodDelta": -2,
+          "sectPrestige": 1
+        }
+      },
+      "tags": [
+        "growth"
+      ]
+    },
+    {
+      "id": "random.cultivation.content_23",
+      "title": "Su kien noi mon 23",
+      "category": "cultivation",
+      "weight": 8,
+      "conditions": {
+        "chapters": [
+          "chapter_3_kinh_chieu_cuu_thien",
+          "chapter_4_nhat_niem_dinh_dao"
+        ],
+        "minDay": 4,
+        "cooldownDays": 4
+      },
+      "actorRules": null,
+      "textTemplate": {
+        "body": "Su kien content 23 mo rong doi song tong mon va dao lo cua Nhat Niem Khai Tong."
+      },
+      "choices": [
+        {
+          "id": "steady",
+          "label": "Xu ly theo quy cu",
+          "outcome": "Giai quyet theo cach on dinh nhat."
+        },
+        {
+          "id": "insight",
+          "label": "Nhin thanh co hoi",
+          "outcome": "Thu khai thac them dao y va loi ich."
+        },
+        {
+          "id": "delay",
+          "label": "Tam de lai",
+          "outcome": "Khong xu ly manh tay ngay luc nay."
+        }
+      ],
+      "effects": {
+        "steady": {
+          "playerCultivationProgress": 4,
+          "foundationStability": 2
+        },
+        "insight": {
+          "foundationStability": 4,
+          "tamMaPressure": -2
+        },
+        "delay": {
+          "playerCultivationProgress": 2,
+          "tamMaPressure": 2
+        }
+      },
+      "tags": [
+        "cultivation"
+      ]
+    },
+    {
+      "id": "random.opportunity.content_24",
+      "title": "Su kien noi mon 24",
+      "category": "opportunity",
+      "weight": 9,
+      "conditions": {
+        "chapters": [
+          "chapter_1_du_tan_khai_son",
+          "chapter_2_tong_mon_lap_the",
+          "chapter_3_kinh_chieu_cuu_thien",
+          "chapter_4_nhat_niem_dinh_dao"
+        ],
+        "minDay": 5,
+        "cooldownDays": 5
+      },
+      "actorRules": null,
+      "textTemplate": {
+        "body": "Su kien content 24 mo rong doi song tong mon va dao lo cua Nhat Niem Khai Tong."
+      },
+      "choices": [
+        {
+          "id": "steady",
+          "label": "Xu ly theo quy cu",
+          "outcome": "Giai quyet theo cach on dinh nhat."
+        },
+        {
+          "id": "insight",
+          "label": "Nhin thanh co hoi",
+          "outcome": "Thu khai thac them dao y va loi ich."
+        },
+        {
+          "id": "delay",
+          "label": "Tam de lai",
+          "outcome": "Khong xu ly manh tay ngay luc nay."
+        }
+      ],
+      "effects": {
+        "steady": {
+          "resources": {
+            "spiritStone": 6
+          },
+          "sectPrestige": 1
+        },
+        "insight": {
+          "addFlags": [
+            "minor_opportunity_logged"
+          ]
+        },
+        "delay": {
+          "resources": {
+            "spiritStone": -2
+          }
+        }
+      },
+      "tags": [
+        "trade"
+      ]
+    },
+    {
+      "id": "random.omen.content_25",
+      "title": "Su kien noi mon 25",
+      "category": "omen",
+      "weight": 10,
+      "conditions": {
+        "chapters": [
+          "chapter_1_du_tan_khai_son",
+          "chapter_2_tong_mon_lap_the"
+        ],
+        "minDay": 2,
+        "cooldownDays": 3
+      },
+      "actorRules": null,
+      "textTemplate": {
+        "body": "Su kien content 25 mo rong doi song tong mon va dao lo cua Nhat Niem Khai Tong."
+      },
+      "choices": [
+        {
+          "id": "steady",
+          "label": "Xu ly theo quy cu",
+          "outcome": "Giai quyet theo cach on dinh nhat."
+        },
+        {
+          "id": "insight",
+          "label": "Nhin thanh co hoi",
+          "outcome": "Thu khai thac them dao y va loi ich."
+        },
+        {
+          "id": "delay",
+          "label": "Tam de lai",
+          "outcome": "Khong xu ly manh tay ngay luc nay."
+        }
+      ],
+      "effects": {
+        "steady": {
+          "addFlags": [
+            "omen_recorded"
+          ],
+          "sectPrestige": 1
+        },
+        "insight": {
+          "foundationStability": 1
+        },
+        "delay": {
+          "sectPrestige": -1
+        }
+      },
+      "tags": [
+        "omen"
+      ]
+    },
+    {
+      "id": "random.opportunity.content_26",
+      "title": "Khach La Gui Huong Tin",
+      "category": "opportunity",
+      "weight": 8,
+      "conditions": {
+        "chapters": [
+          "chapter_2_tong_mon_lap_the",
+          "chapter_3_kinh_chieu_cuu_thien",
+          "chapter_4_nhat_niem_dinh_dao"
+        ],
+        "minDay": 4,
+        "cooldownDays": 4
+      },
+      "actorRules": null,
+      "textTemplate": {
+        "body": "Mot khach la de lai huong tin nho, noi rang ngoai son mon vua lo ra mot dau vet co vat dang gia."
+      },
+      "choices": [
+        {
+          "id": "steady",
+          "label": "Xu ly theo quy cu",
+          "outcome": "Cho nguoi ghi lai va chuan bi di tham do."
+        },
+        {
+          "id": "insight",
+          "label": "Nhin thanh co hoi",
+          "outcome": "Dau tu chut tai nguyen de doi manh moi."
+        },
+        {
+          "id": "delay",
+          "label": "Tam de lai",
+          "outcome": "Khong vo toi mo rong luc nay."
+        }
+      ],
+      "effects": {
+        "steady": {
+          "resources": {
+            "spiritStone": 4
+          },
+          "sectPrestige": 1
+        },
+        "insight": {
+          "addFlags": [
+            "minor_opportunity_logged"
+          ],
+          "playerCultivationProgress": 2
+        },
+        "delay": {
+          "resources": {
+            "spiritStone": -1
+          }
+        }
+      },
+      "tags": [
+        "trade"
+      ]
     }
   ]
 }

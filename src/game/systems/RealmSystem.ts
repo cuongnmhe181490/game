@@ -2,11 +2,13 @@ import { buildingCatalog, realmCatalog, type RealmDefinition } from '@/game/data
 import type { GameStateManager } from '@/game/state/GameStateManager';
 import type { BuildingId, GameState, RealmId, ResourceDeltaState } from '@/game/state/types';
 import { RESOURCE_IDS } from '@/game/state/types';
+import type { ArtifactPassiveBonuses } from '@/game/systems/ArtifactSystem';
+import { DiscipleSystem } from '@/game/systems/DiscipleSystem';
 import { SaveSystem } from '@/game/systems/LocalSaveStore';
 import { normalizeCatalogResourceDelta, ResourceSystem } from '@/game/systems/ResourceSystem';
 import { SectIdentitySystem } from '@/game/systems/SectIdentitySystem';
 import { TechniqueSystem } from '@/game/systems/TechniqueSystem';
-import type { ArtifactPassiveBonuses } from '@/game/systems/ArtifactSystem';
+import { TribulationSystem } from '@/game/systems/TribulationSystem';
 
 export interface CultivationGainBreakdown {
   amount: number;
@@ -38,7 +40,9 @@ export class RealmSystem {
     private readonly resourceSystem: ResourceSystem,
     private readonly techniqueSystem: TechniqueSystem,
     private readonly artifactBonusesProvider?: { getPassiveBonuses(snapshot?: Readonly<GameState>): ArtifactPassiveBonuses },
-    private readonly sectIdentitySystem?: SectIdentitySystem
+    private readonly sectIdentitySystem?: SectIdentitySystem,
+    private readonly tribulationSystem?: TribulationSystem,
+    private readonly discipleSystem?: DiscipleSystem
   ) {}
 
   getCurrentRealm(snapshot: Readonly<GameState> = this.stateManager.snapshot): RealmDefinition {
@@ -50,7 +54,7 @@ export class RealmSystem {
     return realmCatalog.realms.find((realm) => realm.order === currentRealm.order + 1) ?? null;
   }
 
-  addCultivationProgress(amount: number, reason = 'Tu hành thêm một nhịp.'): Readonly<GameState> {
+  addCultivationProgress(amount: number, reason = 'Tu hanh them mot nhip.'): Readonly<GameState> {
     const gain = Math.max(0, Math.trunc(amount));
     const snapshot = this.stateManager.update((draft) => {
       this.applyCultivationGainToDraft(draft, gain, reason);
@@ -76,29 +80,29 @@ export class RealmSystem {
       : 0;
 
     let amount = 2 + linhKhiBonus;
-    const lines: string[] = [`Nền cảnh giới ${currentRealm.name}: +${2 + linhKhiBonus}`];
+    const lines: string[] = [`Nen canh gioi ${currentRealm.name}: +${2 + linhKhiBonus}`];
 
     if (cultivation.cultivationMode === 'focused') {
       amount += 2;
-      lines.push('Chế độ tụ khí: +2');
+      lines.push('Che do tu khi: +2');
     } else {
       amount += 1;
-      lines.push('Chế độ bình ổn: +1');
+      lines.push('Che do binh on: +1');
     }
 
     if (tinhTuDuongLevel > 0) {
       amount += tinhTuDuongLevel;
-      lines.push(`Tĩnh Tu Đường: +${tinhTuDuongLevel}`);
+      lines.push(`Tinh Tu Duong: +${tinhTuDuongLevel}`);
     }
 
     if (typeof equipped.dailyCultivationProgress === 'number' && equipped.dailyCultivationProgress > 0) {
       amount += equipped.dailyCultivationProgress;
-      lines.push(`Công pháp chính: +${equipped.dailyCultivationProgress}`);
+      lines.push(`Cong phap chinh: +${equipped.dailyCultivationProgress}`);
     }
 
     if (artifactBonuses.dailyCultivationProgressBonus > 0) {
       amount += artifactBonuses.dailyCultivationProgressBonus;
-      lines.push(`Pháp khí hộ thân: +${artifactBonuses.dailyCultivationProgressBonus}`);
+      lines.push(`Phap khi ho than: +${artifactBonuses.dailyCultivationProgressBonus}`);
     }
 
     if ((sectModifiers.playerCultivationDaily ?? 0) !== 0) {
@@ -110,31 +114,31 @@ export class RealmSystem {
 
     if (typeof equipped.linhKhiDailyBonus === 'number' && equipped.linhKhiDailyBonus > 0) {
       resourceDelta.linhKhi = equipped.linhKhiDailyBonus;
-      lines.push(`Điều tức linh khí: +${equipped.linhKhiDailyBonus} linhKhi`);
+      lines.push(`Dieu tuc linh khi: +${equipped.linhKhiDailyBonus} linh khi`);
     }
 
     if (cultivation.foundationStability < 40) {
       amount -= 1;
-      lines.push('Nền căn xao động: -1');
+      lines.push('Nen can xao dong: -1');
     }
 
     if (cultivation.foundationStability < 25) {
       amount -= 1;
-      lines.push('Nền căn suy thêm: -1');
+      lines.push('Nen can suy them: -1');
     }
 
     if (cultivation.tamMaPressure >= 30) {
       amount -= 1;
-      lines.push('Tâm ma áp lực: -1');
+      lines.push('Tam ma ap luc: -1');
     }
 
     if (cultivation.tamMaPressure >= 60) {
       amount -= 1;
-      lines.push('Tâm niệm nhiễu nặng: -1');
+      lines.push('Tam niem nhieu nang: -1');
     }
 
     if (hoSonLevel > 0 && cultivation.cultivationMode === 'balanced') {
-      lines.push(`Hộ Sơn Trận Đài giữ tâm: -${hoSonLevel} tâm ma`);
+      lines.push(`Ho Son Tran Dai giu tam: -${hoSonLevel} tam ma`);
     }
 
     return {
@@ -160,7 +164,7 @@ export class RealmSystem {
     if (snapshot.player.cultivation.cultivationProgress < currentRealm.progressRequired) {
       return {
         eligible: false,
-        reason: `Tiến độ chưa đủ để vượt ${currentRealm.name}.`,
+        reason: `Tien do chua du de vuot ${currentRealm.name}.`,
         currentRealm,
         nextRealm
       };
@@ -174,7 +178,7 @@ export class RealmSystem {
       const buildingName = buildingCatalog.buildings.find((entry) => entry.id === missingBuilding)?.name ?? missingBuilding;
       return {
         eligible: false,
-        reason: `Thiếu công trình cần cho đột phá: ${buildingName}.`,
+        reason: `Thieu cong trinh can cho dot pha: ${buildingName}.`,
         currentRealm,
         nextRealm
       };
@@ -185,7 +189,7 @@ export class RealmSystem {
     if (!this.resourceSystem.canAfford(this.toNegativeDelta(cost))) {
       return {
         eligible: false,
-        reason: `Tài nguyên chưa đủ để đột phá ${nextRealm.name}.`,
+        reason: `Tai nguyen chua du de dot pha ${nextRealm.name}.`,
         currentRealm,
         nextRealm
       };
@@ -196,7 +200,7 @@ export class RealmSystem {
     if (missingFlag) {
       return {
         eligible: false,
-        reason: `Chưa đạt điều kiện truyện: ${missingFlag}.`,
+        reason: `Chua dat dieu kien truyen: ${missingFlag}.`,
         currentRealm,
         nextRealm
       };
@@ -204,7 +208,7 @@ export class RealmSystem {
 
     return {
       eligible: true,
-      reason: `Đủ điều kiện đột phá lên ${nextRealm.name}.`,
+      reason: `Du dieu kien dot pha len ${nextRealm.name}.`,
       currentRealm,
       nextRealm
     };
@@ -225,6 +229,8 @@ export class RealmSystem {
     const nextRealm = check.nextRealm;
     const cost = normalizeCatalogResourceDelta(nextRealm.breakthroughRequirements.requiredResources);
     const equippedEffects = this.techniqueSystem.getEquippedPassiveEffects(before);
+    const tribulation = this.tribulationSystem?.assess(before);
+    const previousReputation = before.sect.reputation;
 
     const snapshot = this.stateManager.update((draft) => {
       for (const resourceId of RESOURCE_IDS) {
@@ -232,39 +238,68 @@ export class RealmSystem {
       }
 
       const cultivation = draft.player.cultivation;
-      cultivation.currentRealmId = nextRealm.id as RealmId;
-      cultivation.cultivationProgress = Math.max(0, cultivation.cultivationProgress - check.currentRealm.progressRequired);
-      cultivation.breakthroughReady = false;
-      cultivation.foundationStability = clampPercent(
-        cultivation.foundationStability
-          - (cultivation.foundationStability < 50 ? 4 : 2)
-          + (equippedEffects.foundationStabilityBonus ?? 0)
-          + (typeof nextRealm.unlocks.foundationStabilityBonus === 'number' ? nextRealm.unlocks.foundationStabilityBonus : 0)
-      );
-      cultivation.tamMaPressure = clampPercent(
-        cultivation.tamMaPressure
-          + (cultivation.foundationStability < 45 ? 6 : 2)
-          - (equippedEffects.tamMaPressureMitigation ?? 0)
-      );
-      cultivation.lastSummary = `Đã đột phá lên ${nextRealm.name}.`;
-      this.applyRealmUnlocks(draft, nextRealm);
+      cultivation.breakthroughBonus = 0;
 
-      const reachedFlag = `realm_${nextRealm.id}_reached`;
-      if (!draft.story.storyFlags.includes(reachedFlag)) {
-        draft.story.storyFlags.push(reachedFlag);
+      if (!tribulation || tribulation.outcome === 'success') {
+        cultivation.currentRealmId = nextRealm.id as RealmId;
+        cultivation.cultivationProgress = Math.max(0, cultivation.cultivationProgress - check.currentRealm.progressRequired);
+        cultivation.breakthroughReady = false;
+        cultivation.foundationStability = clampPercent(
+          cultivation.foundationStability
+            - (cultivation.foundationStability < 50 ? 4 : 2)
+            + (equippedEffects.foundationStabilityBonus ?? 0)
+            + (typeof nextRealm.unlocks.foundationStabilityBonus === 'number' ? nextRealm.unlocks.foundationStabilityBonus : 0)
+        );
+        cultivation.tamMaPressure = clampPercent(
+          cultivation.tamMaPressure
+            + (cultivation.foundationStability < 45 ? 6 : 2)
+            - (equippedEffects.tamMaPressureMitigation ?? 0)
+        );
+        cultivation.lastSummary = `Da do qua thien kiep va dot pha len ${nextRealm.name}.`;
+        draft.sect.reputation += 6;
+        draft.sect.prestige += 2;
+        this.applyRealmUnlocks(draft, nextRealm);
+
+        const reachedFlag = `realm_${nextRealm.id}_reached`;
+        if (!draft.story.storyFlags.includes(reachedFlag)) {
+          draft.story.storyFlags.push(reachedFlag);
+        }
+
+        if (!draft.story.storyFlags.includes('first_breakthrough_done')) {
+          draft.story.storyFlags.push('first_breakthrough_done');
+        }
+      } else if (tribulation.outcome === 'partial') {
+        cultivation.cultivationProgress = Math.max(
+          check.currentRealm.progressRequired - 4,
+          cultivation.cultivationProgress - 2
+        );
+        cultivation.breakthroughReady = false;
+        cultivation.foundationStability = clampPercent(cultivation.foundationStability - 2);
+        cultivation.tamMaPressure = clampPercent(cultivation.tamMaPressure + 4);
+        cultivation.lastSummary = `Kiep van da qua nua nhat. Can them mot nhip on dinh truoc khi vuot ${nextRealm.name}.`;
+        draft.sect.reputation += 2;
+      } else {
+        cultivation.cultivationProgress = Math.max(
+          0,
+          cultivation.cultivationProgress - Math.max(4, Math.floor(check.currentRealm.progressRequired / 5))
+        );
+        cultivation.breakthroughReady = false;
+        cultivation.foundationStability = clampPercent(cultivation.foundationStability - 6);
+        cultivation.tamMaPressure = clampPercent(cultivation.tamMaPressure + 8);
+        cultivation.lastSummary = 'Thien kiep lech pha, kinh mach chao dao. Can hoan than duong tuc truoc khi thu lai.';
       }
 
-      if (!draft.story.storyFlags.includes('first_breakthrough_done')) {
-        draft.story.storyFlags.push('first_breakthrough_done');
+      if (draft.sect.reputation > previousReputation) {
+        this.discipleSystem?.applyReputationMilestonesInDraft(draft, previousReputation);
       }
 
-      draft.ui.statusMessage = `Đã đột phá lên ${nextRealm.name}.`;
+      draft.ui.statusMessage = cultivation.lastSummary;
     });
 
     this.saveSystem.saveGame(snapshot);
     return {
-      ok: true,
-      message: `Đã đột phá lên ${nextRealm.name}.`,
+      ok: !tribulation || tribulation.outcome === 'success',
+      message: snapshot.player.cultivation.lastSummary,
       snapshot
     };
   }
@@ -318,4 +353,3 @@ export class RealmSystem {
     return result;
   }
 }
-

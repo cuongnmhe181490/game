@@ -125,6 +125,8 @@ export class FeedbackSystem {
   private audioContext: AudioContext | null = null;
   private unlocked = false;
   private muted = false;
+  private masterVolume = 0.8;
+  private sfxVolume = 0.8;
   private readonly lastPlayedAt = new Map<FeedbackCue, number>();
 
   constructor(private readonly mutedStorageKey = AUDIO_MUTED_STORAGE_KEY) {
@@ -139,6 +141,11 @@ export class FeedbackSystem {
     this.muted = !this.muted;
     this.writeMutedPreference(this.muted);
     return this.muted;
+  }
+
+  setVolumePreferences(masterVolume: number, sfxVolume: number): void {
+    this.masterVolume = Math.max(0, Math.min(1, masterVolume));
+    this.sfxVolume = Math.max(0, Math.min(1, sfxVolume));
   }
 
   unlockAudio(): void {
@@ -230,7 +237,8 @@ export class FeedbackSystem {
     oscillator.type = step.type ?? 'sine';
     oscillator.frequency.setValueAtTime(step.frequency, startAt);
     gain.gain.setValueAtTime(0.0001, startAt);
-    gain.gain.linearRampToValueAtTime(step.volume, startAt + 0.01);
+    const finalVolume = Math.max(0.0001, step.volume * this.masterVolume * this.sfxVolume);
+    gain.gain.linearRampToValueAtTime(finalVolume, startAt + 0.01);
     gain.gain.exponentialRampToValueAtTime(0.0001, endAt);
 
     oscillator.connect(gain);

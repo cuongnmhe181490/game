@@ -1,11 +1,20 @@
 import Phaser from 'phaser';
 
-import { getExplorationSystem, getFeedbackSystem, getSaveStore, getStateManager } from '@/game/config/registry';
+import { Icons } from '@/game/config/assets';
+import { getBeastSystem, getExplorationSystem, getFeedbackSystem, getRealmSystem, getSaveStore, getStateManager } from '@/game/config/registry';
 import { SCENE_KEYS } from '@/game/scenes/sceneKeys';
 import type { BossDefinition, EnemyDefinition, ExplorationMapDefinition } from '@/game/data';
 import type { ExplorationRunOutcome } from '@/game/entities';
 import type { ResourceDeltaState } from '@/game/state/types';
-import { EventModal, createTextButton, drawInsetPanel, menuPalette } from '@/game/ui';
+import {
+  EventModal,
+  Header,
+  NavBar,
+  PanelFrame,
+  ResourceBar,
+  createPrimaryButton,
+  menuPalette
+} from '@/game/ui';
 
 type PhysicsCircle = Phaser.GameObjects.Arc & { body: Phaser.Physics.Arcade.Body };
 type PhysicsRectangle = Phaser.GameObjects.Rectangle & { body: Phaser.Physics.Arcade.Body };
@@ -163,6 +172,9 @@ export class ExplorationScene extends Phaser.Scene {
   private runResolved = false;
   private inputLocked = false;
   private hudDirty = true;
+  private headerShell!: Header;
+  private resourceBars: ResourceBar[] = [];
+  private navBar!: NavBar;
 
   constructor() {
     super(SCENE_KEYS.exploration);
@@ -192,6 +204,15 @@ export class ExplorationScene extends Phaser.Scene {
 
     this.mapId = map.id;
     this.cameras.main.setBackgroundColor(getMapTheme(map).background);
+    const openSystemMenu = (): void => {
+      if (!this.scene.isActive(SCENE_KEYS.systemMenu)) {
+        this.scene.launch(SCENE_KEYS.systemMenu, { returnScene: SCENE_KEYS.exploration });
+      }
+    };
+    this.input.keyboard?.on('keydown-ESC', openSystemMenu);
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
+      this.input.keyboard?.off('keydown-ESC', openSystemMenu);
+    });
     this.physics.world.setBounds(0, 0, 1920, 1080);
     this.cameras.main.setBounds(0, 0, 1920, 1080);
 
@@ -340,76 +361,130 @@ export class ExplorationScene extends Phaser.Scene {
   }
 
   private createHud(map: ExplorationMapDefinition): void {
-    drawInsetPanel(this, {
-      x: 16,
-      y: 14,
-      width: 540,
-      height: 190,
-      fill: menuPalette.panel,
-      alpha: 0.86
+    const snapshot = getStateManager(this).snapshot;
+    const profile = getExplorationSystem(this).getPlayerCombatProfile();
+    const beastSupport = getBeastSystem(this).getExplorationBonuses(snapshot);
+    const currentRealm = getRealmSystem(this).getCurrentRealm(snapshot);
+    const { width, height } = this.scale;
+    const shellWidth = Math.min(430, width - 32);
+    const shellX = Math.floor((width - shellWidth) / 2);
+    const resourceStartY = 116;
+    const navY = height - 92;
+    const overviewY = 240;
+    const overviewHeight = 146;
+    const journeyY = overviewY + overviewHeight + 12;
+    const journeyHeight = Math.max(156, navY - journeyY - 12);
+
+    this.headerShell = new Header(this, {
+      width: shellWidth,
+      playerName: snapshot.player.name,
+      playerTitle: map.name,
+      realm: `${currentRealm.name} • Bí cảnh`,
+      avatarKey: Icons.ui.sectCrest
+    }).setPosition(shellX, 16).setScrollFactor(0);
+
+    this.resourceBars = [
+      new ResourceBar(this, {
+        width: shellWidth - 92,
+        name: 'Sinh lực',
+        current: this.playerHealth,
+        max: this.maxPlayerHealth,
+        iconKey: Icons.resource.karma,
+        color: 'blood'
+      }),
+      new ResourceBar(this, {
+        width: shellWidth - 92,
+        name: 'Tu vi',
+        current: snapshot.player.cultivation.cultivationProgress + this.pendingCultivationProgress,
+        max: currentRealm.progressRequired,
+        iconKey: Icons.resource.spiritualEnergy,
+        color: 'gold'
+      }),
+      new ResourceBar(this, {
+        width: shellWidth - 92,
+        name: 'Linh thạch',
+        current: snapshot.resources.linhThach + (this.pendingRewards.linhThach ?? 0),
+        max: Math.max(snapshot.resources.linhThach + (this.pendingRewards.linhThach ?? 0), 10000),
+        iconKey: Icons.resource.spiritStone,
+        color: 'gold'
+      })
+    ];
+    this.resourceBars.forEach((bar, index) => {
+      bar.setPosition(shellX + 76, resourceStartY + index * 40).setScrollFactor(0);
+    });
+
+    const overviewFrame = new PanelFrame(this, {
+      x: shellX,
+      y: overviewY,
+      width: shellWidth,
+      height: overviewHeight,
+      title: 'Trạng thái bí cảnh',
+      subtitle: 'Theo dõi mục tiêu, boss, và điều khiển nhanh'
     }).setScrollFactor(0);
-    drawInsetPanel(this, {
-      x: 16,
-      y: 642,
-      width: 556,
-      height: 124,
-      fill: menuPalette.panelAlt,
-      alpha: 0.9
+    const journeyFrame = new PanelFrame(this, {
+      x: shellX,
+      y: journeyY,
+      width: shellWidth,
+      height: journeyHeight,
+      title: 'Nhịp chuyến đi',
+      subtitle: 'Tổng kết thưởng và biến động gần nhất'
     }).setScrollFactor(0);
 
-    this.add.text(32, 24, 'Trang thai tham hiem', {
-      color: menuPalette.textStrong,
-      fontFamily: '"Palatino Linotype", "Book Antiqua", Georgia, serif',
-      fontSize: '22px'
-    }).setScrollFactor(0);
-
-    this.add.text(32, 654, 'Tong ket chuyen di', {
-      color: menuPalette.textStrong,
-      fontFamily: '"Palatino Linotype", "Book Antiqua", Georgia, serif',
-      fontSize: '21px'
-    }).setScrollFactor(0);
-
-    this.hudText = this.add.text(32, 56, '', {
+    this.hudText = this.add.text(0, 0, '', {
       color: menuPalette.textStrong,
       fontFamily: '"Segoe UI", Tahoma, sans-serif',
-      fontSize: '16px'
-    }).setScrollFactor(0);
-
-    this.bossText = this.add.text(32, 84, '', {
+      fontSize: '13px',
+      lineSpacing: 4,
+      wordWrap: { width: shellWidth - 36 }
+    });
+    this.bossText = this.add.text(0, 60, '', {
       color: menuPalette.warningText,
       fontFamily: '"Segoe UI", Tahoma, sans-serif',
-      fontSize: '15px'
-    }).setScrollFactor(0);
+      fontSize: '13px',
+      lineSpacing: 4,
+      wordWrap: { width: shellWidth - 36 }
+    });
+    overviewFrame.content.add([this.hudText, this.bossText]);
 
-    this.logText = this.add.text(32, 112, '', {
-      color: menuPalette.textMuted,
-      fontFamily: '"Segoe UI", Tahoma, sans-serif',
-      fontSize: '15px',
-      lineSpacing: 5,
-      wordWrap: { width: 500 }
-    }).setScrollFactor(0);
-
-    this.statusText = this.add.text(32, 688, map.name, {
-      color: menuPalette.accentText,
-      fontFamily: '"Segoe UI", Tahoma, sans-serif',
-      fontSize: '16px',
-      lineSpacing: 5,
-      wordWrap: { width: 520 }
-    }).setScrollFactor(0);
-
-    const retreatButton = createTextButton(this, {
-      x: 1120,
-      y: 56,
-      width: 180,
-      label: 'Rut lui',
-      detail: 'Mang phan thuong dang co ve sect',
+    const retreatButton = createPrimaryButton(this, {
+      width: shellWidth - 36,
+      label: 'Rút lui an toàn',
+      detail: 'Mang phần thưởng hiện có về tông môn',
       onClick: () => {
         if (!this.inputLocked && !this.runResolved) {
-          this.finishRun('retreat', false, ['Tu rut lui truoc khi cham sau hon vao dia gioi nay.']);
+          this.finishRun('retreat', false, ['Tự rút về trước khi chạm sâu hơn vào địa giới này.']);
         }
       }
+    }).setPosition(0, overviewHeight - 74).setScrollFactor(0);
+    overviewFrame.content.add(retreatButton);
+
+    this.statusText = this.add.text(0, 0, map.name, {
+      color: menuPalette.accentText,
+      fontFamily: '"Segoe UI", Tahoma, sans-serif',
+      fontSize: '12px',
+      lineSpacing: 4,
+      wordWrap: { width: shellWidth - 36 }
     });
-    retreatButton.setScrollFactor(0);
+    this.logText = this.add.text(0, 60, '', {
+      color: menuPalette.textMuted,
+      fontFamily: '"Segoe UI", Tahoma, sans-serif',
+      fontSize: '12px',
+      lineSpacing: 4,
+      wordWrap: { width: shellWidth - 36 }
+    });
+    journeyFrame.content.add([this.statusText, this.logText]);
+
+    this.statusLines.push(beastSupport.summary);
+    this.statusLines = this.statusLines.slice(-5);
+
+    this.navBar = new NavBar(this, shellX, navY, shellWidth, [
+      { id: 'sect', label: 'Tông môn', iconKey: Icons.ui.sectCrest, onClick: () => this.scene.start(SCENE_KEYS.sect) },
+      { id: 'cultivate', label: 'Tu hành', iconKey: Icons.status.qiRefining, onClick: () => this.scene.start(SCENE_KEYS.sect) },
+      { id: 'explore', label: 'Bí cảnh', iconKey: Icons.resource.spiritualEnergy, badge: this.eventSpots.length, onClick: () => undefined },
+      { id: 'inventory', label: 'Túi đồ', iconKey: Icons.resource.spiritStone, onClick: () => this.scene.start(SCENE_KEYS.inventory) },
+      { id: 'beasts', label: 'Linh thú', iconKey: Icons.realm.luyenKhi, onClick: () => this.scene.start(SCENE_KEYS.beasts) }
+    ]);
+    this.navBar.setActive('explore');
   }
 
   private createControls(): void {
@@ -820,31 +895,49 @@ export class ExplorationScene extends Phaser.Scene {
 
   private refreshHud(): void {
     const map = getExplorationSystem(this).getMapDefinition(this.mapId);
+    const snapshot = getStateManager(this).snapshot;
+    const beastSupport = getBeastSystem(this).getExplorationBonuses(snapshot);
+    const currentRealm = getRealmSystem(this).getCurrentRealm(snapshot);
     const livingBoss = this.enemyRuntimes.find((enemy) => enemy.isBoss && enemy.alive);
     const itemSummary = Object.entries(this.pendingItems)
       .map(([itemId, amount]) => `${itemId} x${amount}`)
       .join(', ');
 
+    this.headerShell
+      .setPlayerName(snapshot.player.name)
+      .setPlayerTitle(`${map?.name ?? 'Bí cảnh'} • Nguy cơ ${map?.riskLevel ?? 1}`)
+      .setRealm(`${currentRealm.name} • ${livingBoss ? 'Boss còn sống' : 'Đã phá vọng giữ'}`);
+    this.resourceBars[0]?.setValue(this.playerHealth, this.maxPlayerHealth);
+    this.resourceBars[1]?.setValue(
+      snapshot.player.cultivation.cultivationProgress + this.pendingCultivationProgress,
+      currentRealm.progressRequired
+    );
+    this.resourceBars[2]?.setValue(
+      snapshot.resources.linhThach + (this.pendingRewards.linhThach ?? 0),
+      Math.max(snapshot.resources.linhThach + (this.pendingRewards.linhThach ?? 0), 10000)
+    );
+
     this.hudText.setText([
-      `HP ${this.playerHealth}/${this.maxPlayerHealth}`,
-      `Thu duoc: ${formatRewards(this.pendingRewards)}`,
-      `Vat pham dac biet: ${itemSummary || 'chua co'}`,
-      `Tien ich chuyen di: +${this.pendingCultivationProgress} tu hanh | +${this.pendingSectPrestige} uy danh`,
-      'Dieu khien: WASD hoac mui ten | SPACE danh | R rut lui'
+      `Thu được: ${formatRewards(this.pendingRewards)}`,
+      `Vật phẩm đặc biệt: ${itemSummary || 'chưa có'}`,
+      `Tiến ích: +${this.pendingCultivationProgress} tu hành | +${this.pendingSectPrestige} uy danh`,
+      `Linh thú hỗ trợ: ${beastSupport.activeBeastName ? `${beastSupport.activeBeastName} (+${beastSupport.attackBonus} ATK, +${beastSupport.maxHealthBonus} HP)` : 'chưa có'}`,
+      'Điều khiển: WASD hoặc mũi tên | SPACE đánh | R rút lui'
     ]);
 
     this.bossText.setText(
       livingBoss
         ? `Boss: ${livingBoss.definition.name} | HP ${livingBoss.currentHealth}/${livingBoss.definition.maxHealth}`
-        : `Boss: ${map?.name ?? 'Khu vuc'} da mat the giu sau.`
+        : `Boss: ${map?.name ?? 'Khu vực'} đã mất thế giữ sau.`
     );
     this.bossText.setColor(livingBoss ? menuPalette.warningText : menuPalette.successText);
 
-    this.logText.setText(this.statusLines.slice(-5).join('\n'));
+    this.logText.setText(this.statusLines.slice(-4).join('\n'));
     this.statusText.setText(
-      `${map?.name ?? 'Khu vuc'} | Nguy co ${map?.riskLevel ?? 1} | Khuyen nghi ${map?.recommendedRealm ?? 'pham_the'} | Event ${this.eventSpots.filter((spot) => spot.triggered).length}/${this.eventSpots.length}
-Muc tieu: ${livingBoss ? 'Ha boss hoac rut lui an toan voi phan thuong dang co.' : 'Da pha vong giu sau, san sang quay ve sect.'}
-Nhip gan nhat: ${this.statusLines[this.statusLines.length - 1] ?? 'Dang do tham dia hinh.'}`
+      `${map?.name ?? 'Khu vực'} | Nguy cơ ${map?.riskLevel ?? 1} | Khuyến nghị ${map?.recommendedRealm ?? 'pham_the'} | Event ${this.eventSpots.filter((spot) => spot.triggered).length}/${this.eventSpots.length}
+Mục tiêu: ${livingBoss ? 'Hạ boss hoặc rút lui an toàn với phần thưởng đang có.' : 'Đã phá vọng giữ sau, sẵn sàng quay về sect.'}
+Hỗ trợ linh thú: ${beastSupport.activeBeastName ? beastSupport.summary : 'Chưa có linh thú đồng hành.'}
+Nhịp gần nhất: ${this.statusLines[this.statusLines.length - 1] ?? 'Đang dò thám địa hình.'}`
     );
     this.statusText.setColor(
       this.latestStatusTone === 'major'
@@ -876,4 +969,3 @@ Nhip gan nhat: ${this.statusLines[this.statusLines.length - 1] ?? 'Dang do tham 
     this.hudDirty = true;
   }
 }
-
