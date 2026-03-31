@@ -33,6 +33,7 @@ export class MainMenuScene extends Phaser.Scene {
     const shellX = Math.floor((width - shellWidth) / 2);
     const shellY = Math.floor((height - shellHeight) / 2);
     const panelWidth = shellWidth - 32;
+    const halfButtonWidth = Math.floor((panelWidth - 46) / 2);
     const filledSlots = slotSummaries.filter((slot) => slot.hasSave).length;
     const hasMeaningfulProgress = snapshot.time.day > 1 || snapshot.events.history.length > 0 || snapshot.exploration.totalRuns > 0;
     const hasAnySave = saveSummary.source !== 'none';
@@ -49,11 +50,11 @@ export class MainMenuScene extends Phaser.Scene {
     shell.lineStyle(1, menuPalette.frame, 0.45);
     shell.strokeRoundedRect(shellX + 10, shellY + 10, shellWidth - 20, shellHeight - 20, 28);
 
-    const crest = this.add.image(shellX + shellWidth / 2, shellY + 54, Icons.ui.sectCrest)
+    this.add.image(shellX + shellWidth / 2, shellY + 54, Icons.ui.sectCrest)
       .setDisplaySize(52, 52)
       .setAlpha(this.textures.exists(Icons.ui.sectCrest) ? 0.92 : 0);
 
-    this.add.text(shellX + shellWidth / 2, shellY + 100, 'Nhất Niệm Khai Tông', {
+    this.add.text(shellX + shellWidth / 2, shellY + 100, 'Nhat Niem Khai Tong', {
       color: menuPalette.textStrong,
       fontFamily: '"Palatino Linotype", "Book Antiqua", Georgia, serif',
       fontSize: '34px'
@@ -72,17 +73,17 @@ export class MainMenuScene extends Phaser.Scene {
     }).setOrigin(0.5);
 
     const primaryLabel = endingReached
-      ? 'Xem lại kết cục'
+      ? 'Xem lai ket cuc'
       : hasMeaningfulProgress
-        ? 'Tiếp tục'
-        : 'Bắt đầu';
+        ? 'Tiep tuc'
+        : 'Bat dau';
     const primaryDetail = hasMeaningfulProgress
       ? endingReached
-        ? 'Mở lại kết cục của save hiện tại'
-        : 'Vào lại run đang chơi'
+        ? 'Mo lai ket cuc cua save hien tai'
+        : 'Vao lai run dang choi'
       : hasAnySave
-        ? 'Dùng save đang có trong slot hiện tại'
-        : 'Tạo hành trình đầu tiên';
+        ? 'Dung save dang co trong slot hien tai'
+        : 'Tao hanh trinh dau tien';
 
     let panelY = shellY + 192;
 
@@ -91,70 +92,74 @@ export class MainMenuScene extends Phaser.Scene {
       y: panelY,
       width: panelWidth,
       height: canReplay ? 332 : 252,
-      title: 'Hành trình',
-      subtitle: 'Vào game, bắt đầu run mới, hoặc tiếp tục từ save slot hiện có.',
+      title: 'Hanh trinh',
+      subtitle: 'Vao game, bat dau run moi, hoac tiep tuc tu save slot hien co.',
       iconKey: Icons.ui.sectCrest
     });
     this.add.existing(journeyFrame.root);
 
-    const startAction = createPrimaryButton(this, {
-      width: panelWidth - 36,
-      label: primaryLabel,
-      detail: primaryDetail,
-      onClick: () => {
-        this.scene.start(endingReached ? SCENE_KEYS.ending : SCENE_KEYS.sect);
-      }
-    }).setPosition(0, 0);
-
-    const newGameAction = createSecondaryButton(this, {
-      width: panelWidth - 36,
-      label: 'Game mới',
-      detail: canReplay
-        ? 'Run sạch từ Chương 1, không mang theo dư âm replay'
-        : 'Tạo lại điểm bắt đầu chương 1',
-      onClick: () => {
-        saveSystem.clear();
-        const nextSnapshot = stateManager.replace(createGameState());
-        saveSystem.saveGame(nextSnapshot);
-        this.scene.start(SCENE_KEYS.sect);
-      }
-    }).setPosition(0, 64);
-
-    journeyFrame.content.add([startAction, newGameAction]);
-
-    if (canReplay) {
-      const replayAction = createSecondaryButton(this, {
+    journeyFrame.content.add(
+      createPrimaryButton(this, {
         width: panelWidth - 36,
-        label: 'Hành trình mới',
-        detail: replayModifier
-          ? `Mang theo ${replayModifier.label}: ${replayModifier.summary}`
-          : 'Bắt đầu vòng replay mới sau khi đã clear base game',
+        label: primaryLabel,
+        detail: primaryDetail,
         onClick: () => {
-          const nextSnapshot = saveSystem.createReplaySave();
-          stateManager.replace(nextSnapshot);
+          this.scene.start(endingReached ? SCENE_KEYS.ending : SCENE_KEYS.sect);
+        }
+      }).setPosition(0, 0)
+    );
+
+    journeyFrame.content.add(
+      createSecondaryButton(this, {
+        width: panelWidth - 36,
+        label: 'Game moi',
+        detail: canReplay
+          ? 'Run sach tu Chuong 1, khong mang theo du am replay'
+          : 'Tao lai diem bat dau Chuong 1',
+        onClick: () => {
+          saveSystem.clear();
+          const nextSnapshot = stateManager.replace(createGameState());
+          saveSystem.saveGame(nextSnapshot);
           this.scene.start(SCENE_KEYS.sect);
         }
-      }).setPosition(0, 128);
-      journeyFrame.content.add(replayAction);
+      }).setPosition(0, 64)
+    );
+
+    if (canReplay) {
+      journeyFrame.content.add(
+        createSecondaryButton(this, {
+          width: panelWidth - 36,
+          label: 'Hanh trinh moi',
+          detail: replayModifier
+            ? `Mang theo ${replayModifier.label}: ${replayModifier.summary}`
+            : 'Bat dau vong replay moi sau khi da clear base game',
+          onClick: () => {
+            const nextSnapshot = saveSystem.createReplaySave();
+            stateManager.replace(nextSnapshot);
+            this.scene.start(SCENE_KEYS.sect);
+          }
+        }).setPosition(0, 128)
+      );
     }
 
-    const loadY = canReplay ? 196 : 128;
-    const settingsY = canReplay ? 196 : 128;
-    const loadButton = createSecondaryButton(this, {
-      width: Math.floor((panelWidth - 46) / 2),
-      label: 'Load Game',
-      detail: `${filledSlots}/${slotSummaries.length} slot có dữ liệu`,
-      onClick: () => this.scene.start(SCENE_KEYS.saveSlots, { returnScene: SCENE_KEYS.mainMenu })
-    }).setPosition(0, loadY);
+    const lowerActionY = canReplay ? 196 : 128;
+    journeyFrame.content.add(
+      createSecondaryButton(this, {
+        width: halfButtonWidth,
+        label: 'Load Game',
+        detail: `${filledSlots}/${slotSummaries.length} slot co du lieu`,
+        onClick: () => this.scene.start(SCENE_KEYS.saveSlots, { returnScene: SCENE_KEYS.mainMenu })
+      }).setPosition(0, lowerActionY)
+    );
 
-    const settingsButton = createSecondaryButton(this, {
-      width: Math.floor((panelWidth - 46) / 2),
-      label: 'Settings',
-      detail: 'Âm thanh, giao diện, auto-save',
-      onClick: () => this.scene.start(SCENE_KEYS.settings, { returnScene: SCENE_KEYS.mainMenu })
-    }).setPosition(Math.floor((panelWidth - 46) / 2) + 10, settingsY);
-
-    journeyFrame.content.add([loadButton, settingsButton]);
+    journeyFrame.content.add(
+      createSecondaryButton(this, {
+        width: halfButtonWidth,
+        label: 'Settings',
+        detail: 'Am thanh, giao dien, auto-save',
+        onClick: () => this.scene.start(SCENE_KEYS.settings, { returnScene: SCENE_KEYS.mainMenu })
+      }).setPosition(halfButtonWidth + 10, lowerActionY)
+    );
 
     panelY += canReplay ? 348 : 268;
 
@@ -163,17 +168,17 @@ export class MainMenuScene extends Phaser.Scene {
       y: panelY,
       width: panelWidth,
       height: 276,
-      title: 'Tình trạng save',
-      subtitle: 'Tóm tắt ngắn để biết mình đang tiếp tục gì trước khi vào game.'
+      title: 'Tinh trang save',
+      subtitle: 'Tom tat ngan de biet minh dang tiep tuc gi truoc khi vao game.'
     });
     this.add.existing(summaryFrame.root);
 
     const summaryLines = [
-      `Slot hiện tại: ${saveSystem.getCurrentSlot()} | Save: ${saveSummary.source === 'none' ? 'chưa có' : saveSummary.source === 'backup' ? 'đang dùng backup' : 'ổn định'}`,
-      `Cảnh giới: ${snapshot.player.cultivation.currentRealmId} | Ngày ${snapshot.time.day}/${snapshot.time.month}/${snapshot.time.year}`,
-      `Chương: ${snapshot.story.currentChapterId}`,
-      `Kết cục: ${saveSummary.endingCompleted ? saveSummary.endingPath ?? 'đã hoàn tất' : 'chưa đạt'} | Đã clear: ${replayMeta.totalClearCount}`,
-      `Replay: ${replayModifier ? replayModifier.label : 'chưa mở'}`
+      `Slot hien tai: ${saveSystem.getCurrentSlot()} | Save: ${saveSummary.source === 'none' ? 'chua co' : saveSummary.source === 'backup' ? 'dang dung backup' : 'on dinh'}`,
+      `Canh gioi: ${snapshot.player.cultivation.currentRealmId} | Ngay ${snapshot.time.day}/${snapshot.time.month}/${snapshot.time.year}`,
+      `Chuong: ${snapshot.story.currentChapterId}`,
+      `Ket cuc: ${saveSummary.endingCompleted ? saveSummary.endingPath ?? 'da hoan tat' : 'chua dat'} | Da clear: ${replayMeta.totalClearCount}`,
+      `Replay: ${replayModifier ? replayModifier.label : 'chua mo'}`
     ];
 
     summaryLines.forEach((line, index) => {
@@ -186,44 +191,45 @@ export class MainMenuScene extends Phaser.Scene {
       }));
     });
 
-    const exportButton = createSecondaryButton(this, {
-      width: Math.floor((panelWidth - 46) / 2),
-      label: 'Xuất save',
-      detail: 'Tải JSON để backup hoặc gửi bug report',
-      onClick: () => {
-        const raw = saveSystem.exportCurrentSave();
+    summaryFrame.content.add(
+      createSecondaryButton(this, {
+        width: halfButtonWidth,
+        label: 'Xuat save',
+        detail: 'Tai JSON de backup hoac gui bug report',
+        onClick: () => {
+          const raw = saveSystem.exportCurrentSave();
+          if (!raw) {
+            return;
+          }
 
-        if (!raw) {
-          return;
+          const blob = new Blob([raw], { type: 'application/json' });
+          const url = window.URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = `nhat-niem-khai-tong-${PLAYTEST_BUILD_ID}-save.json`;
+          link.click();
+          window.URL.revokeObjectURL(url);
         }
+      }).setPosition(0, 150)
+    );
 
-        const blob = new Blob([raw], { type: 'application/json' });
-        const url = window.URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = `nhat-niem-khai-tong-${PLAYTEST_BUILD_ID}-save.json`;
-        link.click();
-        window.URL.revokeObjectURL(url);
-      }
-    }).setPosition(0, 150);
-
-    const resetButton = createSecondaryButton(this, {
-      width: Math.floor((panelWidth - 46) / 2),
-      label: 'Xóa run',
-      detail: canReplay ? 'Xóa save hiện tại, giữ tiến trình replay' : 'Xóa save và tạo lại điểm đầu',
-      onClick: () => {
-        saveSystem.clear();
-        stateManager.replace(createGameState());
-        const nextSnapshot = stateManager.update((draft) => {
-          draft.ui.statusMessage = canReplay
-            ? 'Đã xóa run hiện tại. Ending đã thấy và replay meta vẫn còn.'
-            : 'Đã xóa dữ liệu save hiện tại và tạo lại Chương 1.';
-        });
-        saveSystem.saveGame(nextSnapshot);
-        this.scene.start(SCENE_KEYS.sect);
-      }
-    }).setPosition(Math.floor((panelWidth - 46) / 2) + 10, 150);
-
-    summaryFrame.content.add([exportButton, resetButton]);
+    summaryFrame.content.add(
+      createSecondaryButton(this, {
+        width: halfButtonWidth,
+        label: 'Xoa run',
+        detail: canReplay ? 'Xoa save hien tai, giu tien trinh replay' : 'Xoa save va tao lai diem dau',
+        onClick: () => {
+          saveSystem.clear();
+          stateManager.replace(createGameState());
+          const nextSnapshot = stateManager.update((draft) => {
+            draft.ui.statusMessage = canReplay
+              ? 'Da xoa run hien tai. Ending da thay va replay meta van con.'
+              : 'Da xoa du lieu save hien tai va tao lai Chuong 1.';
+          });
+          saveSystem.saveGame(nextSnapshot);
+          this.scene.start(SCENE_KEYS.sect);
+        }
+      }).setPosition(halfButtonWidth + 10, 150)
+    );
   }
 }

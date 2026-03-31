@@ -3,7 +3,7 @@ import Phaser from 'phaser';
 import { getSaveStore, getStateManager } from '@/game/config/registry';
 import { SCENE_KEYS } from '@/game/scenes/sceneKeys';
 import { createGameState } from '@/game/state';
-import { createTextButton, drawSceneFrame, PanelFrame, menuPalette } from '@/game/ui';
+import { createPrimaryButton, createSecondaryButton, drawSceneFrame, PanelFrame, menuPalette } from '@/game/ui';
 
 export class SaveSlotsScene extends Phaser.Scene {
   constructor() {
@@ -41,7 +41,7 @@ export class SaveSlotsScene extends Phaser.Scene {
       width: panelWidth,
       height: shellHeight - 48,
       title: 'Save slots',
-      subtitle: 'Chọn slot để tạo, nạp, ghi đè, hoặc xóa dữ liệu.'
+      subtitle: 'Chon slot de tao, nap, ghi de, hoac xoa du lieu.'
     });
     this.add.existing(frame.root);
 
@@ -63,101 +63,105 @@ export class SaveSlotsScene extends Phaser.Scene {
         y: slotY,
         width: panelWidth - 36,
         height: 156,
-        title: `Slot ${slot.slot}${slot.slot === currentSlot ? ' • đang chọn' : ''}`,
+        title: `Slot ${slot.slot}${slot.slot === currentSlot ? ' • dang chon' : ''}`,
         subtitle: slot.hasSave
-          ? `${slot.sectName ?? 'Thanh Huyền Môn'} • ${slot.realmId ?? 'chưa rõ cảnh giới'} • Ngày ${slot.day ?? 1}`
-          : 'Slot trống. Có thể tạo save mới từ đây.'
+          ? `${slot.sectName ?? 'Thanh Huyen Mon'} • ${slot.realmId ?? 'chua ro canh gioi'} • Ngay ${slot.day ?? 1}`
+          : 'Slot trong. Co the tao save moi tu day.'
       });
       frame.content.add(slotFrame.root);
 
-      slotFrame.content.add(this.add.text(0, 0, slot.hasSave
-        ? `Save v${slot.saveVersion ?? '?'} • Playtime ${slot.playtimeDays} ngày`
-        : 'Chưa có dữ liệu lưu.', {
-        color: menuPalette.textMuted,
-        fontFamily: '"Segoe UI", Tahoma, sans-serif',
-        fontSize: '11px',
-        wordWrap: { width: panelWidth - 72 }
-      }));
+      slotFrame.content.add(this.add.text(0, 0,
+        slot.hasSave ? `Save v${slot.saveVersion ?? '?'} • Playtime ${slot.playtimeDays} ngay` : 'Chua co du lieu luu.',
+        {
+          color: menuPalette.textMuted,
+          fontFamily: '"Segoe UI", Tahoma, sans-serif',
+          fontSize: '11px',
+          wordWrap: { width: panelWidth - 72 }
+        }
+      ));
 
-      slotFrame.content.add(this.add.text(0, 18, slot.hasSave
-        ? `${slot.endingCompleted ? 'Đã về đích' : 'Đang hành trình'} • ${slot.updatedAt ?? 'Không rõ thời điểm lưu'}`
-        : 'Có thể bắt đầu từ Chương 1.', {
-        color: menuPalette.accentText,
-        fontFamily: '"Segoe UI", Tahoma, sans-serif',
-        fontSize: '11px',
-        wordWrap: { width: panelWidth - 72 }
-      }));
+      slotFrame.content.add(this.add.text(0, 18,
+        slot.hasSave
+          ? `${slot.endingCompleted ? 'Da ve dich' : 'Dang hanh trinh'} • ${slot.updatedAt ?? 'Khong ro thoi diem luu'}`
+          : 'Co the bat dau tu Chuong 1.',
+        {
+          color: menuPalette.accentText,
+          fontFamily: '"Segoe UI", Tahoma, sans-serif',
+          fontSize: '11px',
+          wordWrap: { width: panelWidth - 72 }
+        }
+      ));
 
-      slotFrame.content.add(createTextButton(this, {
-        x: 78,
-        y: 74,
-        width: 140,
-        label: slot.hasSave ? 'Nạp save' : 'Tạo mới',
-        detail: slot.hasSave ? 'Mở slot này' : 'Bắt đầu Chương 1',
-        onClick: () => {
-          const nextState = slot.hasSave
-            ? saveStore.loadSlot(slot.slot)
-            : saveStore.createNewSaveInSlot(slot.slot, `Đã tạo save mới ở slot ${slot.slot}.`);
-          stateManager.replace(nextState);
-          if (returnScene !== SCENE_KEYS.mainMenu) {
-            this.scene.stop(returnScene);
+      slotFrame.content.add(
+        createPrimaryButton(this, {
+          width: 140,
+          label: slot.hasSave ? 'Nap save' : 'Tao moi',
+          detail: slot.hasSave ? 'Mo slot nay' : 'Bat dau Chuong 1',
+          onClick: () => {
+            const nextState = slot.hasSave
+              ? saveStore.loadSlot(slot.slot)
+              : saveStore.createNewSaveInSlot(slot.slot, `Da tao save moi o slot ${slot.slot}.`);
+            stateManager.replace(nextState);
+            if (returnScene !== SCENE_KEYS.mainMenu) {
+              this.scene.stop(returnScene);
+            }
+            this.scene.start(SCENE_KEYS.sect);
           }
-          this.scene.start(SCENE_KEYS.sect);
-        }
-      }));
+        }).setPosition(16, 74)
+      );
 
-      slotFrame.content.add(createTextButton(this, {
-        x: 232,
-        y: 74,
-        width: 140,
-        label: 'Ghi đè',
-        detail: 'Lưu snapshot hiện tại',
-        onClick: () => {
-          saveStore.setCurrentSlot(slot.slot);
-          const payload = slot.hasSave ? stateManager.snapshot : createGameState();
-          saveStore.saveGame(payload);
-          setStatus(`Đã ghi dữ liệu vào slot ${slot.slot}.`);
-          this.scene.restart({ returnScene });
-        }
-      }));
-
-      slotFrame.content.add(createTextButton(this, {
-        x: 154,
-        y: 118,
-        width: 140,
-        label: 'Xóa slot',
-        detail: slot.hasSave ? 'Xóa save và backup' : 'Slot đang trống',
-        onClick: () => {
-          if (!slot.hasSave) {
-            setStatus(`Slot ${slot.slot} đang trống.`);
-            return;
+      slotFrame.content.add(
+        createSecondaryButton(this, {
+          width: 140,
+          label: 'Ghi de',
+          detail: 'Luu snapshot hien tai',
+          onClick: () => {
+            saveStore.setCurrentSlot(slot.slot);
+            const payload = slot.hasSave ? stateManager.snapshot : createGameState();
+            saveStore.saveGame(payload);
+            setStatus(`Da ghi du lieu vao slot ${slot.slot}.`);
+            this.scene.restart({ returnScene });
           }
-          saveStore.clearSlot(slot.slot);
-          setStatus(`Đã xóa slot ${slot.slot}.`);
-          this.scene.restart({ returnScene });
-        }
-      }));
+        }).setPosition(172, 74)
+      );
+
+      slotFrame.content.add(
+        createSecondaryButton(this, {
+          width: 140,
+          label: 'Xoa slot',
+          detail: slot.hasSave ? 'Xoa save va backup' : 'Slot dang trong',
+          onClick: () => {
+            if (!slot.hasSave) {
+              setStatus(`Slot ${slot.slot} dang trong.`);
+              return;
+            }
+            saveStore.clearSlot(slot.slot);
+            setStatus(`Da xoa slot ${slot.slot}.`);
+            this.scene.restart({ returnScene });
+          }
+        }).setPosition(94, 118)
+      );
     });
 
     statusText.setPosition(0, 536);
     frame.content.add(statusText);
 
-    frame.content.add(createTextButton(this, {
-      x: 154,
-      y: 620,
-      width: 156,
-      label: 'Quay lại',
-      detail: 'Về menu trước đó',
-      onClick: () => {
-        if (returnScene === SCENE_KEYS.mainMenu) {
-          this.scene.start(returnScene);
-          return;
+    frame.content.add(
+      createSecondaryButton(this, {
+        width: 156,
+        label: 'Quay lai',
+        detail: 'Ve menu truoc do',
+        onClick: () => {
+          if (returnScene === SCENE_KEYS.mainMenu) {
+            this.scene.start(returnScene);
+            return;
+          }
+          if (this.scene.isPaused(returnScene)) {
+            this.scene.resume(returnScene);
+          }
+          this.scene.stop();
         }
-        if (this.scene.isPaused(returnScene)) {
-          this.scene.resume(returnScene);
-        }
-        this.scene.stop();
-      }
-    }));
+      }).setPosition(94, 620)
+    );
   }
 }
