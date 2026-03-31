@@ -162,7 +162,7 @@ export class MainMenuScene extends Phaser.Scene {
       x: shellX + 16,
       y: panelY,
       width: panelWidth,
-      height: 232,
+      height: 276,
       title: 'Tình trạng save',
       subtitle: 'Tóm tắt ngắn để biết mình đang tiếp tục gì trước khi vào game.'
     });
@@ -205,7 +205,7 @@ export class MainMenuScene extends Phaser.Scene {
         link.click();
         window.URL.revokeObjectURL(url);
       }
-    }).setPosition(0, 130);
+    }).setPosition(0, 150);
 
     const resetButton = createSecondaryButton(this, {
       width: Math.floor((panelWidth - 46) / 2),
@@ -222,32 +222,8 @@ export class MainMenuScene extends Phaser.Scene {
         saveSystem.saveGame(nextSnapshot);
         this.scene.start(SCENE_KEYS.sect);
       }
-    }).setPosition(Math.floor((panelWidth - 46) / 2) + 10, 130);
+    }).setPosition(Math.floor((panelWidth - 46) / 2) + 10, 150);
 
     summaryFrame.content.add([exportButton, resetButton]);
-
-    panelY += 248;
-
-    const creditsFrame = new PanelFrame(this, {
-      x: shellX + 16,
-      y: panelY,
-      width: panelWidth,
-      height: 120,
-      title: 'Credits',
-      subtitle: 'Phần chính đã là shell mới. Một số panel sâu vẫn còn dùng UI legacy bên trong.'
-    });
-    this.add.existing(creditsFrame.root);
-
-    creditsFrame.content.add(this.add.text(0, 0, [
-      'Phaser 3 + TypeScript + Vite',
-      'Early Access đang ưu tiên vertical slice và readability.',
-      'Nếu thấy flow nào vẫn đổ về UI cũ, đó là phần cần thay tiếp sau menu và shell chính.'
-    ], {
-      color: menuPalette.textMuted,
-      fontFamily: '"Segoe UI", Tahoma, sans-serif',
-      fontSize: '12px',
-      lineSpacing: 4,
-      wordWrap: { width: panelWidth - 36 }
-    }));
   }
 }
