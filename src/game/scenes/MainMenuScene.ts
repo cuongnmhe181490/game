@@ -1,10 +1,11 @@
 import Phaser from 'phaser';
 
+import { Icons } from '@/game/config/assets';
 import { getBuildInfoLine, PLAYTEST_BUILD_ID } from '@/game/config/buildInfo';
 import { getSaveStore, getStateManager } from '@/game/config/registry';
 import { SCENE_KEYS } from '@/game/scenes/sceneKeys';
 import { createGameState } from '@/game/state';
-import { createTextButton, drawInsetPanel, drawSceneFrame, menuPalette } from '@/game/ui';
+import { createPrimaryButton, createSecondaryButton, drawSceneFrame, PanelFrame, menuPalette } from '@/game/ui';
 
 export class MainMenuScene extends Phaser.Scene {
   constructor() {
@@ -26,187 +27,171 @@ export class MainMenuScene extends Phaser.Scene {
 
     saveSystem.saveGame(snapshot);
 
-    this.cameras.main.setBackgroundColor(menuPalette.background);
-    drawSceneFrame(this);
-    drawInsetPanel(this, { x: 82, y: 92, width: 520, height: 514, fill: menuPalette.panel, alpha: 0.88 });
-    drawInsetPanel(this, { x: 648, y: 92, width: 548, height: 514, fill: menuPalette.panelAlt, alpha: 0.88 });
-
-    this.add.text(112, 114, 'Nhat Niem Khai Tong', {
-      color: menuPalette.textStrong,
-      fontFamily: '"Palatino Linotype", "Book Antiqua", Georgia, serif',
-      fontSize: '46px'
-    });
-
-    this.add.text(116, 176, 'Release candidate base game', {
-      color: menuPalette.accentText,
-      fontFamily: '"Segoe UI", Tahoma, sans-serif',
-      fontSize: '20px'
-    });
-
-    this.add.text(116, 204, getBuildInfoLine(), {
-      color: menuPalette.textMuted,
-      fontFamily: '"Segoe UI", Tahoma, sans-serif',
-      fontSize: '14px'
-    });
-
-    this.add.text(116, 236, [
-      'Ban bat dau giua tan tich Thanh Huyen Mon, khi tan hoa trong Chinh dien van chua tat.',
-      'Ban release-candidate nay dong scope o base game pham gioi: tu mo dau den ba ket cuc hien tai.',
-      canReplay
-        ? 'Ban da mo duoc Hanh trinh moi. Replay chi giu mot du am nho, khong mang theo toan bo suc manh cua save cu.'
-        : 'Neu can mot vong sach, hay xoa save hien tai truoc khi bat dau lai tu Chuong 1.'
-    ], {
-      color: menuPalette.textMuted,
-      fontFamily: '"Segoe UI", Tahoma, sans-serif',
-      fontSize: '17px',
-      lineSpacing: 8,
-      wordWrap: { width: 438 }
-    });
-
-    const menuStatusText = this.add.text(680, 520, '', {
-      color: menuPalette.accentText,
-      fontFamily: '"Segoe UI", Tahoma, sans-serif',
-      fontSize: '15px',
-      lineSpacing: 6,
-      wordWrap: { width: 476 }
-    });
-
-    const setMenuStatus = (message: string): void => {
-      menuStatusText.setText(message);
-    };
-
+    const { width, height } = this.scale;
+    const shellWidth = Math.min(430, width - 32);
+    const shellHeight = Math.min(844, height - 24);
+    const shellX = Math.floor((width - shellWidth) / 2);
+    const shellY = Math.floor((height - shellHeight) / 2);
+    const panelWidth = shellWidth - 32;
+    const filledSlots = slotSummaries.filter((slot) => slot.hasSave).length;
     const hasMeaningfulProgress = snapshot.time.day > 1 || snapshot.events.history.length > 0 || snapshot.exploration.totalRuns > 0;
     const hasAnySave = saveSummary.source !== 'none';
     const endingReached = snapshot.ending.completed;
+
+    this.cameras.main.setBackgroundColor(menuPalette.background);
+    drawSceneFrame(this);
+
+    const shell = this.add.graphics();
+    shell.fillStyle(0x070e0b, 0.98);
+    shell.lineStyle(2, 0x1f2f27, 1);
+    shell.fillRoundedRect(shellX, shellY, shellWidth, shellHeight, 32);
+    shell.strokeRoundedRect(shellX, shellY, shellWidth, shellHeight, 32);
+    shell.lineStyle(1, menuPalette.frame, 0.45);
+    shell.strokeRoundedRect(shellX + 10, shellY + 10, shellWidth - 20, shellHeight - 20, 28);
+
+    const crest = this.add.image(shellX + shellWidth / 2, shellY + 54, Icons.ui.sectCrest)
+      .setDisplaySize(52, 52)
+      .setAlpha(this.textures.exists(Icons.ui.sectCrest) ? 0.92 : 0);
+
+    this.add.text(shellX + shellWidth / 2, shellY + 100, 'Nhất Niệm Khai Tông', {
+      color: menuPalette.textStrong,
+      fontFamily: '"Palatino Linotype", "Book Antiqua", Georgia, serif',
+      fontSize: '34px'
+    }).setOrigin(0.5);
+
+    this.add.text(shellX + shellWidth / 2, shellY + 136, 'Early Access vertical slice', {
+      color: menuPalette.accentText,
+      fontFamily: '"Segoe UI", Tahoma, sans-serif',
+      fontSize: '14px'
+    }).setOrigin(0.5);
+
+    this.add.text(shellX + shellWidth / 2, shellY + 160, getBuildInfoLine(), {
+      color: menuPalette.textMuted,
+      fontFamily: '"Segoe UI", Tahoma, sans-serif',
+      fontSize: '11px'
+    }).setOrigin(0.5);
+
     const primaryLabel = endingReached
-      ? 'Xem lai ket cuc'
+      ? 'Xem lại kết cục'
       : hasMeaningfulProgress
-        ? 'Tiep tuc'
-        : 'Bat dau';
+        ? 'Tiếp tục'
+        : 'Bắt đầu';
     const primaryDetail = hasMeaningfulProgress
       ? endingReached
-        ? 'Mo lai ket cuc cua save hien tai'
-        : 'Vao lai save hien tai'
+        ? 'Mở lại kết cục của save hiện tại'
+        : 'Vào lại run đang chơi'
       : hasAnySave
-        ? 'Dung save da tao san'
-        : 'Tao save dau tien';
-    const primaryY = canReplay ? 338 : 372;
-    const gameMoiY = canReplay ? 396 : 438;
-    const replayY = 454;
-    const loadY = canReplay ? 512 : 504;
-    const settingsY = canReplay ? 570 : 562;
-    const exportY = canReplay ? 628 : 620;
+        ? 'Dùng save đang có trong slot hiện tại'
+        : 'Tạo hành trình đầu tiên';
 
-    createTextButton(this, {
-      x: 188,
-      y: primaryY,
-      width: 320,
+    let panelY = shellY + 192;
+
+    const journeyFrame = new PanelFrame(this, {
+      x: shellX + 16,
+      y: panelY,
+      width: panelWidth,
+      height: canReplay ? 274 : 218,
+      title: 'Hành trình',
+      subtitle: 'Vào game, bắt đầu run mới, hoặc tiếp tục từ save slot hiện có.',
+      iconKey: Icons.ui.sectCrest
+    });
+
+    const startAction = createPrimaryButton(this, {
+      width: panelWidth - 36,
       label: primaryLabel,
       detail: primaryDetail,
       onClick: () => {
-        setMenuStatus(
-          endingReached
-            ? 'Dang mo lai ket cuc cua save hien tai.'
-            : hasMeaningfulProgress
-              ? 'Dang tiep tuc save hien tai.'
-              : 'Dang vao diem bat dau cua game.'
-        );
         this.scene.start(endingReached ? SCENE_KEYS.ending : SCENE_KEYS.sect);
       }
-    });
+    }).setPosition(0, 0);
 
-    createTextButton(this, {
-      x: 188,
-      y: gameMoiY,
-      width: 320,
-      label: 'Game moi',
+    const newGameAction = createSecondaryButton(this, {
+      width: panelWidth - 36,
+      label: 'Game mới',
       detail: canReplay
-        ? 'Run sach tu Chuong 1, khong mang theo du am replay'
-        : 'Tao lai diem bat dau chuong 1',
+        ? 'Run sạch từ Chương 1, không mang theo dư âm replay'
+        : 'Tạo lại điểm bắt đầu chương 1',
       onClick: () => {
         saveSystem.clear();
         const nextSnapshot = stateManager.replace(createGameState());
         saveSystem.saveGame(nextSnapshot);
-        setMenuStatus('Da tao save moi tu dau Chuong 1.');
         this.scene.start(SCENE_KEYS.sect);
       }
-    });
+    }).setPosition(0, 64);
+
+    journeyFrame.content.add([startAction, newGameAction]);
 
     if (canReplay) {
-      createTextButton(this, {
-        x: 188,
-        y: replayY,
-        width: 320,
-        label: 'Hanh trinh moi',
+      const replayAction = createSecondaryButton(this, {
+        width: panelWidth - 36,
+        label: 'Hành trình mới',
         detail: replayModifier
           ? `Mang theo ${replayModifier.label}: ${replayModifier.summary}`
-          : 'Bat dau vong moi sau khi da clear base game',
+          : 'Bắt đầu vòng replay mới sau khi đã clear base game',
         onClick: () => {
           const nextSnapshot = saveSystem.createReplaySave();
           stateManager.replace(nextSnapshot);
-          setMenuStatus(
-            replayModifier
-              ? `Da tao vong replay moi voi du am ${replayModifier.label}. Chuong 1 van bat dau tu dau.`
-              : 'Da tao vong replay moi. Ban van di lai Chuong 1 nhu mot hanh trinh day du.'
-          );
           this.scene.start(SCENE_KEYS.sect);
         }
-      });
+      }).setPosition(0, 128);
+      journeyFrame.content.add(replayAction);
     }
 
-    createTextButton(this, {
-      x: 188,
-      y: loadY,
-      width: 320,
+    const loadY = canReplay ? 192 : 128;
+    const settingsY = canReplay ? 192 : 128;
+    const loadButton = createSecondaryButton(this, {
+      width: Math.floor((panelWidth - 46) / 2),
       label: 'Load Game',
-      detail: `Mo save slots (${slotSummaries.filter((slot) => slot.hasSave).length}/${slotSummaries.length} dang co du lieu)`,
+      detail: `${filledSlots}/${slotSummaries.length} slot có dữ liệu`,
       onClick: () => this.scene.start(SCENE_KEYS.saveSlots, { returnScene: SCENE_KEYS.mainMenu })
-    });
+    }).setPosition(0, loadY);
 
-    createTextButton(this, {
-      x: 188,
-      y: settingsY,
-      width: 320,
+    const settingsButton = createSecondaryButton(this, {
+      width: Math.floor((panelWidth - 46) / 2),
       label: 'Settings',
-      detail: 'Audio, UI scale, animation, auto-save, tutorial hints',
+      detail: 'Âm thanh, giao diện, auto-save',
       onClick: () => this.scene.start(SCENE_KEYS.settings, { returnScene: SCENE_KEYS.mainMenu })
+    }).setPosition(Math.floor((panelWidth - 46) / 2) + 10, settingsY);
+
+    journeyFrame.content.add([loadButton, settingsButton]);
+
+    panelY += canReplay ? 290 : 234;
+
+    const summaryFrame = new PanelFrame(this, {
+      x: shellX + 16,
+      y: panelY,
+      width: panelWidth,
+      height: 188,
+      title: 'Tình trạng save',
+      subtitle: 'Tóm tắt ngắn để biết mình đang tiếp tục gì trước khi vào game.'
     });
 
-    createTextButton(this, {
-      x: 188,
-      y: canReplay ? 686 : 678,
-      width: 320,
-      label: canReplay ? 'Xoa save hien tai' : 'Xoa du lieu save',
-      detail: canReplay ? 'Xoa run hien tai, khong dong vao ending da thay' : 'Xoa save va backup roi tao lai',
-      onClick: () => {
-        saveSystem.clear();
-        stateManager.replace(createGameState());
-        const nextSnapshot = stateManager.update((draft) => {
-          draft.ui.statusMessage = canReplay
-            ? 'Da xoa run hien tai. Tien trinh replay van con, nhung Chuong 1 da duoc tao lai sach.'
-            : 'Da xoa du lieu save va tao lai diem bat dau Chuong 1.';
-        });
-        saveSystem.saveGame(nextSnapshot);
-        setMenuStatus(
-          canReplay
-            ? 'Da xoa run hien tai. Cac ending da thay va di vat replay van duoc giu lai.'
-            : 'Da xoa save hien tai va tao lai diem bat dau sach.'
-        );
-        this.scene.start(SCENE_KEYS.sect);
-      }
+    const summaryLines = [
+      `Slot hiện tại: ${saveSystem.getCurrentSlot()} | Save: ${saveSummary.source === 'none' ? 'chưa có' : saveSummary.source === 'backup' ? 'đang dùng backup' : 'ổn định'}`,
+      `Cảnh giới: ${snapshot.player.cultivation.currentRealmId} | Ngày ${snapshot.time.day}/${snapshot.time.month}/${snapshot.time.year}`,
+      `Chương: ${snapshot.story.currentChapterId}`,
+      `Kết cục: ${saveSummary.endingCompleted ? saveSummary.endingPath ?? 'đã hoàn tất' : 'chưa đạt'} | Đã clear: ${replayMeta.totalClearCount}`,
+      `Replay: ${replayModifier ? replayModifier.label : 'chưa mở'}`
+    ];
+
+    summaryLines.forEach((line, index) => {
+      summaryFrame.content.add(this.add.text(0, index * 20, line, {
+        color: index === 0 ? menuPalette.textStrong : menuPalette.textMuted,
+        fontFamily: '"Segoe UI", Tahoma, sans-serif',
+        fontSize: '12px',
+        lineSpacing: 2,
+        wordWrap: { width: panelWidth - 36 }
+      }));
     });
 
-    createTextButton(this, {
-      x: 188,
-      y: exportY,
-      width: 320,
-      label: 'Xuat save JSON',
-      detail: 'Tai ve save hien tai de luu hoac gui kem bug report',
+    const exportButton = createSecondaryButton(this, {
+      width: Math.floor((panelWidth - 46) / 2),
+      label: 'Xuất save',
+      detail: 'Tải JSON để backup hoặc gửi bug report',
       onClick: () => {
         const raw = saveSystem.exportCurrentSave();
 
         if (!raw) {
-          setMenuStatus('Chua co save de xuat. Hay bat dau game truoc.');
           return;
         }
 
@@ -217,75 +202,49 @@ export class MainMenuScene extends Phaser.Scene {
         link.download = `nhat-niem-khai-tong-${PLAYTEST_BUILD_ID}-save.json`;
         link.click();
         window.URL.revokeObjectURL(url);
-        setMenuStatus('Da tai save JSON. Neu gap loi, gui file nay kem mo ta buoc tai hien.');
       }
+    }).setPosition(0, 112);
+
+    const resetButton = createSecondaryButton(this, {
+      width: Math.floor((panelWidth - 46) / 2),
+      label: 'Xóa run',
+      detail: canReplay ? 'Xóa save hiện tại, giữ tiến trình replay' : 'Xóa save và tạo lại điểm đầu',
+      onClick: () => {
+        saveSystem.clear();
+        stateManager.replace(createGameState());
+        const nextSnapshot = stateManager.update((draft) => {
+          draft.ui.statusMessage = canReplay
+            ? 'Đã xóa run hiện tại. Ending đã thấy và replay meta vẫn còn.'
+            : 'Đã xóa dữ liệu save hiện tại và tạo lại Chương 1.';
+        });
+        saveSystem.saveGame(nextSnapshot);
+        this.scene.start(SCENE_KEYS.sect);
+      }
+    }).setPosition(Math.floor((panelWidth - 46) / 2) + 10, 112);
+
+    summaryFrame.content.add([exportButton, resetButton]);
+
+    panelY += 204;
+
+    const creditsFrame = new PanelFrame(this, {
+      x: shellX + 16,
+      y: panelY,
+      width: panelWidth,
+      height: 120,
+      title: 'Credits',
+      subtitle: 'Phần chính đã là shell mới. Một số panel sâu vẫn còn dùng UI legacy bên trong.'
     });
 
-    this.add.text(680, 560, [
-      'Credits',
+    creditsFrame.content.add(this.add.text(0, 0, [
       'Phaser 3 + TypeScript + Vite',
-      'Nhat Niem Khai Tong la demo Early Access dang uu tien vertical slice va readability.',
-      'Asset pipeline: Pollinations + manual curation',
-      'Tone: huyền bí, tiết chế, dễ đọc'
+      'Early Access đang ưu tiên vertical slice và readability.',
+      'Nếu thấy flow nào vẫn đổ về UI cũ, đó là phần cần thay tiếp sau menu và shell chính.'
     ], {
       color: menuPalette.textMuted,
       fontFamily: '"Segoe UI", Tahoma, sans-serif',
-      fontSize: '15px',
-      lineSpacing: 8,
-      wordWrap: { width: 440 }
-    });
-
-    this.add.text(678, 118, 'Nen thu trong 15-20 phut dau', {
-      color: menuPalette.textStrong,
-      fontFamily: '"Palatino Linotype", "Book Antiqua", Georgia, serif',
-      fontSize: '30px'
-    });
-
-    this.add.text(680, 174, [
-      '1. Qua 1 ngay de thay tai nguyen, tong ket ngay, va event dau.',
-      '2. Chon mot de tu de xem mood, loyalty, va nhiem vu.',
-      '3. Mo panel Tu hanh va nhin tien do canh gioi.',
-      '4. Dung hoac nang cap mot cong trinh cot loi.',
-      '5. Vao Hau Son Coc, cham event spot, va tro ve voi phan thuong.',
-      '6. Theo doi Muc tieu chuong de cam nhan Chuong 1 dang tien len.',
-      '7. Neu thay khong ro phai lam gi, ghi lai panel hoac nut bam da gay khuc mac.'
-    ], {
-      color: menuPalette.textMuted,
-      fontFamily: '"Segoe UI", Tahoma, sans-serif',
-      fontSize: '17px',
-      lineSpacing: 10,
-      wordWrap: { width: 476 }
-    });
-
-    this.add.text(680, 402, [
-      `Trang thai save: ${saveSummary.source === 'none' ? 'chua co save' : saveSummary.source === 'backup' ? 'dang dung backup hop le' : 'co save chinh'}`,
-      `Save version: v${snapshot.meta.saveVersion}`,
-      `Ngay hien tai: ${snapshot.time.day}/${snapshot.time.month}/${snapshot.time.year}`,
-      `Chuong hien tai: ${snapshot.story.currentChapterId}`,
-      `Ket cuc base game: ${saveSummary.endingCompleted ? saveSummary.endingPath ?? 'da hoan tat' : 'chua dat'}`,
-      `Da clear: ${replayMeta.totalClearCount} | Ending da thay: ${replayMeta.seenEndingIds.length === 0 ? 'chua co' : replayMeta.seenEndingIds.join(', ')}`,
-      `Du am replay: ${replayModifier ? replayModifier.label : 'chua mo'}`,
-      `Arc tiep theo: ${snapshot.expansion.nextArcId ?? 'chua mo'} | Layer tiep theo: ${snapshot.expansion.nextWorldLayerId ?? 'pham_gioi'}`,
-      `Su kien da giai: ${snapshot.events.history.length} | Tham hiem da di: ${snapshot.exploration.totalRuns}`,
-      'Feedback huu ich nhat: cho nao khong ro phai bam gi, event nao kho hieu, reward nao thay vo nghia, va bug nao lap lai duoc.'
-    ], {
-      color: menuPalette.accentText,
-      fontFamily: '"Segoe UI", Tahoma, sans-serif',
-      fontSize: '17px',
-      lineSpacing: 10,
-      wordWrap: { width: 420 }
-    });
-
-    setMenuStatus(
-      hasAnySave
-        ? endingReached
-          ? canReplay
-            ? 'Save hien tai da khop mot ket cuc. Ban co the xem lai, vao Hanh trinh moi, hoac xoa run hien tai ma van giu tien trinh replay.'
-            : 'Save hien tai da khop mot ket cuc base game. Huong mo rong ve sau da duoc danh dau trong state, nhung chua mo thanh noi dung choi duoc.'
-          : canReplay
-            ? 'Ban dang co save dang choi va da mo replay. Game moi la vong sach, con Hanh trinh moi la vong moi co giu mot du am nho.'
-            : 'Co the Tiep tuc, Game moi, hoac Xoa du lieu save de bat dau vong moi.'
-        : 'Chua co save truoc do. Bam Bat dau de vao diem bat dau Chuong 1.'
-    );
+      fontSize: '12px',
+      lineSpacing: 4,
+      wordWrap: { width: panelWidth - 36 }
+    }));
   }
 }
