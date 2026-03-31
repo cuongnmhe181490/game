@@ -90,7 +90,7 @@ export class MainMenuScene extends Phaser.Scene {
       x: shellX + 16,
       y: panelY,
       width: panelWidth,
-      height: canReplay ? 274 : 218,
+      height: canReplay ? 332 : 252,
       title: 'Hành trình',
       subtitle: 'Vào game, bắt đầu run mới, hoặc tiếp tục từ save slot hiện có.',
       iconKey: Icons.ui.sectCrest
@@ -138,8 +138,8 @@ export class MainMenuScene extends Phaser.Scene {
       journeyFrame.content.add(replayAction);
     }
 
-    const loadY = canReplay ? 192 : 128;
-    const settingsY = canReplay ? 192 : 128;
+    const loadY = canReplay ? 196 : 128;
+    const settingsY = canReplay ? 196 : 128;
     const loadButton = createSecondaryButton(this, {
       width: Math.floor((panelWidth - 46) / 2),
       label: 'Load Game',
@@ -156,13 +156,13 @@ export class MainMenuScene extends Phaser.Scene {
 
     journeyFrame.content.add([loadButton, settingsButton]);
 
-    panelY += canReplay ? 290 : 234;
+    panelY += canReplay ? 348 : 268;
 
     const summaryFrame = new PanelFrame(this, {
       x: shellX + 16,
       y: panelY,
       width: panelWidth,
-      height: 188,
+      height: 232,
       title: 'Tình trạng save',
       subtitle: 'Tóm tắt ngắn để biết mình đang tiếp tục gì trước khi vào game.'
     });
@@ -205,7 +205,7 @@ export class MainMenuScene extends Phaser.Scene {
         link.click();
         window.URL.revokeObjectURL(url);
       }
-    }).setPosition(0, 112);
+    }).setPosition(0, 130);
 
     const resetButton = createSecondaryButton(this, {
       width: Math.floor((panelWidth - 46) / 2),
@@ -222,11 +222,11 @@ export class MainMenuScene extends Phaser.Scene {
         saveSystem.saveGame(nextSnapshot);
         this.scene.start(SCENE_KEYS.sect);
       }
-    }).setPosition(Math.floor((panelWidth - 46) / 2) + 10, 112);
+    }).setPosition(Math.floor((panelWidth - 46) / 2) + 10, 130);
 
     summaryFrame.content.add([exportButton, resetButton]);
 
-    panelY += 204;
+    panelY += 248;
 
     const creditsFrame = new PanelFrame(this, {
       x: shellX + 16,

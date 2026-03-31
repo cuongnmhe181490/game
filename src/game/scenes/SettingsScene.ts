@@ -2,7 +2,7 @@ import Phaser from 'phaser';
 
 import { getFeedbackSystem, getSettingsStore } from '@/game/config/registry';
 import { SCENE_KEYS } from '@/game/scenes/sceneKeys';
-import { createTextButton, drawInsetPanel, drawSceneFrame, menuPalette } from '@/game/ui';
+import { createTextButton, drawSceneFrame, PanelFrame, menuPalette } from '@/game/ui';
 
 export class SettingsScene extends Phaser.Scene {
   constructor() {
@@ -15,21 +15,39 @@ export class SettingsScene extends Phaser.Scene {
     let settings = settingsStore.getSettings();
     getFeedbackSystem(this).setVolumePreferences(settings.masterVolume, settings.sfxVolume);
 
+    const { width, height } = this.scale;
+    const shellWidth = Math.min(430, width - 32);
+    const shellHeight = Math.min(844, height - 24);
+    const shellX = Math.floor((width - shellWidth) / 2);
+    const shellY = Math.floor((height - shellHeight) / 2);
+    const panelWidth = shellWidth - 32;
+
     this.cameras.main.setBackgroundColor(menuPalette.background);
     drawSceneFrame(this);
-    drawInsetPanel(this, { x: 130, y: 70, width: 1020, height: 584, fill: menuPalette.panel, alpha: 0.92 });
 
-    this.add.text(164, 100, 'Settings', {
-      color: menuPalette.textStrong,
-      fontFamily: '"Palatino Linotype", Georgia, serif',
-      fontSize: '34px'
+    const shell = this.add.graphics();
+    shell.fillStyle(0x070e0b, 0.98);
+    shell.lineStyle(2, 0x1f2f27, 1);
+    shell.fillRoundedRect(shellX, shellY, shellWidth, shellHeight, 32);
+    shell.strokeRoundedRect(shellX, shellY, shellWidth, shellHeight, 32);
+    shell.lineStyle(1, menuPalette.frame, 0.45);
+    shell.strokeRoundedRect(shellX + 10, shellY + 10, shellWidth - 20, shellHeight - 20, 28);
+
+    const frame = new PanelFrame(this, {
+      x: shellX + 16,
+      y: shellY + 24,
+      width: panelWidth,
+      height: shellHeight - 48,
+      title: 'Settings',
+      subtitle: 'Âm thanh, giao diện, animation, auto-save, và tutorial hints.'
     });
+    this.add.existing(frame.root);
 
-    const statusText = this.add.text(164, 606, '', {
+    const statusText = this.add.text(0, 0, '', {
       color: menuPalette.accentText,
       fontFamily: '"Segoe UI", Tahoma, sans-serif',
-      fontSize: '14px',
-      wordWrap: { width: 900 }
+      fontSize: '12px',
+      wordWrap: { width: panelWidth - 36 }
     });
 
     const refresh = (): void => {
@@ -39,7 +57,7 @@ export class SettingsScene extends Phaser.Scene {
     const savePartial = (partial: Partial<typeof settings>): void => {
       settings = settingsStore.saveSettings(partial);
       getFeedbackSystem(this).setVolumePreferences(settings.masterVolume, settings.sfxVolume);
-      statusText.setText('Da cap nhat settings cho phien choi hien tai.');
+      statusText.setText('Đã cập nhật settings cho phiên chơi hiện tại.');
       refresh();
     };
 
@@ -70,84 +88,88 @@ export class SettingsScene extends Phaser.Scene {
       },
       {
         label: 'Animation',
-        value: settings.animationEnabled ? 'Bat' : 'Tat',
+        value: settings.animationEnabled ? 'Bật' : 'Tắt',
         onMinus: () => savePartial({ animationEnabled: !settings.animationEnabled }),
         onPlus: () => savePartial({ animationEnabled: !settings.animationEnabled })
       },
       {
         label: 'Particle effects',
-        value: settings.particlesEnabled ? 'Bat' : 'Tat',
+        value: settings.particlesEnabled ? 'Bật' : 'Tắt',
         onMinus: () => savePartial({ particlesEnabled: !settings.particlesEnabled }),
         onPlus: () => savePartial({ particlesEnabled: !settings.particlesEnabled })
       },
       {
         label: 'Auto-save',
-        value: settings.autoSaveEnabled ? 'Bat' : 'Tat',
+        value: settings.autoSaveEnabled ? 'Bật' : 'Tắt',
         onMinus: () => savePartial({ autoSaveEnabled: !settings.autoSaveEnabled }),
         onPlus: () => savePartial({ autoSaveEnabled: !settings.autoSaveEnabled })
       },
       {
         label: 'Tutorial hints',
-        value: settings.tutorialHintsEnabled ? 'Bat' : 'Tat',
+        value: settings.tutorialHintsEnabled ? 'Bật' : 'Tắt',
         onMinus: () => savePartial({ tutorialHintsEnabled: !settings.tutorialHintsEnabled }),
         onPlus: () => savePartial({ tutorialHintsEnabled: !settings.tutorialHintsEnabled })
       }
     ];
 
     rows.forEach((row, index) => {
-      const y = 170 + index * 52;
-      this.add.text(168, y, row.label, {
+      const y = index * 58;
+      frame.content.add(this.add.text(0, y, row.label, {
         color: menuPalette.textStrong,
         fontFamily: '"Segoe UI", Tahoma, sans-serif',
-        fontSize: '17px'
-      });
-      this.add.text(530, y, row.value, {
+        fontSize: '16px'
+      }));
+      frame.content.add(this.add.text(0, y + 22, row.value, {
         color: menuPalette.accentText,
         fontFamily: '"Segoe UI", Tahoma, sans-serif',
-        fontSize: '17px'
-      });
-      createTextButton(this, {
-        x: 770,
-        y: y + 10,
-        width: 92,
+        fontSize: '13px'
+      }));
+      frame.content.add(createTextButton(this, {
+        x: panelWidth - 136,
+        y: y + 12,
+        width: 52,
         label: '-',
-        detail: 'Giam / doi',
+        detail: '',
         onClick: () => row.onMinus?.()
-      });
-      createTextButton(this, {
-        x: 888,
-        y: y + 10,
-        width: 92,
+      }));
+      frame.content.add(createTextButton(this, {
+        x: panelWidth - 74,
+        y: y + 12,
+        width: 52,
         label: '+',
-        detail: 'Tang / doi',
+        detail: '',
         onClick: () => row.onPlus?.()
-      });
+      }));
     });
 
-    this.add.text(168, 554, 'Ghi chu: music volume va particle toggle da duoc luu san cho cac pass tiep theo; sound feedback hien tai da an theo master + sfx volume.', {
+    statusText.setPosition(0, 488);
+    frame.content.add(statusText);
+
+    frame.content.add(this.add.text(0, 516, 'Ghi chú: music volume, particle toggle, và UI scale hiện được lưu an toàn; sound feedback đã dùng master + sfx volume.', {
       color: menuPalette.textMuted,
       fontFamily: '"Segoe UI", Tahoma, sans-serif',
-      fontSize: '13px',
-      wordWrap: { width: 820 }
-    });
+      fontSize: '11px',
+      wordWrap: { width: panelWidth - 36 }
+    }));
 
-    createTextButton(this, {
-      x: 250,
-      y: 610,
-      width: 180,
-      label: 'Reset settings',
-      detail: 'Ve mac dinh',
+    frame.content.add(createTextButton(this, {
+      x: 86,
+      y: 620,
+      width: 156,
+      label: 'Reset',
+      detail: 'Về mặc định',
       onClick: () => {
         settingsStore.resetSettings();
         refresh();
       }
-    });
-    createTextButton(this, {
-      x: 464,
-      y: 610,
-      width: 180,
-      label: 'Quay lai',
-      detail: 'Ve menu truoc do',
+    }));
+
+    frame.content.add(createTextButton(this, {
+      x: 254,
+      y: 620,
+      width: 156,
+      label: 'Quay lại',
+      detail: 'Về menu trước đó',
       onClick: () => {
         if (returnScene === SCENE_KEYS.mainMenu) {
           this.scene.start(returnScene);
@@ -158,6 +180,6 @@ export class SettingsScene extends Phaser.Scene {
         }
         this.scene.stop();
       }
-    });
+    }));
   }
 }

@@ -3,7 +3,7 @@ import Phaser from 'phaser';
 import { getSaveStore, getStateManager } from '@/game/config/registry';
 import { SCENE_KEYS } from '@/game/scenes/sceneKeys';
 import { createGameState } from '@/game/state';
-import { createTextButton, drawInsetPanel, drawSceneFrame, menuPalette } from '@/game/ui';
+import { createTextButton, drawSceneFrame, PanelFrame, menuPalette } from '@/game/ui';
 
 export class SaveSlotsScene extends Phaser.Scene {
   constructor() {
@@ -17,27 +17,39 @@ export class SaveSlotsScene extends Phaser.Scene {
     const slots = saveStore.listSaveSlots();
     const currentSlot = saveStore.getCurrentSlot();
 
+    const { width, height } = this.scale;
+    const shellWidth = Math.min(430, width - 32);
+    const shellHeight = Math.min(844, height - 24);
+    const shellX = Math.floor((width - shellWidth) / 2);
+    const shellY = Math.floor((height - shellHeight) / 2);
+    const panelWidth = shellWidth - 32;
+
     this.cameras.main.setBackgroundColor(menuPalette.background);
     drawSceneFrame(this);
-    drawInsetPanel(this, { x: 120, y: 78, width: 1040, height: 564, fill: menuPalette.panel, alpha: 0.92 });
 
-    this.add.text(158, 108, 'Save Slots', {
-      color: menuPalette.textStrong,
-      fontFamily: '"Palatino Linotype", Georgia, serif',
-      fontSize: '34px'
-    });
-    this.add.text(160, 154, 'Chon slot de tao, nap, ghi de, hoac xoa du lieu. Save cu se tu dong duoc dua vao slot 1 neu can.', {
-      color: menuPalette.textMuted,
-      fontFamily: '"Segoe UI", Tahoma, sans-serif',
-      fontSize: '15px',
-      wordWrap: { width: 920 }
-    });
+    const shell = this.add.graphics();
+    shell.fillStyle(0x070e0b, 0.98);
+    shell.lineStyle(2, 0x1f2f27, 1);
+    shell.fillRoundedRect(shellX, shellY, shellWidth, shellHeight, 32);
+    shell.strokeRoundedRect(shellX, shellY, shellWidth, shellHeight, 32);
+    shell.lineStyle(1, menuPalette.frame, 0.45);
+    shell.strokeRoundedRect(shellX + 10, shellY + 10, shellWidth - 20, shellHeight - 20, 28);
 
-    const statusText = this.add.text(160, 578, '', {
+    const frame = new PanelFrame(this, {
+      x: shellX + 16,
+      y: shellY + 24,
+      width: panelWidth,
+      height: shellHeight - 48,
+      title: 'Save slots',
+      subtitle: 'Chọn slot để tạo, nạp, ghi đè, hoặc xóa dữ liệu.'
+    });
+    this.add.existing(frame.root);
+
+    const statusText = this.add.text(0, 0, '', {
       color: menuPalette.accentText,
       fontFamily: '"Segoe UI", Tahoma, sans-serif',
-      fontSize: '14px',
-      wordWrap: { width: 900 }
+      fontSize: '11px',
+      wordWrap: { width: panelWidth - 36 }
     });
 
     const setStatus = (message: string): void => {
@@ -45,88 +57,97 @@ export class SaveSlotsScene extends Phaser.Scene {
     };
 
     slots.forEach((slot, index) => {
-      const y = 208 + index * 120;
-      drawInsetPanel(this, { x: 152, y, width: 976, height: 98, fill: menuPalette.panelAlt, alpha: 0.9 });
-      this.add.text(176, y + 18, `Slot ${slot.slot}${slot.slot === currentSlot ? ' • Dang chon' : ''}`, {
-        color: menuPalette.textStrong,
-        fontFamily: '"Segoe UI", Tahoma, sans-serif',
-        fontSize: '18px',
-        fontStyle: 'bold'
+      const slotY = index * 170;
+      const slotFrame = new PanelFrame(this, {
+        x: 0,
+        y: slotY,
+        width: panelWidth - 36,
+        height: 156,
+        title: `Slot ${slot.slot}${slot.slot === currentSlot ? ' • đang chọn' : ''}`,
+        subtitle: slot.hasSave
+          ? `${slot.sectName ?? 'Thanh Huyền Môn'} • ${slot.realmId ?? 'chưa rõ cảnh giới'} • Ngày ${slot.day ?? 1}`
+          : 'Slot trống. Có thể tạo save mới từ đây.'
       });
-      this.add.text(176, y + 46, slot.hasSave
-        ? `${slot.sectName ?? 'Thanh Huyen Mon'} • ${slot.realmId ?? 'chua ro canh gioi'} • Ngay ${slot.day ?? 1} • ${slot.endingCompleted ? 'Da ve dich' : 'Dang hanh trinh'}`
-        : 'Slot trong. Co the tao save moi tu day.', {
+      frame.content.add(slotFrame.root);
+
+      slotFrame.content.add(this.add.text(0, 0, slot.hasSave
+        ? `Save v${slot.saveVersion ?? '?'} • Playtime ${slot.playtimeDays} ngày`
+        : 'Chưa có dữ liệu lưu.', {
         color: menuPalette.textMuted,
         fontFamily: '"Segoe UI", Tahoma, sans-serif',
-        fontSize: '14px',
-        wordWrap: { width: 520 }
-      });
-      this.add.text(176, y + 68, slot.hasSave
-        ? `Save v${slot.saveVersion ?? '?'} • Playtime ${slot.playtimeDays} ngay • Cap nhat ${slot.updatedAt ?? 'khong ro'}`
-        : 'Chua co du lieu luu.', {
+        fontSize: '11px',
+        wordWrap: { width: panelWidth - 72 }
+      }));
+
+      slotFrame.content.add(this.add.text(0, 18, slot.hasSave
+        ? `${slot.endingCompleted ? 'Đã về đích' : 'Đang hành trình'} • ${slot.updatedAt ?? 'Không rõ thời điểm lưu'}`
+        : 'Có thể bắt đầu từ Chương 1.', {
         color: menuPalette.accentText,
         fontFamily: '"Segoe UI", Tahoma, sans-serif',
-        fontSize: '12px',
-        wordWrap: { width: 520 }
-      });
+        fontSize: '11px',
+        wordWrap: { width: panelWidth - 72 }
+      }));
 
-      createTextButton(this, {
-        x: 780,
-        y: y + 28,
-        width: 150,
-        label: slot.hasSave ? 'Nap save' : 'Tao moi',
-        detail: slot.hasSave ? 'Nap slot nay' : 'Bat dau tu Chuong 1',
+      slotFrame.content.add(createTextButton(this, {
+        x: 78,
+        y: 74,
+        width: 140,
+        label: slot.hasSave ? 'Nạp save' : 'Tạo mới',
+        detail: slot.hasSave ? 'Mở slot này' : 'Bắt đầu Chương 1',
         onClick: () => {
           const nextState = slot.hasSave
             ? saveStore.loadSlot(slot.slot)
-            : saveStore.createNewSaveInSlot(slot.slot, `Da tao save moi o slot ${slot.slot}.`);
+            : saveStore.createNewSaveInSlot(slot.slot, `Đã tạo save mới ở slot ${slot.slot}.`);
           stateManager.replace(nextState);
           if (returnScene !== SCENE_KEYS.mainMenu) {
             this.scene.stop(returnScene);
           }
           this.scene.start(SCENE_KEYS.sect);
         }
-      });
+      }));
 
-      createTextButton(this, {
-        x: 952,
-        y: y + 28,
-        width: 150,
-        label: 'Ghi de',
-        detail: 'Luu snapshot hien tai',
+      slotFrame.content.add(createTextButton(this, {
+        x: 232,
+        y: 74,
+        width: 140,
+        label: 'Ghi đè',
+        detail: 'Lưu snapshot hiện tại',
         onClick: () => {
           saveStore.setCurrentSlot(slot.slot);
           const payload = slot.hasSave ? stateManager.snapshot : createGameState();
           saveStore.saveGame(payload);
-          setStatus(`Da ghi du lieu vao slot ${slot.slot}.`);
+          setStatus(`Đã ghi dữ liệu vào slot ${slot.slot}.`);
           this.scene.restart({ returnScene });
         }
-      });
+      }));
 
-      createTextButton(this, {
-        x: 866,
-        y: y + 72,
-        width: 150,
-        label: 'Xoa slot',
-        detail: slot.hasSave ? 'Xoa save va backup' : 'Khong co du lieu',
+      slotFrame.content.add(createTextButton(this, {
+        x: 154,
+        y: 118,
+        width: 140,
+        label: 'Xóa slot',
+        detail: slot.hasSave ? 'Xóa save và backup' : 'Slot đang trống',
         onClick: () => {
           if (!slot.hasSave) {
-            setStatus(`Slot ${slot.slot} dang trong.`);
+            setStatus(`Slot ${slot.slot} đang trống.`);
             return;
           }
           saveStore.clearSlot(slot.slot);
-          setStatus(`Da xoa slot ${slot.slot}.`);
+          setStatus(`Đã xóa slot ${slot.slot}.`);
           this.scene.restart({ returnScene });
         }
-      });
+      }));
     });
 
-    createTextButton(this, {
-      x: 240,
-      y: 596,
-      width: 180,
-      label: 'Quay lai',
-      detail: 'Ve menu truoc do',
+    statusText.setPosition(0, 536);
+    frame.content.add(statusText);
+
+    frame.content.add(createTextButton(this, {
+      x: 154,
+      y: 620,
+      width: 156,
+      label: 'Quay lại',
+      detail: 'Về menu trước đó',
       onClick: () => {
         if (returnScene === SCENE_KEYS.mainMenu) {
           this.scene.start(returnScene);
@@ -137,6 +158,6 @@ export class SaveSlotsScene extends Phaser.Scene {
         }
         this.scene.stop();
       }
-    });
+    }));
   }
 }
