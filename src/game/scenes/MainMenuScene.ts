@@ -95,6 +95,7 @@ export class MainMenuScene extends Phaser.Scene {
       subtitle: 'Vào game, bắt đầu run mới, hoặc tiếp tục từ save slot hiện có.',
       iconKey: Icons.ui.sectCrest
     });
+    this.add.existing(journeyFrame.root);
 
     const startAction = createPrimaryButton(this, {
       width: panelWidth - 36,
@@ -165,6 +166,7 @@ export class MainMenuScene extends Phaser.Scene {
       title: 'Tình trạng save',
       subtitle: 'Tóm tắt ngắn để biết mình đang tiếp tục gì trước khi vào game.'
     });
+    this.add.existing(summaryFrame.root);
 
     const summaryLines = [
       `Slot hiện tại: ${saveSystem.getCurrentSlot()} | Save: ${saveSummary.source === 'none' ? 'chưa có' : saveSummary.source === 'backup' ? 'đang dùng backup' : 'ổn định'}`,
@@ -234,6 +236,7 @@ export class MainMenuScene extends Phaser.Scene {
       title: 'Credits',
       subtitle: 'Phần chính đã là shell mới. Một số panel sâu vẫn còn dùng UI legacy bên trong.'
     });
+    this.add.existing(creditsFrame.root);
 
     creditsFrame.content.add(this.add.text(0, 0, [
       'Phaser 3 + TypeScript + Vite',
