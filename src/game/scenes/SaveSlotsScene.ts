@@ -18,9 +18,9 @@ export class SaveSlotsScene extends Phaser.Scene {
     const currentSlot = saveStore.getCurrentSlot();
 
     const shell = new EntryShell(this, {
-      title: 'Save Slots',
-      subtitle: 'Quan ly du lieu hanh trinh',
-      metaLine: 'Tao moi, nap, ghi de, hoac xoa tung khe luu.'
+      title: 'Quản lý Tiến trình',
+      subtitle: 'Sao lưu dữ liệu hành trình',
+      metaLine: 'Tạo mới, nạp, ghi đè, hoặc xóa từng ô lưu.'
     });
     const panelWidth = shell.contentWidth;
 
@@ -29,8 +29,8 @@ export class SaveSlotsScene extends Phaser.Scene {
       y: shell.contentY,
       width: panelWidth,
       height: shell.contentHeight,
-      title: 'Danh sach khe luu',
-      subtitle: 'Ba khe luu de choi thu, replay, va backup.'
+      title: 'Danh sách ô lưu',
+      subtitle: 'Ba ô lưu để trải nghiệm thử, replay, và dự phòng an toàn.'
     });
     this.add.existing(frame.root);
 
@@ -45,24 +45,26 @@ export class SaveSlotsScene extends Phaser.Scene {
       statusText.setText(message);
     };
 
+    const buttonWidth = Math.floor((panelWidth - 60) / 3);
+
     slots.forEach((slot, index) => {
-      const slotY = index * 166;
+      const slotY = index * 180;
       const slotFrame = new PanelFrame(this, {
         x: 0,
         y: slotY,
         width: panelWidth - 36,
-        height: 152,
-        title: `Slot ${slot.slot}${slot.slot === currentSlot ? ' • dang chon' : ''}`,
+        height: 176,
+        title: `Ô ${slot.slot}${slot.slot === currentSlot ? ' • Đang chọn' : ''}`,
         subtitle: slot.hasSave
-          ? `${slot.sectName ?? 'Thanh Huyen Mon'} • ${slot.realmId ?? 'chua ro canh gioi'} • Ngay ${slot.day ?? 1}`
-          : 'Slot trong. Co the tao save moi tu day.'
+          ? `${slot.sectName ?? 'Thanh Huyền Môn'} • ${slot.realmId ? slot.realmId.replace(/_/g, ' ') : 'Chưa rõ'} • Ngày ${slot.day ?? 1}`
+          : 'Ô trống. Có thể khởi tạo hành trình mới ngay tại đây.'
       });
       frame.content.add(slotFrame.root);
 
       slotFrame.content.add(this.add.text(
         0,
         0,
-        slot.hasSave ? `Save v${slot.saveVersion ?? '?'} • Playtime ${slot.playtimeDays} ngay` : 'Chua co du lieu luu.',
+        slot.hasSave ? `Bản lưu ${slot.saveVersion ?? '?'} • Chơi ${slot.playtimeDays} ngày` : 'Chưa có dữ liệu nào.',
         {
           color: menuPalette.textMuted,
           fontFamily: '"Segoe UI", Tahoma, sans-serif',
@@ -73,10 +75,10 @@ export class SaveSlotsScene extends Phaser.Scene {
 
       slotFrame.content.add(this.add.text(
         0,
-        18,
+        16,
         slot.hasSave
-          ? `${slot.endingCompleted ? 'Da ve dich' : 'Dang hanh trinh'} • ${slot.updatedAt ?? 'Khong ro thoi diem luu'}`
-          : 'Co the bat dau tu Chuong 1.',
+          ? `${slot.endingCompleted ? 'Đã hiển thánh' : 'Đang hành trình'} • ${slot.updatedAt ?? 'Chưa rõ hiện trạng'}`
+          : 'Bắt đầu từ Chương 1.',
         {
           color: menuPalette.accentText,
           fontFamily: '"Segoe UI", Tahoma, sans-serif',
@@ -85,65 +87,67 @@ export class SaveSlotsScene extends Phaser.Scene {
         }
       ));
 
+      const btnY = 32;
+
       slotFrame.content.add(
         createPrimaryButton(this, {
-          width: 96,
-          label: slot.hasSave ? 'Nap save' : 'Tao moi',
-          detail: slot.hasSave ? 'Mo tien trinh' : 'Khoi tao run',
+          width: buttonWidth,
+          label: slot.hasSave ? 'Tải game' : 'Tạo mới',
+          detail: slot.hasSave ? 'Mở tiến trình' : 'Bắt đầu mới',
           onClick: () => {
             const nextState = slot.hasSave
               ? saveStore.loadSlot(slot.slot)
-              : saveStore.createNewSaveInSlot(slot.slot, `Da tao save moi o slot ${slot.slot}.`);
+              : saveStore.createNewSaveInSlot(slot.slot, `Đã tạo save mới ở ô ${slot.slot}.`);
             stateManager.replace(nextState);
             if (returnScene !== SCENE_KEYS.mainMenu) {
               this.scene.stop(returnScene);
             }
             this.scene.start(SCENE_KEYS.sect);
           }
-        }).setPosition(0, 56)
+        }).setPosition(10, btnY)
       );
 
       slotFrame.content.add(
         createSecondaryButton(this, {
-          width: 96,
-          label: 'Ghi de',
-          detail: 'Luu hien tai',
+          width: buttonWidth,
+          label: 'Ghi đè',
+          detail: 'Lưu đè trạng thái',
           onClick: () => {
             saveStore.setCurrentSlot(slot.slot);
             const payload = slot.hasSave ? stateManager.snapshot : createGameState();
             saveStore.saveGame(payload);
-            setStatus(`Da ghi du lieu vao slot ${slot.slot}.`);
+            setStatus(`Đã ghi toàn bộ dữ liệu vào ô ${slot.slot}.`);
             this.scene.restart({ returnScene });
           }
-        }).setPosition(108, 56)
+        }).setPosition(10 + buttonWidth + 8, btnY)
       );
 
       slotFrame.content.add(
         createSecondaryButton(this, {
-          width: 96,
-          label: 'Xoa slot',
-          detail: slot.hasSave ? 'Lam trong slot' : 'Slot dang trong',
+          width: buttonWidth,
+          label: 'Xóa ô',
+          detail: 'Dọn trống tiến trình',
           onClick: () => {
             if (!slot.hasSave) {
-              setStatus(`Slot ${slot.slot} dang trong.`);
+              setStatus(`Ô ${slot.slot} hiện tại đang trống.`);
               return;
             }
             saveStore.clearSlot(slot.slot);
-            setStatus(`Da xoa slot ${slot.slot}.`);
+            setStatus(`Đã xóa hoàn toàn ô ${slot.slot}.`);
             this.scene.restart({ returnScene });
           }
-        }).setPosition(216, 56)
+        }).setPosition(10 + (buttonWidth + 8) * 2, btnY)
       );
     });
 
-    statusText.setPosition(0, 514);
+    statusText.setPosition(0, 560);
     frame.content.add(statusText);
 
     frame.content.add(
       createSecondaryButton(this, {
         width: 156,
-        label: 'Quay lai',
-        detail: 'Ve menu truoc do',
+        label: 'Quay lại',
+        detail: 'Về trình đơn trước',
         onClick: () => {
           if (returnScene === SCENE_KEYS.mainMenu) {
             this.scene.start(returnScene);
@@ -154,7 +158,7 @@ export class SaveSlotsScene extends Phaser.Scene {
           }
           this.scene.stop();
         }
-      }).setPosition(94, 566)
+      }).setPosition(panelWidth - 36 - 156 + 18, 552)
     );
   }
 }

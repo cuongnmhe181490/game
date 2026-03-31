@@ -19,9 +19,9 @@ function renderBootError(message: string, detail?: string): void {
   if (!root) {
     document.body.innerHTML = `
       <section class="boot-error" role="alert" aria-live="assertive">
-        <h1>Khong the mo son mon</h1>
+        <h1>Không thể mở sơn môn</h1>
         <p>${message}</p>
-        <p class="boot-error-detail">${detail ?? 'DOM root khong hop le cho ban build hien tai.'}</p>
+        <p class="boot-error-detail">${detail ?? 'DOM root không hợp lệ cho bản build hiện tại.'}</p>
       </section>
     `;
     return;
@@ -30,9 +30,9 @@ function renderBootError(message: string, detail?: string): void {
   hideBootShell();
   root.innerHTML = `
     <section class="boot-error" role="alert" aria-live="assertive">
-      <h1>Khong the mo son mon</h1>
+      <h1>Không thể mở sơn môn</h1>
       <p>${message}</p>
-      <p class="boot-error-detail">${detail ?? 'Hay tai lai trang. Neu loi lap lai, hay xoa save hien tai trong trinh duyet hoac bao lai kem build label.'}</p>
+      <p class="boot-error-detail">${detail ?? 'Hãy tải lại trang. Nếu lỗi lặp lại, hãy xóa save hiện tại trong trình duyệt hoặc báo lại kèm build label.'}</p>
     </section>
   `;
 }
@@ -57,7 +57,7 @@ function getErrorDetail(reason: unknown): string {
     return reason;
   }
 
-  return 'Loi khoi dong khong xac dinh.';
+  return 'Lỗi khởi động không xác định.';
 }
 
 function handleStartupError(event: ErrorEvent): void {
@@ -66,7 +66,7 @@ function handleStartupError(event: ErrorEvent): void {
   }
 
   renderBootError(
-    'Game gap loi khi tai bundle client.',
+    'Game gặp lỗi khi tải bundle client.',
     getErrorDetail(event.error ?? event.message)
   );
 }
@@ -77,7 +77,7 @@ function handleStartupRejection(event: PromiseRejectionEvent): void {
   }
 
   renderBootError(
-    'Game gap loi khi khoi dong promise dau vao.',
+    'Game gặp lỗi khi khởi động promise đầu vào.',
     getErrorDetail(event.reason)
   );
 }
@@ -122,7 +122,7 @@ async function bootstrap(): Promise<void> {
     }
   } catch (error) {
     renderBootError(
-      'Ban build van tai duoc, nhung game gap loi trong luc khoi dong.',
+      'Bản build vẫn tải được, nhưng game gặp lỗi trong lúc khởi động.',
       getErrorDetail(error)
     );
   }

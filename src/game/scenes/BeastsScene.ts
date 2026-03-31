@@ -218,7 +218,7 @@ export class BeastsScene extends Phaser.Scene {
       width: panelWidth,
       height: 214,
       title: 'Chỉ số',
-      subtitle: `Huấn luyện ${selected.state.training} • Rarity ${this.formatRarity(selected.definition.rarity)}`
+      subtitle: `Huấn luyện ${selected.state.training} • Phẩm chất ${this.formatRarity(selected.definition.rarity)}`
     });
     this.scrollContent.add(statsFrame.root);
     [

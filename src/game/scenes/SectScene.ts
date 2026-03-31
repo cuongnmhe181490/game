@@ -61,8 +61,8 @@ import {
 } from '@/game/ui';
 
 const CULTIVATION_MODE_LABELS = {
-  balanced: 'Binh on',
-  focused: 'Tu khi'
+  balanced: 'Bình ổn',
+  focused: 'Tụ khí'
 } as const;
 
 const TUTORIAL_CHOICE_FLAGS = {
@@ -77,11 +77,11 @@ const TUTORIAL_CHOICE_FLAGS = {
 } as const;
 
 function getChapterName(snapshot: Readonly<GameState>): string {
-  return storyChapterCatalog.chapters.find((chapter) => chapter.id === snapshot.story.currentChapterId)?.name ?? 'Chua ro chuong';
+  return storyChapterCatalog.chapters.find((chapter) => chapter.id === snapshot.story.currentChapterId)?.name ?? 'Chưa rõ chương';
 }
 
 function formatDate(snapshot: Readonly<GameState>): string {
-  return `Ngay ${snapshot.time.day} | Thang ${snapshot.time.month} | Nam ${snapshot.time.year}`;
+  return `Ngày ${snapshot.time.day} | Tháng ${snapshot.time.month} | Năm ${snapshot.time.year}`;
 }
 
 function getDiscipleRealmName(realmId: string): string {
@@ -91,13 +91,13 @@ function getDiscipleRealmName(realmId: string): string {
 function getDiscipleStatusLabel(status: GameState['disciples']['roster'][number]['status']): string {
   switch (status) {
     case 'recovering':
-      return 'Dang hoi suc';
+      return 'Đang hồi sức';
     case 'dissatisfied':
-      return 'Bat man';
+      return 'Bất mãn';
     case 'unstable':
-      return 'Bat on';
+      return 'Bất ổn';
     default:
-      return 'On dinh';
+      return 'Ổn định';
   }
 }
 
@@ -231,9 +231,9 @@ export class SectScene extends Phaser.Scene {
 
     this.resourceBarText = this.add.text(-1000, -1000, '', { fontSize: '1px' }).setVisible(false);
     this.resourceBars = [
-      new ResourceBar(this, { width: shellWidth - 104, name: 'Linh thach', current: 0, max: 10000, iconKey: Icons.resource.spiritStone, color: 'gold' }),
-      new ResourceBar(this, { width: shellWidth - 104, name: 'Tu vi', current: 0, max: 100, iconKey: Icons.resource.spiritualEnergy, color: 'gold' }),
-      new ResourceBar(this, { width: shellWidth - 104, name: 'Linh luc', current: 0, max: 100, iconKey: Icons.resource.linhKhi, color: 'spirit' })
+      new ResourceBar(this, { width: shellWidth - 104, name: 'Linh thạch', current: 0, max: 10000, iconKey: Icons.resource.spiritStone, color: 'gold' }),
+      new ResourceBar(this, { width: shellWidth - 104, name: 'T? vi', current: 0, max: 100, iconKey: Icons.resource.spiritualEnergy, color: 'gold' }),
+      new ResourceBar(this, { width: shellWidth - 104, name: 'Linh lực', current: 0, max: 100, iconKey: Icons.resource.linhKhi, color: 'spirit' })
     ];
     this.resourceBars.forEach((bar, index) => {
       bar.setPosition(shellX + 86, shellY + 102 + index * 40);
@@ -248,6 +248,8 @@ export class SectScene extends Phaser.Scene {
 
     let contentY = 0;
     const panelWidth = shellWidth - 32;
+    const threeBtnWidth = Math.floor((panelWidth - 36 - 20) / 3);
+    const halfBtnWidth = Math.floor((panelWidth - 36 - 10) / 2);
 
     const sectFrame = new PanelFrame(this, {
       x: 0,
@@ -296,27 +298,27 @@ export class SectScene extends Phaser.Scene {
     });
     this.scrollContent.add(this.buildingListText);
     this.scrollContent.add(createSecondaryButton(this, {
-      width: 120,
-      label: 'Cong trinh truoc',
-      detail: 'Doi muc dang xem',
+      width: threeBtnWidth,
+      label: 'Trước',
+      detail: 'Công trình trước',
       onClick: () => {
         this.selectedBuildingIndex = this.wrapIndex(this.selectedBuildingIndex - 1, buildingCatalog.buildings.length);
         this.refreshView(getStateManager(this).snapshot);
       }
     }).setPosition(buildingsFrame.root.x + 18, buildingsFrame.root.y + 258));
     this.scrollContent.add(createSecondaryButton(this, {
-      width: 120,
-      label: 'Cong trinh sau',
-      detail: 'Doi muc dang xem',
+      width: threeBtnWidth,
+      label: 'Sau',
+      detail: 'Công trình tiếp theo',
       onClick: () => {
         this.selectedBuildingIndex = this.wrapIndex(this.selectedBuildingIndex + 1, buildingCatalog.buildings.length);
         this.refreshView(getStateManager(this).snapshot);
       }
-    }).setPosition(buildingsFrame.root.x + 154, buildingsFrame.root.y + 258));
+    }).setPosition(buildingsFrame.root.x + 18 + threeBtnWidth + 10, buildingsFrame.root.y + 258));
     this.scrollContent.add(createPrimaryButton(this, {
-      width: 120,
-      label: 'Dung / nang',
-      detail: 'Tac dong len muc dang chon',
+      width: threeBtnWidth,
+      label: 'Dựng / nâng',
+      detail: 'Tác động lên mục đang chọn',
       onClick: () => {
         const snapshotNow = getStateManager(this).snapshot;
         const buildingId = this.getSelectedBuildingId();
@@ -326,7 +328,7 @@ export class SectScene extends Phaser.Scene {
           : getBuildingSystem(this).constructBuilding(buildingId);
         this.refreshView(result.snapshot, result.message);
       }
-    }).setPosition(buildingsFrame.root.x + 290, buildingsFrame.root.y + 258));
+    }).setPosition(buildingsFrame.root.x + 18 + (threeBtnWidth + 10) * 2, buildingsFrame.root.y + 258));
 
     contentY += 338;
 
@@ -348,9 +350,9 @@ export class SectScene extends Phaser.Scene {
     });
     this.scrollContent.add(this.discipleListText);
     this.scrollContent.add(createSecondaryButton(this, {
-      width: 120,
-      label: 'De tu truoc',
-      detail: 'Doi nguoi dang xem',
+      width: threeBtnWidth,
+      label: 'Trước',
+      detail: 'Đệ tử trước',
       onClick: () => {
         this.markTutorialFlag(TUTORIAL_CHOICE_FLAGS.checkedDisciple);
         this.selectedDiscipleIndex = this.wrapIndex(this.selectedDiscipleIndex - 1, getStateManager(this).snapshot.disciples.roster.length);
@@ -358,39 +360,39 @@ export class SectScene extends Phaser.Scene {
       }
     }).setPosition(membersFrame.root.x + 18, membersFrame.root.y + 302));
     this.scrollContent.add(createSecondaryButton(this, {
-      width: 120,
-      label: 'De tu sau',
-      detail: 'Doi nguoi dang xem',
+      width: threeBtnWidth,
+      label: 'Sau',
+      detail: 'Đệ tử tiếp theo',
       onClick: () => {
         this.markTutorialFlag(TUTORIAL_CHOICE_FLAGS.checkedDisciple);
         this.selectedDiscipleIndex = this.wrapIndex(this.selectedDiscipleIndex + 1, getStateManager(this).snapshot.disciples.roster.length);
         this.refreshView(getStateManager(this).snapshot);
       }
-    }).setPosition(membersFrame.root.x + 154, membersFrame.root.y + 302));
+    }).setPosition(membersFrame.root.x + 18 + threeBtnWidth + 10, membersFrame.root.y + 302));
     this.scrollContent.add(createPrimaryButton(this, {
-      width: 120,
-      label: 'Tu luyen',
-      detail: 'Tang tong luc tu hanh',
+      width: threeBtnWidth,
+      label: 'T? luyện',
+      detail: 'Tăng tổng lực tu hành',
       onClick: () => this.assignSelectedDiscipleTask('tu_luyen')
-    }).setPosition(membersFrame.root.x + 290, membersFrame.root.y + 302));
+    }).setPosition(membersFrame.root.x + 18 + (threeBtnWidth + 10) * 2, membersFrame.root.y + 302));
     this.scrollContent.add(createSecondaryButton(this, {
-      width: 120,
+      width: threeBtnWidth,
       label: 'Thu gom',
-      detail: 'Trong duoc cham',
+      detail: 'Trồng dược chậm',
       onClick: () => this.assignSelectedDiscipleTask('trong_duoc')
     }).setPosition(membersFrame.root.x + 18, membersFrame.root.y + 354));
     this.scrollContent.add(createSecondaryButton(this, {
-      width: 120,
-      label: 'Tro dan',
-      detail: 'Ho tro tiet kiem lieu',
+      width: threeBtnWidth,
+      label: 'Trợ đan',
+      detail: 'Hỗ trợ tiết kiệm liệu',
       onClick: () => this.assignSelectedDiscipleTask('luyen_dan')
-    }).setPosition(membersFrame.root.x + 154, membersFrame.root.y + 354));
+    }).setPosition(membersFrame.root.x + 18 + threeBtnWidth + 10, membersFrame.root.y + 354));
     this.scrollContent.add(createSecondaryButton(this, {
-      width: 120,
-      label: 'Ho tro bi canh',
-      detail: 'Tang thuong tham hiem',
+      width: threeBtnWidth,
+      label: 'Hỗ trợ bí cảnh',
+      detail: 'Tăng thưởng thám hiểm',
       onClick: () => this.assignSelectedDiscipleTask('tuan_tra')
-    }).setPosition(membersFrame.root.x + 290, membersFrame.root.y + 354));
+    }).setPosition(membersFrame.root.x + 18 + (threeBtnWidth + 10) * 2, membersFrame.root.y + 354));
 
     contentY += 424;
 
@@ -412,17 +414,17 @@ export class SectScene extends Phaser.Scene {
     });
     this.scrollContent.add(this.statusText);
     this.scrollContent.add(createPrimaryButton(this, {
-      width: 182,
+      width: halfBtnWidth,
       label: 'Nâng cấp tông',
       detail: 'Đi tới khu công trình',
       onClick: () => this.scrollToAnchor('buildings')
     }).setPosition(actionsFrame.root.x + 18, actionsFrame.root.y + 122));
     this.scrollContent.add(createSecondaryButton(this, {
-      width: 182,
+      width: halfBtnWidth,
       label: 'Quản lý môn nhân',
       detail: 'Đi tới danh sách đệ tử',
       onClick: () => this.scrollToAnchor('members')
-    }).setPosition(actionsFrame.root.x + 210, actionsFrame.root.y + 122));
+    }).setPosition(actionsFrame.root.x + 18 + halfBtnWidth + 10, actionsFrame.root.y + 122));
     this.scrollContent.add(createSecondaryButton(this, {
       width: panelWidth - 36,
       label: 'Ngoại giao',
@@ -437,7 +439,7 @@ export class SectScene extends Phaser.Scene {
       y: contentY,
       width: panelWidth,
       height: 248,
-      title: 'Tu Hành',
+      title: 'T? Hành',
       subtitle: 'Theo dõi cảnh giới và mở panel tu luyện'
     });
     this.scrollContent.add(cultivationFrame.root);
@@ -450,29 +452,29 @@ export class SectScene extends Phaser.Scene {
       width: panelWidth - 118,
       value: 0,
       max: 100,
-      label: 'Tien do canh gioi',
+      label: 'Tiến độ cảnh giới',
       iconKey: 'icon_status_qi_refining'
     }).setPosition(cultivationFrame.root.x + 92, cultivationFrame.root.y + 104);
     this.cultivationEmblem = cultivationIcon;
     this.cultivationProgressBar = cultivationProgressBar;
     this.scrollContent.add([cultivationIconRing, cultivationIcon, cultivationProgressBar]);
     this.scrollContent.add(createPrimaryButton(this, {
-      width: 182,
-      label: 'Qua 1 ngay',
+      width: halfBtnWidth,
+      label: 'Qua 1 ngày',
       detail: 'Qua một ngày và xử lý biến động',
       onClick: () => {
         this.markTutorialFlag(TUTORIAL_CHOICE_FLAGS.advancedDay);
         const result = getTimeSystem(this).advanceOneDay();
-        this.refreshView(result.snapshot, 'Da qua mot ngay. Hay doc tong ket va xu ly event hien tai.');
+        this.refreshView(result.snapshot, 'Đã qua một ngày. Hãy đọc tổng kết và xử lý sự kiện hiện tại.');
         this.presentCurrentEvent('time');
       }
     }).setPosition(cultivationFrame.root.x + 18, cultivationFrame.root.y + 194));
     this.scrollContent.add(createSecondaryButton(this, {
-      width: 182,
-      label: 'Tu hanh',
+      width: halfBtnWidth,
+      label: 'T? hành',
       detail: 'Mở bảng tu hành chi tiết',
       onClick: () => this.toggleCultivationPanel(true)
-    }).setPosition(cultivationFrame.root.x + 210, cultivationFrame.root.y + 194));
+    }).setPosition(cultivationFrame.root.x + 18 + halfBtnWidth + 10, cultivationFrame.root.y + 194));
 
     contentY += 268;
 
@@ -503,7 +505,7 @@ export class SectScene extends Phaser.Scene {
 
     this.navBar = new NavBar(this, shellX + 10, shellY + shellHeight - navHeight + 4, shellWidth - 20, [
       { id: 'sect', label: 'Tông môn', iconKey: Icons.ui.sectCrest, onClick: () => this.scrollToAnchor('sect') },
-      { id: 'cultivate', label: 'Tu hành', iconKey: Icons.status.qiRefining, onClick: () => this.scrollToAnchor('cultivate') },
+      { id: 'cultivate', label: 'T? hành', iconKey: Icons.status.qiRefining, onClick: () => this.scrollToAnchor('cultivate') },
       {
         id: 'explore',
         label: 'Bí cảnh',
@@ -581,437 +583,6 @@ export class SectScene extends Phaser.Scene {
     }
 
     this.presentTutorialIntroIfNeeded(syncedSnapshot);
-  }
-
-  private createTopButtons(): void {
-    const showDebugActions = typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('debug') === '1';
-
-    createTextButton(this, {
-      x: 120,
-      y: 602,
-      width: 112,
-      label: 'Qua 1 ngay',
-      detail: 'Chay san xuat',
-      onClick: () => {
-        this.markTutorialFlag(TUTORIAL_CHOICE_FLAGS.advancedDay);
-        const result = getTimeSystem(this).advanceOneDay();
-        this.refreshView(result.snapshot, 'Da qua mot ngay. Hay doc tong ket de hieu tai nguyen, tu hanh va bien dong noi mon.');
-        this.presentCurrentEvent('time');
-      }
-    });
-
-    if (showDebugActions) {
-      createTextButton(this, {
-        x: 245,
-        y: 602,
-        width: 112,
-        label: 'Goi event',
-        detail: 'Nut debug chi hien khi ?debug=1',
-        onClick: () => {
-          this.presentCurrentEvent('system');
-        }
-      });
-    } else {
-      createTextButton(this, {
-        x: 245,
-        y: 602,
-        width: 112,
-        label: 'Ve menu',
-        detail: 'Quay lai menu chinh, giu save hien tai',
-        onClick: () => {
-          const snapshot = getStateManager(this).snapshot;
-          getSaveStore(this).saveGame(snapshot);
-          this.scene.start(SCENE_KEYS.mainMenu);
-        }
-      });
-    }
-
-    createTextButton(this, {
-      x: 370,
-      y: 602,
-      width: 112,
-      label: 'Luu game',
-      detail: 'Ghi vào máy này',
-      onClick: () => {
-        const nextSnapshot = getStateManager(this).snapshot;
-        getSaveStore(this).saveGame(nextSnapshot);
-        this.refreshView(nextSnapshot, 'Đã lưu game vào localStorage.');
-      }
-    });
-
-    createTextButton(this, {
-      x: 495,
-      y: 602,
-      width: 112,
-      label: 'Tai save',
-      detail: 'Doc lai save da ghi',
-      onClick: () => {
-        const loaded = getSaveStore(this).loadSave();
-        const nextSnapshot = getStateManager(this).replace(loaded);
-        getDiplomacySystem(this).syncState();
-        getBuildingSystem(this).syncBuildingStates();
-        const syncedSnapshot = getStateManager(this).update((draft) => {
-          getSectIdentitySystem(this).refreshSectIdentityInDraft(draft);
-        });
-        getSaveStore(this).saveGame(syncedSnapshot);
-        this.refreshView(syncedSnapshot, 'Đã tải lại save hiện có.');
-      }
-    });
-
-    createTextButton(this, {
-      x: 620,
-      y: 602,
-      width: 112,
-      label: 'Túi đồ',
-      detail: 'Kho tông môn',
-      onClick: () => {
-        this.toggleInventoryPanel(true);
-      }
-    });
-
-    createTextButton(this, {
-      x: 745,
-      y: 602,
-      width: 112,
-      label: 'Luyện đan',
-      detail: 'Đan phương cơ bản',
-      onClick: () => {
-        this.toggleAlchemyPanel(true);
-      }
-    });
-
-    createTextButton(this, {
-      x: 870,
-      y: 602,
-      width: 112,
-      label: 'Tu hành',
-      detail: 'Mở panel cảnh giới',
-      onClick: () => {
-        this.toggleCultivationPanel(true);
-      }
-    });
-
-    createTextButton(this, {
-      x: 995,
-      y: 602,
-      width: 112,
-      label: 'Ngoại giao',
-      detail: 'Mở panel phe phái',
-      onClick: () => {
-        this.toggleDiplomacyPanel(true);
-      }
-    });
-
-    createTextButton(this, {
-      x: 1128,
-      y: 154,
-      width: 120,
-      label: 'Tri mon',
-      detail: 'Uy danh va noi quy',
-      onClick: () => {
-        this.toggleGovernancePanel(true);
-      }
-    });
-
-    createTextButton(this, {
-      x: 1128,
-      y: 96,
-      width: 120,
-      label: 'Am thanh',
-      detail: 'Bat / tat phan hoi',
-      onClick: () => {
-        const muted = getFeedbackSystem(this).toggleMuted();
-        this.refreshView(
-          getStateManager(this).snapshot,
-          muted
-            ? 'Da tat am thanh phan hoi. Hieu ung hinh anh van hoat dong binh thuong.'
-            : 'Da bat am thanh phan hoi. Trinh duyet chi phat sau tuong tac cua ban.'
-        );
-      }
-    });
-
-    createTextButton(this, {
-      x: 1120,
-      y: 602,
-      width: 112,
-      label: 'Game moi',
-      detail: 'Xoa tien trinh hien tai',
-      onClick: () => {
-        getSaveStore(this).clear();
-        getStateManager(this).replace(createGameState());
-        const resetSnapshot = getStateManager(this).update((draft) => {
-          draft.ui.statusMessage = 'Da tao lai game tu dau Chuong 1.';
-        });
-        getSaveStore(this).saveGame(resetSnapshot);
-        getDiplomacySystem(this).syncState();
-        getBuildingSystem(this).syncBuildingStates();
-        const syncedSnapshot = getStateManager(this).update((draft) => {
-          getSectIdentitySystem(this).refreshSectIdentityInDraft(draft);
-        });
-        getSaveStore(this).saveGame(syncedSnapshot);
-        this.selectedBuildingIndex = 0;
-        this.selectedDiscipleIndex = 0;
-        this.selectedTechniqueIndex = 0;
-        this.selectedFactionIndex = 0;
-        this.selectedGovernanceStyleIndex = 0;
-        this.selectedRuleIndex = 0;
-        this.selectedElderRoleIndex = 0;
-        this.selectedItemIndex = 0;
-        this.selectedRecipeIndex = 0;
-        this.selectedMapIndex = 0;
-        this.refreshView(syncedSnapshot, 'Đã tạo save mới cho vertical slice.');
-      }
-    });
-  }
-
-  private createBuildingButtons(): void {
-    createTextButton(this, {
-      x: 150,
-      y: 548,
-      width: 120,
-      label: 'Trước',
-      detail: 'Công trình trước',
-      onClick: () => {
-        this.selectedBuildingIndex = this.wrapIndex(this.selectedBuildingIndex - 1, buildingCatalog.buildings.length);
-        this.refreshView(getStateManager(this).snapshot);
-      }
-    });
-
-    createTextButton(this, {
-      x: 284,
-      y: 548,
-      width: 120,
-      label: 'Sau',
-      detail: 'Công trình sau',
-      onClick: () => {
-        this.selectedBuildingIndex = this.wrapIndex(this.selectedBuildingIndex + 1, buildingCatalog.buildings.length);
-        this.refreshView(getStateManager(this).snapshot);
-      }
-    });
-
-    createTextButton(this, {
-      x: 150,
-      y: 606,
-      width: 120,
-      label: 'Dá»±ng',
-      detail: 'Xây công trình',
-      onClick: () => {
-        const buildingId = this.getSelectedBuildingId();
-        const result = getBuildingSystem(this).constructBuilding(buildingId);
-        this.refreshView(result.snapshot, result.message);
-      }
-    });
-
-    createTextButton(this, {
-      x: 284,
-      y: 606,
-      width: 120,
-      label: 'Nâng cấp',
-      detail: 'Tăng cấp hiện tại',
-      onClick: () => {
-        const buildingId = this.getSelectedBuildingId();
-        const result = getBuildingSystem(this).upgradeBuilding(buildingId);
-        this.refreshView(result.snapshot, result.message);
-      }
-    });
-  }
-
-  private createDiscipleButtons(): void {
-    createTextButton(this, {
-      x: 954,
-      y: 548,
-      width: 112,
-      label: 'Map trước',
-      detail: 'Đổi khu thám hiểm',
-      onClick: () => {
-        const maps = getExplorationSystem(this).getMaps();
-        this.selectedMapIndex = this.wrapIndex(this.selectedMapIndex - 1, maps.length);
-        this.refreshView(getStateManager(this).snapshot);
-      }
-    });
-
-    createTextButton(this, {
-      x: 1080,
-      y: 548,
-      width: 136,
-      label: 'Vào map',
-      detail: 'Khu đang chọn',
-      onClick: () => {
-        const explorationSystem = getExplorationSystem(this);
-        const map = this.getSelectedMap();
-        const check = explorationSystem.canEnterMap(map.id);
-
-        if (!check.ok) {
-          this.refreshView(getStateManager(this).snapshot, check.reason);
-          return;
-        }
-
-        this.scene.start(SCENE_KEYS.exploration, { mapId: map.id });
-      }
-    });
-
-    createTextButton(this, {
-      x: 1206,
-      y: 548,
-      width: 112,
-      label: 'Map sau',
-      detail: 'Đổi khu thám hiểm',
-      onClick: () => {
-        const maps = getExplorationSystem(this).getMaps();
-        this.selectedMapIndex = this.wrapIndex(this.selectedMapIndex + 1, maps.length);
-        this.refreshView(getStateManager(this).snapshot);
-      }
-    });
-
-    createTextButton(this, {
-      x: 526,
-      y: 548,
-      width: 120,
-      label: 'Trước',
-      detail: 'Đệ tử trước',
-      onClick: () => {
-        this.markTutorialFlag(TUTORIAL_CHOICE_FLAGS.checkedDisciple);
-        this.selectedDiscipleIndex = this.wrapIndex(this.selectedDiscipleIndex - 1, getStateManager(this).snapshot.disciples.roster.length);
-        this.refreshView(getStateManager(this).snapshot);
-      }
-    });
-
-    createTextButton(this, {
-      x: 660,
-      y: 548,
-      width: 120,
-      label: 'Sau',
-      detail: 'Đệ tử sau',
-      onClick: () => {
-        this.markTutorialFlag(TUTORIAL_CHOICE_FLAGS.checkedDisciple);
-        this.selectedDiscipleIndex = this.wrapIndex(this.selectedDiscipleIndex + 1, getStateManager(this).snapshot.disciples.roster.length);
-        this.refreshView(getStateManager(this).snapshot);
-      }
-    });
-
-    const tasks: Array<{ task: DiscipleTaskId; x: number; y: number }> = [
-      { task: 'tu_luyen', x: 486, y: 606 },
-      { task: 'trong_duoc', x: 624, y: 606 },
-      { task: 'luyen_dan', x: 762, y: 606 },
-      { task: 'thu_thap', x: 486, y: 664 },
-      { task: 'tuan_tra', x: 624, y: 664 },
-      { task: 'nghi_ngoi', x: 762, y: 664 }
-    ];
-
-    for (const entry of tasks) {
-      createTextButton(this, {
-        x: entry.x,
-        y: entry.y,
-        width: 128,
-        label: TASK_LABELS[entry.task],
-        detail: entry.task,
-        onClick: () => {
-          const disciple = this.getSelectedDisciple(getStateManager(this).snapshot);
-
-          if (!disciple) {
-            return;
-          }
-
-          const result = getDiscipleSystem(this).setCurrentTask(disciple.id, entry.task);
-          const syncedSnapshot = getBuildingSystem(this).syncBuildingStates();
-          this.refreshView(syncedSnapshot, result.message);
-        }
-      });
-    }
-
-    createTextButton(this, {
-      x: 1080,
-      y: 606,
-      width: 220,
-      label: 'Gán vào công trình',
-      detail: 'Dùng công trình đang chọn',
-      onClick: () => {
-        const snapshot = getStateManager(this).snapshot;
-        const disciple = this.getSelectedDisciple(snapshot);
-
-        if (!disciple) {
-          return;
-        }
-
-        const result = getDiscipleSystem(this).assignToBuilding(disciple.id, this.getSelectedBuildingId());
-        const syncedSnapshot = getBuildingSystem(this).syncBuildingStates();
-        this.refreshView(syncedSnapshot, result.message);
-      }
-    });
-
-    createTextButton(this, {
-      x: 1080,
-      y: 664,
-      width: 220,
-      label: 'Rút khỏi công trình',
-      detail: 'Giữ task hiện tại',
-      onClick: () => {
-        const disciple = this.getSelectedDisciple(getStateManager(this).snapshot);
-
-        if (!disciple) {
-          return;
-        }
-
-        const result = getDiscipleSystem(this).assignToBuilding(disciple.id, null);
-        const syncedSnapshot = getBuildingSystem(this).syncBuildingStates();
-        this.refreshView(syncedSnapshot, result.message);
-      }
-    });
-
-    createTextButton(this, {
-      x: 486,
-      y: 708,
-      width: 128,
-      label: 'Thưởng',
-      detail: '+mood, +loyalty',
-      onClick: () => {
-        const disciple = this.getSelectedDisciple(getStateManager(this).snapshot);
-
-        if (!disciple) {
-          return;
-        }
-
-        const result = getDiscipleSystem(this).rewardDisciple(disciple.id);
-        this.refreshView(result.snapshot, result.message);
-      }
-    });
-
-    createTextButton(this, {
-      x: 624,
-      y: 708,
-      width: 128,
-      label: 'Nghỉ',
-      detail: 'Hồi sức và dịu tâm',
-      onClick: () => {
-        const disciple = this.getSelectedDisciple(getStateManager(this).snapshot);
-
-        if (!disciple) {
-          return;
-        }
-
-        const result = getDiscipleSystem(this).restDisciple(disciple.id);
-        const syncedSnapshot = getBuildingSystem(this).syncBuildingStates();
-        this.refreshView(syncedSnapshot, result.message);
-      }
-    });
-
-    createTextButton(this, {
-      x: 762,
-      y: 708,
-      width: 128,
-      label: 'Khiển trách',
-      detail: 'Siết kỷ cương',
-      onClick: () => {
-        const disciple = this.getSelectedDisciple(getStateManager(this).snapshot);
-
-        if (!disciple) {
-          return;
-        }
-
-        const result = getDiscipleSystem(this).reprimandDisciple(disciple.id);
-        this.refreshView(result.snapshot, result.message);
-      }
-    });
   }
 
   private setScrollOffset(nextOffset: number): void {
@@ -1191,72 +762,72 @@ export class SectScene extends Phaser.Scene {
   private createGovernancePanel(): void {
     this.governancePanel = new GovernancePanel(this, [
       {
-        label: 'Huong truoc',
-        detail: 'Thien huong tri mon',
+        label: 'H??ng tr??c',
+        detail: 'Thi?n h??ng tr? m?n',
         onClick: () => {
           this.selectedGovernanceStyleIndex = this.wrapIndex(this.selectedGovernanceStyleIndex - 1, governanceStyleCatalog.styles.length);
           this.refreshView(getStateManager(this).snapshot);
         }
       },
       {
-        label: 'Huong sau',
-        detail: 'Thien huong tri mon',
+        label: 'H??ng sau',
+        detail: 'Thi?n h??ng tr? m?n',
         onClick: () => {
           this.selectedGovernanceStyleIndex = this.wrapIndex(this.selectedGovernanceStyleIndex + 1, governanceStyleCatalog.styles.length);
           this.refreshView(getStateManager(this).snapshot);
         }
       },
       {
-        label: 'Ap dung huong',
-        detail: 'Chon thien huong',
+        label: '?p d?ng h??ng',
+        detail: 'Ch?n thi?n h??ng',
         onClick: () => {
           const result = getSectIdentitySystem(this).chooseGovernanceStyle(this.getSelectedGovernanceStyle().id);
           this.refreshView(result.snapshot, result.message);
         }
       },
       {
-        label: 'Noi quy truoc',
-        detail: 'Dang xem noi quy',
+        label: 'N?i quy tr??c',
+        detail: '?ang xem n?i quy',
         onClick: () => {
           this.selectedRuleIndex = this.wrapIndex(this.selectedRuleIndex - 1, sectRuleCatalog.rules.length);
           this.refreshView(getStateManager(this).snapshot);
         }
       },
       {
-        label: 'Noi quy sau',
-        detail: 'Dang xem noi quy',
+        label: 'N?i quy sau',
+        detail: '?ang xem n?i quy',
         onClick: () => {
           this.selectedRuleIndex = this.wrapIndex(this.selectedRuleIndex + 1, sectRuleCatalog.rules.length);
           this.refreshView(getStateManager(this).snapshot);
         }
       },
       {
-        label: 'Bat / tat noi quy',
-        detail: 'Toi da 2 noi quy',
+        label: 'B?t / t?t n?i quy',
+        detail: 'T?i ?a 2 n?i quy',
         onClick: () => {
           const result = getSectIdentitySystem(this).toggleSectRule(this.getSelectedRule().id);
           this.refreshView(result.snapshot, result.message);
         }
       },
       {
-        label: 'Vai tro truoc',
-        detail: 'Dang xem truong lao',
+        label: 'Vai tr? tr??c',
+        detail: '?ang xem tr??ng l?o',
         onClick: () => {
           this.selectedElderRoleIndex = this.wrapIndex(this.selectedElderRoleIndex - 1, elderRoleCatalog.roles.length);
           this.refreshView(getStateManager(this).snapshot);
         }
       },
       {
-        label: 'Vai tro sau',
-        detail: 'Dang xem truong lao',
+        label: 'Vai tr? sau',
+        detail: '?ang xem tr??ng l?o',
         onClick: () => {
           this.selectedElderRoleIndex = this.wrapIndex(this.selectedElderRoleIndex + 1, elderRoleCatalog.roles.length);
           this.refreshView(getStateManager(this).snapshot);
         }
       },
       {
-        label: 'Bo nhiem truong lao',
-        detail: 'Dung de tu dang chon',
+        label: 'B? nhi?m tr??ng l?o',
+        detail: 'D?ng ?? t? ?ang ch?n',
         onClick: () => {
           const disciple = this.getSelectedDisciple(getStateManager(this).snapshot);
           if (!disciple) {
@@ -1268,21 +839,21 @@ export class SectScene extends Phaser.Scene {
         }
       },
       {
-        label: 'Moi khach khanh',
-        detail: 'Dung phe dang chon',
+        label: 'M?i kh?ch khanh',
+        detail: 'D?ng phe ?ang ch?n',
         onClick: () => {
           const result = getSectIdentitySystem(this).inviteGuestCultivator(this.getSelectedFactionId());
           this.refreshView(result.snapshot, result.message);
         }
       },
       {
-        label: 'Moi khach roi di',
-        detail: 'Go khach dau tien',
+        label: 'M?i kh?ch r?i ?i',
+        detail: 'G? kh?ch ??u ti?n',
         onClick: () => {
           const snapshot = getStateManager(this).snapshot;
           const guest = snapshot.sect.guestCultivators[0];
           if (!guest) {
-            this.refreshView(snapshot, 'Chua co khach khanh de moi roi di.');
+            this.refreshView(snapshot, 'Ch?a c? kh?ch khanh ?? m?i r?i ?i.');
             return;
           }
 
@@ -1291,8 +862,8 @@ export class SectScene extends Phaser.Scene {
         }
       },
       {
-        label: 'Dong panel',
-        detail: 'Tro ve son mon',
+        label: '??ng panel',
+        detail: 'Tr? v? s?n m?n',
         onClick: () => {
           this.toggleGovernancePanel(false);
         }
@@ -1404,7 +975,7 @@ export class SectScene extends Phaser.Scene {
     const disciple = this.getSelectedDisciple(snapshot);
 
     if (!disciple) {
-      this.refreshView(snapshot, 'Chua co de tu de phan cong.');
+      this.refreshView(snapshot, 'Ch?a c? ?? t? ?? ph?n c?ng.');
       return;
     }
 
@@ -1439,13 +1010,13 @@ export class SectScene extends Phaser.Scene {
     }
 
     this.eventModal.show({
-      title: `Thien Kiep ${assessment.nextRealmName}`,
-      subtitle: `Tu ${assessment.currentRealmName} len ${assessment.nextRealmName}`,
+      title: `Thi?n Ki?p ${assessment.nextRealmName}`,
+      subtitle: `T? ${assessment.currentRealmName} l?n ${assessment.nextRealmName}`,
       variant: 'omen',
       contextLines: [
-        `Xac suat hien tai: ${assessment.score}/100`,
-        `Du luc dan duoc: +${snapshot.player.cultivation.breakthroughBonus}`,
-        `Nen can: ${snapshot.player.cultivation.foundationStability} | Tam ma: ${snapshot.player.cultivation.tamMaPressure}`
+        `X?c su?t hi?n t?i: ${assessment.score}/100`,
+        `D? l?c ?an d??c: +${snapshot.player.cultivation.breakthroughBonus}`,
+        `N?n c?n: ${snapshot.player.cultivation.foundationStability} | T?m ma: ${snapshot.player.cultivation.tamMaPressure}`
       ],
       body: [
         assessment.summary,
@@ -1454,22 +1025,22 @@ export class SectScene extends Phaser.Scene {
       ],
       options: [
         {
-          label: 'Chong kiep ngay',
-          detail: 'Thu dot pha voi trang thai hien tai',
+          label: 'Ch?ng ki?p ngay',
+          detail: 'Th? ??t ph? v?i tr?ng th?i hi?n t?i',
           onSelect: () => {
             this.eventModal.hide();
             this.time.delayedCall(120, () => {
               const result = getRealmSystem(this).performBreakthrough();
               this.refreshView(result.snapshot, result.message);
               this.eventModal.show({
-                title: result.ok ? 'Thien Kiep da qua' : 'Kiep Van de lai vet',
-                subtitle: result.ok ? 'Canh gioi da doi nhiep' : 'Can them mot nhip chuan bi',
+                title: result.ok ? 'Thi?n Ki?p ?? qua' : 'Ki?p V?n ?? l?i v?t',
+                subtitle: result.ok ? 'C?nh gi?i ?? ??i nh?p' : 'C?n th?m m?t nh?p chu?n b?',
                 variant: result.ok ? 'major' : 'omen',
                 body: [result.message],
                 options: [
                   {
-                    label: 'Lui ve tu hanh',
-                    detail: 'Dong thong bao va tiep tuc dieu tuc',
+                    label: 'L?i v? tu h?nh',
+                    detail: '??ng th?ng b?o v? ti?p t?c ?i?u t?c',
                     onSelect: () => this.eventModal.hide()
                   }
                 ]
@@ -1478,8 +1049,8 @@ export class SectScene extends Phaser.Scene {
           }
         },
         {
-          label: 'Tri hoan',
-          detail: 'Bo sung dan duoc, linh thu, va cong phap truoc khi thu lai',
+          label: 'Tr? ho?n',
+          detail: 'B? sung ?an d??c, linh th?, v? c?ng ph?p tr??c khi th? l?i',
           onSelect: () => this.eventModal.hide()
         }
       ]
@@ -1493,7 +1064,7 @@ export class SectScene extends Phaser.Scene {
       this.playFeedback('ui-invalid');
       this.refreshView(
         snapshot,
-        'Ngoai giao chua la uu tien dau. Hay qua ngay, xem de tu, va hoan tat mot chuyen tham hiem truoc.'
+        'Ngo?i giao ch?a l? ?u ti?n ??u. H?y qua ng?y, xem ?? t?, v? ho?n t?t m?t chuy?n th?m hi?m tr??c.'
       );
       return;
     }
@@ -1631,7 +1202,7 @@ export class SectScene extends Phaser.Scene {
         return [
           'Moc chuong 4',
           'Nhan dien dai kiep dang doi hinh quanh Thanh Huyen Mon.',
-          'Tu nay, ap luc khong chi den tu phe phai ma con tu chinh vet nut cua thien dia va di san xua.'
+          'T? nay, ap luc khong chi den tu phe phai ma con tu chinh vet nut cua thien dia va di san xua.'
         ];
       }
 
@@ -1687,7 +1258,7 @@ export class SectScene extends Phaser.Scene {
         return [
           'Moc chuong 3',
           'Ghep Linh Kinh va co luc thanh bang chung ve dau vet cuong hanh phi thang.',
-          'Mot khi dau vet nay ro ra, Thanh Huyen Mon se khong the tiep tuc lon len ma gia nhu khong biet.'
+          'Mot khi dau vet nay ro ra, Thanh Huyen Mon se khong the tiep tuc lon l?n ma gia nhu khong biet.'
         ];
       }
 
@@ -1938,7 +1509,7 @@ export class SectScene extends Phaser.Scene {
     }
 
     if (!flags.has(TUTORIAL_CHOICE_FLAGS.openedCultivation)) {
-      return 'Mo panel Tu hanh de xem canh gioi, tien do, va dieu kien dot pha.';
+      return 'Mo panel T? hanh de xem canh gioi, tien do, va dieu kien dot pha.';
     }
 
     if (!flags.has('first_building_restored')) {
@@ -1981,7 +1552,7 @@ export class SectScene extends Phaser.Scene {
     }
 
     if (snapshot.player.cultivation.breakthroughReady) {
-      return 'Chuong mon da san dot pha. Mo panel Tu hanh de xem dieu kien va chot buoc tien canh gioi.';
+      return 'Chuong mon da san dot pha. Mo panel T? hanh de xem dieu kien va chot buoc tien canh gioi.';
     }
 
     if (snapshot.diplomacy.pendingMessageEventIds.length > 0) {
@@ -2088,7 +1659,7 @@ export class SectScene extends Phaser.Scene {
     }
 
     if (definition.category === 'artifact') {
-      return 'Phap khi giup chuong mon manh len lau dai; hop khi muon day tu hanh hoac tham hiem on dinh hon.';
+      return 'Phap khi giup chuong mon manh l?n lau dai; hop khi muon day tu hanh hoac tham hiem on dinh hon.';
     }
 
     if (definition.category === 'pill') {
@@ -2113,33 +1684,33 @@ export class SectScene extends Phaser.Scene {
 
     const nextSnapshot = this.markTutorialFlag(
       TUTORIAL_CHOICE_FLAGS.introSeen,
-      'Mo dau Chuong 1 da bat dau. Hay giu lai nhip van hanh cua Thanh Huyen Mon.'
+      'M? ??u Ch??ng 1 ?? b?t ??u. H?y gi? l?i nh?p v?n h?nh c?a Thanh Huy?n M?n.'
     );
 
     this.eventModal.show({
-      title: 'Tan Hoa Chua Tat',
-      subtitle: 'Mo dau Chuong 1',
+      title: 'T?n H?a Ch?a T?t',
+      subtitle: 'M? ??u Ch??ng 1',
       body: [
-        'Thanh Huyen Mon chi con lai cot da nut va it nguoi khong bo di. Sau Thien Khu Bien, khong ai biet ton mon nay co con duoc tinh la mot tong mon nua hay khong.',
-        'Ban la nguoi dung day giua tan tich. Trong Chinh dien toi, Van Tuong Linh Kinh van chua tat han. Viec truoc mat khong phai hung ba, ma la giu cho lu tro nay khong nguoi.',
-        'Muc tieu dau tien: qua mot ngay, giu on noi mon, va dung lai mot dau moi de Thanh Huyen Mon co ly do o lai.'
+        'Thanh Huy?n M?n ch? c?n l?i c?t ?? n?t v? ?t ng??i kh?ng b? ?i. Sau Thi?n Khu Bi?n, kh?ng ai bi?t t?ng m?n n?y c? c?n ???c t?nh l? m?t t?ng m?n n?a hay kh?ng.',
+        'B?n l? ng??i ??ng ??y gi?a t?n t?ch. Trong Ch?nh ?i?n t?i, V?n T??ng Linh Kinh v?n ch?a t?t h?n. Vi?c tr??c m?t kh?ng ph?i h?ng b?, m? l? gi? cho l?a tro n?y kh?ng ngu?i.',
+        'M?c ti?u ??u ti?n: qua m?t ng?y, gi? ?n n?i m?n, v? d?ng l?i m?t ??u m?i ?? Thanh Huy?n M?n c? l? do ? l?i.'
       ],
       options: [
         {
-          label: 'Nhan lay tong mon',
-          detail: 'Giu objective va huong dan ngan tren man hinh',
+          label: 'Nh?n l?y t?ng m?n',
+          detail: 'Gi? objective v? h??ng d?n ng?n tr?n m?n h?nh',
           onSelect: () => {
             this.eventModal.hide();
-            this.refreshView(nextSnapshot, 'Muc tieu dau: qua mot ngay va nhin ro Thanh Huyen Mon dang thieu dieu gi.');
+            this.refreshView(nextSnapshot, 'M?c ti?u ??u: qua m?t ng?y v? nh?n r? Thanh Huy?n M?n ?ang thi?u ?i?u g?.');
           }
         },
         {
-          label: 'Bo qua huong dan',
-          detail: 'An checklist nhap mon, van giu mo dau chuong',
+          label: 'B? qua h??ng d?n',
+          detail: '?n checklist nh?p m?n, v?n gi? m? ??u ch??ng',
           onSelect: () => {
             const skippedSnapshot = this.markTutorialFlag(
               TUTORIAL_CHOICE_FLAGS.skipped,
-              'Da tat huong dan nhap mon cho save nay.'
+              '?? t?t h??ng d?n nh?p m?n cho save n?y.'
             );
             this.eventModal.hide();
             this.refreshView(skippedSnapshot);
@@ -2536,7 +2107,7 @@ export class SectScene extends Phaser.Scene {
         `Cap ${selectedBuildingState.level} | ${selectedBuildingState.isConstructed ? 'Da dung' : selectedBuildingState.isUnlocked ? 'Co the dung' : 'Chua mo'} | Gan ${selectedBuildingState.assignedDiscipleIds.length}`,
         `Hieu qua: ${this.getBuildingEffectText(selectedBuildingId)}`,
         `Tac dong hien tai: ${selectedBuildingId === 'tinh_tu_duong'
-          ? 'Tang toc tu hanh cho de tu lam nhiem vu Tu luyen.'
+          ? 'Tang toc tu hanh cho de tu lam nhiem vu T? luyen.'
           : selectedBuildingId === 'duoc_vien'
             ? 'Tang duoc thao thu dong va bo sung Linh Thao Co Ban cho kho.'
             : selectedBuildingId === 'luyen_khi_phong'
@@ -2649,7 +2220,7 @@ export class SectScene extends Phaser.Scene {
     this.applyRefreshFeedback(snapshot, latestChangeSummary);
     if (snapshot.ui.isCultivationPanelOpen) {
       this.cultivationPanel.show({
-        title: 'Tu hành',
+        title: 'T? hành',
         summaryLines: [
           `Cảnh giới hiện tại: ${currentRealm.name}`,
           `Tiến độ: ${snapshot.player.cultivation.cultivationProgress}/${currentRealm.progressRequired}`,
@@ -2726,7 +2297,7 @@ export class SectScene extends Phaser.Scene {
           selectedGovernanceStyle.summary,
           `Tac dung: ${selectedGovernanceStyle.summary}`,
           '',
-          `Dang xem noi quy: ${selectedRule.name}`,
+          `?ang xem n?i quy: ${selectedRule.name}`,
           selectedRule.summary,
           `Tac dung: ${selectedRule.summary}`,
           '',

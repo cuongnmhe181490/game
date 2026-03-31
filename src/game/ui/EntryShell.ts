@@ -22,14 +22,14 @@ export class EntryShell {
 
   constructor(private readonly scene: Phaser.Scene, options: EntryShellOptions) {
     const { width, height } = scene.scale;
-    this.shellWidth = Math.min(430, width - 32);
-    this.shellHeight = Math.min(844, height - 24);
+    this.shellWidth = Math.min(430, width - 24);
+    this.shellHeight = Math.min(844, height - 20);
     this.shellX = Math.floor((width - this.shellWidth) / 2);
     this.shellY = Math.floor((height - this.shellHeight) / 2);
-    this.contentX = this.shellX + 16;
-    this.contentY = this.shellY + 188;
-    this.contentWidth = this.shellWidth - 32;
-    this.contentHeight = this.shellHeight - 212;
+    this.contentX = this.shellX + 18;
+    this.contentY = this.shellY + 178;
+    this.contentWidth = this.shellWidth - 36;
+    this.contentHeight = this.shellHeight - 204;
 
     scene.cameras.main.setBackgroundColor(menuPalette.background);
     drawSceneFrame(scene);
@@ -48,23 +48,29 @@ export class EntryShell {
         .setAlpha(0.92);
     }
 
-    scene.add.text(this.shellX + this.shellWidth / 2, this.shellY + 100, options.title, {
+    scene.add.text(this.shellX + this.shellWidth / 2, this.shellY + 96, options.title, {
       color: menuPalette.textStrong,
       fontFamily: '"Palatino Linotype", "Book Antiqua", Georgia, serif',
-      fontSize: '34px'
+      fontSize: '34px',
+      align: 'center',
+      wordWrap: { width: this.shellWidth - 48 }
     }).setOrigin(0.5);
 
     scene.add.text(this.shellX + this.shellWidth / 2, this.shellY + 136, options.subtitle, {
       color: menuPalette.accentText,
       fontFamily: '"Segoe UI", Tahoma, sans-serif',
-      fontSize: '14px'
+      fontSize: '14px',
+      align: 'center',
+      wordWrap: { width: this.shellWidth - 56 }
     }).setOrigin(0.5);
 
     if (options.metaLine) {
       scene.add.text(this.shellX + this.shellWidth / 2, this.shellY + 160, options.metaLine, {
         color: menuPalette.textMuted,
         fontFamily: '"Segoe UI", Tahoma, sans-serif',
-        fontSize: '11px'
+        fontSize: '11px',
+        align: 'center',
+        wordWrap: { width: this.shellWidth - 68 }
       }).setOrigin(0.5);
     }
   }
