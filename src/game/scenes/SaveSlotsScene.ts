@@ -3,7 +3,7 @@ import Phaser from 'phaser';
 import { getSaveStore, getStateManager } from '@/game/config/registry';
 import { SCENE_KEYS } from '@/game/scenes/sceneKeys';
 import { createGameState } from '@/game/state';
-import { createPrimaryButton, createSecondaryButton, drawSceneFrame, PanelFrame, menuPalette } from '@/game/ui';
+import { createPrimaryButton, createSecondaryButton, EntryShell, PanelFrame, menuPalette } from '@/game/ui';
 
 export class SaveSlotsScene extends Phaser.Scene {
   constructor() {
@@ -17,31 +17,20 @@ export class SaveSlotsScene extends Phaser.Scene {
     const slots = saveStore.listSaveSlots();
     const currentSlot = saveStore.getCurrentSlot();
 
-    const { width, height } = this.scale;
-    const shellWidth = Math.min(430, width - 32);
-    const shellHeight = Math.min(844, height - 24);
-    const shellX = Math.floor((width - shellWidth) / 2);
-    const shellY = Math.floor((height - shellHeight) / 2);
-    const panelWidth = shellWidth - 32;
-
-    this.cameras.main.setBackgroundColor(menuPalette.background);
-    drawSceneFrame(this);
-
-    const shell = this.add.graphics();
-    shell.fillStyle(0x070e0b, 0.98);
-    shell.lineStyle(2, 0x1f2f27, 1);
-    shell.fillRoundedRect(shellX, shellY, shellWidth, shellHeight, 32);
-    shell.strokeRoundedRect(shellX, shellY, shellWidth, shellHeight, 32);
-    shell.lineStyle(1, menuPalette.frame, 0.45);
-    shell.strokeRoundedRect(shellX + 10, shellY + 10, shellWidth - 20, shellHeight - 20, 28);
+    const shell = new EntryShell(this, {
+      title: 'Save Slots',
+      subtitle: 'Quan ly du lieu hanh trinh',
+      metaLine: 'Tao moi, nap, ghi de, hoac xoa tung khe luu.'
+    });
+    const panelWidth = shell.contentWidth;
 
     const frame = new PanelFrame(this, {
-      x: shellX + 16,
-      y: shellY + 24,
+      x: shell.contentX,
+      y: shell.contentY,
       width: panelWidth,
-      height: shellHeight - 48,
-      title: 'Save slots',
-      subtitle: 'Chon slot de tao, nap, ghi de, hoac xoa du lieu.'
+      height: shell.contentHeight,
+      title: 'Danh sach khe luu',
+      subtitle: 'Ba khe luu de choi thu, replay, va backup.'
     });
     this.add.existing(frame.root);
 
@@ -57,12 +46,12 @@ export class SaveSlotsScene extends Phaser.Scene {
     };
 
     slots.forEach((slot, index) => {
-      const slotY = index * 170;
+      const slotY = index * 166;
       const slotFrame = new PanelFrame(this, {
         x: 0,
         y: slotY,
         width: panelWidth - 36,
-        height: 156,
+        height: 152,
         title: `Slot ${slot.slot}${slot.slot === currentSlot ? ' • dang chon' : ''}`,
         subtitle: slot.hasSave
           ? `${slot.sectName ?? 'Thanh Huyen Mon'} • ${slot.realmId ?? 'chua ro canh gioi'} • Ngay ${slot.day ?? 1}`
@@ -70,7 +59,9 @@ export class SaveSlotsScene extends Phaser.Scene {
       });
       frame.content.add(slotFrame.root);
 
-      slotFrame.content.add(this.add.text(0, 0,
+      slotFrame.content.add(this.add.text(
+        0,
+        0,
         slot.hasSave ? `Save v${slot.saveVersion ?? '?'} • Playtime ${slot.playtimeDays} ngay` : 'Chua co du lieu luu.',
         {
           color: menuPalette.textMuted,
@@ -80,7 +71,9 @@ export class SaveSlotsScene extends Phaser.Scene {
         }
       ));
 
-      slotFrame.content.add(this.add.text(0, 18,
+      slotFrame.content.add(this.add.text(
+        0,
+        18,
         slot.hasSave
           ? `${slot.endingCompleted ? 'Da ve dich' : 'Dang hanh trinh'} • ${slot.updatedAt ?? 'Khong ro thoi diem luu'}`
           : 'Co the bat dau tu Chuong 1.',
@@ -94,9 +87,9 @@ export class SaveSlotsScene extends Phaser.Scene {
 
       slotFrame.content.add(
         createPrimaryButton(this, {
-          width: 140,
+          width: 96,
           label: slot.hasSave ? 'Nap save' : 'Tao moi',
-          detail: slot.hasSave ? 'Mo slot nay' : 'Bat dau Chuong 1',
+          detail: slot.hasSave ? 'Mo tien trinh' : 'Khoi tao run',
           onClick: () => {
             const nextState = slot.hasSave
               ? saveStore.loadSlot(slot.slot)
@@ -107,14 +100,14 @@ export class SaveSlotsScene extends Phaser.Scene {
             }
             this.scene.start(SCENE_KEYS.sect);
           }
-        }).setPosition(16, 74)
+        }).setPosition(0, 56)
       );
 
       slotFrame.content.add(
         createSecondaryButton(this, {
-          width: 140,
+          width: 96,
           label: 'Ghi de',
-          detail: 'Luu snapshot hien tai',
+          detail: 'Luu hien tai',
           onClick: () => {
             saveStore.setCurrentSlot(slot.slot);
             const payload = slot.hasSave ? stateManager.snapshot : createGameState();
@@ -122,14 +115,14 @@ export class SaveSlotsScene extends Phaser.Scene {
             setStatus(`Da ghi du lieu vao slot ${slot.slot}.`);
             this.scene.restart({ returnScene });
           }
-        }).setPosition(172, 74)
+        }).setPosition(108, 56)
       );
 
       slotFrame.content.add(
         createSecondaryButton(this, {
-          width: 140,
+          width: 96,
           label: 'Xoa slot',
-          detail: slot.hasSave ? 'Xoa save va backup' : 'Slot dang trong',
+          detail: slot.hasSave ? 'Lam trong slot' : 'Slot dang trong',
           onClick: () => {
             if (!slot.hasSave) {
               setStatus(`Slot ${slot.slot} dang trong.`);
@@ -139,11 +132,11 @@ export class SaveSlotsScene extends Phaser.Scene {
             setStatus(`Da xoa slot ${slot.slot}.`);
             this.scene.restart({ returnScene });
           }
-        }).setPosition(94, 118)
+        }).setPosition(216, 56)
       );
     });
 
-    statusText.setPosition(0, 536);
+    statusText.setPosition(0, 514);
     frame.content.add(statusText);
 
     frame.content.add(
@@ -161,7 +154,7 @@ export class SaveSlotsScene extends Phaser.Scene {
           }
           this.scene.stop();
         }
-      }).setPosition(94, 620)
+      }).setPosition(94, 566)
     );
   }
 }

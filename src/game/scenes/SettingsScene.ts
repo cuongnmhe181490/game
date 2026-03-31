@@ -2,7 +2,7 @@ import Phaser from 'phaser';
 
 import { getFeedbackSystem, getSettingsStore } from '@/game/config/registry';
 import { SCENE_KEYS } from '@/game/scenes/sceneKeys';
-import { createSecondaryButton, drawSceneFrame, PanelFrame, menuPalette } from '@/game/ui';
+import { createSecondaryButton, EntryShell, PanelFrame, menuPalette } from '@/game/ui';
 
 export class SettingsScene extends Phaser.Scene {
   constructor() {
@@ -15,31 +15,20 @@ export class SettingsScene extends Phaser.Scene {
     let settings = settingsStore.getSettings();
     getFeedbackSystem(this).setVolumePreferences(settings.masterVolume, settings.sfxVolume);
 
-    const { width, height } = this.scale;
-    const shellWidth = Math.min(430, width - 32);
-    const shellHeight = Math.min(844, height - 24);
-    const shellX = Math.floor((width - shellWidth) / 2);
-    const shellY = Math.floor((height - shellHeight) / 2);
-    const panelWidth = shellWidth - 32;
-
-    this.cameras.main.setBackgroundColor(menuPalette.background);
-    drawSceneFrame(this);
-
-    const shell = this.add.graphics();
-    shell.fillStyle(0x070e0b, 0.98);
-    shell.lineStyle(2, 0x1f2f27, 1);
-    shell.fillRoundedRect(shellX, shellY, shellWidth, shellHeight, 32);
-    shell.strokeRoundedRect(shellX, shellY, shellWidth, shellHeight, 32);
-    shell.lineStyle(1, menuPalette.frame, 0.45);
-    shell.strokeRoundedRect(shellX + 10, shellY + 10, shellWidth - 20, shellHeight - 20, 28);
+    const shell = new EntryShell(this, {
+      title: 'Settings',
+      subtitle: 'Audio, UI, va gameplay comfort',
+      metaLine: 'Dieu chinh nhanh cho phien choi hien tai.'
+    });
+    const panelWidth = shell.contentWidth;
 
     const frame = new PanelFrame(this, {
-      x: shellX + 16,
-      y: shellY + 24,
+      x: shell.contentX,
+      y: shell.contentY,
       width: panelWidth,
-      height: shellHeight - 48,
-      title: 'Settings',
-      subtitle: 'Am thanh, giao dien, animation, auto-save, va tutorial hints.'
+      height: shell.contentHeight,
+      title: 'Tuy chinh',
+      subtitle: 'Moi dong la mot setting co the giam hoac tang ngay.'
     });
     this.add.existing(frame.root);
 
@@ -113,7 +102,7 @@ export class SettingsScene extends Phaser.Scene {
     ];
 
     rows.forEach((row, index) => {
-      const y = index * 58;
+      const y = index * 56;
       frame.content.add(this.add.text(0, y, row.label, {
         color: menuPalette.textStrong,
         fontFamily: '"Segoe UI", Tahoma, sans-serif',
@@ -130,7 +119,7 @@ export class SettingsScene extends Phaser.Scene {
           label: '-',
           detail: '',
           onClick: () => row.onMinus?.()
-        }).setPosition(panelWidth - 136, y + 12)
+        }).setPosition(panelWidth - 136, y + 10)
       );
       frame.content.add(
         createSecondaryButton(this, {
@@ -138,15 +127,17 @@ export class SettingsScene extends Phaser.Scene {
           label: '+',
           detail: '',
           onClick: () => row.onPlus?.()
-        }).setPosition(panelWidth - 74, y + 12)
+        }).setPosition(panelWidth - 74, y + 10)
       );
     });
 
-    statusText.setPosition(0, 488);
+    statusText.setPosition(0, 478);
     frame.content.add(statusText);
 
-    frame.content.add(this.add.text(0, 516,
-      'Ghi chu: music volume, particle toggle, va UI scale duoc luu an toan; sound feedback da dung master + sfx volume.',
+    frame.content.add(this.add.text(
+      0,
+      506,
+      'Ghi chu: master va sfx volume da duoc noi vao UI feedback. Cac setting con lai duoc luu an toan cho lan mo tiep theo.',
       {
         color: menuPalette.textMuted,
         fontFamily: '"Segoe UI", Tahoma, sans-serif',
@@ -164,7 +155,7 @@ export class SettingsScene extends Phaser.Scene {
           settingsStore.resetSettings();
           refresh();
         }
-      }).setPosition(86, 620)
+      }).setPosition(0, 566)
     );
 
     frame.content.add(
@@ -182,7 +173,7 @@ export class SettingsScene extends Phaser.Scene {
           }
           this.scene.stop();
         }
-      }).setPosition(254, 620)
+      }).setPosition(168, 566)
     );
   }
 }

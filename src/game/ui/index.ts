@@ -19,3 +19,4 @@ export * from '@/game/ui/NavBar';
 export * from '@/game/ui/ProgressBar';
 export * from '@/game/ui/itemTexture';
 export * from '@/game/ui/beastTexture';
+export * from '@/game/ui/EntryShell';

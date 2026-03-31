@@ -5,7 +5,7 @@ import { getBuildInfoLine, PLAYTEST_BUILD_ID } from '@/game/config/buildInfo';
 import { getSaveStore, getStateManager } from '@/game/config/registry';
 import { SCENE_KEYS } from '@/game/scenes/sceneKeys';
 import { createGameState } from '@/game/state';
-import { createPrimaryButton, createSecondaryButton, drawSceneFrame, PanelFrame, menuPalette } from '@/game/ui';
+import { createPrimaryButton, createSecondaryButton, EntryShell, PanelFrame, menuPalette } from '@/game/ui';
 
 export class MainMenuScene extends Phaser.Scene {
   constructor() {
@@ -27,12 +27,13 @@ export class MainMenuScene extends Phaser.Scene {
       draft.ui.modalEventId = null;
     });
 
-    const { width, height } = this.scale;
-    const shellWidth = Math.min(430, width - 32);
-    const shellHeight = Math.min(844, height - 24);
-    const shellX = Math.floor((width - shellWidth) / 2);
-    const shellY = Math.floor((height - shellHeight) / 2);
-    const panelWidth = shellWidth - 32;
+    const shell = new EntryShell(this, {
+      title: 'Nhat Niem Khai Tong',
+      subtitle: 'Early Access vertical slice',
+      metaLine: getBuildInfoLine(),
+      iconKey: Icons.ui.sectCrest
+    });
+    const panelWidth = shell.contentWidth;
     const halfButtonWidth = Math.floor((panelWidth - 46) / 2);
     const filledSlots = slotSummaries.filter((slot) => slot.hasSave).length;
     const hasMeaningfulProgress = currentSlotSummary.hasSave && (
@@ -42,40 +43,6 @@ export class MainMenuScene extends Phaser.Scene {
     );
     const hasAnySave = saveSummary.source !== 'none';
     const endingReached = saveSummary.endingCompleted;
-
-    this.cameras.main.setBackgroundColor(menuPalette.background);
-    drawSceneFrame(this);
-
-    const shell = this.add.graphics();
-    shell.fillStyle(0x070e0b, 0.98);
-    shell.lineStyle(2, 0x1f2f27, 1);
-    shell.fillRoundedRect(shellX, shellY, shellWidth, shellHeight, 32);
-    shell.strokeRoundedRect(shellX, shellY, shellWidth, shellHeight, 32);
-    shell.lineStyle(1, menuPalette.frame, 0.45);
-    shell.strokeRoundedRect(shellX + 10, shellY + 10, shellWidth - 20, shellHeight - 20, 28);
-
-    this.add.image(shellX + shellWidth / 2, shellY + 54, Icons.ui.sectCrest)
-      .setDisplaySize(52, 52)
-      .setAlpha(this.textures.exists(Icons.ui.sectCrest) ? 0.92 : 0);
-
-    this.add.text(shellX + shellWidth / 2, shellY + 100, 'Nhat Niem Khai Tong', {
-      color: menuPalette.textStrong,
-      fontFamily: '"Palatino Linotype", "Book Antiqua", Georgia, serif',
-      fontSize: '34px'
-    }).setOrigin(0.5);
-
-    this.add.text(shellX + shellWidth / 2, shellY + 136, 'Early Access vertical slice', {
-      color: menuPalette.accentText,
-      fontFamily: '"Segoe UI", Tahoma, sans-serif',
-      fontSize: '14px'
-    }).setOrigin(0.5);
-
-    this.add.text(shellX + shellWidth / 2, shellY + 160, getBuildInfoLine(), {
-      color: menuPalette.textMuted,
-      fontFamily: '"Segoe UI", Tahoma, sans-serif',
-      fontSize: '11px'
-    }).setOrigin(0.5);
-
     const primaryLabel = endingReached
       ? 'Xem lai ket cuc'
       : hasMeaningfulProgress
@@ -89,10 +56,10 @@ export class MainMenuScene extends Phaser.Scene {
         ? 'Dung save dang co trong slot hien tai'
         : 'Tao hanh trinh dau tien';
 
-    let panelY = shellY + 192;
+    let panelY = shell.contentY;
 
     const journeyFrame = new PanelFrame(this, {
-      x: shellX + 16,
+      x: shell.contentX,
       y: panelY,
       width: panelWidth,
       height: canReplay ? 332 : 252,
@@ -168,7 +135,7 @@ export class MainMenuScene extends Phaser.Scene {
     panelY += canReplay ? 348 : 268;
 
     const summaryFrame = new PanelFrame(this, {
-      x: shellX + 16,
+      x: shell.contentX,
       y: panelY,
       width: panelWidth,
       height: 276,
