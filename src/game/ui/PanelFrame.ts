@@ -48,11 +48,11 @@ export class PanelFrame extends Phaser.GameObjects.Container {
 
     super(scene, options.x, options.y, [
       bg,
+      hit,
       iconImage,
       titleText,
       ...(subtitleText ? [subtitleText] : []),
-      content,
-      hit
+      content
     ]);
     this.root = this;
 
