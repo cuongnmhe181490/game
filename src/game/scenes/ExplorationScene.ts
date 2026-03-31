@@ -1,16 +1,22 @@
 import Phaser from 'phaser';
 
 import { Icons } from '@/game/config/assets';
-import { getBeastSystem, getExplorationSystem, getFeedbackSystem, getRealmSystem, getSaveStore, getStateManager } from '@/game/config/registry';
-import { SCENE_KEYS } from '@/game/scenes/sceneKeys';
+import {
+  getBeastSystem,
+  getExplorationSystem,
+  getFeedbackSystem,
+  getRealmSystem,
+  getSaveStore,
+  getStateManager
+} from '@/game/config/registry';
 import type { BossDefinition, EnemyDefinition, ExplorationMapDefinition } from '@/game/data';
 import type { ExplorationRunOutcome } from '@/game/entities';
+import { SCENE_KEYS } from '@/game/scenes/sceneKeys';
 import type { ResourceDeltaState } from '@/game/state/types';
 import {
   EventModal,
   Header,
   NavBar,
-  PanelFrame,
   ResourceBar,
   createPrimaryButton,
   menuPalette
@@ -48,7 +54,11 @@ interface MapVisualTheme {
   note: string;
   enemyPositions: Array<{ x: number; y: number }>;
   eventPositions: Array<{ x: number; y: number }>;
+  bossPosition: { x: number; y: number };
 }
+
+const REFERENCE_WORLD_WIDTH = 1920;
+const REFERENCE_WORLD_HEIGHT = 1080;
 
 function addDelta(target: ResourceDeltaState, source: ResourceDeltaState): ResourceDeltaState {
   const next: ResourceDeltaState = { ...target };
@@ -71,7 +81,7 @@ function formatRewards(rewards: ResourceDeltaState): string {
     linhKhi: 'linh khí',
     duocThao: 'dược thảo',
     khoangThach: 'khoáng thạch',
-    linhMoc: 'linh má»™c'
+    linhMoc: 'linh mộc'
   };
 
   const entries = Object.entries(rewards).filter(([, value]) => typeof value === 'number' && value > 0);
@@ -82,11 +92,11 @@ function getMapTheme(map: ExplorationMapDefinition): MapVisualTheme {
   switch (map.id) {
     case 'hac_moc_lam':
       return {
-        background: 0x061010,
+        background: 0x071011,
         field: 0x10211a,
         accent: 0x264433,
         bossZone: 0x1f2028,
-        note: 'Rừng đen nhiều sương thấp, thu hoạch quý hơn nhưng đòn đánh cũng nặng hơn.',
+        note: 'Rừng đen có sương thấp, thu hoạch quý hơn nhưng đòn đánh cũng nặng hơn.',
         enemyPositions: [
           { x: 500, y: 790 },
           { x: 720, y: 640 },
@@ -97,7 +107,8 @@ function getMapTheme(map: ExplorationMapDefinition): MapVisualTheme {
         eventPositions: [
           { x: 620, y: 860 },
           { x: 1060, y: 420 }
-        ]
+        ],
+        bossPosition: { x: 1480, y: 240 }
       };
     case 'tan_tich_thanh_huyen':
       return {
@@ -117,7 +128,8 @@ function getMapTheme(map: ExplorationMapDefinition): MapVisualTheme {
           { x: 690, y: 820 },
           { x: 1020, y: 560 },
           { x: 1320, y: 250 }
-        ]
+        ],
+        bossPosition: { x: 1490, y: 255 }
       };
     default:
       return {
@@ -125,7 +137,7 @@ function getMapTheme(map: ExplorationMapDefinition): MapVisualTheme {
         field: 0x162523,
         accent: 0x2f4a40,
         bossZone: 0x2c1d1d,
-        note: 'Map đầu giữ combat nhẹ, chủ yếu để mang tài nguyên và vật phẩm nhập môn về sect.',
+        note: 'Bí cảnh nhập môn, chủ yếu để mang tài nguyên và vật phẩm đầu tay về tông môn.',
         enemyPositions: [
           { x: 520, y: 790 },
           { x: 760, y: 700 },
@@ -136,7 +148,8 @@ function getMapTheme(map: ExplorationMapDefinition): MapVisualTheme {
         eventPositions: [
           { x: 660, y: 820 },
           { x: 1080, y: 470 }
-        ]
+        ],
+        bossPosition: { x: 1470, y: 260 }
       };
   }
 }
@@ -175,6 +188,9 @@ export class ExplorationScene extends Phaser.Scene {
   private headerShell!: Header;
   private resourceBars: ResourceBar[] = [];
   private navBar!: NavBar;
+  private playArea = new Phaser.Geom.Rectangle();
+  private topOverlay!: Phaser.GameObjects.Graphics;
+  private bottomOverlay!: Phaser.GameObjects.Graphics;
 
   constructor() {
     super(SCENE_KEYS.exploration);
@@ -197,13 +213,16 @@ export class ExplorationScene extends Phaser.Scene {
 
       if (!draft.story.choiceFlags.includes('tutorial_entered_exploration')) {
         draft.story.choiceFlags.push('tutorial_entered_exploration');
-        draft.ui.statusMessage = 'Đã vào khu thám hiểm đầu tiên. Hạ boss hoặc rút lui an toàn để mang phần thưởng về sơn môn.';
+        draft.ui.statusMessage = 'Đã vào bí cảnh đầu tiên. Hạ boss hoặc rút lui an toàn để mang phần thưởng về sơn môn.';
       }
     });
     getSaveStore(this).saveGame(snapshot);
 
     this.mapId = map.id;
+    this.configurePlayArea();
+    this.physics.world.setBounds(this.playArea.x, this.playArea.y, this.playArea.width, this.playArea.height);
     this.cameras.main.setBackgroundColor(getMapTheme(map).background);
+
     const openSystemMenu = (): void => {
       if (!this.scene.isActive(SCENE_KEYS.systemMenu)) {
         this.scene.launch(SCENE_KEYS.systemMenu, { returnScene: SCENE_KEYS.exploration });
@@ -213,8 +232,6 @@ export class ExplorationScene extends Phaser.Scene {
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
       this.input.keyboard?.off('keydown-ESC', openSystemMenu);
     });
-    this.physics.world.setBounds(0, 0, 1920, 1080);
-    this.cameras.main.setBounds(0, 0, 1920, 1080);
 
     this.drawMap(map);
     this.createPlayer();
@@ -231,6 +248,7 @@ export class ExplorationScene extends Phaser.Scene {
 
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
       this.eventModal.destroy();
+      this.navBar?.destroy();
     });
 
     this.refreshHud();
@@ -263,36 +281,85 @@ export class ExplorationScene extends Phaser.Scene {
     }
   }
 
+  private configurePlayArea(): void {
+    const { width, height } = this.scale;
+    const shellWidth = Math.min(430, width - 32);
+    const shellX = Math.floor((width - shellWidth) / 2);
+    const resourceStartY = 116;
+    const navY = height - 92;
+    const top = resourceStartY + 3 * 40 + 14;
+    const bottom = navY - 14;
+    this.playArea.setTo(shellX, top, shellWidth, Math.max(260, bottom - top));
+  }
+
+  private projectToPlayArea(x: number, y: number, padding = 24): Phaser.Math.Vector2 {
+    const px = this.playArea.x + Phaser.Math.Clamp(x / REFERENCE_WORLD_WIDTH, 0, 1) * this.playArea.width;
+    const py = this.playArea.y + Phaser.Math.Clamp(y / REFERENCE_WORLD_HEIGHT, 0, 1) * this.playArea.height;
+    return new Phaser.Math.Vector2(
+      Phaser.Math.Clamp(px, this.playArea.left + padding, this.playArea.right - padding),
+      Phaser.Math.Clamp(py, this.playArea.top + padding, this.playArea.bottom - padding)
+    );
+  }
+
   private drawMap(map: ExplorationMapDefinition): void {
     const theme = getMapTheme(map);
-    this.add.rectangle(960, 540, 1920, 1080, theme.background);
-    this.add.rectangle(960, 540, 1800, 940, theme.field).setStrokeStyle(2, theme.accent, 1);
-    this.add.rectangle(960, 120, 1740, 96, 0x0b1014, 0.42).setStrokeStyle(1, menuPalette.frameSoft, 0.7);
-    this.add.rectangle(380, 820, 460, 180, theme.accent, 0.42);
-    this.add.rectangle(980, 520, 520, 140, theme.accent, 0.35);
-    this.add.rectangle(1540, 280, 420, 220, theme.bossZone, 0.8).setStrokeStyle(2, 0x8f744a, 0.8);
-    this.add.text(110, 96, map.name, {
-      color: menuPalette.textStrong,
-      fontFamily: '"Palatino Linotype", "Book Antiqua", Georgia, serif',
-      fontSize: '30px'
-    });
-    this.add.text(110, 132, theme.note, {
+    const playCenterX = this.playArea.centerX;
+
+    this.add.rectangle(this.scale.width / 2, this.scale.height / 2, this.scale.width, this.scale.height, theme.background, 1);
+
+    const worldBg = this.add.graphics();
+    worldBg.fillStyle(theme.field, 0.92);
+    worldBg.lineStyle(1, theme.accent, 0.9);
+    worldBg.fillRoundedRect(this.playArea.x, this.playArea.y, this.playArea.width, this.playArea.height, 24);
+    worldBg.strokeRoundedRect(this.playArea.x, this.playArea.y, this.playArea.width, this.playArea.height, 24);
+    worldBg.setDepth(0);
+
+    this.add.rectangle(
+      playCenterX,
+      this.playArea.y + this.playArea.height * 0.22,
+      this.playArea.width * 0.62,
+      this.playArea.height * 0.08,
+      theme.accent,
+      0.22
+    ).setDepth(1);
+
+    this.add.rectangle(
+      playCenterX,
+      this.playArea.y + this.playArea.height * 0.72,
+      this.playArea.width * 0.7,
+      this.playArea.height * 0.12,
+      theme.accent,
+      0.16
+    ).setDepth(1);
+
+    this.add.rectangle(
+      this.playArea.x + this.playArea.width * 0.76,
+      this.playArea.y + this.playArea.height * 0.2,
+      this.playArea.width * 0.26,
+      this.playArea.height * 0.18,
+      theme.bossZone,
+      0.78
+    ).setStrokeStyle(1, menuPalette.frame, 0.7).setDepth(1);
+
+    this.add.text(this.playArea.x + 18, this.playArea.y + 12, theme.note, {
       color: menuPalette.textMuted,
       fontFamily: '"Segoe UI", Tahoma, sans-serif',
-      fontSize: '16px',
-      wordWrap: { width: 900 }
-    });
+      fontSize: '12px',
+      lineSpacing: 3,
+      wordWrap: { width: this.playArea.width - 36 }
+    }).setDepth(2);
   }
 
   private createPlayer(): void {
     const profile = getExplorationSystem(this).getPlayerCombatProfile();
     this.maxPlayerHealth = profile.maxHealth;
     this.playerHealth = profile.maxHealth;
-    this.player = this.add.circle(180, 860, 18, 0xc9b27c) as PhysicsCircle;
+    const spawn = this.projectToPlayArea(320, 860, 30);
+    this.player = this.add.circle(spawn.x, spawn.y, 14, 0xc9b27c) as PhysicsCircle;
+    this.player.setDepth(5);
     this.physics.add.existing(this.player);
+    this.player.body.setCircle(14);
     this.player.body.setCollideWorldBounds(true);
-    this.player.body.setCircle(18);
-    this.cameras.main.startFollow(this.player, true, 0.08, 0.08);
     this.markHudDirty();
   }
 
@@ -302,14 +369,15 @@ export class ExplorationScene extends Phaser.Scene {
 
     map.enemyPool.forEach((enemyId, index) => {
       const definition = explorationSystem.getEnemyDefinition(enemyId);
-
       if (!definition) {
         return;
       }
 
-      const position = positions[index % positions.length];
+      const ref = positions[index % positions.length];
+      const pos = this.projectToPlayArea(ref.x, ref.y, 24);
       const color = map.id === 'tan_tich_thanh_huyen' ? 0x8b7ba0 : map.id === 'hac_moc_lam' ? 0x597251 : 0x9b4d3f;
-      const sprite = this.add.rectangle(position.x, position.y, 28 + index, 28 + index, color) as PhysicsRectangle;
+      const sprite = this.add.rectangle(pos.x, pos.y, 26, 26, color) as PhysicsRectangle;
+      sprite.setDepth(4);
       this.physics.add.existing(sprite);
       sprite.body.setCollideWorldBounds(true);
 
@@ -326,12 +394,15 @@ export class ExplorationScene extends Phaser.Scene {
 
   private spawnBoss(bossId: string): void {
     const boss = getExplorationSystem(this).getBossDefinition(bossId);
-
-    if (!boss) {
+    const map = getExplorationSystem(this).getMapDefinition(this.mapId);
+    if (!boss || !map) {
       return;
     }
 
-    const sprite = this.add.rectangle(1600, 260, 56, 56, 0x7e2f2f) as PhysicsRectangle;
+    const ref = getMapTheme(map).bossPosition;
+    const pos = this.projectToPlayArea(ref.x, ref.y, 30);
+    const sprite = this.add.rectangle(pos.x, pos.y, 42, 42, 0x7e2f2f) as PhysicsRectangle;
+    sprite.setDepth(4);
     this.physics.add.existing(sprite);
     sprite.body.setCollideWorldBounds(true);
 
@@ -349,9 +420,12 @@ export class ExplorationScene extends Phaser.Scene {
     const positions = getMapTheme(map).eventPositions;
 
     map.eventPool.forEach((eventId, index) => {
-      const spot = this.add.circle(positions[index]?.x ?? 760, positions[index]?.y ?? 760, 24, 0x4f7f66, 0.35) as PhysicsCircle;
+      const ref = positions[index] ?? positions[positions.length - 1] ?? { x: 760, y: 760 };
+      const pos = this.projectToPlayArea(ref.x, ref.y, 30);
+      const spot = this.add.circle(pos.x, pos.y, 18, 0x4f7f66, 0.35) as PhysicsCircle;
+      spot.setDepth(3).setStrokeStyle(1, 0x8fb08d, 0.8);
       this.physics.add.existing(spot);
-      spot.body.setCircle(24);
+      spot.body.setCircle(18);
       this.eventSpots.push({
         eventId,
         sprite: spot,
@@ -362,7 +436,6 @@ export class ExplorationScene extends Phaser.Scene {
 
   private createHud(map: ExplorationMapDefinition): void {
     const snapshot = getStateManager(this).snapshot;
-    const profile = getExplorationSystem(this).getPlayerCombatProfile();
     const beastSupport = getBeastSystem(this).getExplorationBonuses(snapshot);
     const currentRealm = getRealmSystem(this).getCurrentRealm(snapshot);
     const { width, height } = this.scale;
@@ -370,18 +443,14 @@ export class ExplorationScene extends Phaser.Scene {
     const shellX = Math.floor((width - shellWidth) / 2);
     const resourceStartY = 116;
     const navY = height - 92;
-    const overviewY = 240;
-    const overviewHeight = 146;
-    const journeyY = overviewY + overviewHeight + 12;
-    const journeyHeight = Math.max(156, navY - journeyY - 12);
 
     this.headerShell = new Header(this, {
       width: shellWidth,
       playerName: snapshot.player.name,
       playerTitle: map.name,
-      realm: `${currentRealm.name} • Bí cảnh`,
+      realm: `${currentRealm.name} • Nguy cơ ${map.riskLevel}`,
       avatarKey: Icons.ui.sectCrest
-    }).setPosition(shellX, 16).setScrollFactor(0);
+    }).setPosition(shellX, 16).setDepth(50);
 
     this.resourceBars = [
       new ResourceBar(this, {
@@ -410,69 +479,64 @@ export class ExplorationScene extends Phaser.Scene {
       })
     ];
     this.resourceBars.forEach((bar, index) => {
-      bar.setPosition(shellX + 76, resourceStartY + index * 40).setScrollFactor(0);
+      bar.setPosition(shellX + 76, resourceStartY + index * 40).setDepth(50);
     });
 
-    const overviewFrame = new PanelFrame(this, {
-      x: shellX,
-      y: overviewY,
-      width: shellWidth,
-      height: overviewHeight,
-      title: 'Trạng thái bí cảnh',
-      subtitle: 'Theo dõi mục tiêu, boss, và điều khiển nhanh'
-    }).setScrollFactor(0);
-    const journeyFrame = new PanelFrame(this, {
-      x: shellX,
-      y: journeyY,
-      width: shellWidth,
-      height: journeyHeight,
-      title: 'Nhịp chuyến đi',
-      subtitle: 'Tổng kết thưởng và biến động gần nhất'
-    }).setScrollFactor(0);
+    this.topOverlay = this.add.graphics().setDepth(20);
+    this.topOverlay.fillStyle(0x081014, 0.82);
+    this.topOverlay.lineStyle(1, 0x294d3c, 0.82);
+    this.topOverlay.fillRoundedRect(this.playArea.x + 10, this.playArea.y + 42, this.playArea.width - 20, 66, 16);
+    this.topOverlay.strokeRoundedRect(this.playArea.x + 10, this.playArea.y + 42, this.playArea.width - 20, 66, 16);
 
-    this.hudText = this.add.text(0, 0, '', {
+    this.bottomOverlay = this.add.graphics().setDepth(20);
+    this.bottomOverlay.fillStyle(0x081014, 0.84);
+    this.bottomOverlay.lineStyle(1, 0x294d3c, 0.82);
+    this.bottomOverlay.fillRoundedRect(this.playArea.x + 10, this.playArea.bottom - 86, this.playArea.width - 20, 76, 16);
+    this.bottomOverlay.strokeRoundedRect(this.playArea.x + 10, this.playArea.bottom - 86, this.playArea.width - 20, 76, 16);
+
+    this.hudText = this.add.text(this.playArea.x + 24, this.playArea.y + 52, '', {
       color: menuPalette.textStrong,
       fontFamily: '"Segoe UI", Tahoma, sans-serif',
-      fontSize: '13px',
+      fontSize: '12px',
       lineSpacing: 4,
-      wordWrap: { width: shellWidth - 36 }
-    });
-    this.bossText = this.add.text(0, 60, '', {
+      wordWrap: { width: this.playArea.width - 180 }
+    }).setDepth(21);
+
+    this.bossText = this.add.text(this.playArea.x + 24, this.playArea.y + 80, '', {
       color: menuPalette.warningText,
       fontFamily: '"Segoe UI", Tahoma, sans-serif',
-      fontSize: '13px',
+      fontSize: '11px',
       lineSpacing: 4,
-      wordWrap: { width: shellWidth - 36 }
-    });
-    overviewFrame.content.add([this.hudText, this.bossText]);
+      wordWrap: { width: this.playArea.width - 180 }
+    }).setDepth(21);
 
-    const retreatButton = createPrimaryButton(this, {
-      width: shellWidth - 36,
-      label: 'Rút lui an toàn',
-      detail: 'Mang phần thưởng hiện có về tông môn',
+    this.statusText = this.add.text(this.playArea.x + 24, this.playArea.bottom - 76, '', {
+      color: menuPalette.accentText,
+      fontFamily: '"Segoe UI", Tahoma, sans-serif',
+      fontSize: '11px',
+      lineSpacing: 4,
+      wordWrap: { width: this.playArea.width - 48 }
+    }).setDepth(21);
+
+    this.logText = this.add.text(this.playArea.x + 24, this.playArea.bottom - 48, '', {
+      color: menuPalette.textMuted,
+      fontFamily: '"Segoe UI", Tahoma, sans-serif',
+      fontSize: '11px',
+      lineSpacing: 3,
+      wordWrap: { width: this.playArea.width - 48 }
+    }).setDepth(21);
+
+    createPrimaryButton(this, {
+      width: 132,
+      height: 42,
+      label: 'Rút lui',
+      detail: 'Mang thưởng hiện có',
       onClick: () => {
         if (!this.inputLocked && !this.runResolved) {
           this.finishRun('retreat', false, ['Tự rút về trước khi chạm sâu hơn vào địa giới này.']);
         }
       }
-    }).setPosition(0, overviewHeight - 74).setScrollFactor(0);
-    overviewFrame.content.add(retreatButton);
-
-    this.statusText = this.add.text(0, 0, map.name, {
-      color: menuPalette.accentText,
-      fontFamily: '"Segoe UI", Tahoma, sans-serif',
-      fontSize: '12px',
-      lineSpacing: 4,
-      wordWrap: { width: shellWidth - 36 }
-    });
-    this.logText = this.add.text(0, 60, '', {
-      color: menuPalette.textMuted,
-      fontFamily: '"Segoe UI", Tahoma, sans-serif',
-      fontSize: '12px',
-      lineSpacing: 4,
-      wordWrap: { width: shellWidth - 36 }
-    });
-    journeyFrame.content.add([this.statusText, this.logText]);
+    }).setPosition(this.playArea.right - 146, this.playArea.y + 54).setDepth(22);
 
     this.statusLines.push(beastSupport.summary);
     this.statusLines = this.statusLines.slice(-5);
@@ -541,26 +605,27 @@ export class ExplorationScene extends Phaser.Scene {
       }
 
       const distance = Phaser.Math.Distance.Between(this.player.x, this.player.y, enemy.sprite.x, enemy.sprite.y);
+      if (distance > profile.attackRange) {
+        continue;
+      }
 
-      if (distance <= profile.attackRange) {
-        landedHit = true;
-        enemy.currentHealth = Math.max(0, enemy.currentHealth - profile.attackDamage);
-        this.spawnFloatingText(enemy.sprite.x, enemy.sprite.y - 26, `-${profile.attackDamage}`, menuPalette.warningText);
-        enemy.sprite.setFillStyle(enemy.isBoss ? 0xb85a5a : 0xcb7b5a);
-        this.time.delayedCall(100, () => {
-          if (enemy.alive) {
-            enemy.sprite.setFillStyle(enemy.isBoss ? 0x7e2f2f : 0x9b4d3f);
-          }
-        });
-
-        if (enemy.currentHealth <= 0) {
-          this.defeatEnemy(enemy);
+      landedHit = true;
+      enemy.currentHealth = Math.max(0, enemy.currentHealth - profile.attackDamage);
+      this.spawnFloatingText(enemy.sprite.x, enemy.sprite.y - 24, `-${profile.attackDamage}`, menuPalette.warningText);
+      enemy.sprite.setFillStyle(enemy.isBoss ? 0xb85a5a : 0xcb7b5a);
+      this.time.delayedCall(100, () => {
+        if (enemy.alive) {
+          enemy.sprite.setFillStyle(enemy.isBoss ? 0x7e2f2f : 0x9b4d3f);
         }
+      });
+
+      if (enemy.currentHealth <= 0) {
+        this.defeatEnemy(enemy);
       }
     }
 
     if (!landedHit) {
-      this.flashStatus('Don danh truot khoi muc tieu.', 'neutral');
+      this.flashStatus('Đòn đánh trượt khỏi mục tiêu.', 'neutral');
     }
 
     this.markHudDirty();
@@ -580,7 +645,7 @@ export class ExplorationScene extends Phaser.Scene {
         enemy.sprite.body.setVelocity(0, 0);
       }
 
-      if (distance <= 32 && time >= enemy.attackReadyAt && time >= this.playerDamageReadyAt) {
+      if (distance <= 28 && time >= enemy.attackReadyAt && time >= this.playerDamageReadyAt) {
         enemy.attackReadyAt = time + enemy.definition.attackCooldownMs;
         this.playerDamageReadyAt = time + 450;
         this.playerHealth = Math.max(0, this.playerHealth - enemy.definition.damage);
@@ -607,7 +672,7 @@ export class ExplorationScene extends Phaser.Scene {
     this.spawnFloatingText(
       enemy.sprite.x,
       enemy.sprite.y - 20,
-      enemy.isBoss ? 'PHA VONG GIU' : 'Ha xong',
+      enemy.isBoss ? 'PHÁ VỌNG GIỮ' : 'Hạ xong',
       enemy.isBoss ? menuPalette.successText : menuPalette.accentText
     );
     if (enemy.isBoss) {
@@ -624,7 +689,6 @@ export class ExplorationScene extends Phaser.Scene {
 
     if (enemy.isBoss) {
       const bossDefinition = enemy.definition as BossDefinition;
-
       for (const itemDrop of bossDefinition.itemDrops ?? []) {
         if (Math.random() <= itemDrop.chance) {
           this.pendingItems[itemDrop.itemId] = (this.pendingItems[itemDrop.itemId] ?? 0) + itemDrop.amount;
@@ -644,6 +708,7 @@ export class ExplorationScene extends Phaser.Scene {
 
   private spawnLoot(x: number, y: number, resourceId: keyof ResourceDeltaState, amount: number): void {
     const pickup = this.add.circle(x, y, 10, 0xbe985d) as PhysicsCircle;
+    pickup.setDepth(3);
     this.physics.add.existing(pickup);
     pickup.body.setCircle(10);
     this.lootPickups.push({
@@ -664,8 +729,7 @@ export class ExplorationScene extends Phaser.Scene {
       }
 
       const distance = Phaser.Math.Distance.Between(this.player.x, this.player.y, spot.sprite.x, spot.sprite.y);
-
-      if (distance <= 34) {
+      if (distance <= 30) {
         spot.triggered = true;
         spot.sprite.body.enable = false;
         spot.sprite.setVisible(false);
@@ -676,18 +740,19 @@ export class ExplorationScene extends Phaser.Scene {
 
     for (const pickup of [...this.lootPickups]) {
       const distance = Phaser.Math.Distance.Between(this.player.x, this.player.y, pickup.sprite.x, pickup.sprite.y);
-
-      if (distance <= 24) {
-        this.pendingRewards = addDelta(this.pendingRewards, {
-          [pickup.resourceId]: pickup.amount
-        });
-        this.playFeedback('reward');
-        this.spawnFloatingText(pickup.sprite.x, pickup.sprite.y - 16, `+${pickup.amount}`, menuPalette.accentText);
-        pickup.sprite.destroy();
-        this.lootPickups = this.lootPickups.filter((entry) => entry !== pickup);
-        this.markHudDirty();
-        this.flashStatus(`Thu được +${pickup.amount} ${pickup.resourceId}.`);
+      if (distance > 24) {
+        continue;
       }
+
+      this.pendingRewards = addDelta(this.pendingRewards, {
+        [pickup.resourceId]: pickup.amount
+      });
+      this.playFeedback('reward');
+      this.spawnFloatingText(pickup.sprite.x, pickup.sprite.y - 16, `+${pickup.amount}`, menuPalette.accentText);
+      pickup.sprite.destroy();
+      this.lootPickups = this.lootPickups.filter((entry) => entry !== pickup);
+      this.markHudDirty();
+      this.flashStatus(`Thu được +${pickup.amount} ${pickup.resourceId}.`);
     }
   }
 
@@ -712,7 +777,7 @@ export class ExplorationScene extends Phaser.Scene {
 
     this.eventModal.show({
       title: definition.title,
-      subtitle: `${map.name} | lua chon tai hien truong`,
+      subtitle: `${map.name} • lựa chọn tại hiện trường`,
       variant:
         eventId.includes('altar') || eventId.includes('records') || map.id === 'tan_tich_thanh_huyen'
           ? 'discovery'
@@ -739,7 +804,6 @@ export class ExplorationScene extends Phaser.Scene {
             if (typeof amount !== 'number' || amount <= 0) {
               continue;
             }
-
             this.pendingItems[itemId] = (this.pendingItems[itemId] ?? 0) + Math.trunc(amount);
           }
 
@@ -763,7 +827,6 @@ export class ExplorationScene extends Phaser.Scene {
             if (typeof value !== 'number') {
               continue;
             }
-
             this.pendingFactionRelations[factionId] = (this.pendingFactionRelations[factionId] ?? 0) + Math.trunc(value);
           }
 
@@ -817,15 +880,15 @@ export class ExplorationScene extends Phaser.Scene {
     );
     this.flashStatus(
       result === 'victory'
-        ? 'Chuyen di ket lai voi thang loi. Dang chuan bi tro ve sect.'
+        ? 'Chuyến đi kết lại với thắng lợi. Đang chuẩn bị trở về sect.'
         : result === 'defeat'
-          ? 'That thu, dang dua chuong mon rut ve an toan.'
-          : 'Rut lui an toan, thu xep thuong va tro ve tong mon.',
+          ? 'Thất thủ, đang đưa chưởng môn rút về an toàn.'
+          : 'Rút lui an toàn, thu xếp thưởng và trở về tông môn.',
       result === 'victory' ? 'major' : result === 'defeat' ? 'danger' : 'reward'
     );
     this.markHudDirty();
 
-    const applyReturn = () => {
+    const applyReturn = (): void => {
       const outcome: ExplorationRunOutcome = {
         mapId: this.mapId,
         rewards: this.pendingRewards,
@@ -869,7 +932,7 @@ export class ExplorationScene extends Phaser.Scene {
       feedback.unlockAudio();
       feedback.play(cue);
     } catch {
-      // Exploration should stay fully playable even if feedback is unavailable.
+      // Keep scene playable if feedback is unavailable.
     }
   }
 
@@ -879,7 +942,7 @@ export class ExplorationScene extends Phaser.Scene {
       fontFamily: '"Segoe UI", Tahoma, sans-serif',
       fontSize: '16px',
       fontStyle: 'bold'
-    }).setOrigin(0.5);
+    }).setOrigin(0.5).setDepth(30);
 
     this.tweens.add({
       targets: marker,
@@ -887,9 +950,7 @@ export class ExplorationScene extends Phaser.Scene {
       alpha: 0,
       duration: 520,
       ease: 'Cubic.Out',
-      onComplete: () => {
-        marker.destroy();
-      }
+      onComplete: () => marker.destroy()
     });
   }
 
@@ -907,6 +968,7 @@ export class ExplorationScene extends Phaser.Scene {
       .setPlayerName(snapshot.player.name)
       .setPlayerTitle(`${map?.name ?? 'Bí cảnh'} • Nguy cơ ${map?.riskLevel ?? 1}`)
       .setRealm(`${currentRealm.name} • ${livingBoss ? 'Boss còn sống' : 'Đã phá vọng giữ'}`);
+
     this.resourceBars[0]?.setValue(this.playerHealth, this.maxPlayerHealth);
     this.resourceBars[1]?.setValue(
       snapshot.player.cultivation.cultivationProgress + this.pendingCultivationProgress,
@@ -918,26 +980,19 @@ export class ExplorationScene extends Phaser.Scene {
     );
 
     this.hudText.setText([
-      `Thu được: ${formatRewards(this.pendingRewards)}`,
-      `Vật phẩm đặc biệt: ${itemSummary || 'chưa có'}`,
-      `Tiến ích: +${this.pendingCultivationProgress} tu hành | +${this.pendingSectPrestige} uy danh`,
-      `Linh thú hỗ trợ: ${beastSupport.activeBeastName ? `${beastSupport.activeBeastName} (+${beastSupport.attackBonus} ATK, +${beastSupport.maxHealthBonus} HP)` : 'chưa có'}`,
-      'Điều khiển: WASD hoặc mũi tên | SPACE đánh | R rút lui'
+      `Mục tiêu: ${livingBoss ? 'Hạ boss hoặc rút lui an toàn.' : 'Boss đã ngã, có thể rút lui.'}`,
+      `Linh thú: ${beastSupport.activeBeastName ? beastSupport.activeBeastName : 'chưa có'}`
     ]);
 
     this.bossText.setText(
       livingBoss
-        ? `Boss: ${livingBoss.definition.name} | HP ${livingBoss.currentHealth}/${livingBoss.definition.maxHealth}`
-        : `Boss: ${map?.name ?? 'Khu vực'} đã mất thế giữ sau.`
+        ? `Boss: ${livingBoss.definition.name} • HP ${livingBoss.currentHealth}/${livingBoss.definition.maxHealth}`
+        : `Chiến tuyến đã mở. Thu được: ${formatRewards(this.pendingRewards)}`
     );
     this.bossText.setColor(livingBoss ? menuPalette.warningText : menuPalette.successText);
 
-    this.logText.setText(this.statusLines.slice(-4).join('\n'));
     this.statusText.setText(
-      `${map?.name ?? 'Khu vực'} | Nguy cơ ${map?.riskLevel ?? 1} | Khuyến nghị ${map?.recommendedRealm ?? 'pham_the'} | Event ${this.eventSpots.filter((spot) => spot.triggered).length}/${this.eventSpots.length}
-Mục tiêu: ${livingBoss ? 'Hạ boss hoặc rút lui an toàn với phần thưởng đang có.' : 'Đã phá vọng giữ sau, sẵn sàng quay về sect.'}
-Hỗ trợ linh thú: ${beastSupport.activeBeastName ? beastSupport.summary : 'Chưa có linh thú đồng hành.'}
-Nhịp gần nhất: ${this.statusLines[this.statusLines.length - 1] ?? 'Đang dò thám địa hình.'}`
+      `${map?.name ?? 'Khu vực'} • Sự kiện ${this.eventSpots.filter((spot) => spot.triggered).length}/${this.eventSpots.length} • Vật phẩm: ${itemSummary || 'chưa có'}`
     );
     this.statusText.setColor(
       this.latestStatusTone === 'major'
@@ -948,6 +1003,8 @@ Nhịp gần nhất: ${this.statusLines[this.statusLines.length - 1] ?? 'Đang d
             ? menuPalette.successText
             : menuPalette.accentText
     );
+
+    this.logText.setText(this.statusLines.slice(-2).join('\n'));
     this.hudDirty = false;
   }
 
