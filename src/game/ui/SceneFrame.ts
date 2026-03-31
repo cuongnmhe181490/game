@@ -12,15 +12,8 @@ export function drawSceneFrame(scene: Phaser.Scene): Phaser.GameObjects.Graphics
   frame.fillEllipse(width * 0.26, height * 0.18, width * 0.34, height * 0.2);
   frame.fillStyle(menuPalette.accentDeep, 0.1);
   frame.fillEllipse(width * 0.78, height * 0.12, width * 0.28, height * 0.14);
-
-  frame.fillStyle(menuPalette.panel, 0.92);
-  frame.fillRoundedRect(40, 40, width - 80, height - 80, 28);
-  frame.lineStyle(2, menuPalette.frame, 0.9);
-  frame.strokeRoundedRect(40, 40, width - 80, height - 80, 28);
-  frame.lineStyle(1, 0xffffff, 0.05);
-  frame.strokeRoundedRect(54, 54, width - 108, height - 108, 22);
-  frame.lineStyle(1, menuPalette.frameSoft, 0.5);
-  frame.strokeRoundedRect(64, 64, width - 128, height - 128, 18);
+  frame.fillStyle(0xffffff, 0.02);
+  frame.fillRect(0, 0, width, height);
 
   return frame;
 }

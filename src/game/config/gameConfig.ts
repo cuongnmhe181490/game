@@ -38,11 +38,14 @@ export function createGameConfig(
   stateManager: GameStateManager,
   saveSystem: SaveSystem
 ): Phaser.Types.Core.GameConfig {
+  const appWidth = 430;
+  const appHeight = 844;
+
   return {
     type: Phaser.AUTO,
     parent,
-    width: 1280,
-    height: 720,
+    width: appWidth,
+    height: appHeight,
     backgroundColor: '#081014',
     scene: [BootScene, PreloadScene, MainMenuScene, SectScene, BeastsScene, InventoryScene, ExplorationScene, EndingScene, SaveSlotsScene, SettingsScene, SystemMenuScene],
     physics: {
@@ -55,8 +58,8 @@ export function createGameConfig(
       mode: Phaser.Scale.FIT,
       autoCenter: Phaser.Scale.CENTER_BOTH,
       expandParent: true,
-      width: 1280,
-      height: 720
+      width: appWidth,
+      height: appHeight
     },
     callbacks: {
       postBoot: (game) => {
