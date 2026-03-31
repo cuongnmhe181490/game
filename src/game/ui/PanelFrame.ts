@@ -43,8 +43,7 @@ export class PanelFrame extends Phaser.GameObjects.Container {
       : undefined;
     const content = scene.add.container(0, 0);
     const hit = scene.add.rectangle(0, 0, options.width, options.height, 0xffffff, 0.001)
-      .setOrigin(0)
-      .setInteractive({ useHandCursor: true });
+      .setOrigin(0);
 
     super(scene, options.x, options.y, [
       bg,
@@ -65,7 +64,6 @@ export class PanelFrame extends Phaser.GameObjects.Container {
     this.widthValue = options.width;
     this.heightValue = options.height;
 
-    this.bindHover();
     this.resize(options.width, options.height);
     this.setTitle(options.title);
     this.setSubtitle(options.subtitle);
@@ -102,27 +100,6 @@ export class PanelFrame extends Phaser.GameObjects.Container {
     this.redraw();
     this.layout();
     return this;
-  }
-
-  private bindHover(): void {
-    this.hit.on('pointerover', () => {
-      this.scene.tweens.killTweensOf(this);
-      this.scene.tweens.add({
-        targets: this,
-        alpha: 1,
-        duration: 120,
-        ease: 'Quad.Out'
-      });
-    });
-    this.hit.on('pointerout', () => {
-      this.scene.tweens.killTweensOf(this);
-      this.scene.tweens.add({
-        targets: this,
-        alpha: 0.98,
-        duration: 120,
-        ease: 'Quad.Out'
-      });
-    });
   }
 
   private redraw(): void {

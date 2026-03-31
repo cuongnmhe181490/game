@@ -5,6 +5,19 @@ import { SCENE_KEYS } from '@/game/scenes/sceneKeys';
 import { createGameState } from '@/game/state';
 import { createPrimaryButton, createSecondaryButton, EntryShell, PanelFrame, menuPalette } from '@/game/ui';
 
+const REALM_LABELS: Record<string, string> = {
+  pham_the: 'Phàm Thể',
+  luyen_khi: 'Luyện Khí',
+  truc_co: 'Trúc Cơ',
+  kim_dan: 'Kim Đan',
+  nguyen_anh: 'Nguyên Anh',
+  hoa_than: 'Hóa Thần',
+  luyen_hu: 'Luyện Hư',
+  hop_the: 'Hợp Thể',
+  dai_thua: 'Đại Thừa',
+  do_kiep: 'Độ Kiếp'
+};
+
 export class SaveSlotsScene extends Phaser.Scene {
   constructor() {
     super(SCENE_KEYS.saveSlots);
@@ -45,53 +58,51 @@ export class SaveSlotsScene extends Phaser.Scene {
       statusText.setText(message);
     };
 
-    const buttonWidth = Math.floor((panelWidth - 60) / 3);
+    const buttonWidth = Math.floor((panelWidth - 76) / 3);
+    const slotWidth = panelWidth - 36;
+    const slotHeight = 176;
+    const slotStep = 180;
 
     slots.forEach((slot, index) => {
-      const slotY = index * 180;
+      const slotY = index * slotStep;
+      const slotTitle = `Ô ${slot.slot}${slot.slot === currentSlot ? ' • Đang chọn' : ''}`;
       const slotFrame = new PanelFrame(this, {
         x: 0,
         y: slotY,
-        width: panelWidth - 36,
-        height: 176,
-        title: `Ô ${slot.slot}${slot.slot === currentSlot ? ' • Đang chọn' : ''}`,
-        subtitle: slot.hasSave
-          ? `${slot.sectName ?? 'Thanh Huyền Môn'} • ${slot.realmId ? slot.realmId.replace(/_/g, ' ') : 'Chưa rõ'} • Ngày ${slot.day ?? 1}`
-          : 'Ô trống. Có thể khởi tạo hành trình mới ngay tại đây.'
+        width: slotWidth,
+        height: slotHeight,
+        title: slotTitle
       });
       frame.content.add(slotFrame.root);
 
-      slotFrame.content.add(this.add.text(
-        0,
-        0,
-        slot.hasSave ? `Bản lưu ${slot.saveVersion ?? '?'} • Chơi ${slot.playtimeDays} ngày` : 'Chưa có dữ liệu nào.',
-        {
-          color: menuPalette.textMuted,
-          fontFamily: '"Segoe UI", Tahoma, sans-serif',
-          fontSize: '11px',
-          wordWrap: { width: panelWidth - 72 }
-        }
-      ));
+      const realmLabel = slot.realmId ? (REALM_LABELS[slot.realmId] ?? slot.realmId.replace(/_/g, ' ')) : 'Phàm Thể';
+      const lineOne = slot.hasSave
+        ? `${slot.sectName ?? 'Thanh Huyền Môn'} • ${realmLabel} • Ngày ${slot.day ?? 1}`
+        : 'Ô trống. Có thể khởi tạo hành trình mới ngay tại đây.';
+      const lineTwo = slot.hasSave
+        ? `Bản lưu ${slot.saveVersion ?? '?'} • Chơi ${slot.playtimeDays} ngày • ${slot.endingCompleted ? 'Đã hiển thánh' : 'Đang hành trình'}`
+        : 'Chưa có dữ liệu nào. Bắt đầu từ Chương 1.';
 
-      slotFrame.content.add(this.add.text(
-        0,
-        16,
-        slot.hasSave
-          ? `${slot.endingCompleted ? 'Đã hiển thánh' : 'Đang hành trình'} • ${slot.updatedAt ?? 'Chưa rõ hiện trạng'}`
-          : 'Bắt đầu từ Chương 1.',
-        {
-          color: menuPalette.accentText,
-          fontFamily: '"Segoe UI", Tahoma, sans-serif',
-          fontSize: '11px',
-          wordWrap: { width: panelWidth - 72 }
-        }
-      ));
+      slotFrame.content.add(this.add.text(0, 0, lineOne, {
+        color: menuPalette.textMuted,
+        fontFamily: '"Segoe UI", Tahoma, sans-serif',
+        fontSize: '11px',
+        wordWrap: { width: slotWidth - 36 }
+      }));
 
-      const btnY = 32;
+      slotFrame.content.add(this.add.text(0, 20, lineTwo, {
+        color: menuPalette.accentText,
+        fontFamily: '"Segoe UI", Tahoma, sans-serif',
+        fontSize: '11px',
+        wordWrap: { width: slotWidth - 36 }
+      }));
+
+      const btnY = 48;
 
       slotFrame.content.add(
         createPrimaryButton(this, {
           width: buttonWidth,
+          height: 44,
           label: slot.hasSave ? 'Tải game' : 'Tạo mới',
           detail: slot.hasSave ? 'Mở tiến trình' : 'Bắt đầu mới',
           onClick: () => {
@@ -104,12 +115,13 @@ export class SaveSlotsScene extends Phaser.Scene {
             }
             this.scene.start(SCENE_KEYS.sect);
           }
-        }).setPosition(10, btnY)
+        }).setPosition(0, btnY)
       );
 
       slotFrame.content.add(
         createSecondaryButton(this, {
           width: buttonWidth,
+          height: 44,
           label: 'Ghi đè',
           detail: 'Lưu đè trạng thái',
           onClick: () => {
@@ -119,12 +131,13 @@ export class SaveSlotsScene extends Phaser.Scene {
             setStatus(`Đã ghi toàn bộ dữ liệu vào ô ${slot.slot}.`);
             this.scene.restart({ returnScene });
           }
-        }).setPosition(10 + buttonWidth + 8, btnY)
+        }).setPosition(buttonWidth + 10, btnY)
       );
 
       slotFrame.content.add(
         createSecondaryButton(this, {
           width: buttonWidth,
+          height: 44,
           label: 'Xóa ô',
           detail: 'Dọn trống tiến trình',
           onClick: () => {
@@ -136,11 +149,11 @@ export class SaveSlotsScene extends Phaser.Scene {
             setStatus(`Đã xóa hoàn toàn ô ${slot.slot}.`);
             this.scene.restart({ returnScene });
           }
-        }).setPosition(10 + (buttonWidth + 8) * 2, btnY)
+        }).setPosition((buttonWidth + 10) * 2, btnY)
       );
     });
 
-    statusText.setPosition(0, 560);
+    statusText.setPosition(0, 548);
     frame.content.add(statusText);
 
     frame.content.add(
@@ -153,12 +166,14 @@ export class SaveSlotsScene extends Phaser.Scene {
             this.scene.start(returnScene);
             return;
           }
+
           if (this.scene.isPaused(returnScene)) {
             this.scene.resume(returnScene);
           }
+
           this.scene.stop();
         }
-      }).setPosition(panelWidth - 36 - 156 + 18, 552)
+      }).setPosition(panelWidth - 174, 572)
     );
   }
 }

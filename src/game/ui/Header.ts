@@ -2,6 +2,25 @@ import Phaser from 'phaser';
 
 import { menuPalette } from '@/game/ui/theme';
 
+const DISPLAY_FIXUPS: Array<[RegExp, string]> = [
+  [/\bKhai Tong Chu\b/g, 'Khai Tông Chủ'],
+  [/\bThanh Huyen Mon\b/g, 'Thanh Huyền Môn'],
+  [/\bPham The\b/g, 'Phàm Thể'],
+  [/\bLuyen Khi\b/g, 'Luyện Khí'],
+  [/\bTruc Co\b/g, 'Trúc Cơ'],
+  [/\bKim Dan\b/g, 'Kim Đan'],
+  [/\bNguyen Anh\b/g, 'Nguyên Anh'],
+  [/\bHoa Than\b/g, 'Hóa Thần'],
+  [/\bDu Tan Khai Son\b/g, 'Dư Tàn Khai Sơn'],
+  [/\bTong Mon Lap The\b/g, 'Tông Môn Lập Thế'],
+  [/\bKinh Chieu Cuu Thien\b/g, 'Kinh Chiếu Cửu Thiên'],
+  [/\bNhat Niem Dinh Dao\b/g, 'Nhất Niệm Định Đạo']
+];
+
+function normalizeDisplayText(value: string): string {
+  return DISPLAY_FIXUPS.reduce((text, [pattern, replacement]) => text.replace(pattern, replacement), value);
+}
+
 export interface HeaderOptions {
   width: number;
   playerName: string;
@@ -65,18 +84,19 @@ export class Header extends Phaser.GameObjects.Container {
   }
 
   setPlayerName(name: string): this {
-    this.nameText.setText(name);
-    this.avatarFallback.setText(name.slice(0, 1).toUpperCase() || '?');
+    const normalized = normalizeDisplayText(name);
+    this.nameText.setText(normalized);
+    this.avatarFallback.setText(normalized.slice(0, 1).toUpperCase() || '?');
     return this;
   }
 
   setPlayerTitle(title: string): this {
-    this.titleText.setText(title);
+    this.titleText.setText(normalizeDisplayText(title));
     return this;
   }
 
   setRealm(realm: string): this {
-    this.realmText.setText(realm);
+    this.realmText.setText(normalizeDisplayText(realm));
     return this;
   }
 

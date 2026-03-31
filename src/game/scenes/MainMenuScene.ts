@@ -7,6 +7,27 @@ import { SCENE_KEYS } from '@/game/scenes/sceneKeys';
 import { createGameState } from '@/game/state';
 import { createPrimaryButton, createSecondaryButton, EntryShell, PanelFrame, menuPalette } from '@/game/ui';
 
+const REALM_LABELS: Record<string, string> = {
+  pham_the: 'Phàm Thể',
+  luyen_khi: 'Luyện Khí',
+  truc_co: 'Trúc Cơ',
+  kim_dan: 'Kim Đan',
+  nguyen_anh: 'Nguyên Anh',
+  hoa_than: 'Hóa Thần',
+  luyen_hu: 'Luyện Hư',
+  hop_the: 'Hợp Thể',
+  dai_thua: 'Đại Thừa',
+  do_kiep: 'Độ Kiếp'
+};
+
+const CHAPTER_LABELS: Record<string, string> = {
+  chapter_1_du_tan_khai_son: 'Chương 1: Dư Tàn Khai Sơn',
+  chapter_2_kien_thiet_tong_mon: 'Chương 2: Kiến Thiết Tông Môn',
+  chapter_3_thu_trieu_thao_phat: 'Chương 3: Thú Triều Thảo Phạt',
+  chapter_4_van_kiep_tranh_phong: 'Chương 4: Vạn Kiếp Tranh Phong',
+  chapter_5_thien_dao_tranh_doat: 'Chương 5: Thiên Đạo Tranh Đoạt'
+};
+
 export class MainMenuScene extends Phaser.Scene {
   constructor() {
     super(SCENE_KEYS.mainMenu);
@@ -51,6 +72,7 @@ export class MainMenuScene extends Phaser.Scene {
       : hasMeaningfulProgress
         ? 'Tiếp tục'
         : 'Bắt đầu';
+
     const primaryDetail = hasMeaningfulProgress
       ? endingReached
         ? 'Mở lại kết cục của tiến trình hiện tại'
@@ -88,7 +110,7 @@ export class MainMenuScene extends Phaser.Scene {
         width: panelWidth - 36,
         label: 'Game mới',
         detail: canReplay
-          ? 'Hành trình mới từ Chương 1, không mượn sức từ Replay'
+          ? 'Tạo lại điểm bắt đầu Chương 1, không mượn sức từ Replay'
           : 'Tạo lại điểm bắt đầu Chương 1',
         onClick: () => {
           saveSystem.clear();
@@ -106,7 +128,7 @@ export class MainMenuScene extends Phaser.Scene {
           label: 'Hành trình mới',
           detail: replayModifier
             ? `Mang theo ${replayModifier.label}: ${replayModifier.summary}`
-            : 'Bắt đầu vòng chơi Replay sau khi đã hoàn thành Base Game',
+            : 'Bắt đầu vòng Replay sau khi đã hoàn thành Base Game',
           onClick: () => {
             const nextSnapshot = saveSystem.createReplaySave();
             stateManager.replace(nextSnapshot);
@@ -141,45 +163,24 @@ export class MainMenuScene extends Phaser.Scene {
       x: shell.contentX,
       y: panelY,
       width: panelWidth,
-      height: 296,
+      height: 300,
       title: 'Tình trạng lưu',
       subtitle: 'Tóm tắt tiến trình để biết bạn đang ở đoạn nào trước khi vào game.'
     });
     this.add.existing(summaryFrame.root);
 
-    const realmLabels: Record<string, string> = {
-      pham_the: 'Phàm Thể',
-      luyen_khi: 'Luyện Khí',
-      truc_co: 'Trúc Cơ',
-      ket_dan: 'Kết Đan',
-      nguyen_anh: 'Nguyên Anh',
-      hoa_than: 'Hóa Thần',
-      luyen_hu: 'Luyện Hư',
-      hop_the: 'Hợp Thể',
-      dai_thua: 'Đại Thừa',
-      do_kiep: 'Độ Kiếp'
-    };
-
-    const chapterLabels: Record<string, string> = {
-      chapter_1_du_tan_khai_son: 'Chương 1: Dư Tàn Khai Sơn',
-      chapter_2_kien_thiet_tong_mon: 'Chương 2: Kiến Thiết Tông Môn',
-      chapter_3_thu_trieu_thao_phat: 'Chương 3: Thú Triều Thảo Phạt',
-      chapter_4_van_kiep_tranh_phong: 'Chương 4: Vạn Kiếp Tranh Phong',
-      chapter_5_thien_dao_tranh_doat: 'Chương 5: Thiên Đạo Tranh Đoạt'
-    };
-
     const currentRealmName = currentSlotSummary.realmId
-      ? (realmLabels[currentSlotSummary.realmId] ?? currentSlotSummary.realmId.replace(/_/g, ' '))
+      ? (REALM_LABELS[currentSlotSummary.realmId] ?? currentSlotSummary.realmId.replace(/_/g, ' '))
       : 'Phàm Thể';
     const currentChapterName = currentSlotSummary.chapterId
-      ? (chapterLabels[currentSlotSummary.chapterId] ?? currentSlotSummary.chapterId.replace(/_/g, ' '))
+      ? (CHAPTER_LABELS[currentSlotSummary.chapterId] ?? currentSlotSummary.chapterId.replace(/_/g, ' '))
       : 'Chương 1';
 
     const summaryLines = [
       `Ô hiện tại: ${currentSlot} | Save: ${saveSummary.source === 'none' ? 'Trống' : saveSummary.source === 'backup' ? 'Dùng dự phòng' : 'Ổn định'}`,
-      `Cảnh giới: ${currentRealmName} | Ngày ${currentSlotSummary.day ?? 1}/1/1`,
+      `Cảnh giới: ${currentRealmName} | Ngày ${currentSlotSummary.day ?? 1}`,
       `Chương: ${currentChapterName}`,
-      `Kết cục: ${saveSummary.endingCompleted ? saveSummary.endingPath ?? 'Đã hiển thánh' : 'Chưa đạt'} | Đã clear: ${replayMeta.totalClearCount}`,
+      `Kết cục: ${saveSummary.endingCompleted ? (saveSummary.endingPath ?? 'Đã hoàn thành') : 'Chưa đạt'} | Đã clear: ${replayMeta.totalClearCount}`,
       `Replay: ${replayModifier ? replayModifier.label : 'Chưa mở'}`
     ];
 

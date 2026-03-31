@@ -65,10 +65,7 @@ function handleStartupError(event: ErrorEvent): void {
     return;
   }
 
-  renderBootError(
-    'Game gặp lỗi khi tải bundle client.',
-    getErrorDetail(event.error ?? event.message)
-  );
+  renderBootError('Game gặp lỗi khi tải bundle client.', getErrorDetail(event.error ?? event.message));
 }
 
 function handleStartupRejection(event: PromiseRejectionEvent): void {
@@ -76,10 +73,7 @@ function handleStartupRejection(event: PromiseRejectionEvent): void {
     return;
   }
 
-  renderBootError(
-    'Game gặp lỗi khi khởi động promise đầu vào.',
-    getErrorDetail(event.reason)
-  );
+  renderBootError('Game gặp lỗi khi khởi động promise đầu vào.', getErrorDetail(event.reason));
 }
 
 window.addEventListener('error', handleStartupError);
@@ -112,6 +106,11 @@ async function bootstrap(): Promise<void> {
     saveSystem.startAutosave(() => stateManager.snapshot);
 
     const game = new Phaser.Game(createGameConfig(root, stateManager, saveSystem));
+
+    if (import.meta.env.DEV) {
+      (window as typeof window & { __NNKT_GAME__?: Phaser.Game }).__NNKT_GAME__ = game;
+    }
+
     resolveBootSuccess();
 
     if (import.meta.hot) {

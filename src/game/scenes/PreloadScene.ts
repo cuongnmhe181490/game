@@ -30,19 +30,19 @@ export class PreloadScene extends Phaser.Scene {
     progressBox.lineStyle(1, menuPalette.frame, 1);
     progressBox.strokeRoundedRect(width * 0.2, height * 0.72, width * 0.6, 28, 12);
 
-    this.add.text(width / 2, height * 0.28, 'Mo son mon', {
+    this.add.text(width / 2, height * 0.28, 'Mở sơn môn', {
       color: menuPalette.textStrong,
       fontFamily: '"Palatino Linotype", "Book Antiqua", Georgia, serif',
       fontSize: '36px'
     }).setOrigin(0.5);
 
-    this.add.text(width / 2, height * 0.35, 'Dang khoi phuc save, dung giao dien, va chuan bi ban base game...', {
+    this.add.text(width / 2, height * 0.35, 'Đang khôi phục save, dựng giao diện, và chuẩn bị bản base game...', {
       color: menuPalette.textMuted,
       fontFamily: '"Segoe UI", Tahoma, sans-serif',
       fontSize: '18px'
     }).setOrigin(0.5);
 
-    const progressText = this.add.text(width / 2, height * 0.78, 'Dang tai tai nguyen...', {
+    const progressText = this.add.text(width / 2, height * 0.78, 'Đang tải tài nguyên...', {
       color: menuPalette.textSoft,
       fontFamily: '"Segoe UI", Tahoma, sans-serif',
       fontSize: '15px'
@@ -56,11 +56,11 @@ export class PreloadScene extends Phaser.Scene {
 
     const handleLoadError = (file: Phaser.Loader.File) => {
       if (file.key === 'sect-crest' || file.key === 'icon_ui_sect_crest') {
-        progressText.setText('Khong tai duoc bieu trung tong mon. Game van tiep tuc voi giao dien du phong.');
+        progressText.setText('Không tải được biểu trưng tông môn. Game vẫn tiếp tục với giao diện dự phòng.');
         return;
       }
 
-      progressText.setText(`Thieu tai nguyen tuy chon: ${file.key}`);
+      progressText.setText(`Thiếu tài nguyên tùy chọn: ${file.key}`);
     };
 
     const cleanupLoadListeners = () => {
@@ -75,7 +75,7 @@ export class PreloadScene extends Phaser.Scene {
       cleanupLoadListeners();
       progressBar.destroy();
       progressBox.destroy();
-      progressText.setText('Tai xong. Dang vao menu chinh...');
+      progressText.setText('Tải xong. Đang vào menu chính...');
 
       this.time.delayedCall(180, () => {
         this.scene.start(SCENE_KEYS.mainMenu);

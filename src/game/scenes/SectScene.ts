@@ -97,7 +97,7 @@ function getDiscipleStatusLabel(status: GameState['disciples']['roster'][number]
     case 'unstable':
       return 'Bất ổn';
     default:
-      return 'Ổn định';
+      return 'ổn định';
   }
 }
 
@@ -232,7 +232,7 @@ export class SectScene extends Phaser.Scene {
     this.resourceBarText = this.add.text(-1000, -1000, '', { fontSize: '1px' }).setVisible(false);
     this.resourceBars = [
       new ResourceBar(this, { width: shellWidth - 104, name: 'Linh thạch', current: 0, max: 10000, iconKey: Icons.resource.spiritStone, color: 'gold' }),
-      new ResourceBar(this, { width: shellWidth - 104, name: 'T? vi', current: 0, max: 100, iconKey: Icons.resource.spiritualEnergy, color: 'gold' }),
+      new ResourceBar(this, { width: shellWidth - 104, name: 'Tu vi', current: 0, max: 100, iconKey: Icons.resource.spiritualEnergy, color: 'gold' }),
       new ResourceBar(this, { width: shellWidth - 104, name: 'Linh lực', current: 0, max: 100, iconKey: Icons.resource.linhKhi, color: 'spirit' })
     ];
     this.resourceBars.forEach((bar, index) => {
@@ -255,8 +255,8 @@ export class SectScene extends Phaser.Scene {
       x: 0,
       y: contentY,
       width: panelWidth,
-      height: 260,
-      title: 'Tông Môn',
+      height: 290,
+      title: 'Tông môn',
       subtitle: 'Danh vọng, cấp tông, và nhịp điều hành hiện tại',
       iconKey: Icons.ui.sectCrest
     });
@@ -269,7 +269,7 @@ export class SectScene extends Phaser.Scene {
       lineSpacing: 5,
       wordWrap: { width: panelWidth - 36 }
     });
-    this.summaryText = this.add.text(sectFrame.root.x + 18, sectFrame.root.y + 154, '', {
+    this.summaryText = this.add.text(sectFrame.root.x + 18, sectFrame.root.y + 176, '', {
       color: menuPalette.textMuted,
       fontFamily: '"Segoe UI", Tahoma, sans-serif',
       fontSize: '12px',
@@ -278,14 +278,14 @@ export class SectScene extends Phaser.Scene {
     });
     this.scrollContent.add([this.eventText, this.summaryText]);
 
-    contentY += 280;
+    contentY += 310;
 
     const buildingsFrame = new PanelFrame(this, {
       x: 0,
       y: contentY,
       width: panelWidth,
-      height: 318,
-      title: 'Công Trình',
+      height: 342,
+      title: 'Công trình',
       subtitle: 'Các công trình đang vận hành hoặc chờ phục hồi'
     });
     this.scrollContent.add(buildingsFrame.root);
@@ -330,14 +330,14 @@ export class SectScene extends Phaser.Scene {
       }
     }).setPosition(buildingsFrame.root.x + 18 + (threeBtnWidth + 10) * 2, buildingsFrame.root.y + 258));
 
-    contentY += 338;
+    contentY += 362;
 
     const membersFrame = new PanelFrame(this, {
       x: 0,
       y: contentY,
       width: panelWidth,
-      height: 404,
-      title: 'Môn Nhân',
+      height: 452,
+      title: 'Môn nhân',
       subtitle: 'Xem nhanh đệ tử, nhiệm vụ, và trạng thái trung thành'
     });
     this.scrollContent.add(membersFrame.root);
@@ -371,7 +371,7 @@ export class SectScene extends Phaser.Scene {
     }).setPosition(membersFrame.root.x + 18 + threeBtnWidth + 10, membersFrame.root.y + 302));
     this.scrollContent.add(createPrimaryButton(this, {
       width: threeBtnWidth,
-      label: 'T? luyện',
+      label: 'Tu luyện',
       detail: 'Tăng tổng lực tu hành',
       onClick: () => this.assignSelectedDiscipleTask('tu_luyen')
     }).setPosition(membersFrame.root.x + 18 + (threeBtnWidth + 10) * 2, membersFrame.root.y + 302));
@@ -394,14 +394,14 @@ export class SectScene extends Phaser.Scene {
       onClick: () => this.assignSelectedDiscipleTask('tuan_tra')
     }).setPosition(membersFrame.root.x + 18 + (threeBtnWidth + 10) * 2, membersFrame.root.y + 354));
 
-    contentY += 424;
+    contentY += 472;
 
     const actionsFrame = new PanelFrame(this, {
       x: 0,
       y: contentY,
       width: panelWidth,
-      height: 212,
-      title: 'Điều Hành',
+      height: 220,
+      title: 'Điều hành',
       subtitle: 'Thao tác nhanh cho nâng cấp, nhân sự, và ngoại giao'
     });
     this.scrollContent.add(actionsFrame.root);
@@ -439,7 +439,7 @@ export class SectScene extends Phaser.Scene {
       y: contentY,
       width: panelWidth,
       height: 248,
-      title: 'T? Hành',
+      title: 'Tu hành',
       subtitle: 'Theo dõi cảnh giới và mở panel tu luyện'
     });
     this.scrollContent.add(cultivationFrame.root);
@@ -471,7 +471,7 @@ export class SectScene extends Phaser.Scene {
     }).setPosition(cultivationFrame.root.x + 18, cultivationFrame.root.y + 194));
     this.scrollContent.add(createSecondaryButton(this, {
       width: halfBtnWidth,
-      label: 'T? hành',
+      label: 'Tu hành',
       detail: 'Mở bảng tu hành chi tiết',
       onClick: () => this.toggleCultivationPanel(true)
     }).setPosition(cultivationFrame.root.x + 18 + halfBtnWidth + 10, cultivationFrame.root.y + 194));
@@ -483,7 +483,7 @@ export class SectScene extends Phaser.Scene {
       y: contentY,
       width: panelWidth,
       height: 270,
-      title: 'Túi Đồ Nhanh',
+      title: 'Túi đồ nhanh',
       subtitle: 'Xem nhanh vài vật phẩm chính trước khi mở trang túi đồ'
     });
     this.scrollContent.add(inventoryFrame.root);
@@ -505,7 +505,7 @@ export class SectScene extends Phaser.Scene {
 
     this.navBar = new NavBar(this, shellX + 10, shellY + shellHeight - navHeight + 4, shellWidth - 20, [
       { id: 'sect', label: 'Tông môn', iconKey: Icons.ui.sectCrest, onClick: () => this.scrollToAnchor('sect') },
-      { id: 'cultivate', label: 'T? hành', iconKey: Icons.status.qiRefining, onClick: () => this.scrollToAnchor('cultivate') },
+      { id: 'cultivate', label: 'Tu hành', iconKey: Icons.status.qiRefining, onClick: () => this.scrollToAnchor('cultivate') },
       {
         id: 'explore',
         label: 'Bí cảnh',
@@ -516,7 +516,7 @@ export class SectScene extends Phaser.Scene {
           const map = this.getSelectedMap();
           const unlocked = snapshotNow.exploration.unlockedMapIds.includes(map.id);
           if (!unlocked) {
-            this.refreshView(snapshotNow, `Khu ${map.name} chua du dieu kien mo.`);
+            this.refreshView(snapshotNow, `Khu ${map.name} chưa đủ điều kiện mở.`);
             return;
           }
           this.markTutorialFlag(TUTORIAL_CHOICE_FLAGS.enteredExploration);
@@ -610,7 +610,7 @@ export class SectScene extends Phaser.Scene {
           const snapshot = getStateManager(this).update((draft) => {
             draft.player.cultivation.cultivationMode =
               draft.player.cultivation.cultivationMode === 'balanced' ? 'focused' : 'balanced';
-            draft.ui.statusMessage = `Đã chuyển sang chế độ ${CULTIVATION_MODE_LABELS[draft.player.cultivation.cultivationMode]}.`;
+            draft.ui.statusMessage = `ÄÃ£ chuyá»ƒn sang cháº¿ Ä‘á»™ ${CULTIVATION_MODE_LABELS[draft.player.cultivation.cultivationMode]}.`;
           });
           getSaveStore(this).saveGame(snapshot);
           this.refreshView(snapshot);
@@ -680,7 +680,7 @@ export class SectScene extends Phaser.Scene {
     this.diplomacyPanel = new DiplomacyPanel(this, [
       {
         label: 'Phe trước',
-        detail: 'Đổi phe đang xem',
+        detail: 'Äá»•i phe Ä‘ang xem',
         onClick: () => {
           this.selectedFactionIndex = this.wrapIndex(this.selectedFactionIndex - 1, getDiplomacySystem(this).getKnownFactions().length);
           this.refreshView(getStateManager(this).snapshot);
@@ -688,7 +688,7 @@ export class SectScene extends Phaser.Scene {
       },
       {
         label: 'Phe sau',
-        detail: 'Đổi phe đang xem',
+        detail: 'Äá»•i phe Ä‘ang xem',
         onClick: () => {
           this.selectedFactionIndex = this.wrapIndex(this.selectedFactionIndex + 1, getDiplomacySystem(this).getKnownFactions().length);
           this.refreshView(getStateManager(this).snapshot);
@@ -719,7 +719,7 @@ export class SectScene extends Phaser.Scene {
       },
       {
         label: 'Gửi lễ vật',
-        detail: '-10 linh thạch',
+        detail: '-10 linh tháº¡ch',
         onClick: () => {
           const result = getDiplomacySystem(this).sendTribute(this.getSelectedFactionId());
           this.refreshView(result.snapshot, result.message);
@@ -735,7 +735,7 @@ export class SectScene extends Phaser.Scene {
       },
       {
         label: 'Mua dược thảo',
-        detail: 'Xích Luyện Bảo',
+        detail: 'XÃ­ch Luyá»‡n Báº£o',
         onClick: () => {
           const result = getDiplomacySystem(this).executeTrade(this.getSelectedFactionId(), 'buy_herbs');
           this.refreshView(result.snapshot, result.message);
@@ -743,7 +743,7 @@ export class SectScene extends Phaser.Scene {
       },
       {
         label: 'Mua khoáng thạch',
-        detail: 'Xích Luyện Bảo',
+        detail: 'XÃ­ch Luyá»‡n Báº£o',
         onClick: () => {
           const result = getDiplomacySystem(this).executeTrade(this.getSelectedFactionId(), 'buy_ore');
           this.refreshView(result.snapshot, result.message);
@@ -751,7 +751,7 @@ export class SectScene extends Phaser.Scene {
       },
       {
         label: 'Đóng panel',
-        detail: 'Trở về sơn môn',
+        detail: 'Trá»Ÿ vá» sÆ¡n mÃ´n',
         onClick: () => {
           this.toggleDiplomacyPanel(false);
         }
@@ -762,72 +762,72 @@ export class SectScene extends Phaser.Scene {
   private createGovernancePanel(): void {
     this.governancePanel = new GovernancePanel(this, [
       {
-        label: 'H??ng tr??c',
-        detail: 'Thi?n h??ng tr? m?n',
+        label: 'Hướng trước',
+        detail: 'Thiên hướng trị môn',
         onClick: () => {
           this.selectedGovernanceStyleIndex = this.wrapIndex(this.selectedGovernanceStyleIndex - 1, governanceStyleCatalog.styles.length);
           this.refreshView(getStateManager(this).snapshot);
         }
       },
       {
-        label: 'H??ng sau',
-        detail: 'Thi?n h??ng tr? m?n',
+        label: 'Hướng sau',
+        detail: 'Thiên hướng trị môn',
         onClick: () => {
           this.selectedGovernanceStyleIndex = this.wrapIndex(this.selectedGovernanceStyleIndex + 1, governanceStyleCatalog.styles.length);
           this.refreshView(getStateManager(this).snapshot);
         }
       },
       {
-        label: '?p d?ng h??ng',
-        detail: 'Ch?n thi?n h??ng',
+        label: 'Áp dụng hướng',
+        detail: 'Chọn thiên hướng',
         onClick: () => {
           const result = getSectIdentitySystem(this).chooseGovernanceStyle(this.getSelectedGovernanceStyle().id);
           this.refreshView(result.snapshot, result.message);
         }
       },
       {
-        label: 'N?i quy tr??c',
-        detail: '?ang xem n?i quy',
+        label: 'Nội quy trước',
+        detail: 'Đang xem nội quy',
         onClick: () => {
           this.selectedRuleIndex = this.wrapIndex(this.selectedRuleIndex - 1, sectRuleCatalog.rules.length);
           this.refreshView(getStateManager(this).snapshot);
         }
       },
       {
-        label: 'N?i quy sau',
-        detail: '?ang xem n?i quy',
+        label: 'Nội quy sau',
+        detail: 'Đang xem nội quy',
         onClick: () => {
           this.selectedRuleIndex = this.wrapIndex(this.selectedRuleIndex + 1, sectRuleCatalog.rules.length);
           this.refreshView(getStateManager(this).snapshot);
         }
       },
       {
-        label: 'B?t / t?t n?i quy',
-        detail: 'T?i ?a 2 n?i quy',
+        label: 'Bật / tắt nội quy',
+        detail: 'Tối đa 2 nội quy',
         onClick: () => {
           const result = getSectIdentitySystem(this).toggleSectRule(this.getSelectedRule().id);
           this.refreshView(result.snapshot, result.message);
         }
       },
       {
-        label: 'Vai tr? tr??c',
-        detail: '?ang xem tr??ng l?o',
+        label: 'Vai trò trước',
+        detail: 'Đang xem trưởng lão',
         onClick: () => {
           this.selectedElderRoleIndex = this.wrapIndex(this.selectedElderRoleIndex - 1, elderRoleCatalog.roles.length);
           this.refreshView(getStateManager(this).snapshot);
         }
       },
       {
-        label: 'Vai tr? sau',
-        detail: '?ang xem tr??ng l?o',
+        label: 'Vai trò sau',
+        detail: 'Đang xem trưởng lão',
         onClick: () => {
           this.selectedElderRoleIndex = this.wrapIndex(this.selectedElderRoleIndex + 1, elderRoleCatalog.roles.length);
           this.refreshView(getStateManager(this).snapshot);
         }
       },
       {
-        label: 'B? nhi?m tr??ng l?o',
-        detail: 'D?ng ?? t? ?ang ch?n',
+        label: 'Bổ nhiệm trưởng lão',
+        detail: 'Dùng đệ tử đang chọn',
         onClick: () => {
           const disciple = this.getSelectedDisciple(getStateManager(this).snapshot);
           if (!disciple) {
@@ -839,21 +839,21 @@ export class SectScene extends Phaser.Scene {
         }
       },
       {
-        label: 'M?i kh?ch khanh',
-        detail: 'D?ng phe ?ang ch?n',
+        label: 'Mời khách khanh',
+        detail: 'Dùng phe đang chọn',
         onClick: () => {
           const result = getSectIdentitySystem(this).inviteGuestCultivator(this.getSelectedFactionId());
           this.refreshView(result.snapshot, result.message);
         }
       },
       {
-        label: 'M?i kh?ch r?i ?i',
-        detail: 'G? kh?ch ??u ti?n',
+        label: 'Mời khách rời đi',
+        detail: 'Gỡ khách đầu tiên',
         onClick: () => {
           const snapshot = getStateManager(this).snapshot;
           const guest = snapshot.sect.guestCultivators[0];
           if (!guest) {
-            this.refreshView(snapshot, 'Ch?a c? kh?ch khanh ?? m?i r?i ?i.');
+            this.refreshView(snapshot, 'Chưa có khách khanh để mời rời đi.');
             return;
           }
 
@@ -862,8 +862,8 @@ export class SectScene extends Phaser.Scene {
         }
       },
       {
-        label: '??ng panel',
-        detail: 'Tr? v? s?n m?n',
+        label: 'Đóng panel',
+        detail: 'Trở về sơn môn',
         onClick: () => {
           this.toggleGovernancePanel(false);
         }
@@ -874,16 +874,16 @@ export class SectScene extends Phaser.Scene {
   private createInventoryPanel(): void {
     this.inventoryPanel = new InventoryPanel(this, [
       {
-        label: 'Vật trước',
-        detail: 'Đổi vật đang xem',
+        label: 'Váº­t trước',
+        detail: 'Äá»•i váº­t Ä‘ang xem',
         onClick: () => {
           this.selectedItemIndex = this.wrapIndex(this.selectedItemIndex - 1, this.getInventoryEntries(getStateManager(this).snapshot).length);
           this.refreshView(getStateManager(this).snapshot);
         }
       },
       {
-        label: 'Vật sau',
-        detail: 'Đổi vật đang xem',
+        label: 'Váº­t sau',
+        detail: 'Äá»•i váº­t Ä‘ang xem',
         onClick: () => {
           this.selectedItemIndex = this.wrapIndex(this.selectedItemIndex + 1, this.getInventoryEntries(getStateManager(this).snapshot).length);
           this.refreshView(getStateManager(this).snapshot);
@@ -904,7 +904,7 @@ export class SectScene extends Phaser.Scene {
       },
       {
         label: 'Trang bị pháp khí',
-        detail: 'Một slot cho trưởng môn',
+        detail: 'Má»™t slot cho trÆ°á»Ÿng mÃ´n',
         onClick: () => {
           const entry = this.getSelectedInventoryEntry(getStateManager(this).snapshot);
           if (!entry) {
@@ -917,7 +917,7 @@ export class SectScene extends Phaser.Scene {
       },
       {
         label: 'Tháo pháp khí',
-        detail: 'Bỏ trang bị hiện tại',
+        detail: 'Bá» trang bá»‹ hiá»‡n táº¡i',
         onClick: () => {
           const result = getArtifactSystem(this).unequipArtifact();
           this.refreshView(result.snapshot, result.message);
@@ -925,7 +925,7 @@ export class SectScene extends Phaser.Scene {
       },
       {
         label: 'Đóng panel',
-        detail: 'Trở về sơn môn',
+        detail: 'Trá»Ÿ vá» sÆ¡n mÃ´n',
         onClick: () => {
           this.toggleInventoryPanel(false);
         }
@@ -936,16 +936,16 @@ export class SectScene extends Phaser.Scene {
   private createAlchemyPanel(): void {
     this.alchemyPanel = new AlchemyPanel(this, [
       {
-        label: 'Phương trước',
-        detail: 'Đổi đan phương đang xem',
+        label: 'PhÆ°Æ¡ng trước',
+        detail: 'Äá»•i Ä‘an phÆ°Æ¡ng Ä‘ang xem',
         onClick: () => {
           this.selectedRecipeIndex = this.wrapIndex(this.selectedRecipeIndex - 1, alchemyRecipeCatalog.recipes.length);
           this.refreshView(getStateManager(this).snapshot);
         }
       },
       {
-        label: 'Phương sau',
-        detail: 'Đổi đan phương đang xem',
+        label: 'PhÆ°Æ¡ng sau',
+        detail: 'Äá»•i Ä‘an phÆ°Æ¡ng Ä‘ang xem',
         onClick: () => {
           this.selectedRecipeIndex = this.wrapIndex(this.selectedRecipeIndex + 1, alchemyRecipeCatalog.recipes.length);
           this.refreshView(getStateManager(this).snapshot);
@@ -962,7 +962,7 @@ export class SectScene extends Phaser.Scene {
       },
       {
         label: 'Đóng panel',
-        detail: 'Trở về sơn môn',
+        detail: 'Trá»Ÿ vá» sÆ¡n mÃ´n',
         onClick: () => {
           this.toggleAlchemyPanel(false);
         }
@@ -975,7 +975,7 @@ export class SectScene extends Phaser.Scene {
     const disciple = this.getSelectedDisciple(snapshot);
 
     if (!disciple) {
-      this.refreshView(snapshot, 'Ch?a c? ?? t? ?? ph?n c?ng.');
+      this.refreshView(snapshot, 'Chưa có đệ tử để phân công.');
       return;
     }
 
@@ -1010,13 +1010,13 @@ export class SectScene extends Phaser.Scene {
     }
 
     this.eventModal.show({
-      title: `Thi?n Ki?p ${assessment.nextRealmName}`,
-      subtitle: `T? ${assessment.currentRealmName} l?n ${assessment.nextRealmName}`,
+      title: `Thiên Kiếp ${assessment.nextRealmName}`,
+      subtitle: `Từ ${assessment.currentRealmName} lên ${assessment.nextRealmName}`,
       variant: 'omen',
       contextLines: [
-        `X?c su?t hi?n t?i: ${assessment.score}/100`,
-        `D? l?c ?an d??c: +${snapshot.player.cultivation.breakthroughBonus}`,
-        `N?n c?n: ${snapshot.player.cultivation.foundationStability} | T?m ma: ${snapshot.player.cultivation.tamMaPressure}`
+        `Xác suất hiện tại: ${assessment.score}/100`,
+        `Dược lực đan dược: +${snapshot.player.cultivation.breakthroughBonus}`,
+        `Nền căn: ${snapshot.player.cultivation.foundationStability} | Tâm ma: ${snapshot.player.cultivation.tamMaPressure}`
       ],
       body: [
         assessment.summary,
@@ -1025,22 +1025,22 @@ export class SectScene extends Phaser.Scene {
       ],
       options: [
         {
-          label: 'Ch?ng ki?p ngay',
-          detail: 'Th? ??t ph? v?i tr?ng th?i hi?n t?i',
+          label: 'Chống kiếp ngay',
+          detail: 'Thử đột phá với trạng thái hiện tại',
           onSelect: () => {
             this.eventModal.hide();
             this.time.delayedCall(120, () => {
               const result = getRealmSystem(this).performBreakthrough();
               this.refreshView(result.snapshot, result.message);
               this.eventModal.show({
-                title: result.ok ? 'Thi?n Ki?p ?? qua' : 'Ki?p V?n ?? l?i v?t',
-                subtitle: result.ok ? 'C?nh gi?i ?? ??i nh?p' : 'C?n th?m m?t nh?p chu?n b?',
+                title: result.ok ? 'Thiên kiếp đã qua' : 'Kiếp vận để lại vết',
+                subtitle: result.ok ? 'Cảnh giới đã đổi nhịp' : 'Cần thêm một nhịp chuẩn bị',
                 variant: result.ok ? 'major' : 'omen',
                 body: [result.message],
                 options: [
                   {
-                    label: 'L?i v? tu h?nh',
-                    detail: '??ng th?ng b?o v? ti?p t?c ?i?u t?c',
+                    label: 'Lùi về tu hành',
+                    detail: 'Đóng thông báo và tiếp tục điều tức',
                     onSelect: () => this.eventModal.hide()
                   }
                 ]
@@ -1049,8 +1049,8 @@ export class SectScene extends Phaser.Scene {
           }
         },
         {
-          label: 'Tr? ho?n',
-          detail: 'B? sung ?an d??c, linh th?, v? c?ng ph?p tr??c khi th? l?i',
+          label: 'Trì hoãn',
+          detail: 'Bổ sung đan dược, linh thú và công pháp trước khi thử lại',
           onSelect: () => this.eventModal.hide()
         }
       ]
@@ -1064,7 +1064,7 @@ export class SectScene extends Phaser.Scene {
       this.playFeedback('ui-invalid');
       this.refreshView(
         snapshot,
-        'Ngo?i giao ch?a l? ?u ti?n ??u. H?y qua ng?y, xem ?? t?, v? ho?n t?t m?t chuy?n th?m hi?m tr??c.'
+        'Ngoại giao chưa là ưu tiên đầu. Hãy qua ngày, xem đệ tử và hoàn tất một chuyến thám hiểm trước.'
       );
       return;
     }
@@ -1136,27 +1136,27 @@ export class SectScene extends Phaser.Scene {
 
     const steps = [
       {
-        label: 'Nhan lay tan cuc cua tong mon',
+        label: 'Nhận lấy tàn cục của tông môn',
         done: snapshot.story.choiceFlags.includes(TUTORIAL_CHOICE_FLAGS.introSeen)
       },
       {
-        label: 'Qua mot ngay dau tien',
+        label: 'Qua một ngày đầu tiên',
         done: snapshot.time.day > 1 || snapshot.story.choiceFlags.includes(TUTORIAL_CHOICE_FLAGS.advancedDay)
       },
       {
-        label: 'Xem mot de tu',
+        label: 'Xem một đệ tử',
         done: snapshot.story.choiceFlags.includes(TUTORIAL_CHOICE_FLAGS.checkedDisciple)
       },
       {
-        label: 'Mo panel tu hanh',
+        label: 'Mở panel tu hành',
         done: snapshot.story.choiceFlags.includes(TUTORIAL_CHOICE_FLAGS.openedCultivation)
       },
       {
-        label: 'Giai quyet mot su kien',
+        label: 'Giải quyết một sự kiện',
         done: snapshot.events.history.length > 0 || snapshot.story.choiceFlags.includes(TUTORIAL_CHOICE_FLAGS.resolvedEvent)
       },
       {
-        label: 'Vao map tham hiem dau',
+        label: 'Vào map thám hiểm đầu',
         done: snapshot.story.choiceFlags.includes(TUTORIAL_CHOICE_FLAGS.enteredExploration)
       },
       {
@@ -1192,223 +1192,223 @@ export class SectScene extends Phaser.Scene {
     if (snapshot.story.currentChapterId === 'chapter_4_nhat_niem_dinh_dao') {
       if (!flags.has('chapter4_started')) {
         return [
-          'Moc chuong 4',
-          'Mo beat chuyen doan cuoi cua pham gioi: Thien Khu Van Dao.',
-          'Qua them ngay hoac doi major event de xac nhan Thanh Huyen Mon da buoc vao dai kiep lon hon moi tranh chap tong mon.'
+          'Mốc chương 4',
+          'Mở beat chuyển đoạn cuối của phàm giới: Thiên Khu Vấn Đạo.',
+          'Qua thêm ngày hoặc đợi major event để xác nhận Thanh Huyền Môn đã bước vào đại kiếp lớn hơn mọi tranh chấp tông môn.'
         ];
       }
 
       if (!flags.has('first_great_crisis_seen')) {
         return [
-          'Moc chuong 4',
-          'Nhan dien dai kiep dang doi hinh quanh Thanh Huyen Mon.',
-          'T? nay, ap luc khong chi den tu phe phai ma con tu chinh vet nut cua thien dia va di san xua.'
+          'Mốc chương 4',
+          'Nhận diện đại kiếp đang đổi hình quanh Thanh Huyền Môn.',
+          'Từ nay, áp lực không chỉ đến từ phe phái mà còn từ chính vết nứt của thiên địa và di sản xưa.'
         ];
       }
 
       if (!flags.has('first_core_truth_piece_obtained')) {
         return [
-          'Moc chuong 4',
-          'Tim manh chan tuong cot loi ve Thien Khu Bien va vai tro cua Thanh Huyen Mon.',
-          'Chuong 4 can mot su that ro hon de bien dai kiep thanh lua chon co y nghia, khong chi la suc ep mu mo.'
+          'Mốc chương 4',
+          'Tìm mảnh chân tướng cốt lõi về Thiên Khu Biến và vai trò của Thanh Huyền Môn.',
+          'Chương 4 cần một sự thật rõ hơn để biến đại kiếp thành lựa chọn có ý nghĩa, không chỉ là sức ép mù mờ.'
         ];
       }
 
       if (!flags.has('first_doctrinal_choice_made')) {
         return [
-          'Moc chuong 4',
-          'Chot mot huong dao ly de noi mon biet tong mon dang giu thu gi.',
-          'Day la buoc tu van hanh sang dinh nghia: giu cuong ky, giu quyen, hay mo mot loi di moi.'
+          'Mốc chương 4',
+          'Chốt một hướng đạo lý để nội môn biết tông môn đang giữ thứ gì.',
+          'Đây là bước từ vận hành sang định nghĩa: giữ cương kỷ, giữ quyền, hay mở một lối đi mới.'
         ];
       }
 
       if (!flags.has('first_major_sacrifice_or_compromise')) {
         return [
-          'Moc chuong 4',
-          'Tra mot cai gia thuc su de giu lai dieu ban da chon.',
-          'Neu chua co hy sinh hay nhuong bo, tong mon chua thuc su bi dai kiep thu den tan cung.'
+          'Mốc chương 4',
+          'Trả một cái giá thực sự để giữ lại điều bạn đã chọn.',
+          'Nếu chưa có hy sinh hay nhượng bộ, tông môn chưa thực sự bị đại kiếp thử đến tận cùng.'
         ];
       }
 
       if (!flags.has('chapter4_ultimatum_resolved')) {
         return [
-          'Moc chuong 4',
-          'Vuot qua toi hau thu tu ben ngoai truoc nguong ket cuoc.',
-          'Sau khi thu nay toi, Thanh Huyen Mon se khong con duoc xem la mot tieu tong co the bo qua.'
+          'Mốc chương 4',
+          'Vượt qua tối hậu thư từ bên ngoài trước ngưỡng kết cuộc.',
+          'Sau khi thư này tới, Thanh Huyền Môn sẽ không còn được xem là một tiểu tông có thể bỏ qua.'
         ];
       }
 
       return [
-        'Moc chuong 4',
-        'Dung toi nguong cua ba dao va mo duong vao ket cuoc.',
-        'Khi major event cuoi xuat hien, hay chot xem Thanh Huyen Mon se dua pham gioi nay qua dai kiep bang cach nao.'
+        'Mốc chương 4',
+        'Đứng tới ngưỡng của ba đạo và mở đường vào kết cuộc.',
+        'Khi major event cuối xuất hiện, hãy chốt xem Thanh Huyền Môn sẽ đưa phàm giới này qua đại kiếp bằng cách nào.'
       ];
     }
 
     if (snapshot.story.currentChapterId === 'chapter_3_kinh_chieu_cuu_thien') {
       if (!flags.has('archive_sky_crack_seen')) {
         return [
-          'Moc chuong 3',
-          'Theo doi manh thu luc dau tien cho thay Thien Khu Bien khong phai tai bien vo chu.',
-          'Chuong nay khong con chi lap tong, ma bat dau de tong mon doi mat voi su that lon hon minh.'
+          'Mốc chương 3',
+          'Theo dõi manh thư lục đầu tiên cho thấy Thiên Khu Biến không phải tai biến vô chủ.',
+          'Chương này không còn chỉ lập tông, mà bắt đầu để tông môn đối mặt với sự thật lớn hơn mình.'
         ];
       }
 
       if (!flags.has('ascension_trace_confirmed')) {
         return [
-          'Moc chuong 3',
-          'Ghep Linh Kinh va co luc thanh bang chung ve dau vet cuong hanh phi thang.',
-          'Mot khi dau vet nay ro ra, Thanh Huyen Mon se khong the tiep tuc lon l?n ma gia nhu khong biet.'
+          'Mốc chương 3',
+          'Ghép Linh Kính và cổ lục thành bằng chứng về dấu vết cưỡng hành phi thăng.',
+          'Một khi dấu vết này rõ ra, Thanh Huyền Môn sẽ không thể tiếp tục lớn lên mà giả như không biết.'
         ];
       }
 
       if (!flags.has('first_serious_faction_probe')) {
         return [
-          'Moc chuong 3',
-          'Chiu dot thu the thuc su dau tien khi ben ngoai da nhin Thanh Huyen Mon nhu mot thuc the dang len.',
-          'Giua chuong 3, tong mon bat dau bi can do boi nhung phe co suc nang hon.'
+          'Mốc chương 3',
+          'Chịu đợt thử thế thực sự đầu tiên khi bên ngoài đã nhìn Thanh Huyền Môn như một thực thể đang lên.',
+          'Giữa chương 3, tông môn bắt đầu bị cân đo bởi những phe có sức nặng hơn.'
         ];
       }
 
       if (!flags.has('first_disciple_ambition_incident')) {
         return [
-          'Moc chuong 3',
-          'Xu ly su chenh khat vong trong noi mon khi de tu bat dau lon nhanh hon tong mon cu.',
-          'Day la dau moc cho thay ap luc noi bo da khong con chiu dung bang tinh nghia don thuan.'
+          'Mốc chương 3',
+          'Xử lý sự chênh khát vọng trong nội môn khi đệ tử bắt đầu lớn nhanh hơn tông môn cũ.',
+          'Đây là dấu mốc cho thấy áp lực nội bộ đã không còn chịu đựng bằng tình nghĩa đơn thuần.'
         ];
       }
 
       return [
-        'Moc chuong 3',
-        'Chot Chuong 3 bang viec thua nhan Thanh Huyen Mon da buoc vao dong phong van duoi troi rong.',
-        'Major event ket chuong se mo ra giai doan dai kiep va dao ly nang ne hon cua Chuong 4.'
+        'Mốc chương 3',
+        'Chốt Chương 3 bằng việc thừa nhận Thanh Huyền Môn đã bước vào dòng phong vân dưới trời rộng.',
+        'Major event kết chương sẽ mở ra giai đoạn đại kiếp và đạo lý nặng nề hơn của Chương 4.'
       ];
     }
 
     if (snapshot.story.currentChapterId === 'chapter_2_tong_mon_lap_the') {
       if (!flags.has('chapter2_started')) {
         return [
-          'Moc chuong 2',
-          'Chot buoc chuyen tu sinh ton sang lap tong.',
-          'Qua them ngay hoac goi major event de mo beat Khai Son Lap Tong.'
+          'Mốc chương 2',
+          'Chốt bước chuyển từ sinh tồn sang lập tông.',
+          'Qua thêm ngày hoặc gọi major event để mở beat Khai Sơn Lập Tông.'
         ];
       }
 
       if (!flags.has('first_formal_recruitment_opened')) {
         return [
-          'Moc chuong 2',
-          'Mo dot thu nhan mon sinh dau tien theo khuon phep.',
-          'Chuong nay khong chi giu nguoi o lai, ma bat dau chon nguoi de lon cung tong mon.'
+          'Mốc chương 2',
+          'Mở đợt thu nhận môn sinh đầu tiên theo khuôn phép.',
+          'Chương này không chỉ giữ người ở lại, mà bắt đầu chọn người để lớn cùng tông môn.'
         ];
       }
 
       if (!flags.has('first_internal_rule_enforced')) {
         return [
-          'Moc chuong 2',
-          'Dat ne nep noi mon dau tien.',
-          'Noi quy, ghi cong, va cach giu trat tu se bat dau dinh hinh Thanh Huyen Mon.'
+          'Mốc chương 2',
+          'Đặt nề nếp nội môn đầu tiên.',
+          'Nội quy, ghi công, và cách giữ trật tự sẽ bắt đầu định hình Thanh Huyền Môn.'
         ];
       }
 
       if (!flags.has('first_external_contact_received')) {
         return [
-          'Moc chuong 2',
-          'Chuan bi don ben ngoai de mat toi Thanh Huyen Mon.',
-          'Giu uy danh va on dinh de su gia dau tien khong thay mot ton mon roi rac.'
+          'Mốc chương 2',
+          'Chuẩn bị đón bên ngoài để mắt tới Thanh Huyền Môn.',
+          'Giữ uy danh và ổn định để sứ giả đầu tiên không thấy một tàn môn rời rạc.'
         ];
       }
 
       if (!flags.has('first_expansion_building_completed')) {
         return [
-          'Moc chuong 2',
-          'Dung them mot cong trinh mo rong de tong mon co them nhip van hanh.',
-          'Moc nay dat khi noi mon co it nhat 4 cong trinh dang van hanh.'
+          'Mốc chương 2',
+          'Dựng thêm một công trình mở rộng để tông môn có thêm nhịp vận hành.',
+          'Mốc này đạt khi nội môn có ít nhất 4 công trình đang vận hành.'
         ];
       }
 
       if (!flags.has('first_faction_pressure_resolved')) {
         return [
-          'Moc chuong 2',
-          'Vuot qua dot thu the dau tien khi tong mon da bi nhin thay.',
-          'On dinh va tu the ton mon quan trong hon viec an thua trong mot buoi doi dap.'
+          'Mốc chương 2',
+          'Vượt qua đợt thử thế đầu tiên khi tông môn đã bị nhìn thấy.',
+          'Ổn định và tư thế tông môn quan trọng hơn việc ăn thua trong một buổi đối đáp.'
         ];
       }
 
       if (!flags.has('mirror_history_conflict')) {
         return [
-          'Moc chuong 2',
-          'Theo vet nut giua su luc cong khai va dieu Van Tuong Linh Kinh phan chieu.',
-          'Day la dau moi cho thay viec lap tong khong chi la dung nha, ma con la chon cach giu su that.'
+          'Mốc chương 2',
+          'Theo vết nứt giữa sử lục công khai và điều Vân Tượng Linh Kính phản chiếu.',
+          'Đây là đầu mối cho thấy việc lập tông không chỉ là dựng nhà, mà còn là chọn cách giữ sự thật.'
         ];
       }
 
       return [
-        'Moc chuong 2',
-        'Chot lai the dung cua mot tieu tong da dung chan.',
-        'Khi major event cuoi xuat hien, hay chon cach xac lap Thanh Huyen Mon truoc ben ngoai.'
+        'Mốc chương 2',
+        'Chốt lại thế đứng của một tiểu tông đã đứng chân.',
+        'Khi major event cuối xuất hiện, hãy chọn cách xác lập Thanh Huyền Môn trước bên ngoài.'
       ];
     }
 
     if (snapshot.story.currentChapterId !== 'chapter_1_du_tan_khai_son' || flags.has('chapter1_completed')) {
       return [
-        'Chuong 1 da khop lai.',
-        'Thanh Huyen Mon da giu duoc tan hoa.',
-        'Hay tiep tuc mo rong tong mon cho chuong sau.'
+        'Chương 1 đã khớp lại.',
+        'Thanh Huyền Môn đã giữ được tàn hỏa.',
+        'Hãy tiếp tục mở rộng tông môn cho chương sau.'
       ];
     }
 
     if (!flags.has('sect_ruins_surveyed')) {
       return [
-        'Moc chuong 1',
-        'Khao sat tan tich va nhan lay Thanh Huyen Mon.',
-        'Su kien mo dau se cho thay vi sao ban chua the bo di.'
+        'Mốc chương 1',
+        'Khảo sát tàn tích và nhận lấy Thanh Huyền Môn.',
+        'Sự kiện mở đầu sẽ cho thấy vì sao bạn chưa thể bỏ đi.'
       ];
     }
 
     if (!flags.has('first_resource_cycle_completed')) {
       return [
-        'Moc chuong 1',
-        'Qua mot ngay dau tien de giu nhip song con.',
-        'Doc tong ket ngay de thay tong mon dang thieu dieu gi.'
+        'Mốc chương 1',
+        'Qua một ngày đầu tiên để giữ nhịp sống còn.',
+        'Đọc tổng kết ngày để thấy tông môn đang thiếu điều gì.'
       ];
     }
 
     if (!flags.has('first_building_restored')) {
       return [
-        'Moc chuong 1',
-        'Dung hoac nang cap them mot cong trinh cot loi.',
-        'Chi can mot dau hieu khoi phuc de noi mon dung lai.'
+        'Mốc chương 1',
+        'Dựng hoặc nâng cấp thêm một công trình cốt lõi.',
+        'Chỉ cần một dấu hiệu khôi phục để nội môn đứng lại.'
       ];
     }
 
     if (!flags.has('first_major_threat_seen')) {
       return [
-        'Moc chuong 1',
-        'On dinh nhan tam va chuan bi cho bien co dau tien.',
-        'Qua them ngay, giu tai nguyen va de tu o muc an toan.'
+        'Mốc chương 1',
+        'Ổn định nhân tâm và chuẩn bị cho biến cố đầu tiên.',
+        'Qua thêm ngày, giữ tài nguyên và đệ tử ở mức an toàn.'
       ];
     }
 
     if (!flags.has('first_major_threat_survived')) {
       return [
-        'Moc chuong 1',
-        'Vuot qua moi de doa nghiem trong dau tien.',
-        'Khi bien co lon den, phai chon cach giu lai son mon.'
+        'Mốc chương 1',
+        'Vượt qua mối đe dọa nghiêm trọng đầu tiên.',
+        'Khi biến cố lớn đến, phải chọn cách giữ lại sơn môn.'
       ];
     }
 
     if (!flags.has('linh_kinh_glimpse_seen')) {
       return [
-        'Moc chuong 1',
-        'Theo dau phan ung dau tien cua Van Tuong Linh Kinh.',
-        'Day la dau vet cho thay tai bien nam xua chua thuc su ket lai.'
+        'Mốc chương 1',
+        'Theo dấu phản ứng đầu tiên của Vân Tượng Linh Kính.',
+        'Đây là dấu vết cho thấy tai biến năm xưa chưa thực sự khép lại.'
       ];
     }
 
     return [
-      'Moc chuong 1',
-      'Chot loi nguyen o lai va dung lai tong mon.',
-      'Khi major event cuoi xuat hien, hay chon cach giu tan hoa Thanh Huyen Mon.'
+      'Mốc chương 1',
+      'Chốt lời nguyện ở lại và dựng lại tông môn.',
+      'Khi major event cuối xuất hiện, hãy chọn cách giữ tàn hỏa Thanh Huyền Môn.'
     ];
   }
 
@@ -1426,105 +1426,105 @@ export class SectScene extends Phaser.Scene {
 
     if (snapshot.story.currentChapterId === 'chapter_4_nhat_niem_dinh_dao') {
       if (!flags.has('chapter4_started')) {
-        return 'Qua them ngay de mo beat mo dau Chuong 4, khi Thanh Huyen Mon buoc vao giai doan Thien Khu Van Dao.';
+        return 'Qua thêm ngày để mở beat mở đầu Chương 4, khi Thanh Huyền Môn bước vào giai đoạn Thiên Khu Vấn Đạo.';
       }
 
       if (!flags.has('first_core_truth_piece_obtained')) {
-        return 'Theo doi major event Chuong 4 de lay manh chan tuong cot loi; day la diem bien crisis thanh lua chon that su.';
+        return 'Theo dõi major event Chương 4 để lấy mảnh chân tướng cốt lõi; đây là điểm biến crisis thành lựa chọn thật sự.';
       }
 
       if (!flags.has('first_doctrinal_choice_made')) {
-        return 'Giu on dinh va uy danh o muc an toan, roi chot mot huong dao ly khi beat quyet dinh xuat hien.';
+        return 'Giữ ổn định và uy danh ở mức an toàn, rồi chốt một hướng đạo lý khi beat quyết định xuất hiện.';
       }
 
       if (!flags.has('first_major_sacrifice_or_compromise')) {
-        return 'Chuan bi cho mot quyet dinh doi gia: tich linh thach, giu on dinh, va san long chap nhan mat mot thu de giu mot thu khac.';
+        return 'Chuẩn bị cho một quyết định đổi giá: tích linh thạch, giữ ổn định, và sẵn lòng chấp nhận mất một thứ để giữ một thứ khác.';
       }
 
       if (!flags.has('chapter4_ultimatum_resolved')) {
-        return 'Theo doi ap luc phe phai va quyet xem Thanh Huyen Mon se cung hay nhuong truoc toi hau thu sap toi.';
+        return 'Theo dõi áp lực phe phái và quyết xem Thanh Huyền Môn sẽ cứng hay nhường trước tối hậu thư sắp tới.';
       }
 
-      return 'Theo doi Muc tieu chuong va thong so Dai kiep / Chan tuong o panel phai de mo nguong ket cuoc cua Chuong 4.';
+      return 'Theo dõi Mục tiêu chương và thông số Đại kiếp / Chân tướng ở panel phải để mở ngưỡng kết cuộc của Chương 4.';
     }
 
     if (snapshot.story.currentChapterId === 'chapter_3_kinh_chieu_cuu_thien') {
       if (!flags.has('archive_sky_crack_seen')) {
-        return 'Theo doi major event lien quan co luc va Linh Kinh; Chuong 3 bat dau bang viec bien su nghi ngo thanh bang chung.';
+        return 'Theo dõi major event liên quan cổ lục và Linh Kính; Chương 3 bắt đầu bằng việc biến sự nghi ngờ thành bằng chứng.';
       }
 
       if (!flags.has('ascension_trace_confirmed')) {
-        return 'Giu uy danh tong mon va tiep tuc day mach su that cho toi khi dau vet cuong hanh phi thang lo ro.';
+        return 'Giữ uy danh tông môn và tiếp tục đẩy mạch sự thật cho tới khi dấu vết cưỡng hành phi thăng lộ rõ.';
       }
 
       if (!flags.has('first_serious_faction_probe')) {
-        return 'Chuan bi cho ben ngoai thu the thuc su: giu on dinh, co du linh thach, va san sang doi dap.';
+        return 'Chuẩn bị cho bên ngoài thử thế thực sự: giữ ổn định, có đủ linh thạch, và sẵn sàng đối đáp.';
       }
 
       if (!flags.has('first_disciple_ambition_incident')) {
-        return 'De y mood, loyalty, va ne nep noi mon; Chuong 3 se bat dau thu xem tong mon xu ly khat vong ben trong the nao.';
+        return 'Để ý mood, loyalty và nề nếp nội môn; Chương 3 sẽ bắt đầu thử xem tông môn xử lý khát vọng bên trong thế nào.';
       }
 
-      return 'Theo doi Muc tieu chuong o panel phai va khop lai Chuong 3 bang major event ket chuong hien tai.';
+      return 'Theo dõi Mục tiêu chương ở panel phải và khớp lại Chương 3 bằng major event kết chương hiện tại.';
     }
 
     if (snapshot.story.currentChapterId === 'chapter_2_tong_mon_lap_the') {
       if (!flags.has('chapter2_started')) {
-        return 'Qua mot ngay nua hoac goi su kien de mo beat Khai Son Lap Tong cua Chuong 2.';
+        return 'Qua một ngày nữa hoặc gọi sự kiện để mở beat Khai Sơn Lập Tông của Chương 2.';
       }
 
       if (!flags.has('first_formal_recruitment_opened')) {
-        return 'Cho beat thu nhan mon sinh dau tien, va de y suc chua de tu de co cho nhan nguoi.';
+        return 'Chờ beat thu nhận môn sinh đầu tiên, và để ý sức chứa đệ tử để có chỗ nhận người.';
       }
 
       if (!flags.has('first_internal_rule_enforced')) {
-        return 'Mo Tri mon de xem governance/rules, roi xu ly beat noi quy dau tien cua Chuong 2.';
+        return 'Mở Trị môn để xem governance/rules, rồi xử lý beat nội quy đầu tiên của Chương 2.';
       }
 
       if (!flags.has('first_external_contact_received')) {
-        return 'Giu uy danh va on dinh o muc dep, vi ben ngoai sap bat dau de mat den Thanh Huyen Mon.';
+        return 'Giữ uy danh và ổn định ở mức đẹp, vì bên ngoài sắp bắt đầu để mắt đến Thanh Huyền Môn.';
       }
 
       if (!flags.has('first_expansion_building_completed')) {
-        return 'Dung them mot cong trinh Chuong 2 nhu Linh Thach Kho, Luyen Khi Phong, Tiep Khach Duong, hoac Ho Son Tran Dai.';
+        return 'Dựng thêm một công trình Chương 2 như Linh Thạch Kho, Luyện Khí Phòng, Tiếp Khách Đường, hoặc Hộ Sơn Trận Đài.';
       }
 
       if (!flags.has('first_faction_pressure_resolved')) {
-        return 'Xu ly dot ap luc dau tien tu ben ngoai va tranh de on dinh tong mon roi xuong qua thap.';
+        return 'Xử lý đợt áp lực đầu tiên từ bên ngoài và tránh để ổn định tông môn rơi xuống quá thấp.';
       }
 
       if (!flags.has('mirror_history_conflict')) {
-        return 'Theo doi major event lien quan Van Tuong Linh Kinh; Chuong 2 can mot vet nut lich su ro hon de khop lai.';
+        return 'Theo dõi major event liên quan Vân Tượng Linh Kính; Chương 2 cần một vết nứt lịch sử rõ hơn để khớp lại.';
       }
 
-      return 'Theo doi Muc tieu chuong o panel phai va khop lai Chuong 2 bang major event ket chuong hien tai.';
+      return 'Theo dõi Mục tiêu chương ở panel phải và khớp lại Chương 2 bằng major event kết chương hiện tại.';
     }
 
     if (!flags.has(TUTORIAL_CHOICE_FLAGS.advancedDay) && snapshot.time.day <= 1) {
-      return 'Qua mot ngay de thay tong ket tai nguyen va nhip van hanh dau tien.';
+      return 'Qua một ngày để thấy tổng kết tài nguyên và nhịp vận hành đầu tiên.';
     }
 
     if (!flags.has(TUTORIAL_CHOICE_FLAGS.checkedDisciple)) {
-      return 'Chon mot de tu de xem mood, loyalty, nhiem vu, va muc do on dinh.';
+      return 'Chọn một đệ tử để xem mood, loyalty, nhiệm vụ, và mức độ ổn định.';
     }
 
     if (!flags.has(TUTORIAL_CHOICE_FLAGS.openedCultivation)) {
-      return 'Mo panel T? hanh de xem canh gioi, tien do, va dieu kien dot pha.';
+      return 'Mở panel Tu hành để xem cảnh giới, tiến độ và điều kiện đột phá.';
     }
 
     if (!flags.has('first_building_restored')) {
-      return 'Dung hoac nang cap them mot cong trinh cot loi de Chuong 1 co dau hieu phuc hoi.';
+      return 'Dựng hoặc nâng cấp thêm một công trình cốt lõi để Chương 1 có dấu hiệu phục hồi.';
     }
 
     if (!flags.has(TUTORIAL_CHOICE_FLAGS.returnedExploration)) {
-      return 'Vao Hau Son Coc, cham it nhat mot event spot, roi tro ve voi phan thuong.';
+      return 'Vào Hậu Sơn Cốc, chạm ít nhất một event spot, rồi trở về với phần thưởng.';
     }
 
     if (!flags.has('first_major_threat_survived')) {
-      return 'Tiep tuc qua ngay, giu tai nguyen va on dinh noi mon de doi bien co lon cua Chuong 1.';
+      return 'Tiếp tục qua ngày, giữ tài nguyên và ổn định nội môn để đợi biến cố lớn của Chương 1.';
     }
 
-    return 'Theo doi Muc tieu chuong o panel phai va khop lai Chuong 1 bang major event hien tai.';
+    return 'Theo dõi Mục tiêu chương ở panel phải và khớp lại Chương 1 bằng major event hiện tại.';
   }
 
   private getDemoProgressLines(snapshot: Readonly<GameState>): string[] {
@@ -1532,63 +1532,63 @@ export class SectScene extends Phaser.Scene {
     const currentChapter = storyChapterCatalog.chapters.find((chapter) => chapter.id === snapshot.story.currentChapterId);
     const chapterNumber = storyChapterCatalog.chapters.findIndex((chapter) => chapter.id === snapshot.story.currentChapterId) + 1;
     const chapterPrefix = `major.chapter${Math.max(1, chapterNumber)}`;
-    const chapterLabel = `Chuong ${Math.max(1, chapterNumber)}`;
+    const chapterLabel = `Chương ${Math.max(1, chapterNumber)}`;
     const totalMajorEvents = currentChapter?.majorEventIds.length ?? 0;
     const majorEventsResolved = snapshot.story.resolvedMajorEventIds.filter((eventId) => eventId.startsWith(chapterPrefix)).length;
 
     return [
-      `Ngay da qua: ${snapshot.time.day}`,
-      `Cong trinh dang van hanh: ${restoredBuildings}`,
-      `Su kien da giai: ${snapshot.events.history.length}`,
-      `Boss da ha: ${snapshot.exploration.defeatedBossIds.length}`,
-      `Canh gioi chuong mon: ${getRealmSystem(this).getCurrentRealm(snapshot).name}`,
-      `Moc ${chapterLabel} da mo: ${majorEventsResolved}/${totalMajorEvents}`
+      `Ngày đã qua: ${snapshot.time.day}`,
+      `Công trình đang vận hành: ${restoredBuildings}`,
+      `Sự kiện đã giải: ${snapshot.events.history.length}`,
+      `Boss đã hạ: ${snapshot.exploration.defeatedBossIds.length}`,
+      `Cảnh giới chưởng môn: ${getRealmSystem(this).getCurrentRealm(snapshot).name}`,
+      `Mốc ${chapterLabel} đã mở: ${majorEventsResolved}/${totalMajorEvents}`
     ];
   }
 
   private getPriorityNotice(snapshot: Readonly<GameState>, activeEventTitle: string | null): string {
     if (activeEventTitle) {
-      return `Co su kien dang cho giai quyet: ${activeEventTitle}. Giai quyet no truoc de tranh mat mach chapter hoac phan thuong.`;
+      return `Có sự kiện đang chờ giải quyết: ${activeEventTitle}. Giải quyết nó trước để tránh mất mạch chapter hoặc phần thưởng.`;
     }
 
     if (snapshot.player.cultivation.breakthroughReady) {
-      return 'Chuong mon da san dot pha. Mo panel T? hanh de xem dieu kien va chot buoc tien canh gioi.';
+      return 'Chưởng môn đã sẵn đột phá. Mở panel Tu hành để xem điều kiện và chốt bước tiến cảnh giới.';
     }
 
     if (snapshot.diplomacy.pendingMessageEventIds.length > 0) {
-      return 'Dang co thu phe phai cho xu ly. Ngoai giao co the doi event pressure va co hoi giao dich.';
+      return 'Đang có thư phe phái chờ xử lý. Ngoại giao có thể đổi event pressure và cơ hội giao dịch.';
     }
 
     const unstableDisciple = snapshot.disciples.roster.find((disciple) => disciple.mood <= 35 || disciple.loyalty <= 35 || disciple.riskFlags.length > 0);
     if (unstableDisciple) {
-      return `${unstableDisciple.name} dang can duoc de y. Mood, loyalty hoac risk cua de tu nay co the gay them su kien noi mon.`;
+      return `${unstableDisciple.name} đang cần được để ý. Mood, loyalty hoặc risk của đệ tử này có thể gây thêm sự kiện nội môn.`;
     }
 
-    return 'Neu dang phan van, hay qua 1 ngay hoac lam theo Muc tieu chuong o ben phai de day vong choi tien len.';
+    return 'Nếu đang phân vân, hãy qua 1 ngày hoặc làm theo Mục tiêu chương ở bên phải để đẩy vòng chơi tiến lên.';
   }
 
   private getWhyThisMatters(snapshot: Readonly<GameState>): string {
     if (snapshot.ending.completed) {
-      return 'Ket cuc nay la diem khop cua base game pham gioi: no tong hop cach Thanh Huyen Mon da chon giu trat tu, quyen luc, hay mo dao lo moi.';
+      return 'Kết cục này là điểm khớp của base game phàm giới: nó tổng hợp cách Thanh Huyền Môn đã chọn giữ trật tự, quyền lực, hay mở đạo lộ mới.';
     }
 
     if (snapshot.story.currentChapterId === 'chapter_1_du_tan_khai_son') {
-      return 'Chuong 1 khong can lam moi thu. Chi can giu tong mon song, dung lai mot vai diem tu, va vuot qua moi de doa dau tien.';
+      return 'Chương 1 không cần làm mọi thứ. Chỉ cần giữ tông môn sống, dựng lại một vài điểm tựa, và vượt qua mối đe dọa đầu tiên.';
     }
 
     if (snapshot.story.currentChapterId === 'chapter_2_tong_mon_lap_the') {
-      return 'Chuong 2 kiem tra xem Thanh Huyen Mon co dung duoc thanh mot tieu tong co ne nep, co nguoi, va co tu the truoc ben ngoai hay khong.';
+      return 'Chương 2 kiểm tra xem Thanh Huyền Môn có đứng được thành một tiểu tông có nề nếp, có người, và có tư thế trước bên ngoài hay không.';
     }
 
     if (snapshot.story.currentChapterId === 'chapter_3_kinh_chieu_cuu_thien') {
-      return 'Chuong 3 kiem tra xem Thanh Huyen Mon co giu duoc minh khi su that, khat vong, va ap luc ben ngoai cung luc day den hay khong.';
+      return 'Chương 3 kiểm tra xem Thanh Huyền Môn có giữ được mình khi sự thật, khát vọng, và áp lực bên ngoài cùng lúc đẩy đến hay không.';
     }
 
     if (snapshot.story.currentChapterId === 'chapter_4_nhat_niem_dinh_dao') {
-      return 'Chuong 4 khong con hoi tong mon co song noi hay khong, ma hoi thu gi dang xung dang duoc giu lai khi dai kiep va chan tuong cung ep toi tan cua.';
+      return 'Chương 4 không còn hỏi tông môn có sống nổi hay không, mà hỏi thứ gì đang xứng đáng được giữ lại khi đại kiếp và chân tướng cùng ép tới tận cửa.';
     }
 
-    return 'Moi panel trong ban base game hien tai deu quay ve mot viec: giu tong mon on, lam chuong mon manh len, va mo them mach chapter.';
+    return 'Mọi panel trong bản base game hiện tại đều quay về một việc: giữ tông môn ổn, làm chưởng môn mạnh lên, và mở thêm mạch chapter.';
   }
 
   private getChapterPressureLines(snapshot: Readonly<GameState>): string[] {
@@ -1607,7 +1607,7 @@ export class SectScene extends Phaser.Scene {
     return [
       `Dai kiep: ${snapshot.story.greatCrisisLevel}/100`,
       `Chan tuong da thu: ${snapshot.story.truthProgress}/100`,
-      `Lech huong hien tai: ${alignmentLabelMap[dominantAlignment[0]] ?? 'Chua ro'} (${dominantAlignment[1]})`
+      `Lệch hướng hiện tại: ${alignmentLabelMap[dominantAlignment[0]] ?? 'Chưa rõ'} (${dominantAlignment[1]})`
     ];
   }
 
@@ -1636,8 +1636,8 @@ export class SectScene extends Phaser.Scene {
     }
 
     return rewardLines.length > 0
-      ? `Map nay chu yeu de ${rewardLines.join('; ')}.`
-      : 'Map nay chu yeu de lay tai nguyen va day chapter/exploration loop tien len.';
+      ? `Map này chủ yếu để ${rewardLines.join('; ')}.`
+      : 'Map này chủ yếu để lấy tài nguyên và đẩy chapter/exploration loop tiến lên.';
   }
 
   private getLatestChangeSummary(snapshot: Readonly<GameState>, statusOverride?: string): string {
@@ -1655,19 +1655,19 @@ export class SectScene extends Phaser.Scene {
     const definition = itemCatalog.items.find((item) => item.id === itemId);
 
     if (!definition) {
-      return 'Vat pham nay chua co mo ta muc dich ro hon.';
+      return 'Vật phẩm này chưa có mô tả mục đích rõ hơn.';
     }
 
     if (definition.category === 'artifact') {
-      return 'Phap khi giup chuong mon manh l?n lau dai; hop khi muon day tu hanh hoac tham hiem on dinh hon.';
+      return 'Pháp khí giúp chưởng môn mạnh lên lâu dài; hợp khi muốn đẩy tu hành hoặc thám hiểm ổn định hơn.';
     }
 
     if (definition.category === 'pill') {
-      return 'Dan duoc cho loi ich thay ngay, hop luc can day nhanh tu hanh hoac giu nen can.';
+      return 'Đan dược cho lợi ích thấy ngay, hợp lúc cần đẩy nhanh tu hành hoặc giữ nền căn.';
     }
 
     if (definition.category === 'herb' || definition.category === 'material' || definition.category === 'ore') {
-      return 'Nhom nay chu yeu dung cho luyen dan, mo rong tong mon, hoac de danh doi gia tri trong cac event sau.';
+      return 'Nhóm này chủ yếu dùng cho luyện đan, mở rộng tông môn, hoặc để đánh đổi giá trị trong các event sau.';
     }
 
     if (definition.category === 'quest') {
@@ -1684,33 +1684,33 @@ export class SectScene extends Phaser.Scene {
 
     const nextSnapshot = this.markTutorialFlag(
       TUTORIAL_CHOICE_FLAGS.introSeen,
-      'M? ??u Ch??ng 1 ?? b?t ??u. H?y gi? l?i nh?p v?n h?nh c?a Thanh Huy?n M?n.'
+      'Mở đầu Chương 1 đã bắt đầu. Hãy giữ lại nhịp vận hành của Thanh Huyền Môn.'
     );
 
     this.eventModal.show({
-      title: 'T?n H?a Ch?a T?t',
-      subtitle: 'M? ??u Ch??ng 1',
+      title: 'Tàn Hỏa Chưa Tắt',
+      subtitle: 'Mở đầu Chương 1',
       body: [
-        'Thanh Huy?n M?n ch? c?n l?i c?t ?? n?t v? ?t ng??i kh?ng b? ?i. Sau Thi?n Khu Bi?n, kh?ng ai bi?t t?ng m?n n?y c? c?n ???c t?nh l? m?t t?ng m?n n?a hay kh?ng.',
-        'B?n l? ng??i ??ng ??y gi?a t?n t?ch. Trong Ch?nh ?i?n t?i, V?n T??ng Linh Kinh v?n ch?a t?t h?n. Vi?c tr??c m?t kh?ng ph?i h?ng b?, m? l? gi? cho l?a tro n?y kh?ng ngu?i.',
-        'M?c ti?u ??u ti?n: qua m?t ng?y, gi? ?n n?i m?n, v? d?ng l?i m?t ??u m?i ?? Thanh Huy?n M?n c? l? do ? l?i.'
+        'Thanh Huyền Môn chỉ còn lại cột đá nứt vỡ và ít người không bỏ đi. Sau Thiên Khu Biến, không ai biết tông môn này còn được tính là một tông môn nữa hay không.',
+        'Bạn là người đứng dậy giữa tàn tích. Trong Chính Điện tối, Vân Tượng Linh Kính vẫn chưa tắt hẳn. Việc trước mắt không phải hùng bá, mà là giữ cho lửa tro này không nguội.',
+        'Mục tiêu đầu tiên: qua một ngày, giữ ổn nội môn, và dựng lại một đầu mối để Thanh Huyền Môn có lý do ở lại.'
       ],
       options: [
         {
-          label: 'Nh?n l?y t?ng m?n',
-          detail: 'Gi? objective v? h??ng d?n ng?n tr?n m?n h?nh',
+          label: 'Nhận lấy tông môn',
+          detail: 'Giữ objective và hướng dẫn ngắn trên màn hình',
           onSelect: () => {
             this.eventModal.hide();
-            this.refreshView(nextSnapshot, 'M?c ti?u ??u: qua m?t ng?y v? nh?n r? Thanh Huy?n M?n ?ang thi?u ?i?u g?.');
+            this.refreshView(nextSnapshot, 'Mục tiêu đầu: qua một ngày và nhận ra Thanh Huyền Môn đang thiếu điều gì.');
           }
         },
         {
-          label: 'B? qua h??ng d?n',
-          detail: '?n checklist nh?p m?n, v?n gi? m? ??u ch??ng',
+          label: 'Bỏ qua hướng dẫn',
+          detail: 'Ẩn checklist nhập môn, vẫn giữ mở đầu chương',
           onSelect: () => {
             const skippedSnapshot = this.markTutorialFlag(
               TUTORIAL_CHOICE_FLAGS.skipped,
-              '?? t?t h??ng d?n nh?p m?n cho save n?y.'
+              'Đã tắt hướng dẫn nhập môn cho save này.'
             );
             this.eventModal.hide();
             this.refreshView(skippedSnapshot);
@@ -1766,7 +1766,7 @@ export class SectScene extends Phaser.Scene {
 
     this.eventModal.show({
       title: event.title,
-      subtitle: `${event.kind === 'major' ? 'major' : event.category} • ngày ${snapshot.time.day} • ${getChapterName(snapshot)}`,
+      subtitle: `${event.kind === 'major' ? 'biến cố chính' : event.category} • ngày ${snapshot.time.day} • ${getChapterName(snapshot)}`,
       variant:
         event.kind === 'major'
           ? 'major'
@@ -1834,11 +1834,11 @@ export class SectScene extends Phaser.Scene {
     }
 
     if (typedEffects.sectFortune) {
-      tags.push(`${typedEffects.sectFortune > 0 ? '+' : ''}${typedEffects.sectFortune} khi van`);
+      tags.push(`${typedEffects.sectFortune > 0 ? '+' : ''}${typedEffects.sectFortune} khí vận`);
     }
 
     if (typedEffects.sectStability) {
-      tags.push(`${typedEffects.sectStability > 0 ? '+' : ''}${typedEffects.sectStability} on dinh`);
+      tags.push(`${typedEffects.sectStability > 0 ? '+' : ''}${typedEffects.sectStability} ổn định`);
     }
 
     if (typedEffects.playerCultivationProgress) {
@@ -1846,24 +1846,24 @@ export class SectScene extends Phaser.Scene {
     }
 
     if (typedEffects.foundationStability) {
-      tags.push(`${typedEffects.foundationStability > 0 ? '+' : ''}${typedEffects.foundationStability} nen can`);
+      tags.push(`${typedEffects.foundationStability > 0 ? '+' : ''}${typedEffects.foundationStability} nền căn`);
     }
 
     if (typedEffects.tamMaPressure) {
-      tags.push(`${typedEffects.tamMaPressure > 0 ? '+' : ''}${typedEffects.tamMaPressure} tam ma`);
+      tags.push(`${typedEffects.tamMaPressure > 0 ? '+' : ''}${typedEffects.tamMaPressure} tâm ma`);
     }
 
     if (typedEffects.discipleMoodDelta) {
-      tags.push(`${typedEffects.discipleMoodDelta > 0 ? '+' : ''}${typedEffects.discipleMoodDelta} mood de tu`);
+      tags.push(`${typedEffects.discipleMoodDelta > 0 ? '+' : ''}${typedEffects.discipleMoodDelta} tâm trạng đệ tử`);
     }
 
     if (typedEffects.discipleLoyaltyDelta) {
-      tags.push(`${typedEffects.discipleLoyaltyDelta > 0 ? '+' : ''}${typedEffects.discipleLoyaltyDelta} loyalty de tu`);
+      tags.push(`${typedEffects.discipleLoyaltyDelta > 0 ? '+' : ''}${typedEffects.discipleLoyaltyDelta} trung thành đệ tử`);
     }
 
     if (typedEffects.factionReputation?.length) {
       const factionDelta = typedEffects.factionReputation[0];
-      tags.push(`${factionDelta.delta > 0 ? '+' : ''}${factionDelta.delta} quan he ${this.getFactionName(factionDelta.factionId)}`);
+      tags.push(`${factionDelta.delta > 0 ? '+' : ''}${factionDelta.delta} quan hệ ${this.getFactionName(factionDelta.factionId)}`);
     }
 
     if (typedEffects.recruitDiscipleArchetype) {
@@ -2029,7 +2029,7 @@ export class SectScene extends Phaser.Scene {
     const breakthrough = getRealmSystem(this).checkBreakthroughEligibility(snapshot);
     const selectedDiscipleBuildingName = selectedDisciple?.assignedBuildingId
       ? buildingCatalog.buildings.find((building) => building.id === selectedDisciple.assignedBuildingId)?.name ?? selectedDisciple.assignedBuildingId
-      : 'Chưa gán';
+      : 'ChÆ°a gÃ¡n';
     const notableFlags = [
       ...snapshot.story.storyFlags.slice(-3),
       ...snapshot.story.worldFlags.slice(-2),
@@ -2039,7 +2039,7 @@ export class SectScene extends Phaser.Scene {
     const diplomacyAlerts = Object.values(snapshot.diplomacy.factions).filter((faction) => faction.warningLevel > 0 || faction.hostilityLevel > 0);
     const historyLines = snapshot.events.history.slice(-4).reverse().map((entry) => {
       const detail = entry.contextSummary ? ` | ${entry.contextSummary}` : '';
-      return `Ngay ${entry.resolvedOnDay}: ${entry.title}${detail}`;
+      return `Ngày ${entry.resolvedOnDay}: ${entry.title}${detail}`;
     });
     const explorationSystem = getExplorationSystem(this);
     const selectedMap = this.getSelectedMap();
@@ -2060,11 +2060,11 @@ export class SectScene extends Phaser.Scene {
     const latestChangeSummary = this.getLatestChangeSummary(snapshot, statusOverride);
 
     this.resourceBarText.setText([
-      `Linh thach ${snapshot.resources.linhThach}`,
-      `Linh khi ${snapshot.resources.linhKhi}`,
-      `Duoc thao ${snapshot.resources.duocThao}`,
-      `Khoang thach ${snapshot.resources.khoangThach}`,
-      `Linh moc ${snapshot.resources.linhMoc}`
+      `Linh thạch ${snapshot.resources.linhThach}`,
+      `Linh khí ${snapshot.resources.linhKhi}`,
+      `Dược thảo ${snapshot.resources.duocThao}`,
+      `Khoáng thạch ${snapshot.resources.khoangThach}`,
+      `Linh mộc ${snapshot.resources.linhMoc}`
     ].join('   |   '));
 
     const chipValues = [
@@ -2086,7 +2086,7 @@ export class SectScene extends Phaser.Scene {
       .setPlayerTitle(`${snapshot.player.title} • ${formatDate(snapshot)}`)
       .setRealm(`${currentRealm.name} • ${chapterName}`);
     this.cultivationProgressBar
-      .setLabel(`Tien do ${currentRealm.name}`)
+      .setLabel(`Tiến độ ${currentRealm.name}`)
       .setProgress(snapshot.player.cultivation.cultivationProgress, currentRealm.progressRequired);
     const realmIconMap: Record<string, string> = {
       pham_the: 'icon_status_qi_refining',
@@ -2103,99 +2103,75 @@ export class SectScene extends Phaser.Scene {
 
     this.buildingListText.setText(
       [
-        `Dang xem: ${selectedBuildingDefinition.name}`,
-        `Cap ${selectedBuildingState.level} | ${selectedBuildingState.isConstructed ? 'Da dung' : selectedBuildingState.isUnlocked ? 'Co the dung' : 'Chua mo'} | Gan ${selectedBuildingState.assignedDiscipleIds.length}`,
-        `Hieu qua: ${this.getBuildingEffectText(selectedBuildingId)}`,
-        `Tac dong hien tai: ${selectedBuildingId === 'tinh_tu_duong'
-          ? 'Tang toc tu hanh cho de tu lam nhiem vu T? luyen.'
-          : selectedBuildingId === 'duoc_vien'
-            ? 'Tang duoc thao thu dong va bo sung Linh Thao Co Ban cho kho.'
-            : selectedBuildingId === 'luyen_khi_phong'
-              ? 'Giam nguyen lieu luyen dan khi co de tu ho tro.'
-              : selectedBuildingId === 'tang_kinh_cac'
-                ? 'Day nhanh nhip hoc va tong luc tu hanh noi mon.'
-                : selectedBuildingId === 'ho_son_tran_dai'
-                  ? 'Tang thuong khi co de tu ho tro bi canh.'
-                  : 'Giup tong mon giu nhip van hanh on dinh.'}`,
+        `Đang xem: ${selectedBuildingDefinition.name}`,
+        `Cấp ${selectedBuildingState.level} | ${selectedBuildingState.isConstructed ? 'Đã dựng' : selectedBuildingState.isUnlocked ? 'Có thể dựng' : 'Chưa mở'} | Gắn ${selectedBuildingState.assignedDiscipleIds.length}`,
+        `Hiệu quả: ${this.getBuildingEffectText(selectedBuildingId)}`,
         '',
-        'Mot vai cong trinh dang van hanh',
+        'Công trình nổi bật',
         ...buildingCatalog.buildings
-          .slice(0, 3)
+          .slice(0, 2)
           .map((building) => {
             const state = snapshot.sect.buildings[building.id as BuildingId];
-            return `${building.name}: cap ${state.level} | ${state.isConstructed ? 'dang van hanh' : state.isUnlocked ? 'san sang dung' : 'chua mo'}`;
+            return `${building.name}: cấp ${state.level} | ${state.isConstructed ? 'đang vận hành' : state.isUnlocked ? 'sẵn sàng dựng' : 'chưa mở'}`;
           })
       ].join('\n')
     );
 
     this.buildingDetailText.setText([
-      `Dang chon: ${selectedBuildingDefinition.name}`,
-      `Trang thai: ${selectedBuildingState.status} | Cap ${selectedBuildingState.level}`,
-      `Dung: ${constructCheck.ok ? 'Co the' : constructCheck.reason}`,
-      `Nang cap: ${upgradeCheck.ok ? 'Co the' : upgradeCheck.reason}`,
-      `Hieu qua: ${this.getBuildingEffectText(selectedBuildingId)}`,
-      `Chi phi: ${this.formatCost(selectedBuildingDefinition.buildCost as Record<string, number>)}`
+      `Đang chọn: ${selectedBuildingDefinition.name}`,
+      `Trạng thái: ${selectedBuildingState.status} | Cấp ${selectedBuildingState.level}`,
+      `Dựng: ${constructCheck.ok ? 'Có thể' : constructCheck.reason}`,
+      `Nâng cấp: ${upgradeCheck.ok ? 'Có thể' : upgradeCheck.reason}`,
+      `Hiệu quả: ${this.getBuildingEffectText(selectedBuildingId)}`,
+      `Chi phí: ${this.formatCost(selectedBuildingDefinition.buildCost as Record<string, number>)}`
     ]);
 
     this.discipleListText.setText(
       selectedDisciple
         ? [
-            `Dang chon: ${selectedDisciple.name}`,
-            `${getDiscipleRealmName(selectedDisciple.realmId)} | ${selectedDisciple.temperament} | The trang ${selectedDisciple.health}`,
-            `Nhiem vu: ${TASK_LABELS[selectedDisciple.currentTask]} | Cong trinh: ${selectedDiscipleBuildingName}`,
-            `Mood ${selectedDisciple.mood} | Loyalty ${selectedDisciple.loyalty} | ${selectedDisciple.breakthroughReady ? 'San dot pha' : getDiscipleStatusLabel(selectedDisciple.status)}`,
+            `Đang chọn: ${selectedDisciple.name}`,
+            `${getDiscipleRealmName(selectedDisciple.realmId)} | ${getDiscipleStatusLabel(selectedDisciple.status)}`,
+            `Nhiệm vụ: ${TASK_LABELS[selectedDisciple.currentTask]} | Công trình: ${selectedDiscipleBuildingName}`,
+            `Tâm trạng ${selectedDisciple.mood} | Trung thành ${selectedDisciple.loyalty}`,
             '',
-            `Ho tro hien tai: ${selectedDisciple.currentTask === 'tu_luyen'
-              ? 'Dong gop tong luc tu hanh cho chuong mon.'
-              : selectedDisciple.currentTask === 'trong_duoc'
-                ? 'Tao duoc thao va Linh Thao Co Ban cham moi ngay.'
-                : selectedDisciple.currentTask === 'luyen_dan'
-                  ? 'Giam nguyen lieu khi luyen dan.'
-                  : selectedDisciple.currentTask === 'tuan_tra'
-                    ? 'Tang thuong cho chuyen tham hiem tiep theo.'
-                    : 'Dang duong suc, it dong gop hon nhung an toan.'}`,
-            '',
-            'Mon nhan khac',
+            'Môn nhân khác',
             ...snapshot.disciples.roster
-              .slice(0, 3)
-              .map((disciple) => `${disciple.name}: ${TASK_LABELS[disciple.currentTask]} | mood ${disciple.mood} | loyalty ${disciple.loyalty}`)
+              .slice(0, 2)
+              .map((disciple) => `${disciple.name}: ${TASK_LABELS[disciple.currentTask]}`)
           ].join('\n')
-        : 'Chua co de tu. Hay tiep tuc event va tuyen nhan de lap lai tong mon.'
+        : 'Chưa có đệ tử. Hãy tiếp tục event và tuyển nhân để lập lại tông môn.'
     );
 
     this.discipleDetailText.setText(
       selectedDisciple
         ? [
-            `Dang chon: ${selectedDisciple.name}`,
-            `Canh gioi: ${getDiscipleRealmName(selectedDisciple.realmId)} | Tuoi ${selectedDisciple.age}`,
-            `Nhiem vu: ${TASK_LABELS[selectedDisciple.currentTask]} | Cong trinh: ${selectedDiscipleBuildingName}`,
-            `Tien do: ${selectedDisciple.cultivationProgress} | Dot pha: ${selectedDisciple.breakthroughReady ? 'San sang' : 'Chua'}`,
-            `Tam trang ${selectedDisciple.mood} | Trung thanh ${selectedDisciple.loyalty} | The trang ${selectedDisciple.health}`,
-            `Uu diem: ${selectedDisciple.positiveTraitIds.map((traitId) => this.getTraitLabel(traitId)).join(', ') || 'Chua co'}`,
-            `Khuyet diem: ${selectedDisciple.flawTraitIds.map((traitId) => this.getTraitLabel(traitId)).join(', ') || 'Chua co'}`
+            `Đang chọn: ${selectedDisciple.name}`,
+            `Cảnh giới: ${getDiscipleRealmName(selectedDisciple.realmId)} | Tuổi ${selectedDisciple.age}`,
+            `Nhiệm vụ: ${TASK_LABELS[selectedDisciple.currentTask]} | Công trình: ${selectedDiscipleBuildingName}`,
+            `Tiến độ: ${selectedDisciple.cultivationProgress} | Đột phá: ${selectedDisciple.breakthroughReady ? 'Sẵn sàng' : 'Chưa'}`,
+            `Tâm trạng ${selectedDisciple.mood} | Trung thành ${selectedDisciple.loyalty} | Thể trạng ${selectedDisciple.health}`,
+            `Ưu điểm: ${selectedDisciple.positiveTraitIds.map((traitId) => this.getTraitLabel(traitId)).join(', ') || 'Chưa có'}`,
+            `Khuyết điểm: ${selectedDisciple.flawTraitIds.map((traitId) => this.getTraitLabel(traitId)).join(', ') || 'Chưa có'}`
           ].join('\n')
-        : 'Chua co de tu.'
+        : 'Chưa có đệ tử.'
     );
 
     this.eventText.setText([
-      `${snapshot.sect.name}`,
-      `Cap tong mon ${getSectLevel(snapshot)} | Uy danh ${snapshot.sect.prestige} | Danh vong ${snapshot.sect.reputation} | On dinh ${snapshot.sect.stability}`,
-      `Tong so de tu ${snapshot.disciples.roster.length}/${snapshot.sect.discipleCapacity} | Tong luc tu hanh ${managementOverview.cultivationPower}`,
-      `Tai nguyen tong mon: LT ${snapshot.resources.linhThach} | Duoc ${snapshot.resources.duocThao} | Khoang ${snapshot.resources.khoangThach}`,
-      `Chuong hien tai: ${chapterName} | Tien do: ${chapterProgress}`,
-      `Ngoai giao: ${snapshot.diplomacy.lastSummary}`
+      snapshot.sect.name,
+      `Cấp tông môn ${getSectLevel(snapshot)} | Uy danh ${snapshot.sect.prestige} | Danh vọng ${snapshot.sect.reputation}`,
+      `Đệ tử ${snapshot.disciples.roster.length}/${snapshot.sect.discipleCapacity} | Tổng lực tu hành ${managementOverview.cultivationPower}`,
+      `Tài nguyên: LT ${snapshot.resources.linhThach} | Dược ${snapshot.resources.duocThao} | Khoáng ${snapshot.resources.khoangThach}`
     ].join('\n'));
 
     this.summaryText.setText([
-      `Muc tieu ngay: ${recommendedNextStep}`,
-      `Uu tien hien tai: ${priorityNotice}`,
-      `Thay doi gan nhat: ${latestChangeSummary}`,
-      `Nhip noi mon: ${managementOverview.summaryLines[0] ?? 'Chua co de tu dang tao hieu qua noi mon ro rang.'}`
+      `Mục tiêu ngày: ${recommendedNextStep}`,
+      `Ưu tiên hiện tại: ${priorityNotice}`,
+      `Thay đổi gần nhất: ${latestChangeSummary}`
     ].join('\n'));
     this.statusText.setText(
       [
-        `Nhac nhanh: ${whyThisMatters}`,
-        `Tro dan: -${managementOverview.alchemyCostReduction} nguyen lieu | Ho tro bi canh: x${managementOverview.explorationRewardMultiplier.toFixed(2)} thuong | Kiep luc: +${snapshot.player.cultivation.breakthroughBonus}`
+        `Nhắc nhanh: ${whyThisMatters}`,
+        `Trợ đan: -${managementOverview.alchemyCostReduction} nguyên liệu | Hỗ trợ bí cảnh: x${managementOverview.explorationRewardMultiplier.toFixed(2)} thưởng`
       ].join('\n')
     );
 
@@ -2220,7 +2196,7 @@ export class SectScene extends Phaser.Scene {
     this.applyRefreshFeedback(snapshot, latestChangeSummary);
     if (snapshot.ui.isCultivationPanelOpen) {
       this.cultivationPanel.show({
-        title: 'T? hành',
+        title: 'Tu hành',
         summaryLines: [
           `Cảnh giới hiện tại: ${currentRealm.name}`,
           `Tiến độ: ${snapshot.player.cultivation.cultivationProgress}/${currentRealm.progressRequired}`,
@@ -2251,26 +2227,26 @@ export class SectScene extends Phaser.Scene {
       this.diplomacyPanel.show({
         title: 'Ngoai giao',
         summaryLines: [
-          `Dang xem: ${selectedFaction.name}`,
+          `Đang xem: ${selectedFaction.name}`,
           `Trang thai: ${selectedFactionState.relationStatus}`,
           `Diem quan he: ${selectedFactionState.relationScore}`,
-          `Canh bao: ${selectedFactionState.warningLevel} • Thu dich: ${selectedFactionState.hostilityLevel}`,
-          `Lien minh: ${selectedFactionState.allianceState}`,
-          `Mo giao dich: ${selectedFactionState.tradeAccess ? 'Co' : 'Chua'}`,
-          `Thu dang cho: ${snapshot.diplomacy.pendingMessageEventIds.length}`,
-          `Mo ta ngan: ${selectedFaction.shortDescription}`
+          `Cảnh báo: ${selectedFactionState.warningLevel} • Thù địch: ${selectedFactionState.hostilityLevel}`,
+          `Liên minh: ${selectedFactionState.allianceState}`,
+          `Mở giao dịch: ${selectedFactionState.tradeAccess ? 'Có' : 'Chưa'}`,
+          `Thư đang chờ: ${snapshot.diplomacy.pendingMessageEventIds.length}`,
+          `Mô tả ngắn: ${selectedFaction.shortDescription}`
         ],
         detailLines: [
-          `Vai tro: ${selectedFaction.gameplayRole}`,
+          `Vai trò: ${selectedFaction.gameplayRole}`,
           `Tag event: ${selectedFaction.eventTags.join(', ')}`,
-          `Co phe phai: ${selectedFactionState.knownFlags.join(', ') || 'Chua co'}`,
+          `Cờ phe phái: ${selectedFactionState.knownFlags.join(', ') || 'Chưa có'}`,
           '',
-          'Tuong tac gan day',
+          'Tương tác gần đây',
           ...(selectedFactionState.recentInteractions.length > 0
-            ? selectedFactionState.recentInteractions.slice().reverse().map((entry) => `Ngay ${entry.day} • ${entry.type} • ${entry.summary}`)
-            : ['Chua co']),
+            ? selectedFactionState.recentInteractions.slice().reverse().map((entry) => `Ngày ${entry.day} • ${entry.type} • ${entry.summary}`)
+            : ['Chưa có']),
           '',
-          `Trade nhanh: ${selectedFaction.id === 'xich_luyen_bao' ? 'Mua duoc thao / khoang thach bang linh thach.' : 'Phe nay chua co trade hook trong sprint nay.'}`
+          `Trade nhanh: ${selectedFaction.id === 'xich_luyen_bao' ? 'Mua dược thảo / khoáng thạch bằng linh thạch.' : 'Phe này chưa có trade hook trong sprint này.'}`
         ]
       });
     } else {
@@ -2278,46 +2254,46 @@ export class SectScene extends Phaser.Scene {
     }
 
     if (snapshot.ui.isGovernancePanelOpen) {
-      const selectedDiscipleName = selectedDisciple?.name ?? 'Chua chon de tu';
+      const selectedDiscipleName = selectedDisciple?.name ?? 'Chưa chọn đệ tử';
       this.governancePanel.show({
-        title: 'Tri mon',
+        title: 'Trị môn',
         summaryLines: [
           `Uy danh: ${snapshot.sect.prestige}`,
-          `Khi van: ${snapshot.sect.fortune}`,
-          `On dinh tong mon: ${snapshot.sect.stability}`,
-          `Thien huong hien tai: ${governanceStyleCatalog.styles.find((style) => style.id === snapshot.sect.governanceStyleId)?.name ?? snapshot.sect.governanceStyleId}`,
-          `Noi quy dang ap dung: ${snapshot.sect.activeRuleIds.map((ruleId) => sectRuleCatalog.rules.find((rule) => rule.id === ruleId)?.name ?? ruleId).join(', ') || 'Chua co'}`,
-          `Truong lao: ${snapshot.sect.elders.length}/${snapshot.sect.elderSlots}`,
-          `Khach khanh: ${snapshot.sect.guestCultivators.length}/${snapshot.sect.guestCultivatorSlots}`,
-          `De tu dang chon: ${selectedDiscipleName}`,
-          `Phe dang chon de moi khach: ${selectedFaction?.name ?? 'Chua chon'}`
+          `Khí vận: ${snapshot.sect.fortune}`,
+          `Ổn định tông môn: ${snapshot.sect.stability}`,
+          `Thiên hướng hiện tại: ${governanceStyleCatalog.styles.find((style) => style.id === snapshot.sect.governanceStyleId)?.name ?? snapshot.sect.governanceStyleId}`,
+          `Nội quy đang áp dụng: ${snapshot.sect.activeRuleIds.map((ruleId) => sectRuleCatalog.rules.find((rule) => rule.id === ruleId)?.name ?? ruleId).join(', ') || 'Chưa có'}`,
+          `Trưởng lão: ${snapshot.sect.elders.length}/${snapshot.sect.elderSlots}`,
+          `Khách khanh: ${snapshot.sect.guestCultivators.length}/${snapshot.sect.guestCultivatorSlots}`,
+          `Đệ tử đang chọn: ${selectedDiscipleName}`,
+          `Phe đang chọn để mời khách: ${selectedFaction?.name ?? 'Chưa chọn'}`
         ],
         detailLines: [
-          `Dang xem thien huong: ${selectedGovernanceStyle.name}`,
+          `Đang xem thiên hướng: ${selectedGovernanceStyle.name}`,
           selectedGovernanceStyle.summary,
-          `Tac dung: ${selectedGovernanceStyle.summary}`,
+          `Tác dụng: ${selectedGovernanceStyle.summary}`,
           '',
-          `?ang xem n?i quy: ${selectedRule.name}`,
+          `Đang xem nội quy: ${selectedRule.name}`,
           selectedRule.summary,
-          `Tac dung: ${selectedRule.summary}`,
+          `Tác dụng: ${selectedRule.summary}`,
           '',
-          `Vai tro truong lao: ${selectedElderRole.name}`,
+          `Vai trò trưởng lão: ${selectedElderRole.name}`,
           selectedElderRole.summary,
-          `Tac dung: ${selectedElderRole.summary}`,
+          `Tác dụng: ${selectedElderRole.summary}`,
           '',
-          'Danh sach truong lao',
+          'Danh sách trưởng lão',
           ...(snapshot.sect.elders.length > 0
             ? snapshot.sect.elders.map((elder) => {
                 const roleName = elderRoleCatalog.roles.find((role) => role.id === elder.roleId)?.name ?? elder.roleId;
                 const discipleName = snapshot.disciples.roster.find((disciple) => disciple.id === elder.discipleId)?.name ?? elder.discipleId;
                 return `${roleName}: ${discipleName}`;
               })
-            : ['Chua co']),
+            : ['Chưa co']),
           '',
-          'Danh sach khach khanh',
+          'Danh sách khách khanh',
           ...(snapshot.sect.guestCultivators.length > 0
-            ? snapshot.sect.guestCultivators.map((guest) => `${guest.name} • ${guest.bonusSummary} • ${guest.remainingDays} ngay`)
-            : ['Chua co'])
+            ? snapshot.sect.guestCultivators.map((guest) => `${guest.name} • ${guest.bonusSummary} • ${guest.remainingDays} ngày`)
+            : ['Chưa co'])
         ]
       });
     } else {
@@ -2372,7 +2348,7 @@ export class SectScene extends Phaser.Scene {
             const itemName = itemCatalog.items.find((item) => item.id === output.itemId)?.name ?? output.itemId;
             return [
               `${itemName} x${output.amount}`,
-              `→ ${this.describeItem(output.itemId)}`
+              `â†’ ${this.describeItem(output.itemId)}`
             ];
           })
         ],
@@ -2481,15 +2457,15 @@ export class SectScene extends Phaser.Scene {
   private getItemCategoryLabel(category: string): string {
     switch (category) {
       case 'herb':
-        return 'Linh thảo';
+        return 'Linh tháº£o';
       case 'ore':
-        return 'Khoáng liệu';
+        return 'KhoÃ¡ng liá»‡u';
       case 'pill':
-        return 'Đan dược';
+        return 'Äan dÆ°á»£c';
       case 'material':
-        return 'Vật liệu';
+        return 'Váº­t liá»‡u';
       case 'artifact':
-        return 'Pháp khí';
+        return 'PhÃ¡p khÃ­';
       default:
         return category;
     }
