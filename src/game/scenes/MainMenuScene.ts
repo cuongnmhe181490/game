@@ -15,7 +15,9 @@ export class MainMenuScene extends Phaser.Scene {
   create(): void {
     const stateManager = getStateManager(this);
     const saveSystem = getSaveStore(this);
+    const currentSlot = saveSystem.getCurrentSlot();
     const saveSummary = saveSystem.getSaveSummary();
+    const currentSlotSummary = saveSystem.getSlotSummary(currentSlot);
     const slotSummaries = saveSystem.listSaveSlots();
     const replayMeta = saveSystem.getReplayMeta();
     const replayModifier = saveSystem.getSelectedReplayModifier(replayMeta);
@@ -25,8 +27,6 @@ export class MainMenuScene extends Phaser.Scene {
       draft.ui.modalEventId = null;
     });
 
-    saveSystem.saveGame(snapshot);
-
     const { width, height } = this.scale;
     const shellWidth = Math.min(430, width - 32);
     const shellHeight = Math.min(844, height - 24);
@@ -35,9 +35,13 @@ export class MainMenuScene extends Phaser.Scene {
     const panelWidth = shellWidth - 32;
     const halfButtonWidth = Math.floor((panelWidth - 46) / 2);
     const filledSlots = slotSummaries.filter((slot) => slot.hasSave).length;
-    const hasMeaningfulProgress = snapshot.time.day > 1 || snapshot.events.history.length > 0 || snapshot.exploration.totalRuns > 0;
+    const hasMeaningfulProgress = currentSlotSummary.hasSave && (
+      (currentSlotSummary.day ?? 1) > 1 ||
+      saveSummary.eventCount > 0 ||
+      saveSummary.explorationRuns > 0
+    );
     const hasAnySave = saveSummary.source !== 'none';
-    const endingReached = snapshot.ending.completed;
+    const endingReached = saveSummary.endingCompleted;
 
     this.cameras.main.setBackgroundColor(menuPalette.background);
     drawSceneFrame(this);
@@ -174,9 +178,9 @@ export class MainMenuScene extends Phaser.Scene {
     this.add.existing(summaryFrame.root);
 
     const summaryLines = [
-      `Slot hien tai: ${saveSystem.getCurrentSlot()} | Save: ${saveSummary.source === 'none' ? 'chua co' : saveSummary.source === 'backup' ? 'dang dung backup' : 'on dinh'}`,
-      `Canh gioi: ${snapshot.player.cultivation.currentRealmId} | Ngay ${snapshot.time.day}/${snapshot.time.month}/${snapshot.time.year}`,
-      `Chuong: ${snapshot.story.currentChapterId}`,
+      `Slot hien tai: ${currentSlot} | Save: ${saveSummary.source === 'none' ? 'chua co' : saveSummary.source === 'backup' ? 'dang dung backup' : 'on dinh'}`,
+      `Canh gioi: ${currentSlotSummary.realmId ?? 'pham_the'} | Ngay ${currentSlotSummary.day ?? 1}/1/1`,
+      `Chuong: ${currentSlotSummary.chapterId ?? 'chapter_1_du_tan_khai_son'}`,
       `Ket cuc: ${saveSummary.endingCompleted ? saveSummary.endingPath ?? 'da hoan tat' : 'chua dat'} | Da clear: ${replayMeta.totalClearCount}`,
       `Replay: ${replayModifier ? replayModifier.label : 'chua mo'}`
     ];
