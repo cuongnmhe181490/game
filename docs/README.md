@@ -19,6 +19,10 @@ Tai lieu trong repo duoc chia theo vai tro ro rang. Neu dang mo mot task moi, do
   - Dung cho: nguoi moi vao repo, build/run/share
   - Chua: game la gi, phan nao dang playable, save/reset basics, gioi han hien tai
   - Day la entry point chinh, khong phai noi chua moi chi tiet thiet ke
+- [use-cases.md](D:/game/docs/use-cases.md)
+  - Dung cho: nhanh hieu playable loop va user flow hien tai
+  - Chua: cac use case thuc dung cho menu, sect, exploration, alchemy, cultivation, beasts, save/load, replay
+  - Huu ich nhat khi can review vertical slice hoac test flow nguoi choi
 
 ### Story / lore / naming
 - [story-bible.md](D:/game/docs/story-bible.md)
@@ -76,9 +80,10 @@ Tai lieu trong repo duoc chia theo vai tro ro rang. Neu dang mo mot task moi, do
 ### Neu lam gameplay / systems / save / state
 1. [AGENTS.md](D:/game/AGENTS.md)
 2. [README.md](D:/game/README.md)
-3. [chapters.md](D:/game/docs/chapters.md)
-4. [event-rules.md](D:/game/docs/event-rules.md)
-5. [expansion-architecture.md](D:/game/docs/expansion-architecture.md) neu task co lien quan arc/ending/replay/save hook
+3. [use-cases.md](D:/game/docs/use-cases.md)
+4. [chapters.md](D:/game/docs/chapters.md)
+5. [event-rules.md](D:/game/docs/event-rules.md)
+6. [expansion-architecture.md](D:/game/docs/expansion-architecture.md) neu task co lien quan arc/ending/replay/save hook
 
 ### Neu lam expansion planning
 1. [AGENTS.md](D:/game/AGENTS.md)
@@ -91,10 +96,11 @@ Tai lieu trong repo duoc chia theo vai tro ro rang. Neu dang mo mot task moi, do
 ### Neu lam release / testing / external handoff
 1. [AGENTS.md](D:/game/AGENTS.md)
 2. [README.md](D:/game/README.md)
-3. [playtest-guide.md](D:/game/docs/playtest-guide.md)
-4. [release-candidate-notes.md](D:/game/docs/release-candidate-notes.md)
-5. [deployment-notes.md](D:/game/docs/deployment-notes.md)
-6. [pre-release-checklist.md](D:/game/docs/pre-release-checklist.md)
+3. [use-cases.md](D:/game/docs/use-cases.md)
+4. [playtest-guide.md](D:/game/docs/playtest-guide.md)
+5. [release-candidate-notes.md](D:/game/docs/release-candidate-notes.md)
+6. [deployment-notes.md](D:/game/docs/deployment-notes.md)
+7. [pre-release-checklist.md](D:/game/docs/pre-release-checklist.md)
 
 ## Where to add X
 
